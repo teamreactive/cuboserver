@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import FamiliaProveedor,
+                    ContactosxFamiliaProveedor
+
+
+admin.site.register(FamiliaProveedor)
+admin.site.register(ContactosxFamiliaProveedor)
