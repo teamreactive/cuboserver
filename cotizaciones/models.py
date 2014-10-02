@@ -6,6 +6,17 @@ from proveedores.models import Proveedor
 
 
 class Cotizacion(models.Model):
+    IVAS = (
+        ('1', '16'),
+        ('2', '1.6'), 
+        ('3', '20'),
+        ('4', '0'),
+    )
+    PAGOS = (
+        ('1', 'anticipado'),
+        ('2', 'contado'),
+        ('3', 'dias'),
+    )
     producto = models.ForeignKey(Product)
     precio_unitario = models.CharField(max_length=10)
     iva = models.CharField(max_length=1, choices=IVAS)

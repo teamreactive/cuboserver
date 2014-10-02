@@ -36,6 +36,20 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'centrosdecostos',
+    'clientes',
+    'compras',
+    'contactos',
+    'cotizaciones',
+    'equipos',
+    'familiasproveedores',
+    'historiales',
+    'lugares',
+    'productos',
+    'proveedores',
+    'solicitudes',
+    'tiposdeequipos',
+    'usuarios',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -82,6 +96,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+########### HEROKU CONFIG ##############
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
