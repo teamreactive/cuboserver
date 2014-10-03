@@ -16,7 +16,7 @@ class Proveedor(models.Model):
     nit = models.CharField(max_length=25)
     numero_verificacion = models.CharField(max_length=25)
     lugar = models.ForeignKey(Lugar, related_name='Proveedor.lugar')
-    logo = models.CharField(max_length=50)
+    logo = models.FileField(upload_to='logos/proovedores')
     cliente = models.ForeignKey(Cliente, related_name='Proveedor.cliente')
     calificacion = models.IntegerField()
     cotizacion_defecto = models.CharField(choices=COTIZACIONES_DEFECTOS)
