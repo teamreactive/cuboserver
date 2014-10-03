@@ -29,5 +29,5 @@ class ProductosxSolicitud(models.Model):
     solicitud = models.ForeignKey(Solicitud, related_name='PxS.solicitud')
     producto = models.ForeignKey(Producto, related_name='PxS.producto')
     numero_linea = models.IntegerField()
-    cantidad_producto = models.CharField(max_length=5)
+    cantidad_producto = models.DecimalField(max_digits=10, decimal_places=2)
     unidad_producto = models.CharField(max_length=15)
