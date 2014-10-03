@@ -7,6 +7,6 @@ class Contacto(models.Model):
     telefono_fijo = models.CharField(max_length=15, null=True)
     extension = models.CharField(max_length=5, null=True)
     celular = models.CharField(max_length=15, null=True)
-    correo_electronico = models.CharField(max_length=25, null=True)
+    correo_electronico = models.EmailField(max_length=25, null=True)
     cargo = models.CharField(max_length=25, null=True)
     perfil = models.TextField(null=True)
