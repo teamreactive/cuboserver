@@ -18,9 +18,8 @@ class Cotizacion(models.Model):
         ('3', 'dias'),
     )
     producto = models.ForeignKey(Product)
-    precio_unitario = models.CharField(max_length=10)
+    precio_unitario = models.DecimalField(max_digits=12,decimal_places=2)
     iva = models.CharField(max_length=1, choices=IVAS)
-    tiempo_entrega = models.CharField(max_length=10)
     referencia = models.CharField(max_length=25)
     validez = models.CharField(max_length=25)
     forma_de_pago = models.CharField(max_length=1, choices=PAGOS)
