@@ -8,5 +8,5 @@ class Cliente(models.Model):
     codigo_verificacion = models.CharField(max_length=25, null=True)
     razon_social = models.CharField(max_length=25)
     sigla = models.CharField(max_length=10, null=True)
-    lugar = models.ForeignKey(Lugar, related_name='Cliente.lugar', null=True)
-    logo = models.FileField(upload_to='logos', null=True)
+    lugar = models.ForeignKey(Lugar, related_name='cliente', null=True)
+    logo = models.ImageField(upload_to='logos', null=True)
