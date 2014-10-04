@@ -1,11 +1,6 @@
 from django.contrib import admin
 
-from .models import Producto,
-                    NombresxProducto,
-                    FotosxProducto,
-                    PrecioxProducto,
-                    ProductoxContactoQueNoVende,
-                    ProductoxContactoQueVende
+from .models import Producto, NombresxProducto, FotosxProducto, PrecioxProducto, ProductoxContactoQueNoVende, ProductoxContactoQueVende
 
 admin.site.register(Producto)
 admin.site.register(NombresxProducto)

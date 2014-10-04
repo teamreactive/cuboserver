@@ -3,15 +3,15 @@ from django.db import models
 from datetime import datetime
 from lugares.models import Lugar
 from usuarios.models import Usuario
-from centrosdecostos import CentroDeCosto
+from centrosdecostos.models import CentroDeCosto
 from equipos.models import Equipo
 from productos.models import Producto
 
 
 class Solicitud(models.Model):
     EMERGENCIAS = (
-        '0': 'no',
-        '1': 'si',
+        ('0', 'no'),
+        ('1', 'si'),
     )
     estado = models.CharField(max_length=1)
     lugar_entrega = models.ForeignKey(Lugar, related_name='Solicitud.lugar_entrega')
