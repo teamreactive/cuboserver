@@ -16,7 +16,7 @@ class Lugar(models.Model):
     numero_seccion = models.CharField(max_length=5)
     numero_1 = models.CharField(max_length=5)
     numero_2 = models.CharField(max_length=5)
-    cliente = models.ForeignKey(clientes.models.Cliente, related_name='Lugar')
+    cliente = models.ForeignKey('clientes.models.Cliente')
 
 class LugarxContacto(models.Model):
     lugar = models.ForeignKey(Lugar, related_name='LxC.lugar')

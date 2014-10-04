@@ -24,7 +24,7 @@ class Usuario(models.Model):
     cliente = models.ForeignKey(Cliente, related_name='Usuario.cliente', null=True)
     tipo = models.CharField(max_length=1, choices=TIPOS)
     contacto = models.ForeignKey(Contacto, related_name='Usuario.contacto')
-    activo = models.CharField(max_length=1 choices=ACTIVOS)
+    activo = models.CharField(max_length=1, choices=ACTIVOS)
 
 class ConsolidadorxSolicitante(models.Model):
     consolidador = models.ForeignKey(Usuario, related_name='CxS.consolidador')
