@@ -1,12 +1,12 @@
 from django.contrib import admin
 
-from .models import Usuario,
-                    ConsolidadorxSolicitante,
-                    SolicitantexCodificador,
-                    AprobadorSolicitudesxSolicitante,
-                    AprobadorSolicitudesxComprador,
-                    CompradorxAprobadorCompras,
-                    AprobadorCompraxAlmacenista
+from .models import Usuario
+from .models import ConsolidadorxSolicitante
+from .models import SolicitantexCodificador
+from .models import AprobadorSolicitudesxSolicitante
+from .models import AprobadorSolicitudesxComprador
+from .models import CompradorxAprobadorCompras
+from .models import AprobadorCompraxAlmacenista
 
 
 admin.site.register(Usuario)
