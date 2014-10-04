@@ -3,13 +3,12 @@ from django.db import models
 from lugares.models import Lugar
 from clientes.models import Cliente
 from contactos.models import Contacto
-from proveedores.models import Proveedor
 
 
 class Proveedor(models.Model):
     COTIZACIONES_DEFECTOS = (
-        '0': 'no',
-        '1': 'si',
+        ('0', 'no'),
+        ('1', 'si'),
     )
     razon_social = models.CharField(max_length=25)
     sigla = models.CharField(max_length=10)

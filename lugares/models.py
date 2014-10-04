@@ -1,7 +1,7 @@
 from django.db import models
 
 from contactos.models import Contacto
-from clientes.models import Cliente
+#from clientes.models import Cliente
 
 class Lugar(models.Model):
     SECCIONES = (
@@ -16,7 +16,7 @@ class Lugar(models.Model):
     numero_seccion = models.CharField(max_length=5)
     numero_1 = models.CharField(max_length=5)
     numero_2 = models.CharField(max_length=5)
-    cliente = models.ForeignKey(Cliente, related_name='Lugar')
+ #   cliente = models.ForeignKey(Cliente, related_name='Lugar')
 
 class LugarxContacto(models.Model):
     lugar = models.ForeignKey(Lugar, related_name='LxC.lugar')
