@@ -18,6 +18,6 @@ class Lugar(models.Model):
     numero_2 = models.CharField(max_length=5)
     # cliente = models.ForeignKey('clientes.models.Cliente')
 #
-# class LugarxContacto(models.Model):
-#     lugar = models.ForeignKey(Lugar, related_name='LxC.lugar')
-#     contacto = models.ForeignKey(Contacto, related_name='LxC.contacto')
+class LugarxContacto(models.Model):
+    lugar = models.ForeignKey(Lugar, related_name='LxC.lugar')
+    contacto = models.ForeignKey(Contacto, related_name='LxC.contacto')
