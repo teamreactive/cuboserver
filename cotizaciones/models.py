@@ -23,5 +23,5 @@ class Cotizacion(models.Model):
     referencia = models.CharField(max_length=25)
     validez = models.CharField(max_length=25)
     forma_de_pago = models.CharField(max_length=1, choices=PAGOS)
-    proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL)
+    proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null = True)
     fecha_entrega = models.DateTimeField()
