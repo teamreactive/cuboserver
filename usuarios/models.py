@@ -6,18 +6,18 @@ from contactos.models import Contacto
 
 class Usuario(models.Model):
     TIPOS = (
-        '1': 'administrador_general',
-        '2': 'administrador_cliente',
-        '3': 'solicitante',
-        '4': 'codificador',
-        '5': 'aprobador_solicitudes',
-        '6': 'comprador',
-        '7': 'aprobador_compra',
-        '8': 'almacenista',
+        ('1', 'administrador_general'),
+        ('2', 'administrador_cliente'),
+        ('3', 'solicitante'),
+        ('4', 'codificador'),
+        ('5', 'aprobador_solicitudes'),
+        ('6', 'comprador'),
+        ('7', 'aprobador_compra'),
+        ('8', 'almacenista'),
     )
     ACTIVOS = (
-        '0': 'no',
-        '1': 'si',
+        ('0', 'no'),
+        ('1', 'si'),
     )
     nombre = models.CharField(max_length=25)
     contrasena = models.CharField(max_length=25)
