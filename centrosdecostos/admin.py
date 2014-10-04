@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models immport CentroDeCosto
+from .models import CentroDeCosto
 
 
 admin.site.register(CentroDeCosto)
