@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import FamiliaProveedor, ContactosxFamiliaProveedor
+from .models import FamiliaProveedor
 
 
 admin.site.register(FamiliaProveedor)
-admin.site.register(ContactosxFamiliaProveedor)

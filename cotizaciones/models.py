@@ -25,3 +25,6 @@ class Cotizacion(models.Model):
     forma_de_pago = models.CharField(max_length=1, choices=PAGOS)
     proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null = True)
     fecha_entrega = models.DateTimeField()
+
+    class Meta:
+        db_table = 'cotizacion'
