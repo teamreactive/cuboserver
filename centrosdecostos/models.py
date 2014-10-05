@@ -6,3 +6,6 @@ from clientes.models import Cliente
 class CentroDeCosto(models.Model):
     nombre = models.CharField(max_length=25)
     cliente = models.ForeignKey(Cliente)
+
+    class Meta:
+        db_table = 'centro_de_costo'

@@ -16,6 +16,12 @@ class Proveedor(models.Model):
     calificacion = models.IntegerField()
     cotizacion_defecto = models.BooleanField(default=False)
 
+    class Meta:
+        db_table = 'proveedor'
+
 class ContactosxProveedor(models.Model):
     contacto = models.ForeignKey(Contacto, related_name='CxP.contacto')
     proveedor = models.ForeignKey(Proveedor, related_name='CxP.proveedor')
+
+    class Meta:
+        db_table = 'contacto_por_proveedor'

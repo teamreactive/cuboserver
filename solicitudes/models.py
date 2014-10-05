@@ -25,9 +25,15 @@ class Solicitud(models.Model):
     emergencia = models.CharField(max_length=1, choices=EMERGENCIAS)
     proyecto = models.CharField(max_length=25)
 
+    class Meta:
+        db_table = 'solicitud'
+
 class ProductosxSolicitud(models.Model):
     solicitud = models.ForeignKey(Solicitud, related_name='PxS.solicitud')
     producto = models.ForeignKey(Producto, related_name='PxS.producto')
     numero_linea = models.IntegerField()
     cantidad_producto = models.DecimalField(max_digits=10, decimal_places=2)
     unidad_producto = models.CharField(max_length=15)
+
+    class Meta:
+        db_table = 'producto_por_solicitud'

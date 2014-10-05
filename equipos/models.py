@@ -10,3 +10,6 @@ class Equipo(models.Model):
     cantidad = models.IntegerField()
     tipo_de_equipo = models.ForeignKey(TipoDeEquipo, on_delete=models.SET_NULL, null = True)
     cliente = models.ForeignKey(Cliente)
+
+    class Meta:
+        db_table = 'equipo'
