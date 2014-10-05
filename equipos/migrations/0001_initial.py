@@ -24,6 +24,7 @@ class Migration(migrations.Migration):
                 ('tipo_de_equipo', models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, to='tiposdeequipos.TipoDeEquipo', null=True)),
             ],
             options={
+                'db_table': 'equipo',
             },
             bases=(models.Model,),
         ),

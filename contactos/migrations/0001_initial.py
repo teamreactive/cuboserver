@@ -24,6 +24,7 @@ class Migration(migrations.Migration):
                 ('perfil', models.TextField(null=True, blank=True)),
             ],
             options={
+                'db_table': 'contacto',
             },
             bases=(models.Model,),
         ),

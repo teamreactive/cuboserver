@@ -1,5 +1,39 @@
 <form method="post">
     {% csrf_token %}
-    {{ form }}
+    <label>Nombre</label>
+    <br>
+    {{ form.nombre }}
+    {{ form.nombre.errors }}
+    <br>
+    <label>Seccion</label>
+    <br>
+    {{ form.seccion }}
+    {{ form.seccion.error }}
+    <br>
+    <label>Numero seccion</label>
+    <br>
+    {{ form.numero_seccion }}
+    {{ form.numero_seccion.errors }}
+    <br>
+    <label>Segundo numero</label>
+    <br>
+    {{ form.numero_1 }}
+    {{ form.numero_1.errors }}
+    <br>
+    <label>Tercer numero</label>
+    <br>
+    {{ form.numero_2 }}
+    {{ form.numero_2.errors }}
+    <br>
+    <label>Informacion adicional</label>
+    <br>
+    {{ form.extra }}
+    {{ form.extra.errors }}
+    <br>
+    <label>Contactos</label>
+    <br>
+    {{ form.contactos }}
+    {{ form.contactos.errors }}
+    <br>
     <input type="submit" value="Crear lugar" />
 </form>

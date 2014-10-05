@@ -13,30 +13,16 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='ContactosxFamiliaProveedor',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('contactos', models.ForeignKey(to='contactos.Contacto')),
-            ],
-            options={
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
             name='FamiliaProveedor',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('nombre', models.CharField(max_length=25)),
                 ('cliente', models.ForeignKey(to='clientes.Cliente')),
+                ('contactos', models.ManyToManyField(to='contactos.Contacto', db_table=b'familiaproveedorxcontacto')),
             ],
             options={
+                'db_table': 'familia_proveedor',
             },
             bases=(models.Model,),
-        ),
-        migrations.AddField(
-            model_name='contactosxfamiliaproveedor',
-            name='familia_proveedor',
-            field=models.ForeignKey(to='familiasproveedores.FamiliaProveedor'),
-            preserve_default=True,
         ),
     ]

@@ -17,6 +17,7 @@ class Lugar(models.Model):
     numero_seccion = models.CharField(max_length=5)
     numero_1 = models.CharField(max_length=5)
     numero_2 = models.CharField(max_length=5)
+    extra = models.CharField(max_length=100)
     usuario = models.ForeignKey(Usuario, null=True)
     contactos = models.ManyToManyField(Contacto, db_table='lugarxcontactos')
 

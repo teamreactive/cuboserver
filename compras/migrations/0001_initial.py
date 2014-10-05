@@ -22,6 +22,7 @@ class Migration(migrations.Migration):
                 ('cotizacion', models.ForeignKey(to='cotizaciones.Cotizacion')),
             ],
             options={
+                'db_table': 'compra',
             },
             bases=(models.Model,),
         ),

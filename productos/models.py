@@ -15,7 +15,7 @@ class Producto(models.Model):
     codigo_onu = models.CharField(max_length=25)
     nombre = models.CharField(max_length=25)
     descripcion = models.TextField(null=True,blank=True)
-    referencia = models.CharField(max_length=25, null=True, blank=True)
+    referencia = models.CharField(max_length=25, null=True,blank=True)
     marca = models.CharField(max_length=25)
     servicio = models.CharField(max_length=1, choices=SERVICIOS)
     familia_proveedor = models.ForeignKey(FamiliaProveedor, null=True)
@@ -48,7 +48,7 @@ class PrecioxProducto(models.Model):
     precio_promedio = models.FloatField(null=True)
 
     class Meta:
-        db_table = 'precio_ptoducto'
+        db_table = 'precio_producto'
 
 class ProductoxContactoQueNoVende(models.Model):
     producto = models.ForeignKey(Producto)
