@@ -1,6 +1,6 @@
 from django.db import models
 
-from lugares.models import Lugar
+#from lugares.models import Lugar
 
 
 class Cliente(models.Model):
@@ -8,5 +8,5 @@ class Cliente(models.Model):
     codigo_verificacion = models.CharField(max_length=25, null=True)
     razon_social = models.CharField(max_length=25)
     sigla = models.CharField(max_length=10, null=True)
-    lugar = models.ForeignKey(Lugar, related_name='Cliente', null=True, on_delete=models.PROTECT)
+#    lugar = models.ForeignKey(Lugar, related_name='Cliente', null=True, on_delete=models.PROTECT)
     logo = models.ImageField(upload_to='logos', null=True)
