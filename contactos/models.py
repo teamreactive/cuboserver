@@ -10,3 +10,6 @@ class Contacto(models.Model):
     correo_electronico = models.EmailField(max_length=25, null=True, blank=True)
     cargo = models.CharField(max_length=25, null=True, blank=True)
     perfil = models.TextField(null=True, blank=True)
+
+    class Meta:
+        db_table = 'contacto'
