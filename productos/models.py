@@ -24,13 +24,22 @@ class Producto(models.Model):
     equipo = models.ForeignKey(Equipo, null=True)
     centro_de_costo = models.ForeignKey(CentroDeCosto, null=True)
 
+    class Meta:
+        db_table = 'producto'
+
 class NombresxProducto(models.Model):
     producto = models.ForeignKey(Producto)
     nombre = models.CharField(max_length=25)
 
+    class Meta:
+        db_table = 'nombre_por_contacto'
+
 class FotosxProducto(models.Model):
     producto = models.ForeignKey(Producto)
     foto = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'fotos_por_producto'
 
 class PrecioxProducto(models.Model):
     producto = models.ForeignKey(Producto)
@@ -38,10 +47,19 @@ class PrecioxProducto(models.Model):
     talla = models.CharField(max_length=1)
     precio_promedio = models.FloatField(null=True)
 
+    class Meta:
+        db_table = 'precio_ptoducto'
+
 class ProductoxContactoQueNoVende(models.Model):
     producto = models.ForeignKey(Producto)
     contacto = models.ForeignKey(Contacto)
 
+    class Meta:
+        db_table = 'producto_contacto_no_vende'
+
 class ProductoxContactoQueVende(models.Model):
     producto = models.ForeignKey(Producto)
     contacto = models.ForeignKey(Contacto)
+
+    class Meta:
+        db_table = 'producto_contacto_que_vende'
