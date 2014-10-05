@@ -20,12 +20,7 @@ class Lugar(models.Model):
 
     user = models.ForeignKey(Usuario, null=True)
 
+    contactos = models.ManyToManyField(Contacto,db_table='lugarxcontactos')
+
     class Meta:
         db_table = 'lugar'
-
-class LugarxContacto(models.Model):
-    lugar = models.ForeignKey(Lugar, related_name='LxC.lugar')
-    contacto = models.ForeignKey(Contacto, related_name='LxC.contacto')
-
-    class Meta:
-        db_table = 'lugar_por_contacto'
