@@ -5,13 +5,12 @@ from clientes.models import Cliente
 from contactos.models import Contacto
 from equipos.models import Equipo
 from familiasproveedores.models import FamiliaProveedor
-from productos.models import Producto
 
 
 class Producto(models.Model):
     SERVICIOS = (
-        's', 'si',
-        'n', 'no',
+        ('s', 'si'),
+        ('n', 'no'),
     )
     codigo_onu = models.CharField(max_length=25)
     nombre = models.CharField(max_length=25)

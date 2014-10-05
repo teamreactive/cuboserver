@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import Solicitud,
-                    ProductosxSolicitud
+from .models import Solicitud, ProductosxSolicitud
 
 
 admin.site.register(Solicitud)
