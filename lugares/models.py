@@ -17,10 +17,10 @@ class Lugar(models.Model):
     numero_seccion = models.CharField(max_length=5)
     numero_1 = models.CharField(max_length=5)
     numero_2 = models.CharField(max_length=5)
-
-    user = models.ForeignKey(Usuario, null=True)
+    usuario = models.ForeignKey(Usuario, null=True)
 
     contactos = models.ManyToManyField(Contacto,db_table='lugarxcontactos')
 
     class Meta:
         db_table = 'lugar'
+

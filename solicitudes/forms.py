@@ -8,5 +8,5 @@ class SolicitudForm(ModelForm):
         fields = [
             'estado', 'lugar_entrega', 'fecha_requerida',
             'solicitante', 'consolidador', 'aprobador',
-            'centro_de_costo', 'equipo', 'emergencia', 'proyecto'
+            'centro_de_costo', 'equipo', 'emergencia', 'proyecto',
         ]
