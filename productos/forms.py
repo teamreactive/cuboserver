@@ -9,5 +9,5 @@ class ProductoForm(ModelForm):
             'codigo_onu', 'nombre', 'descripcion',
             'referencia', 'marca', 'servicio',
             'familia_proveedor', 'tiempo_promedio',
-            'cliente', 'equipo', 'centro_de_costo'
+            'cliente', 'equipo', 'centro_de_costo',
         ]

@@ -7,5 +7,5 @@ class LugarForm(ModelForm):
         model = Lugar
         fields = [
             'nombre', 'seccion', 'numero_seccion',
-            'numero_1', 'numero_2', 'user'
+            'numero_1', 'numero_2', 'usuario',
         ]
