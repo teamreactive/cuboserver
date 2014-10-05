@@ -12,7 +12,7 @@ class Lugar(models.Model):
         ('4', 'avenida'),
         ('5', 'diagonal'),
     )
-    nombre = models.CharField(max_length=25, null=True)
+    nombre = models.CharField(max_length=25, null=True, blank=True)
     seccion = models.CharField(max_length=1, choices=SECCIONES)
     numero_seccion = models.CharField(max_length=5)
     numero_1 = models.CharField(max_length=5)
