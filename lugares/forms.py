@@ -4,7 +4,7 @@ from .models import Lugar
 
 class LugarForm(ModelForm):
     class Meta:
-        model = Solicitud
+        model = Lugar
         fields = [
             'nombre', 'seccion', 'numero_seccion',
             'numero_1', 'numero_2', 'user'
