@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import Lugar, LugarxContacto
+from .models import Lugar
 
 
 admin.site.register(Lugar)
-admin.site.register(LugarxContacto)
