@@ -18,7 +18,9 @@ class Proveedor(models.Model):
 
     class Meta:
         db_table = 'proveedor'
-        unique_together = ((cliente,nit))
+        unique_together = (
+            ('cliente', 'nit'),
+        )
 
 class ContactosxProveedor(models.Model):
     contacto = models.ForeignKey(Contacto, related_name='CxP.contacto')

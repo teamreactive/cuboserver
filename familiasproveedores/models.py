@@ -14,6 +14,8 @@ class FamiliaProveedor(models.Model):
 
     class Meta:
         db_table = 'familia_proveedor'
-        unique_together = ((nombre,cliente),)
+        unique_together = (
+        	('nombre', 'cliente'),
+        )
 
 

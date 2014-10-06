@@ -12,4 +12,6 @@ class CentroDeCosto(models.Model):
 
     class Meta:
         db_table = 'centro_de_costo'
-        unique_together = ((nombre,cliente),)
+        unique_together = (
+        	('nombre', 'cliente'),
+        )
