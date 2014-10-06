@@ -26,6 +26,8 @@ class Producto(models.Model):
 
     class Meta:
         db_table = 'producto'
+        unique_together = ((cliente,codigo_onu),)
+
 
 class NombresxProducto(models.Model):
     producto = models.ForeignKey(Producto)

@@ -16,4 +16,5 @@ class Lugar(models.Model):
 
     class Meta:
         db_table = 'lugar'
+        unique_together = ((usuario,nombre),(usuario,direccion),)
 
