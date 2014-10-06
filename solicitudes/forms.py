@@ -6,6 +6,11 @@ from lugares.models import Lugar
 
 
 class SolicitudForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(SolicitudForm, self).__init__(*args, **kwargs)
+        self.fields['consolidador'].required = False
+
     class Meta:
         model = Solicitud
         fields = [
@@ -15,6 +20,7 @@ class SolicitudForm(ModelForm):
             'equipo',
             'proyecto',
             'productos',
+            'consolidador',
         ]
         widgets = {
             'lugar_entrega': Select(attrs={'class': 'form-control', 'placeholder': 'Lugar de entrega'}),

@@ -6,6 +6,8 @@
     <p>Centro de costo: {{ solicitud.centro_de_costo }}</p>
     <p>Equipo: {{ solicitud.equipo }}</p>
     <p>Proyecto: {{ solicitud.proyecto }}</p>
+    <p>Consolidador: {{ solicitud.consolidador }}</p>
+    <p>Solicitante: {{ solicitud.solicitante }}</p>
     {% if solicitud.estado == '1' %}
     <p class="btn btn_estado{{ solicitud.estado }}">Estado: En revision</p>
     {% elif solicitud.estado == '2' %}

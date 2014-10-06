@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 
+from django.db.models import Q
 from lugares.forms import LugarForm
 from productos.forms import ProductoForm, FotosxProductoForm
 from solicitudes.forms import SolicitudForm
@@ -11,58 +12,65 @@ from usuarios.views import get_usuario
 def inicio_solicitante(request):
     usuario = get_usuario(request)
     if usuario and usuario.tipo == '3':
-        solicitudes = Solicitud.objects.filter(solicitante=usuario)
+        solicitudes = Solicitud.objects.filter(Q(consolidador=usuario) | Q(solicitante=usuario))
+        solicitud_form = SolicitudForm()
+        lugar_form = LugarForm()
+        producto_form = ProductoForm()
+        params = {
+            'usuario': usuario,
+            'solicitud_form': solicitud_form,
+            'lugar_form': lugar_form,
+            'producto_form': producto_form,
+            'solicitudes': solicitudes,
+        }
         if request.method == 'POST':
-            solicitud_form = SolicitudForm()
-            lugar_form = LugarForm()
-            producto_form = ProductoForm()
-            if (request.POST.get('solicitud') and 
-                not request.POST.get('lugar') and
-                not request.POST.get('producto')):
+            solicitud_submit = request.POST.get('solicitud')
+            lugar_submit = request.POST.get('lugar')
+            producto_submit = request.POST.get('producto')
+            if solicitud_submit and not lugar_submit and not producto_submit:
                 solicitud_form = SolicitudForm(request.POST)
                 if solicitud_form.is_valid():
-                    solicitud = solicitud_form.save(commit=False)
-                    solicitud.estado = '1' if len(Usuario.objects.filter(tipo='5')) > 0 else '3'
-                    solicitud.solicitante = usuario
-                    solicitud.save()
-                    return redirect('/inicio_solicitante/')
-            elif (not request.POST.get('solicitud') and 
-                request.POST.get('lugar') and
-                not request.POST.get('producto')):
+                    try:
+                        solicitud = solicitud_form.save(commit=False)
+                        solicitud.estado = '1' if len(Usuario.objects.filter(tipo='5')) > 0 else '3'
+                        if solicitud.consolidador:
+                            solicitud.consolidador = usuario
+                            solicitud.solicitante = solicitud.consolidador
+                        else:
+                            solicitud.solicitante = usuario
+                        solicitud.save()
+                        return redirect('/inicio_solicitante/')
+                    except:
+                        params['solicitud_form'] = solicitud_form
+                        pass
+                else:
+                    params['solicitud_form'] = solicitud_form
+            elif not solicitud_submit and lugar_submit and not producto_submit:
                 lugar_form = LugarForm(request.POST)
                 if lugar_form.is_valid():
-                    lugar = lugar_form.save(commit=False)
-                    lugar.usuario = usuario
-                    lugar.save()
-                    return redirect('/inicio_solicitante/')
-            elif (not request.POST.get('solicitud') and 
-                not request.POST.get('lugar') and
-                request.POST.get('producto')):
+                    try:
+                        lugar = lugar_form.save(commit=False)
+                        lugar.usuario = usuario
+                        lugar.save()
+                        return redirect('/inicio_solicitante/')
+                    except:
+                        params['lugar_form'] = lugar_form
+                        pass
+                else:
+                    params['lugar_form'] = lugar_form
+            elif not solicitud_submit and not lugar_submit and producto_submit:
                 producto_form = ProductoForm(request.POST)
                 if producto_form.is_valid():
-                    producto = producto_form.save(commit=False)
-                    producto.cliente = usuario.cliente
-                    producto.save()
-                    return redirect('/inicio_solicitante/')
-            params = {
-                    'usuario': usuario,
-                    'solicitud_form': solicitud_form,
-                    'lugar_form': lugar_form,
-                    'producto_form': producto_form,
-                    'solicitudes': solicitudes,
-            }
-            return render(request, 'solicitantes/inicio_solicitante.html', params)
-        else:
-            solicitud_form = SolicitudForm()
-            lugar_form = LugarForm()
-            producto_form = ProductoForm()
-            params = {
-                'usuario': usuario,
-                'solicitud_form': solicitud_form,
-                'lugar_form': lugar_form,
-                'producto_form': producto_form,
-                'solicitudes': solicitudes,
-            }
-            return render(request, 'solicitantes/inicio_solicitante.html', params)
+                    try:
+                        producto = producto_form.save(commit=False)
+                        producto.cliente = usuario.cliente
+                        producto.save()
+                        return redirect('/inicio_solicitante/')
+                    except:
+                        params['producto_form'] = producto_form
+                        pass
+                else:
+                    params['producto_form'] = producto_form
+        return render(request, 'solicitantes/inicio_solicitante.html', params)
     else:
         return redirect('/')
