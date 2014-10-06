@@ -59,7 +59,7 @@ class Migration(migrations.Migration):
                 ('descripcion', models.TextField(null=True, blank=True)),
                 ('referencia', models.CharField(max_length=25, null=True, blank=True)),
                 ('marca', models.CharField(max_length=25)),
-                ('servicio', models.CharField(max_length=1, choices=[(b's', b'si'), (b'n', b'no')])),
+                ('servicio', models.BooleanField(default=False)),
                 ('tiempo_promedio', models.CharField(max_length=15, null=True, blank=True)),
                 ('centro_de_costo', models.ForeignKey(to='centrosdecostos.CentroDeCosto', null=True)),
                 ('cliente', models.ForeignKey(to='clientes.Cliente')),

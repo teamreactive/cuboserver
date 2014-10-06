@@ -1,9 +1,13 @@
 <!doctype html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="">
+        <meta charset='utf-8'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        {% block head %}{% endblock %}
     </head>
     <body>
-
+        {% block body %}{% endblock %}
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+        <script src="app.js"></script>
     </body>
 </html>

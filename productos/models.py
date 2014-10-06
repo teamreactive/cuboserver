@@ -17,8 +17,10 @@ class Producto(models.Model):
     familia_proveedor = models.ForeignKey(FamiliaProveedor, null=True)
     tiempo_promedio = models.CharField(max_length=15, null=True, blank=True)
     cliente = models.ForeignKey(Cliente)
-    contacto_novende = models.ManyToManyField(Contacto,dt_table='ProductoxContactoQueNoVende')
-    contacto_vende = models.ManyToManyField(Contacto,dt_table='ProductoxContactoQueVende')
+    contacto_novende = models.ManyToManyField(Contacto, db_table='productoxcontactoquenovende',
+                                              related_name='Producto.contacto_novende')
+    contacto_vende = models.ManyToManyField(Contacto, db_table='productoxcontactoquevende',
+                                            related_name='Producto.contacto_vende')
     class Meta:
         db_table = 'producto'
 

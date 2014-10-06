@@ -10,9 +10,11 @@ from productos.models import Producto
 
 class Solicitud(models.Model):
     ESTADOS = (
-        ('1','solicitado'),
-        ('2','rechazado por aprobador de solicitudes'),
-        ('3'.'apro'))
+        ('1', 'solicitudud de compra creada'),
+        ('2', 'solicitudud de compra rechazada'),
+        ('3', 'solicitudud de compra aprobada'),
+        ('4', 'cotizacion creada'),
+    )
     estado = models.CharField(max_length=1, choices=ESTADOS)
     lugar_entrega = models.ForeignKey(Lugar, related_name='Solicitud.lugar_entrega')
     fecha_creacion = models.DateTimeField(default=datetime.now)
