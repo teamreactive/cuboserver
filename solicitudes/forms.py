@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from .models import Solicitud
 
-from django.forms.widgets import Select, DateTimeInput, TextInput, SelectMultiple
+from django.forms.widgets import Select, DateTimeInput, TextInput, SelectMultiple, HiddenInput
 from lugares.models import Lugar
 
 
