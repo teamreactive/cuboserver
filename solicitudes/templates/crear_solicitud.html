@@ -1,5 +1,49 @@
 <form method="post">
     {% csrf_token %}
-    {{ form }}
+    <label>Estado</label>
+    <br>
+    {{ form.estado }}
+    {{ form.estado.errors }}
+    <br>
+    <label>Lugar de entrega</label>
+    <br>
+    {{ form.lugar_entrega }}
+    {{ form.lugar_entrega.errors }}
+    <br>
+    <a href="/crear_lugar/">
+        Crear nuevo lugar de entrega
+    </a>
+    <br>
+    <label>Fecha requerida</label>
+    <br>
+    <input type="date" name="fecha_requerida" value={{ fecha_requerida }}>
+    {{ form.fecha_requerida.errors }}
+    <br>
+    <label>Centro de costo</label>
+    <br>
+    {{ form.centro_de_costo }}
+    {{ form.centro_de_costo.errors }}
+    <br>
+    <label>Equipo</label>
+    <br>
+    {{ form.equipo }}
+    {{ form.equipo.errors }}
+    <br>
+    <label>Proyecto</label>
+    <br>
+    {{ form.proyecto }}
+    {{ form.proyecto.errors }}
+    <br>
+    <label>Producto/s</label>
+    <br>
+    {{ form.productos }}
+    {{ form.productos.errors }}
+    <br>
+    <a href="/crear_producto/">
+        Crear nuevo producto
+    </a>
+    <br>
     <input type="submit" value="Crear solicitud" />
 </form>
+
+ <iframe src="/crear_lugar/"></iframe>
