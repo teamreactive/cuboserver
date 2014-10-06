@@ -13,7 +13,7 @@ def index(request):
             Usuario.objects.get(nombre=nombre, contrasena=encriptar(contrasena))
             request.session['nombre'] = nombre
             request.session['nombre_check'] = encriptar(nombre)
-            return redirect('/inicio_solicitante/')
+            return redirect('/')
         except Usuario.DoesNotExist:
             params = {
                 'nombre': nombre,
@@ -42,6 +42,7 @@ def get_usuario(request):
         try:
             return Usuario.objects.get(nombre=nombre)
         except Usuario.DoesNotExist:
+            request.session.flush()
             return None
     else:
         return None

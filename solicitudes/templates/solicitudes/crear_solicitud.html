@@ -1,22 +1,14 @@
 <form method="post" class="form-signin">
     {% csrf_token %}
     {{ solicitud_form }}
-    <br>
-    <a href="#" onclick="$('#nuevo_lugar').toggle();">
-    	Crear nuevo lugar de entrega
-    </a>
-    <br>
-    <div id="nuevo_lugar">
-    	{% include "lugares/crear_lugar.html" %}
+    <div id="link_nuevo_lugar">
+        <a href="#" id="onclick_nuevo_lugar">Crear nuevo lugar de entrega</a>
     </div>
-    <br>
-    <a href="#" onclick="$('#nuevo_producto').toggle();">
-    	Crear nuevo producto
-    </a>
-    <br>
-    <div id="nuevo_producto">
-    	{% include "productos/crear_producto.html" %}
+    <div id="link_nuevo_producto">
+        <a href="#" id="onclick_nuevo_producto">Crear nuevo producto</a>
     </div>
-    <br>
     <button class="btn btn-large btn-primary" type="submit">Crear solicitud</button>
 </form>
+
+<div id="nuevo_producto">{% include "productos/crear_producto.html" %}</div>
+<div id="nuevo_lugar">{% include "lugares/crear_lugar.html" %}</div>
