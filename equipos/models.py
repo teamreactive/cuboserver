@@ -16,3 +16,4 @@ class Equipo(models.Model):
 
     class Meta:
         db_table = 'equipo'
+        unique_together = ((nombre,cliente),)

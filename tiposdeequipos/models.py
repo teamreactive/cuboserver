@@ -10,3 +10,4 @@ class TipoDeEquipo(models.Model):
 
     class Meta:
         db_table = 'tipo_de_equipo'
+        unique_together = ((cliente,nombre),)
