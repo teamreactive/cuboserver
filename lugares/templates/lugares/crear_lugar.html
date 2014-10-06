@@ -1,16 +1,5 @@
 <form method="post">
     {% csrf_token %}
-    <label>Nombre</label>
-    {{ form.nombre }}
-    {{ form.nombre.errors }}
-    <label>Direccion (ej: calle 162 14 33)</label>
-    {{ form.direccion }}
-    {{ form.direccion.error }}
-    <label>Descripcion (ej: edificio gratamira</label>
-    {{ form.descripcion }}
-    {{ form.descripcion.errors }}
-    <label>Contactos</label>
-    {{ form.contactos }}
-    {{ form.contactos.errors }}
+    {{ lugar_form }}
     <input type="submit" value="Crear lugar" />
 </form>

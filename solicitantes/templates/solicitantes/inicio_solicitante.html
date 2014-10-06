@@ -40,50 +40,27 @@
                     <hr>
                 </div>
                 <div class="row-fluid">
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>
-                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                        </p>
-                        <p><a class="btn" href="#">View details &raquo;</a></p>
+                    {% for solicitud in solicitudes %}
+                    <div class="span5">
+                        <h2>Solicitud #{{ solicitud.id }}</h2>
+                        <p>Lugar: {{ solicitud.lugar_entrega }}</p>
+                        <p>Fecha creacion: {{ solicitud.fecha_creacion }}</p>
+                        <p>Fecha requerida: {{ solicitud.fecha_requerida }}</p>
+                        <p>Centro de costo: {{ solicitud.centro_de_costo }}</p>
+                        <p>Equipo: {{ solicitud.equipo }}</p>
+                        <p>Proyecto: {{ solicitud.proyecto }}</p>
+                        {% if solicitud.estado == '1' %}
+                        <p class="btn btn_estado{{ solicitud.estado }}">Estado: En revision</p>
+                        {% elif solicitud.estado == '2' %}
+                        <p class="btn btn_estado{{ solicitud.estado }}">Estado: Rechazada</p>
+                        {% elif solicitud.estado == '3' %}
+                        <p class="btn btn_estado{{ solicitud.estado }}">Estado: Aprobada</p>
+                        {% elif solicitud.estado == '4' %}
+                        <p class="btn btn_estado{{ solicitud.estado }}">Estado: Cotizada</p>
+                        {% endif %}
+                        <hr>
                     </div><!--/span-->
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>
-                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                        </p>
-                        <p><a class="btn" href="#">View details &raquo;</a></p>
-                    </div><!--/span-->
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>
-                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                        </p>
-                        <p><a class="btn" href="#">View details &raquo;</a></p>
-                    </div><!--/span-->
-                </div><!--/row-->
-                <div class="row-fluid">
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>
-                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                        </p>
-                        <p><a class="btn" href="#">View details &raquo;</a></p>
-                    </div><!--/span-->
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>
-                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                        </p>
-                        <p><a class="btn" href="#">View details &raquo;</a></p>
-                    </div><!--/span-->
-                    <div class="span4">
-                        <h2>Heading</h2>
-                        <p>
-                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                        </p>
-                        <p><a class="btn" href="#">View details &raquo;</a></p>
-                    </div><!--/span-->
+                    {% endfor %}
                 </div><!--/row-->
             </div><!--/span-->
             <div class="span4">
