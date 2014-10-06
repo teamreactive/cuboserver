@@ -7,7 +7,7 @@ from usuarios.models import Usuario
 class Lugar(models.Model):
     nombre = models.CharField(max_length=25, null=True, blank=True)
     direccion = models.CharField(max_length=25)
-    descripcion = models.CharField(max_length=100)
+    descripcion = models.CharField(max_length=100, null=True, blank=True)
     usuario = models.ForeignKey(Usuario, null=True)
     contactos = models.ManyToManyField(Contacto, db_table='lugarxcontactos')
 

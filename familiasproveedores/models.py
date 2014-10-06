@@ -9,6 +9,8 @@ class FamiliaProveedor(models.Model):
     cliente = models.ForeignKey(Cliente)
     contactos = models.ManyToManyField(Contacto,db_table='familiaproveedorxcontacto')
 
+    def __unicode__(self):
+    	return '%s' % self.nombre
 
     class Meta:
         db_table = 'familia_proveedor'

@@ -11,5 +11,8 @@ class Contacto(models.Model):
     cargo = models.CharField(max_length=25, null=True, blank=True)
     perfil = models.TextField(null=True, blank=True)
 
+    def __unicode__(self):
+        return '%s - %s' % (self.nombre, self.telefono_fijo)
+
     class Meta:
         db_table = 'contacto'

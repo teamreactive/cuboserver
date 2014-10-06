@@ -13,26 +13,43 @@ def inicio_solicitante(request):
     if usuario and usuario.tipo == '3':
         solicitudes = Solicitud.objects.filter(solicitante=usuario)
         if request.method == 'POST':
-            solicitud_form = SolicitudForm(request.POST)
+            solicitud_form = SolicitudForm()
             lugar_form = LugarForm()
             producto_form = ProductoForm()
             fotosxproducto_form = FotosxProductoForm()
-            if solicitud_form.is_valid():
-                solicitud = solicitud_form.save(commit=False)
-                solicitud.estado = '1' if len(Usuario.objects.filter(tipo='5')) > 0 else '3'
-                solicitud.solicitante = usuario
-                solicitud.save()
-                return redirect('/inicio_solicitante/')
-            else:
-                params = {
+            print request.POST.get('submit')
+            if request.POST.get('submit') == 'solicitud':
+                solicitud_form = SolicitudForm(request.POST)
+                if solicitud_form.is_valid():
+                    solicitud = solicitud_form.save(commit=False)
+                    solicitud.estado = '1' if len(Usuario.objects.filter(tipo='5')) > 0 else '3'
+                    solicitud.solicitante = usuario
+                    solicitud.save()
+                    return redirect('/inicio_solicitante/')
+            elif request.POST.get('submit') == 'lugar':
+                lugar_form = LugarForm(request.POST)
+                if lugar_form.is_valid():
+                    lugar = lugar_form.save(commit=False)
+                    lugar.usuario = usuario
+                    lugar.save()
+                    return redirect('/inicio_solicitante/')
+            elif request.POST.get('submit') == 'producto':
+                producto_form = ProductoForm(request.POST)
+                fotosxproducto_form = FotosxProductoForm(request.POST)
+                if producto_form.is_valid() and fotosxproducto_form.is_valid():
+                    producto = producto_form.save(commit=False)
+                    producto.cliente = usuario
+                    producto.save()
+                    return redirect('/inicio_solicitante/')
+            params = {
                     'usuario': usuario,
                     'solicitud_form': solicitud_form,
                     'lugar_form': lugar_form,
                     'producto_form': producto_form,
                     'fotosxproducto_form': fotosxproducto_form,
                     'solicitudes': solicitudes,
-                }
-                return render(request, 'solicitantes/inicio_solicitante.html', params)
+            }
+            return render(request, 'solicitantes/inicio_solicitante.html', params)
         else:
             solicitud_form = SolicitudForm()
             lugar_form = LugarForm()
