@@ -17,14 +17,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('nombre', models.CharField(max_length=25, null=True, blank=True)),
-                ('seccion', models.CharField(max_length=1, choices=[(b'1', b'calle'), (b'2', b'carrera'), (b'3', b'transversal'), (b'4', b'avenida'), (b'5', b'diagonal')])),
-                ('numero_seccion', models.CharField(max_length=5)),
-                ('numero_1', models.CharField(max_length=5)),
-                ('numero_2', models.CharField(max_length=5)),
-<<<<<<< HEAD
-=======
-                ('extra', models.CharField(max_length=100)),
->>>>>>> ad787553272f977a8eacb6148a6435f10de128d4
+                ('direccion', models.CharField(max_length=25)),
+                ('descripcion', models.CharField(max_length=100)),
                 ('contactos', models.ManyToManyField(to='contactos.Contacto', db_table=b'lugarxcontactos')),
                 ('usuario', models.ForeignKey(to='usuarios.Usuario', null=True)),
             ],

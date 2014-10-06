@@ -9,8 +9,6 @@ class Migration(migrations.Migration):
     dependencies = [
         ('contactos', '0001_initial'),
         ('clientes', '0001_initial'),
-        ('equipos', '0001_initial'),
-        ('centrosdecostos', '0001_initial'),
         ('familiasproveedores', '0001_initial'),
     ]
 
@@ -46,11 +44,7 @@ class Migration(migrations.Migration):
                 ('precio_promedio', models.FloatField(null=True)),
             ],
             options={
-<<<<<<< HEAD
-                'db_table': 'precio_ptoducto',
-=======
                 'db_table': 'precio_producto',
->>>>>>> ad787553272f977a8eacb6148a6435f10de128d4
             },
             bases=(models.Model,),
         ),
@@ -65,37 +59,13 @@ class Migration(migrations.Migration):
                 ('marca', models.CharField(max_length=25)),
                 ('servicio', models.BooleanField(default=False)),
                 ('tiempo_promedio', models.CharField(max_length=15, null=True, blank=True)),
-                ('centro_de_costo', models.ForeignKey(to='centrosdecostos.CentroDeCosto', null=True)),
                 ('cliente', models.ForeignKey(to='clientes.Cliente')),
-                ('equipo', models.ForeignKey(to='equipos.Equipo', null=True)),
+                ('contacto_novende', models.ManyToManyField(related_name=b'Producto.contacto_novende', db_table=b'productoxcontactoquenovende', to='contactos.Contacto')),
+                ('contacto_vende', models.ManyToManyField(related_name=b'Producto.contacto_vende', db_table=b'productoxcontactoquevende', to='contactos.Contacto')),
                 ('familia_proveedor', models.ForeignKey(to='familiasproveedores.FamiliaProveedor', null=True)),
             ],
             options={
                 'db_table': 'producto',
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='ProductoxContactoQueNoVende',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('contacto', models.ForeignKey(to='contactos.Contacto')),
-                ('producto', models.ForeignKey(to='productos.Producto')),
-            ],
-            options={
-                'db_table': 'producto_contacto_no_vende',
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name='ProductoxContactoQueVende',
-            fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('contacto', models.ForeignKey(to='contactos.Contacto')),
-                ('producto', models.ForeignKey(to='productos.Producto')),
-            ],
-            options={
-                'db_table': 'producto_contacto_que_vende',
             },
             bases=(models.Model,),
         ),
