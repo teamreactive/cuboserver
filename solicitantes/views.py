@@ -48,5 +48,4 @@ def inicio_solicitante(request):
             }
             return render(request, 'solicitantes/inicio_solicitante.html', params)
     else:
-        request.session.flush()
         return redirect('/')
