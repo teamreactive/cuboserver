@@ -3,9 +3,8 @@
         <h2 class="form-signin-heading">Nuevo producto</h2>
         {% csrf_token %}
         {{ producto_form }}
-        {{ fotosxproducto_form }}
         <div class="submit_form">
-            <button class="btn btn-large btn-primary" name="submit" value="lugar" type="submit">
+            <button class="btn btn-large btn-primary" name="producto" value="producto" type="submit">
             	Crear producto
             </button>
         </div>

@@ -16,9 +16,9 @@ def inicio_solicitante(request):
             solicitud_form = SolicitudForm()
             lugar_form = LugarForm()
             producto_form = ProductoForm()
-            fotosxproducto_form = FotosxProductoForm()
-            print request.POST.get('submit')
-            if request.POST.get('submit') == 'solicitud':
+            if (request.POST.get('solicitud') and 
+                not request.POST.get('lugar') and
+                not request.POST.get('producto')):
                 solicitud_form = SolicitudForm(request.POST)
                 if solicitud_form.is_valid():
                     solicitud = solicitud_form.save(commit=False)
@@ -26,19 +26,22 @@ def inicio_solicitante(request):
                     solicitud.solicitante = usuario
                     solicitud.save()
                     return redirect('/inicio_solicitante/')
-            elif request.POST.get('submit') == 'lugar':
+            elif (not request.POST.get('solicitud') and 
+                request.POST.get('lugar') and
+                not request.POST.get('producto')):
                 lugar_form = LugarForm(request.POST)
                 if lugar_form.is_valid():
                     lugar = lugar_form.save(commit=False)
                     lugar.usuario = usuario
                     lugar.save()
                     return redirect('/inicio_solicitante/')
-            elif request.POST.get('submit') == 'producto':
+            elif (not request.POST.get('solicitud') and 
+                not request.POST.get('lugar') and
+                request.POST.get('producto')):
                 producto_form = ProductoForm(request.POST)
-                fotosxproducto_form = FotosxProductoForm(request.POST)
-                if producto_form.is_valid() and fotosxproducto_form.is_valid():
+                if producto_form.is_valid():
                     producto = producto_form.save(commit=False)
-                    producto.cliente = usuario
+                    producto.cliente = usuario.cliente
                     producto.save()
                     return redirect('/inicio_solicitante/')
             params = {
@@ -46,7 +49,6 @@ def inicio_solicitante(request):
                     'solicitud_form': solicitud_form,
                     'lugar_form': lugar_form,
                     'producto_form': producto_form,
-                    'fotosxproducto_form': fotosxproducto_form,
                     'solicitudes': solicitudes,
             }
             return render(request, 'solicitantes/inicio_solicitante.html', params)
@@ -54,13 +56,11 @@ def inicio_solicitante(request):
             solicitud_form = SolicitudForm()
             lugar_form = LugarForm()
             producto_form = ProductoForm()
-            fotosxproducto_form = FotosxProductoForm()
             params = {
                 'usuario': usuario,
                 'solicitud_form': solicitud_form,
                 'lugar_form': lugar_form,
                 'producto_form': producto_form,
-                'fotosxproducto_form': fotosxproducto_form,
                 'solicitudes': solicitudes,
             }
             return render(request, 'solicitantes/inicio_solicitante.html', params)
