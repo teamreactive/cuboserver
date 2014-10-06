@@ -26,6 +26,7 @@ class Migration(migrations.Migration):
                 ('producto', models.ForeignKey(related_name=b'PxS.producto', to='productos.Producto')),
             ],
             options={
+                'db_table': 'producto_por_solicitud',
             },
             bases=(models.Model,),
         ),
@@ -46,6 +47,7 @@ class Migration(migrations.Migration):
                 ('solicitante', models.ForeignKey(related_name=b'Solicitud.solicitante', to='usuarios.Usuario')),
             ],
             options={
+                'db_table': 'solicitud',
             },
             bases=(models.Model,),
         ),

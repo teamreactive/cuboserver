@@ -27,6 +27,7 @@ class Migration(migrations.Migration):
                 ('proveedor', models.ForeignKey(on_delete=django.db.models.deletion.SET_NULL, to='proveedores.Proveedor', null=True)),
             ],
             options={
+                'db_table': 'cotizacion',
             },
             bases=(models.Model,),
         ),

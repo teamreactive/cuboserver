@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
                 ('cliente', models.ForeignKey(to='clientes.Cliente')),
             ],
             options={
+                'db_table': 'centro_de_costo',
             },
             bases=(models.Model,),
         ),

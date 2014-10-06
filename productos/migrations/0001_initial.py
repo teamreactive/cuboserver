@@ -22,6 +22,7 @@ class Migration(migrations.Migration):
                 ('foto', models.CharField(max_length=100)),
             ],
             options={
+                'db_table': 'fotos_por_producto',
             },
             bases=(models.Model,),
         ),
@@ -32,6 +33,7 @@ class Migration(migrations.Migration):
                 ('nombre', models.CharField(max_length=25)),
             ],
             options={
+                'db_table': 'nombre_por_contacto',
             },
             bases=(models.Model,),
         ),
@@ -44,6 +46,7 @@ class Migration(migrations.Migration):
                 ('precio_promedio', models.FloatField(null=True)),
             ],
             options={
+                'db_table': 'precio_ptoducto',
             },
             bases=(models.Model,),
         ),
@@ -53,17 +56,18 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('codigo_onu', models.CharField(max_length=25)),
                 ('nombre', models.CharField(max_length=25)),
-                ('descripcion', models.TextField(null=True)),
-                ('referencia', models.CharField(max_length=25, null=True)),
+                ('descripcion', models.TextField(null=True, blank=True)),
+                ('referencia', models.CharField(max_length=25, null=True, blank=True)),
                 ('marca', models.CharField(max_length=25)),
                 ('servicio', models.CharField(max_length=1, choices=[(b's', b'si'), (b'n', b'no')])),
-                ('tiempo_promedio', models.CharField(max_length=15, null=True)),
+                ('tiempo_promedio', models.CharField(max_length=15, null=True, blank=True)),
                 ('centro_de_costo', models.ForeignKey(to='centrosdecostos.CentroDeCosto', null=True)),
                 ('cliente', models.ForeignKey(to='clientes.Cliente')),
                 ('equipo', models.ForeignKey(to='equipos.Equipo', null=True)),
                 ('familia_proveedor', models.ForeignKey(to='familiasproveedores.FamiliaProveedor', null=True)),
             ],
             options={
+                'db_table': 'producto',
             },
             bases=(models.Model,),
         ),
@@ -75,6 +79,7 @@ class Migration(migrations.Migration):
                 ('producto', models.ForeignKey(to='productos.Producto')),
             ],
             options={
+                'db_table': 'producto_contacto_no_vende',
             },
             bases=(models.Model,),
         ),
@@ -86,6 +91,7 @@ class Migration(migrations.Migration):
                 ('producto', models.ForeignKey(to='productos.Producto')),
             ],
             options={
+                'db_table': 'producto_contacto_que_vende',
             },
             bases=(models.Model,),
         ),

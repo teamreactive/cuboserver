@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
             ],
             options={
+                'db_table': 'aprobador_compras_por_almacenista',
             },
             bases=(models.Model,),
         ),
@@ -27,6 +28,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
             ],
             options={
+                'db_table': 'aprobador_solicitudes_por_comprador',
             },
             bases=(models.Model,),
         ),
@@ -36,6 +38,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
             ],
             options={
+                'db_table': 'aprobador_solicitudes_por_solicitante',
             },
             bases=(models.Model,),
         ),
@@ -45,6 +48,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
             ],
             options={
+                'db_table': 'comprador_por_aprobador_compras',
             },
             bases=(models.Model,),
         ),
@@ -54,6 +58,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
             ],
             options={
+                'db_table': 'consolidador_por_solicitante',
             },
             bases=(models.Model,),
         ),
@@ -63,6 +68,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
             ],
             options={
+                'db_table': 'solicitante_por_codificador',
             },
             bases=(models.Model,),
         ),
@@ -78,6 +84,7 @@ class Migration(migrations.Migration):
                 ('contacto', models.ForeignKey(related_name=b'Usuario.contacto', to='contactos.Contacto')),
             ],
             options={
+                'db_table': 'usuario',
             },
             bases=(models.Model,),
         ),

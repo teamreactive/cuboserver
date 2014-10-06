@@ -21,6 +21,7 @@ class Migration(migrations.Migration):
                 ('usuario', models.ForeignKey(related_name=b'Historial.usuario', to='usuarios.Usuario')),
             ],
             options={
+                'db_table': 'historial',
             },
             bases=(models.Model,),
         ),

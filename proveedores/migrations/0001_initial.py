@@ -20,6 +20,7 @@ class Migration(migrations.Migration):
                 ('contacto', models.ForeignKey(related_name=b'CxP.contacto', to='contactos.Contacto')),
             ],
             options={
+                'db_table': 'contacto_por_proveedor',
             },
             bases=(models.Model,),
         ),
@@ -38,6 +39,7 @@ class Migration(migrations.Migration):
                 ('lugar', models.ForeignKey(related_name=b'Proveedor.lugar', to='lugares.Lugar')),
             ],
             options={
+                'db_table': 'proveedor',
             },
             bases=(models.Model,),
         ),
