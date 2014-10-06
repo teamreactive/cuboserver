@@ -17,6 +17,23 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+<<<<<<< HEAD
+            name='ProductosxSolicitud',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('numero_linea', models.IntegerField()),
+                ('cantidad_producto', models.DecimalField(max_digits=10, decimal_places=2)),
+                ('unidad_producto', models.CharField(max_length=15)),
+                ('producto', models.ForeignKey(related_name=b'PxS.producto', to='productos.Producto')),
+            ],
+            options={
+                'db_table': 'producto_por_solicitud',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
+=======
+>>>>>>> ad787553272f977a8eacb6148a6435f10de128d4
             name='Solicitud',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),

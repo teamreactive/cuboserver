@@ -46,7 +46,11 @@ class Migration(migrations.Migration):
                 ('precio_promedio', models.FloatField(null=True)),
             ],
             options={
+<<<<<<< HEAD
+                'db_table': 'precio_ptoducto',
+=======
                 'db_table': 'precio_producto',
+>>>>>>> ad787553272f977a8eacb6148a6435f10de128d4
             },
             bases=(models.Model,),
         ),

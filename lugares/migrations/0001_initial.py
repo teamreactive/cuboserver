@@ -21,7 +21,10 @@ class Migration(migrations.Migration):
                 ('numero_seccion', models.CharField(max_length=5)),
                 ('numero_1', models.CharField(max_length=5)),
                 ('numero_2', models.CharField(max_length=5)),
+<<<<<<< HEAD
+=======
                 ('extra', models.CharField(max_length=100)),
+>>>>>>> ad787553272f977a8eacb6148a6435f10de128d4
                 ('contactos', models.ManyToManyField(to='contactos.Contacto', db_table=b'lugarxcontactos')),
                 ('usuario', models.ForeignKey(to='usuarios.Usuario', null=True)),
             ],
