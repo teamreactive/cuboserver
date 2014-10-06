@@ -42,31 +42,23 @@
                 <div class="row-fluid">
                     {% for solicitud in solicitudes %}
                     <div class="span5">
-                        <h2>Solicitud #{{ solicitud.id }}</h2>
-                        <p>Lugar: {{ solicitud.lugar_entrega }}</p>
-                        <p>Fecha creacion: {{ solicitud.fecha_creacion }}</p>
-                        <p>Fecha requerida: {{ solicitud.fecha_requerida }}</p>
-                        <p>Centro de costo: {{ solicitud.centro_de_costo }}</p>
-                        <p>Equipo: {{ solicitud.equipo }}</p>
-                        <p>Proyecto: {{ solicitud.proyecto }}</p>
-                        {% if solicitud.estado == '1' %}
-                        <p class="btn btn_estado{{ solicitud.estado }}">Estado: En revision</p>
-                        {% elif solicitud.estado == '2' %}
-                        <p class="btn btn_estado{{ solicitud.estado }}">Estado: Rechazada</p>
-                        {% elif solicitud.estado == '3' %}
-                        <p class="btn btn_estado{{ solicitud.estado }}">Estado: Aprobada</p>
-                        {% elif solicitud.estado == '4' %}
-                        <p class="btn btn_estado{{ solicitud.estado }}">Estado: Cotizada</p>
-                        {% endif %}
-                        <hr>
+                        {% include "solicitudes/solicitud.html" %}
                     </div><!--/span-->
                     {% endfor %}
                 </div><!--/row-->
             </div><!--/span-->
             <div class="span4">
-                <div class="well sidebar-nav">
-                    {% include "solicitudes/crear_solicitud.html" %}
-                </div><!--/.well -->
+                <div class="sidebar-nav">
+                    <div class="well">
+                        {% include "solicitudes/crear_solicitud.html" %}
+                    </div><!--/.well -->
+                    <div class="well">
+                        {% include "lugares/crear_lugar.html" %}
+                    </div><!--/.well -->
+                    <div class="well">
+                        {% include "productos/crear_producto.html" %}
+                    </div><!--/.well -->
+                </div>
             </div><!--/span-->
         </div><!--/row-->
 

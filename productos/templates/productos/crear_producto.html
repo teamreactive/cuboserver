@@ -1,6 +1,13 @@
-<form method="post" id="producto">
-    {% csrf_token %}
-    {{ producto_form }}
-    {{ fotosxproducto_form }}
-    <input type="submit" value="Crear producto" />
-</form>
+<div id="nuevo_producto">
+    <form method="post" class="form-signin">
+        <h2 class="form-signin-heading">Nuevo producto</h2>
+        {% csrf_token %}
+        {{ producto_form }}
+        {{ fotosxproducto_form }}
+        <div class="submit_form">
+            <button class="btn btn-large btn-primary" name="submit" value="lugar" type="submit">
+            	Crear producto
+            </button>
+        </div>
+    </form>
+</div>
