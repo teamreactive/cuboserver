@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'cotizaciones',
     'equipos',
     'familiasproveedores',
+    'generics',
     'historiales',
     'lugares',
     'productos',

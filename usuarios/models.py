@@ -20,11 +20,14 @@ class Usuario(models.Model):
         ('1', 'si'),
     )
     nombre = models.CharField(max_length=25, unique=True)
-    contrasena = models.CharField(max_length=25)
+    contrasena = models.CharField(max_length=255)
     cliente = models.ForeignKey(Cliente, related_name='Usuario.cliente', null=True)
     tipo = models.CharField(max_length=1, choices=TIPOS)
     contacto = models.ForeignKey(Contacto, related_name='Usuario.contacto')
     activo = models.CharField(max_length=1, choices=ACTIVOS)
+
+    def __unicode__(self):
+        return '%s' % self.nombre
 
     class Meta:
         db_table = 'usuario'

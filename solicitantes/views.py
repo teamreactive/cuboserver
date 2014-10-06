@@ -19,19 +19,19 @@ def inicio_solicitante(request):
             else:
                 solicitud_form = SolicitudForm(solicitud_form.cleaned_data)
                 params = {
-                    'nombre': usuario.nombre,
+                    'usuario': usuario,
                     'solicitud_form': solicitud_form,
                     'lugar_form': lugar_form,
                     'producto_form': producto_form,
                 }
         else:
             params = {
-                'nombre': usuario.nombre,
+                'usuario': usuario,
                 'solicitud_form': solicitud_form,
                 'lugar_form': lugar_form,
                 'producto_form': producto_form,
             }
-            return render(request, 'inicio_solicitante.html', params)
+            return render(request, 'solicitantes/inicio_solicitante.html', params)
     else:
         request.session.flush()
         return redirect('/')

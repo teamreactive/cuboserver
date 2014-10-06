@@ -8,5 +8,8 @@ class Cliente(models.Model):
     sigla = models.CharField(max_length=10, null=True, blank=True)
     logo = models.ImageField(upload_to='logos', null=True, blank=True)
 
+    def __unicode__(self):
+        return self.nit
+
     class Meta:
         db_table = 'cliente'

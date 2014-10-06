@@ -27,5 +27,8 @@ class Solicitud(models.Model):
     proyecto = models.CharField(max_length=25)
     productos = models.ManyToManyField(Producto, db_table='productosxsolicitud')
 
+    def __unicode__(self):
+        return '%s - %s - %s' % (self.estado, self.solicitante, self.fecha_creacion)
+
     class Meta:
         db_table = 'solicitud'

@@ -21,6 +21,9 @@ class Producto(models.Model):
     contacto_novende = models.ManyToManyField(Contacto, db_table='productoxcontactoquenovende', related_name='Producto.contacto_novende')
     contacto_vende = models.ManyToManyField(Contacto, db_table='productoxcontactoquevende', related_name='Producto.contacto_vende')
     
+    def __unicode__(self):
+        return '%s - %s' % (self.codigo_onu, self.nombre)
+
     class Meta:
         db_table = 'producto'
 

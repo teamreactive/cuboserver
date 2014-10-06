@@ -11,6 +11,9 @@ class Lugar(models.Model):
     usuario = models.ForeignKey(Usuario, null=True)
     contactos = models.ManyToManyField(Contacto, db_table='lugarxcontactos')
 
+    def __unicode__(self):
+        return '%s - %s' % (self.nombre, self.direccion)
+
     class Meta:
         db_table = 'lugar'
 

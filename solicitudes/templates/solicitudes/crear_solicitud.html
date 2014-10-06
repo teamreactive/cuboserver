@@ -1,24 +1,10 @@
-<form method="post">
+<form method="post" class="form-signin">
     {% csrf_token %}
-    <label>Lugar de entrega</label>
-    {{ solicitud_form.lugar_entrega }}
-    {{ solicitud_form.lugar_entrega.errors }}
+    {{ solicitud_form }}
+    <br>
     <a href="/crear_lugar/">Crear nuevo lugar de entrega</a>
-    <label>Fecha requerida</label>
-    <input type="datetime" name="fecha_requerida" value={{ fecha_requerida }}>
-    {{ solicitud_form.fecha_requerida.errors }}
-    <label>Centro de costo</label>
-    {{ solicitud_form.centro_de_costo }}
-    {{ solicitud_form.centro_de_costo.errors }}
-    <label>Equipo</label>
-    {{ solicitud_form.equipo }}
-    {{ solicitud_form.equipo.errors }}
-    <label>Proyecto</label>
-    {{ solicitud_form.proyecto }}
-    {{ solicitud_form.proyecto.errors }}
-    <label>Producto/s</label>
-    {{ solicitud_form.productos }}
-    {{ solicitud_form.productos.errors }}
+    <br>
     <a href="/crear_producto/">Crear nuevo producto</a>
-    <input type="submit" value="Crear solicitud" />
+    <br>
+    <button class="btn btn-large btn-primary" type="submit">Crear solicitud</button>
 </form>

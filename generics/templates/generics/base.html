@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compras 10.0 official website">
+    <meta name="author" content="Reactive">
+
+    <!-- Le styles -->
+    {% load staticfiles %}
+    <link href="{% static "generics/css/bootstrap.css" %}" rel="stylesheet">
+    {% block head %}{% endblock %}
+    <link href="{% static "generics/css/bootstrap-responsive.css" %}" rel="stylesheet">
+</head>
+
+<body>
+
+    {% block body %}{% endblock %}
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static "generics/js/jquery.js" %}"></script>
+    <script src="{% static "generics/js/bootstrap-transition.js" %}"></script>
+    <script src="{% static "generics/js/bootstrap-alert.js" %}"></script>
+    <script src="{% static "generics/js/bootstrap-modal.js" %}"></script>
+    <script src="{% static "generics/js/bootstrap-dropdown.js" %}"></script>
+    <script src="{% static "generics/js/bootstrap-scrollspy.js" %}"></script>
+    <script src="{% static "generics/js/bootstrap-tab.js" %}"></script>
+    <script src="{% static "generics/js/bootstrap-tooltip.js" %}"></script>
+    <script src="{% static "generics/js/bootstrap-popover.js" %}"></script>
+    <script src="{% static "generics/js/bootstrap-button.js" %}"></script>
+    <script src="{% static "generics/js/bootstrap-collapse.js" %}"></script>
+    <script src="{% static "generics/js/bootstrap-carousel.js" %}"></script>
+    <script src="{% static "generics/js/bootstrap-typeahead.js" %}"></script>
+</body>
+</html>

@@ -11,5 +11,8 @@ class Equipo(models.Model):
     tipo_de_equipo = models.ForeignKey(TipoDeEquipo, on_delete=models.SET_NULL, null = True)
     cliente = models.ForeignKey(Cliente)
 
+    def __unicode__(self):
+    	return '%s' % self.nombre
+
     class Meta:
         db_table = 'equipo'
