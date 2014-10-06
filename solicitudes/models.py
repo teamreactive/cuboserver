@@ -15,7 +15,7 @@ class Solicitud(models.Model):
         ('3', 'solicitudud de compra aprobada'),
         ('4', 'cotizacion creada'),
     )
-    estado = models.CharField(max_length=1, choices=ESTADOS)
+    estado = models.CharField(max_length=1, default='1', choices=ESTADOS)
     lugar_entrega = models.ForeignKey(Lugar, related_name='Solicitud.lugar_entrega')
     fecha_creacion = models.DateTimeField(default=datetime.now)
     fecha_requerida = models.DateTimeField()

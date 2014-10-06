@@ -6,7 +6,6 @@ class SolicitudForm(ModelForm):
     class Meta:
         model = Solicitud
         fields = [
-            'estado',
             'lugar_entrega',
             'fecha_requerida',
             'centro_de_costo',

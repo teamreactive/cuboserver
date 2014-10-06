@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+
+    <div id="bienvenida_index">
+        <h1>Bienvenido, inicia sesion para continuar</h1>
+    </div>
+
+    <div id="login_index">
+        <form method="post">
+            <label>Nombre</label>
+            <input type="text" value={{ nombre }}>
+            <label>Clave</label>
+            <input type="password" value={{ clave }}>
+        </form>
+    </div>
+
+{% endblock %}

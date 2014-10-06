@@ -17,10 +17,10 @@ class Producto(models.Model):
     familia_proveedor = models.ForeignKey(FamiliaProveedor, null=True)
     tiempo_promedio = models.CharField(max_length=15, null=True, blank=True)
     cliente = models.ForeignKey(Cliente)
-    contacto_novende = models.ManyToManyField(Contacto, db_table='productoxcontactoquenovende',
-                                              related_name='Producto.contacto_novende')
-    contacto_vende = models.ManyToManyField(Contacto, db_table='productoxcontactoquevende',
-                                            related_name='Producto.contacto_vende')
+    valido = models.BooleanField(default=False)
+    contacto_novende = models.ManyToManyField(Contacto, db_table='productoxcontactoquenovende', related_name='Producto.contacto_novende')
+    contacto_vende = models.ManyToManyField(Contacto, db_table='productoxcontactoquevende', related_name='Producto.contacto_vende')
+    
     class Meta:
         db_table = 'producto'
 
@@ -29,19 +29,19 @@ class NombresxProducto(models.Model):
     nombre = models.CharField(max_length=25)
 
     class Meta:
-        db_table = 'nombre_por_contacto'
+        db_table = 'nombre_por_producto'
 
 class FotosxProducto(models.Model):
     producto = models.ForeignKey(Producto)
-    foto = models.CharField(max_length=100)
+    foto = models.ImageField(upload_to='imagenes_productos')
 
     class Meta:
         db_table = 'fotos_por_producto'
 
 class PrecioxProducto(models.Model):
     producto = models.ForeignKey(Producto)
-    unidad = models.CharField(max_length=1)
-    talla = models.CharField(max_length=1)
+    unidad = models.CharField(max_length=10)
+    talla = models.CharField(max_length=10)
     precio_promedio = models.FloatField(null=True)
 
     class Meta:

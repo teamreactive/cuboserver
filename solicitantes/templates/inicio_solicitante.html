@@ -1,0 +1,21 @@
+{% extends "solicitantes/base.html" %}
+
+{% block head %}{% endblock %}
+
+{% block body %}
+
+    <div id="bienvenida_solicitantes">
+        <h1>Bienvenido, {{ username }}</h1>
+    </div>
+
+    <div id="solicitudes_solicitantes">
+        {% for solicitud in solicitudes %}
+        <p>{{ solicitud }}</p>
+        {% endfor %}
+    </div>
+
+    <div id="crear_solicitud_solicitantes">
+        {% include "solicitudes/crear_solicitud.html" %}
+    </div>
+
+{% endblock %}
