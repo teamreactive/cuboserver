@@ -8,22 +8,17 @@ from familiasproveedores.models import FamiliaProveedor
 
 
 class Producto(models.Model):
-    SERVICIOS = (
-        ('s', 'si'),
-        ('n', 'no'),
-    )
     codigo_onu = models.CharField(max_length=25)
     nombre = models.CharField(max_length=25)
     descripcion = models.TextField(null=True,blank=True)
     referencia = models.CharField(max_length=25, null=True,blank=True)
     marca = models.CharField(max_length=25)
-    servicio = models.CharField(max_length=1, choices=SERVICIOS)
+    servicio = models.BooleanField(default=False)
     familia_proveedor = models.ForeignKey(FamiliaProveedor, null=True)
     tiempo_promedio = models.CharField(max_length=15, null=True, blank=True)
     cliente = models.ForeignKey(Cliente)
-    equipo = models.ForeignKey(Equipo, null=True)
-    centro_de_costo = models.ForeignKey(CentroDeCosto, null=True)
-
+    contacto_novende = models.ManyToManyField(Contacto,dt_table='ProductoxContactoQueNoVende')
+    contacto_vende = models.ManyToManyField(Contacto,dt_table='ProductoxContactoQueVende')
     class Meta:
         db_table = 'producto'
 
@@ -49,17 +44,3 @@ class PrecioxProducto(models.Model):
 
     class Meta:
         db_table = 'precio_producto'
-
-class ProductoxContactoQueNoVende(models.Model):
-    producto = models.ForeignKey(Producto)
-    contacto = models.ForeignKey(Contacto)
-
-    class Meta:
-        db_table = 'producto_contacto_no_vende'
-
-class ProductoxContactoQueVende(models.Model):
-    producto = models.ForeignKey(Producto)
-    contacto = models.ForeignKey(Contacto)
-
-    class Meta:
-        db_table = 'producto_contacto_que_vende'

@@ -9,7 +9,11 @@ from productos.models import Producto
 
 
 class Solicitud(models.Model):
-    estado = models.CharField(max_length=1)
+    ESTADOS = (
+        ('1','solicitado'),
+        ('2','rechazado por aprobador de solicitudes'),
+        ('3'.'apro'))
+    estado = models.CharField(max_length=1, choices=ESTADOS)
     lugar_entrega = models.ForeignKey(Lugar, related_name='Solicitud.lugar_entrega')
     fecha_creacion = models.DateTimeField(default=datetime.now)
     fecha_requerida = models.DateTimeField()
