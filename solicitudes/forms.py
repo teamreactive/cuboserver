@@ -9,6 +9,7 @@ class SolicitudForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(SolicitudForm, self).__init__(*args, **kwargs)
+        self.fields['consolidador'].label = "Solicitante"
         self.fields['consolidador'].required = False
 
     class Meta:
@@ -29,4 +30,5 @@ class SolicitudForm(ModelForm):
             'equipo': Select(attrs={'class': 'form-control', 'placeholder': 'Equipo'}),
             'proyecto': TextInput(attrs={'class': 'form-control', 'placeholder': 'Proyecto'}),
             'productos': SelectMultiple(attrs={'class': 'form-control', 'placeholder': 'Producto/s'}),
+            'consolidador': Select(attrs={'class': 'form-control', 'placeholder': 'consolidador'})
         }
