@@ -37,6 +37,7 @@ class NombresxProducto(models.Model):
 
     class Meta:
         db_table = 'nombre_por_producto'
+        unique_together = (('producto','nombre'),)
 
 class FotosxProducto(models.Model):
     producto = models.ForeignKey(Producto)
