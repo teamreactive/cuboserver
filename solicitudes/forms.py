@@ -6,6 +6,12 @@ from lugares.models import Lugar
 
 
 class SolicitudForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(SolicitudForm, self).__init__(*args, **kwargs)
+        self.fields['consolidador'].label = "Solicitante"
+        self.fields['consolidador'].required = False
+
     class Meta:
         model = Solicitud
         fields = [
@@ -15,6 +21,7 @@ class SolicitudForm(ModelForm):
             'equipo',
             'proyecto',
             'productos',
+            'consolidador',
         ]
         widgets = {
             'lugar_entrega': Select(attrs={'class': 'form-control', 'placeholder': 'Lugar de entrega'}),
@@ -23,4 +30,5 @@ class SolicitudForm(ModelForm):
             'equipo': Select(attrs={'class': 'form-control', 'placeholder': 'Equipo'}),
             'proyecto': TextInput(attrs={'class': 'form-control', 'placeholder': 'Proyecto'}),
             'productos': SelectMultiple(attrs={'class': 'form-control', 'placeholder': 'Producto/s'}),
+            'consolidador': Select(attrs={'class': 'form-control', 'placeholder': 'consolidador'})
         }

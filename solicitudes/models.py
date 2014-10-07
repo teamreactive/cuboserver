@@ -18,7 +18,7 @@ class Solicitud(models.Model):
     estado = models.CharField(max_length=1, default='1', choices=ESTADOS)
     lugar_entrega = models.ForeignKey(Lugar, related_name='Solicitud.lugar_entrega')
     fecha_creacion = models.DateTimeField(default=datetime.now)
-    fecha_requerida = models.DateTimeField()
+    fecha_requerida = models.DateField()
     solicitante = models.ForeignKey(Usuario, related_name='Solicitud.solicitante')
     consolidador = models.ForeignKey(Usuario, related_name='Solicitud.consolidador', null=True)
     aprobador = models.ForeignKey(Usuario, related_name='Solicitud.aprobador', null=True)
