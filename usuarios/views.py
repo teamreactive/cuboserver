@@ -24,14 +24,22 @@ def index(request):
     else:
         usuario = get_usuario(request)
         if usuario:
-            if usuario.tipo == '1': pass
-            elif usuario.tipo == '2': pass
-            elif usuario.tipo == '3': return redirect('/inicio_solicitante/')
-            elif usuario.tipo == '4': pass
-            elif usuario.tipo == '5': pass
-            elif usuario.tipo == '6': pass
-            elif usuario.tipo == '7': pass
-            elif usuario.tipo == '8': pass
+            if usuario.tipo == '1':
+                pass
+            elif usuario.tipo == '2':
+                pass
+            elif usuario.tipo == '3':
+                return redirect('/inicio_solicitante/')
+            elif usuario.tipo == '4':
+                pass
+            elif usuario.tipo == '5':
+                pass
+            elif usuario.tipo == '6':
+                pass
+            elif usuario.tipo == '7':
+                pass
+            elif usuario.tipo == '8':
+                pass
             else: request.session.flush()
         return render(request, 'usuarios/index.html')
 
