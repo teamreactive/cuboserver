@@ -5,34 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Compras 10.0 official website">
     <meta name="author" content="Reactive">
-
-    <!-- Le styles -->
     {% load staticfiles %}
-    <link href="{% static "generics/css/bootstrap.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static "generics/css/generics.css" %}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
     {% block head %}{% endblock %}
-    <link href="{% static "generics/css/bootstrap-responsive.css" %}" rel="stylesheet">
 </head>
-
 <body>
-
-    {% block body %}{% endblock %}
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="{% static "generics/js/jquery.js" %}"></script>
-    <script src="{% static "generics/js/bootstrap-transition.js" %}"></script>
-    <script src="{% static "generics/js/jquery-popup.js" %}"></script>
-    <script src="{% static "generics/js/bootstrap-alert.js" %}"></script>
-    <script src="{% static "generics/js/bootstrap-modal.js" %}"></script>
-    <script src="{% static "generics/js/bootstrap-dropdown.js" %}"></script>
-    <script src="{% static "generics/js/bootstrap-scrollspy.js" %}"></script>
-    <script src="{% static "generics/js/bootstrap-tab.js" %}"></script>
-    <script src="{% static "generics/js/bootstrap-tooltip.js" %}"></script>
-    <script src="{% static "generics/js/bootstrap-popover.js" %}"></script>
-    <script src="{% static "generics/js/bootstrap-button.js" %}"></script>
-    <script src="{% static "generics/js/bootstrap-collapse.js" %}"></script>
-    <script src="{% static "generics/js/bootstrap-carousel.js" %}"></script>
-    <script src="{% static "generics/js/bootstrap-typeahead.js" %}"></script>
+    <div class="container-fluid" ng-app="app">
+        <div class="row">
+            <div class="nav">
+                {% include "generics/nav.html" %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="banner" id="welcome">
+                {% include "generics/banner.html" %}
+            </div>
+        </div>
+        <div class="container">
+            {% block body %}{% endblock %}
+            <div class="row">
+                <hr>
+            </div>
+            <div class="row">
+                <div class="footer">
+                    {% include "generics/footer.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

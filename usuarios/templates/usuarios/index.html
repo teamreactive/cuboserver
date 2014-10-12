@@ -3,20 +3,22 @@
 {% block head %}
 
     {% load staticfiles %}
-    <link href="{% static "usuarios/index.css" %}" rel="stylesheet">
+    <link href="{% static "usuarios/css/index.css" %}" rel="stylesheet">
+    <script src="{% static "usuarios/js/app.js" %}"></script>
     <title>Iniciar sesion</title>
 
 {% endblock %}
 
 {% block body %}
 
-    <div class="container">         <form method="post" class="form-signin">
-{% csrf_token %}             <h2 class="form-signin-heading">Iniciar
-sesion</h2>             <input type="text" name="nombre" class="input-block-
-level"              placeholder="Nombre" value="{{ nombre }}" required>
-<input type="password" name="contrasena" class="input-block-level"
-placeholder="Contrasena" value="{{ contrasena }}" required>
-<button class="btn btn-large btn-primary" type="submit">Iniciar
-sesion</button>         </form>     </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div id="login" class="form" ng-controller="LoginController as loginCtrl">
+                {% include "usuarios/login.html" %}
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
 
 {% endblock %}
