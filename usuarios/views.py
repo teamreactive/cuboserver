@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect
-
-from cubo.settings import SECRET_KEY
-import hashlib
-from .models import Usuario
+from django.views.generic import View
 from rest_framework import viewsets
+
+from .models import Usuario
 from .serializers import UsuarioSerializer
 
 
-class UsuarioViewSet(viewsets.ModelViewSet):
+class UsuarioViewSet(viewsets.ReadOnlyModelViewSet):
     """
     API endpoint that allows solicitudes to be viewed or edited.
     """
@@ -15,62 +14,15 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     serializer_class = UsuarioSerializer
 
 
-def index(request):
-    if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        contrasena = request.POST.get('contrasena')
-        try:
-            Usuario.objects.get(nombre=nombre, contrasena=encriptar(contrasena))
-            request.session['nombre'] = nombre
-            request.session['nombre_check'] = encriptar(nombre)
-            return redirect('/')
-        except Usuario.DoesNotExist:
-            params = {
-                'nombre': nombre,
-                'contrasena': contrasena,
-                'mensaje': 'Error al ingresar, verifica tus datos e intenta nuevamente.'
-            }
-            return render(request, 'usuarios/index.html', params)
-    else:
-        usuario = get_usuario(request)
-        if usuario:
-            if usuario.tipo == '1':
-                pass
-            elif usuario.tipo == '2':
-                pass
-            elif usuario.tipo == '3':
-                return redirect('/inicio_solicitante/')
-            elif usuario.tipo == '4':
-                pass
-            elif usuario.tipo == '5':
-                pass
-            elif usuario.tipo == '6':
-                pass
-            elif usuario.tipo == '7':
-                pass
-            elif usuario.tipo == '8':
-                pass
-            else: request.session.flush()
-        return render(request, 'usuarios/index.html')
+class HomeView(View):
+    """
+    View endpoint that renders the home.
+    """
+    template_name = 'usuarios/index.html'
 
-def get_usuario(request):
-    nombre = request.session.get('nombre')
-    nombre_check = request.session.get('nombre_check')
-    if encriptar(nombre) == nombre_check:
-        try:
-            return Usuario.objects.get(nombre=nombre)
-        except Usuario.DoesNotExist:
-            request.session.flush()
-            return None
-    else:
-        return None
-
-def encriptar(valor):
-    if SECRET_KEY and valor:
-        return hashlib.sha512(SECRET_KEY + valor).hexdigest()
-    else:
-        return None
-
-def logout(request):
-    request.session.flush()
-    return redirect('/')
+    def get(self, request, *args, **kwargs):
+        """
+        Define the response of a HTTP GET request.
+        Renters the home page with the given template.
+        """
+        return render(request, self.template_name)

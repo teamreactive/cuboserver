@@ -19,7 +19,7 @@ class Usuario(models.Model):
         ('0', 'no'),
         ('1', 'si'),
     )
-    nombre = models.CharField(max_length=25, unique=True)
+    nombre = models.CharField(max_length=25, primary_key=True)
     contrasena = models.CharField(max_length=255)
     cliente = models.ForeignKey(Cliente, related_name='Usuario.cliente', null=True)
     tipo = models.CharField(max_length=1, choices=TIPOS)

@@ -5,7 +5,9 @@ from rest_framework import serializers
 class LugarSerializer(serializers.HyperlinkedModelSerializer):
 	class Meta:
 		model = Lugar
-		fields = ('nombre',
+		fields = (
+				  'id',
+				  'nombre',
 				  'direccion',
 				  'descripcion',
 				  'usuario',

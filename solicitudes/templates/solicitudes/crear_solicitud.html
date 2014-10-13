@@ -2,6 +2,45 @@
 <hr>
 <form name="solicitudForm" action="post" ng-submit="solicitudForm.$valid" novalidate>
     {% csrf_token %}
-    {{ solicitud_form }}
-    <button ng-disabled="!solicitudForm.$valid" class="btn btn-default" type="submit">Ingresar ahora</button>
+    {% verbatim %}
+    <div class="form-group">
+        <label for="solicitudLugar">Lugar de entrega</label>
+        <select class="form-control select" id="solicitudLugar" required ng-model="solicitud.lugar">
+        	<option value="{{ lugarEntrega.id }}" ng-repeat="lugar in solicitanteCtrl.lugares">
+        		{{ lugarEntrega.nombre + " -> " + lugarEntrega.direccion }}
+        	</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="solicitudFechaRequerida">Fecha requerida</label>
+        <input type="date" class="form-control" id="solicitudFechaRequerida" placeholder="Fecha requerida" maxlength="15" required ng-model="solicitud.fecha_requerida">
+    </div>
+    <div class="form-group">
+        <label for="solicitudCentroDeCosto">Centro de costo</label>
+        <select class="form-control" id="solicitudCentroDeCosto" required ng-model="solicitud.centrodecosto" ng-options="item for item in solicitanteCtrl.centrosdecostos">
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="solicitudEquipo">Equipo</label>
+        <select class="form-control select" id="solicitudEquipo" required ng-model="solicitud.equipo">
+        	<option value="{{ equipo.id }}" ng-repeat="equipo in solicitanteCtrl.equipos">
+        		{{ equipo.nombre }}
+        	</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="solicitudProyecto">Proyecto</label>
+        <input type="text" class="form-control" id="solicitudProyecto" placeholder="Proyecto" maxlength="15" required ng-model="solicitud.proyecto">
+    </div>
+    <div class="form-group">
+        <label for="solicitudProductos">Productos</label>
+        <select class="form-control select" id="solicitudProductos" required nultiple ng-model="solicitud.producto">
+        	<option value="{{ producto.id }}" ng-repeat="producto in solicitanteCtrl.productos">
+        		{{ producto.nombre }}
+        	</option>
+        </select>
+    </div>
+    <button ng-disabled="!solicitudForm.$valid" class="btn btn-default" type="submit">Crear solicitud</button>
+    {{ mensaje }}
+    {% endverbatim %}
 </form>
