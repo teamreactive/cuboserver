@@ -18,11 +18,19 @@ class HomeView(View):
     """
     View endpoint that renders the home.
     """
-    template_name = 'usuarios/index.html'
+    template_name = 'usuarios/index-solicitante.html'
 
     def get(self, request, *args, **kwargs):
         """
         Define the response of a HTTP GET request.
-        Renters the home page with the given template.
+        Renders the home page with the given template name.
         """
         return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        """
+        Define the response of a HTTP POST request.
+        Validate and submit the corresponding form,
+        and return the respective HTTP status code.
+        """
+        return HttpResponse(status=200)

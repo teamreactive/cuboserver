@@ -43,7 +43,6 @@ INSTALLED_APPS = (
     'cotizaciones',
     'equipos',
     'familiasproveedores',
-    'generics',
     'historiales',
     'lugares',
     'productos',
@@ -52,6 +51,7 @@ INSTALLED_APPS = (
     'solicitudes',
     'tiposdeequipos',
     'usuarios',
+    'utils',
 )
 
 MIDDLEWARE_CLASSES = (

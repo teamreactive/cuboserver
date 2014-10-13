@@ -1,15 +1,10 @@
-{% extends "generics/base.html" %}
+{% extends "utils/base.html" %}
 
 {% block head %}
-
-    {% load staticfiles %}
-    <link rel="stylesheet" href="{% static "solicitantes/css/inicio_solicitante.css" %}">
-    <script src="{% static "solicitantes/js/app.js" %}"></script>
-
+    <title>Bienvenido solicitante</title>
 {% endblock %}
 
 {% block body %}
-
     <div class="row" ng-controller="SolicitanteController as solicitanteCtrl">
         <div class="col-md-8">
             {% include "solicitudes/solicitud.html" %}
@@ -18,5 +13,9 @@
             {% include "solicitudes/crear_solicitud.html" %}
         </div>
     </div>
+{% endblock %}
 
+{% block js %}
+    {% load staticfiles %}
+    <script src="{% static "usuarios/js/app.js" %}"></script>
 {% endblock %}

@@ -8,24 +8,19 @@
     {% load staticfiles %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{% static "generics/css/generics.css" %}">
-    <link rel="stylesheet" href="{% static "generics/css/chosen.css" %}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="{% static "generics/js/chosen.jquery.min.js" %}"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <link rel="stylesheet" href="{% static "utils/css/base.css" %}">
     {% block head %}{% endblock %}
 </head>
 <body>
     <div class="container-fluid" ng-app="app">
         <div class="row">
             <div class="nav">
-                {% include "generics/nav.html" %}
+                {% include "utils/nav.html" %}
             </div>
         </div>
         <div class="row">
             <div class="banner" id="welcome">
-                {% include "generics/banner.html" %}
+                {% include "utils/banner.html" %}
             </div>
         </div>
         <div class="container">
@@ -35,12 +30,14 @@
             </div>
             <div class="row">
                 <div class="footer">
-                    {% include "generics/footer.html" %}
+                    {% include "utils/footer.html" %}
                 </div>
             </div>
         </div>
     </div>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
     {% block js %}{% endblock %}
 </body>
 </html>
