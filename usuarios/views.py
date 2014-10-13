@@ -19,7 +19,7 @@ class HomeView(View):
     """
     View endpoint that renders the home.
     """
-    template_name = 'usuarios/index-login.html'
+    template_name = 'usuarios/'
 
     def get(self, request, *args, **kwargs):
         """
@@ -35,3 +35,12 @@ class HomeView(View):
         and return the respective HTTP status code.
         """
         return HttpResponse(status=300)
+
+def get_template(request,template_name):
+    if request.usuario.is_authenticated():
+        if request.user.tipo == '3':
+            return template_name + 'index-solicitante'
+#        if request.user.tipo == '6':
+#            return template_name + 'index-comprador'
+    else:
+        return template_name + 'index-login.html'
