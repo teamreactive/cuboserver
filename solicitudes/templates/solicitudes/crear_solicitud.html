@@ -1,18 +1,7 @@
-<div id="nueva_solicitud">
-    <form method="post" class="form-signin">
-        <h2 class="form-signin-heading">Nueva solicitud</h2>
-        {% csrf_token %}
-        {{ solicitud_form }}
-        <div id="link_nuevo_lugar">
-            <a href="#nuevo_lugar">Crear nuevo lugar de entrega</p>
-        </div>
-        <div id="link_nuevo_producto">
-            <a href="#nuevo_producto">Crear nuevo producto</a>
-        </div>
-        <div class="submit_form">
-            <button class="btn btn-large btn-primary" name="solicitud" value="solicitud" type="submit">
-                Crear solicitud
-            </button>
-        </div>
-    </form>
-</div>
+<h2>Nueva solicitud</h2>
+<hr>
+<form name="solicitudForm" action="post" ng-submit="solicitudForm.$valid" novalidate>
+    {% csrf_token %}
+    {{ solicitud_form }}
+    <button ng-disabled="!solicitudForm.$valid" class="btn btn-default" type="submit">Ingresar ahora</button>
+</form>

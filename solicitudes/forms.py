@@ -24,11 +24,11 @@ class SolicitudForm(ModelForm):
             'consolidador',
         ]
         widgets = {
-            'lugar_entrega': Select(attrs={'class': 'form-control', 'placeholder': 'Lugar de entrega'}),
+            'lugar_entrega': Select(attrs={'class': 'form-control', 'required': 'required'}),
             'fecha_requerida': DateTimeInput(attrs={'class': 'form-control', 'placeholder': 'Fecha requerida'}),
-            'centro_de_costo': Select(attrs={'class': 'form-control', 'placeholder': 'Centro de costosos'}),
-            'equipo': Select(attrs={'class': 'form-control', 'placeholder': 'Equipo'}),
+            'centro_de_costo': Select(attrs={'class': 'form-control'}),
+            'equipo': Select(attrs={'class': 'form-control'}),
             'proyecto': TextInput(attrs={'class': 'form-control', 'placeholder': 'Proyecto'}),
-            'productos': SelectMultiple(attrs={'class': 'form-control', 'placeholder': 'Producto/s'}),
+            'productos': SelectMultiple(attrs={'class': 'form-control'}),
             'consolidador': Select(attrs={'class': 'form-control', 'placeholder': 'consolidador'})
         }

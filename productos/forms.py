@@ -5,7 +5,7 @@ from .models import Producto, FotosxProducto
 class ProductoForm(ModelForm):
     class Meta:
         model = Producto
-        fields = [
+        fields = (
             'codigo_onu',
             'nombre',
             'descripcion',
@@ -13,11 +13,11 @@ class ProductoForm(ModelForm):
             'marca',
             'servicio',
             'familia_proveedor',
-        ]
+        )
 
 class FotosxProductoForm(ModelForm):
     class Meta:
         model = FotosxProducto
-        fields = [
+        fields = (
             'foto',
-        ]
+        )

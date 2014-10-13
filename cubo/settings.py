@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'lugares',
     'productos',
     'proveedores',
+    'rest_framework',
     'solicitantes',
     'solicitudes',
     'tiposdeequipos',

@@ -3,6 +3,16 @@ from django.shortcuts import render, redirect
 from cubo.settings import SECRET_KEY
 import hashlib
 from .models import Usuario
+from rest_framework import viewsets
+from .serializers import UsuarioSerializer
+
+
+class UsuarioViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows solicitudes to be viewed or edited.
+    """
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
 
 
 def index(request):
