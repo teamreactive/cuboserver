@@ -1,6 +1,9 @@
 {% verbatim %}
 <h2>Tus solicitudes</h2>
 <hr>
+<div class="alert alert-success" ng-hide="mensage == null">
+    {{ mensaje }}
+</div>
 <div class="col-md-6" ng-repeat="solicitud in solicitanteCtrl.solicitudes">
     <p>{{ solicitud.estado }}</p>
     <p>{{ solicitud.lugar_entrega }}</p>

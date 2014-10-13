@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from rest_framework import viewsets
@@ -33,4 +34,4 @@ class HomeView(View):
         Validate and submit the corresponding form,
         and return the respective HTTP status code.
         """
-        return HttpResponse(status=200)
+        return HttpResponse(status=300)

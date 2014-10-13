@@ -1,21 +1,30 @@
 {% extends "utils/base.html" %}
 
 {% block head %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "utils/css/chosen.css" %}">
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css">
     <title>Bienvenido solicitante</title>
 {% endblock %}
 
 {% block body %}
-    <div class="row" ng-controller="SolicitanteController as solicitanteCtrl">
-        <div class="col-md-8">
-            {% include "solicitudes/solicitud.html" %}
-        </div>
-        <div class="col-md-4">
-            {% include "solicitudes/crear_solicitud.html" %}
+    <div class="row" ng-app="app">
+        <div ng-controller="SolicitanteCtrl as solicitanteCtrl">
+            <div class="col-md-8">
+                {% verbatim %}
+                {% endverbatim %}
+                {% include "solicitudes/solicitud.html" %}
+            </div>
+            <div class="col-md-4">
+                {% include "solicitudes/crear_solicitud.html" %}
+            </div>
         </div>
     </div>
 {% endblock %}
 
 {% block js %}
     {% load staticfiles %}
-    <script src="{% static "usuarios/js/app.js" %}"></script>
+    <script src="{% static "usuarios/js/index-solicitante.js" %}"></script>
+    <script src="{% static "utils/js/chosen.jquery.min.js" %}"></script>
+    <script src="{% static "utils/js/datepicker.js" %}"></script>
 {% endblock %}

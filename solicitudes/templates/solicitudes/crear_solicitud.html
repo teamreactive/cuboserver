@@ -1,46 +1,89 @@
 <h2>Nueva solicitud</h2>
 <hr>
-<form name="solicitudForm" action="post" ng-submit="solicitudForm.$valid" novalidate>
+<form name="solicitudForm" method="post" ng-submit="solicitudForm.$valid" novalidate>
     {% csrf_token %}
     {% verbatim %}
     <div class="form-group">
         <label for="solicitudLugar">Lugar de entrega</label>
-        <select class="form-control select" id="solicitudLugar" required ng-model="solicitud.lugar">
-        	<option value="{{ lugarEntrega.id }}" ng-repeat="lugar in solicitanteCtrl.lugares">
-        		{{ lugarEntrega.nombre + " -> " + lugarEntrega.direccion }}
-        	</option>
+        <select data-placeholder="Seleccionar lugar"
+        class="form-control select"
+        id="solicitudLugar"
+        required
+        ng-model="solicitud.lugar"
+        chosen="solicitanteCtrl.lugares"
+        ng-options="lugar.nombre for lugar in solicitanteCtrl.lugares">
         </select>
     </div>
     <div class="form-group">
         <label for="solicitudFechaRequerida">Fecha requerida</label>
-        <input type="date" class="form-control" id="solicitudFechaRequerida" placeholder="Fecha requerida" maxlength="15" required ng-model="solicitud.fecha_requerida">
+        <input type="date" class="form-control datepicker"
+        id="solicitudFechaRequerida"
+        placeholder="Fecha requerida" maxlength="15"
+        required ng-model="solicitud.fecha_requerida">
     </div>
     <div class="form-group">
         <label for="solicitudCentroDeCosto">Centro de costo</label>
-        <select class="form-control" id="solicitudCentroDeCosto" required ng-model="solicitud.centrodecosto" ng-options="item for item in solicitanteCtrl.centrosdecostos">
+        <select data-placeholder="Seleccionar centro de costo"
+        class="form-control select"
+        id="solicitudCentroDeCosto"
+        required
+        ng-model="solicitud.centrodecosto"
+        chosen="solicitanteCtrl.centrosdecostos"
+        ng-options="centro.nombre for centro in solicitanteCtrl.centrosdecostos">
         </select>
     </div>
     <div class="form-group">
         <label for="solicitudEquipo">Equipo</label>
-        <select class="form-control select" id="solicitudEquipo" required ng-model="solicitud.equipo">
-        	<option value="{{ equipo.id }}" ng-repeat="equipo in solicitanteCtrl.equipos">
-        		{{ equipo.nombre }}
-        	</option>
+        <select data-placeholder="Seleccionar equipo"
+        class="form-control select"
+        id="solicitudEquipo"
+        required
+        ng-model="solicitud.equipo"
+        chosen="solicitanteCtrl.equipos"
+        ng-options="equipo.nombre for equipo in solicitanteCtrl.equipos">
         </select>
     </div>
     <div class="form-group">
         <label for="solicitudProyecto">Proyecto</label>
-        <input type="text" class="form-control" id="solicitudProyecto" placeholder="Proyecto" maxlength="15" required ng-model="solicitud.proyecto">
+        <input type="text" class="form-control"
+        id="solicitudProyecto"
+        placeholder="Proyecto" maxlength="15"
+        required ng-model="solicitud.proyecto">
     </div>
     <div class="form-group">
         <label for="solicitudProductos">Productos</label>
-        <select class="form-control select" id="solicitudProductos" required nultiple ng-model="solicitud.producto">
-        	<option value="{{ producto.id }}" ng-repeat="producto in solicitanteCtrl.productos">
-        		{{ producto.nombre }}
-        	</option>
+        <select data-placeholder="Seleccionar productos"
+        class="form-control select"
+        id="solicitudProductos"
+        required
+        multiple
+        ng-model="solicitud.productos"
+        chosen="solicitanteCtrl.productos"
+        ng-options="producto.nombre for producto in solicitanteCtrl.productos">
         </select>
+        <hr>
+        <div ng-hide="solicitud.productos == null">
+            <div class="panel panel-default productosSolicitud">
+                <div class="panel-body">
+                    <div ng-repeat="producto in solicitud.productos">
+                        <label for="{{ producto.id }}">
+                            {{ producto.nombre }}
+                        </label>
+                        <input type="number" class="form-control"
+                        id="{{ producto.id }}"
+                        placeholder="Cantidad" maxlength="5"
+                        required ng-model="producto.cantidad">
+                        <div ng-show="producto != 
+                        solicitud.productos[solicitud.productos.length-1]">
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
     </div>
-    <button ng-disabled="!solicitudForm.$valid" class="btn btn-default" type="submit">Crear solicitud</button>
-    {{ mensaje }}
+    <button ng-disabled="!solicitudForm.$valid" class="btn btn-default">
+        Crear solicitud
+    </button>
     {% endverbatim %}
 </form>
