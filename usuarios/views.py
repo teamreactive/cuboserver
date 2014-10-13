@@ -19,7 +19,7 @@ class HomeView(View):
     """
     View endpoint that renders the home.
     """
-    template_name = 'usuarios/index-solicitante.html'
+    template_name = 'usuarios/index-login.html'
 
     def get(self, request, *args, **kwargs):
         """
