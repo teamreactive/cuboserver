@@ -3,18 +3,17 @@
 {% block head %}
     {% load staticfiles %}
     <link rel="stylesheet" href="{% static "utils/css/chosen.css" %}">
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css">
-    <title>Bienvenido solicitante</title>
+    <title>Bienvenido codificador</title>
 {% endblock %}
 
 {% block body %}
     <div class="row" ng-app="app">
-        <div ng-controller="SolicitanteCtrl as solicitanteCtrl">
+        <div ng-controller="CodificadorCtrl as codificadorCtrl">
             <div class="col-md-8">
-                {% include "solicitudes/solicitud.html" %}
+                {% include "productos/producto.html" %}
             </div>
             <div class="col-md-4">
-                {% include "solicitudes/crear_solicitud.html" %}
+                {% include "productos/crear_producto.html" %}
             </div>
         </div>
     </div>
@@ -24,5 +23,4 @@
     {% load staticfiles %}
     <script src="{% static "usuarios/js/index-solicitante.js" %}"></script>
     <script src="{% static "utils/js/chosen.jquery.min.js" %}"></script>
-    <script src="{% static "utils/js/datepicker.js" %}"></script>
 {% endblock %}

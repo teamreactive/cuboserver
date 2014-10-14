@@ -1,0 +1,13 @@
+{% verbatim %}
+<h2>Productos pendientes</h2>
+<hr>
+<div class="col-md-6" ng-repeat="solicitud in solicitanteCtrl.solicitudes">
+    <p>{{ producto.nombre }}</p>
+    <p>{{ producto.codigo_onu }}</p>
+    <p>{{ producto.descripcion }}</p>
+    <p>{{ solicitud.referencia }}</p>
+    <p>{{ solicitud.marca }}</p>
+    <p>{{ solicitud.servicio }}</p>
+    <p>{{ solicitud.familia_proveedor }}</p>
+</div>
+{% endverbatim %}

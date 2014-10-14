@@ -39,12 +39,14 @@ class NombresxProducto(models.Model):
         db_table = 'nombre_por_producto'
         unique_together = (('producto','nombre'),)
 
+
 class FotosxProducto(models.Model):
     producto = models.ForeignKey(Producto)
     foto = models.ImageField(upload_to='imagenes_productos')
 
     class Meta:
         db_table = 'fotos_por_producto'
+
 
 class PrecioxProducto(models.Model):
     producto = models.ForeignKey(Producto)
