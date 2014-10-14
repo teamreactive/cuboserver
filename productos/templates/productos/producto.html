@@ -1,13 +1,14 @@
 {% verbatim %}
 <h2>Productos pendientes</h2>
 <hr>
-<div class="col-md-6" ng-repeat="solicitud in solicitanteCtrl.solicitudes">
+<div class="col-md-6" ng-repeat="producto in codificadorCtrl.productos">
     <p>{{ producto.nombre }}</p>
-    <p>{{ producto.codigo_onu }}</p>
+    <p>{{ producto.onu }}</p>
     <p>{{ producto.descripcion }}</p>
-    <p>{{ solicitud.referencia }}</p>
-    <p>{{ solicitud.marca }}</p>
-    <p>{{ solicitud.servicio }}</p>
-    <p>{{ solicitud.familia_proveedor }}</p>
+    <p>{{ producto.referencia }}</p>
+    <p>{{ producto.marca }}</p>
+    <p>{{ producto.servicio }}</p>
+    <p>{{ producto.familia }}</p>
+    <hr ng-hide="producto == codificadorCtrl.productos[codificadorCtrl.productos.length-1]">
 </div>
 {% endverbatim %}

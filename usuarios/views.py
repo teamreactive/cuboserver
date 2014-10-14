@@ -2,8 +2,12 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import View
 from rest_framework import viewsets
+from StringIO import StringIO
+from rest_framework.parsers import JSONParser
 
+import json
 from .models import Usuario
+from productos.serializers import ProductoSerializer
 from .serializers import UsuarioSerializer
 
 
@@ -19,7 +23,8 @@ class HomeView(View):
     """
     View endpoint that renders the home.
     """
-    template_name = 'usuarios/index-solicitante.html'
+    template_name = 'usuarios/index-codificador.html'
+    # TODO -> REPLACE WITH THE GET_TEMPLATE FUNCTION #
 
     def get(self, request, *args, **kwargs):
         """
@@ -34,13 +39,31 @@ class HomeView(View):
         Validate and submit the corresponding form,
         and return the respective HTTP status code.
         """
-        return HttpResponse(status=300)
+        stream = StringIO(request.body)
+        data = JSONParser().parse(stream)
+        data = fix_data(data)
+        print data
+        return HttpResponse(status=200)
 
-def get_template(request,template_name):
+def get_template(request, template_name):
+    """
+    Returns the respective template based on the
+    logged user type, in case there's no user or
+    if the user is invalid, returns the user
+    login template.
+    """
+    template_name = 'usuaios/'
     if request.usuario.is_authenticated():
         if request.user.tipo == '3':
             return template_name + 'index-solicitante'
-#        if request.user.tipo == '6':
-#            return template_name + 'index-comprador'
+#       if request.user.tipo == '6':
+#           return template_name + 'index-comprador'
     else:
         return template_name + 'index-login.html'
+
+def fix_data(data):
+    for key in data:
+        key = key.encode('utf-8')
+        value = data[key].encode('utf-8')
+        data[key] = value
+    return data

@@ -1,12 +1,8 @@
-<p>{{ producto.descripcion }}</p>
-<p>{{ solicitud.referencia }}</p>
-<p>{{ solicitud.marca }}</p>
-<p>{{ solicitud.servicio }}</p>
-<p>{{ solicitud.familia_proveedor }}</p>
-
-<h2>Nueva solicitud</h2>
+<h2>Nuevo producto</h2>
 <hr>
-<form name="solicitudForm" method="post" ng-submit="solicitudForm.$valid" novalidate>
+<form name="productoForm"method="post"
+ng-submit="codificadorCtrl.submit()"
+novalidate>
     {% csrf_token %}
     {% verbatim %}
     <div class="form-group">
@@ -14,80 +10,60 @@
         <input type="text" class="form-control"
         id="productoNombre"
         placeholder="Nombre" maxlength="100"
-        required ng-model="producto.nombre">
+        required ng-model="codificadorCtrl.producto.nombre">
     </div>
     <div class="form-group">
         <label for="productoOnu">Codigo ONU</label>
         <input type="text" class="form-control"
         id="productoOnu"
         placeholder="Codigo ONU" maxlength="15"
-        required ng-model="producto.onu">
+        required ng-model="codificadorCtrl.producto.onu">
     </div>
     <div class="form-group">
-        <label for="solicitudCentroDeCosto">Centro de costo</label>
-        <select data-placeholder="Seleccionar centro de costo"
-        class="form-control select"
-        id="solicitudCentroDeCosto"
-        required
-        ng-model="solicitud.centrodecosto"
-        chosen="solicitanteCtrl.centrosdecostos"
-        ng-options="centro.nombre for centro in solicitanteCtrl.centrosdecostos">
-        </select>
+        <label for="productoDescripcion">Descripcion</label>
+        <textarea placeholder="Ingrese la descripcion del producto..."
+        class="form-control" id="productoDescripcion"
+        required ng-model="codificadorCtrl.producto.descripcion"></textarea>
     </div>
     <div class="form-group">
-        <label for="solicitudEquipo">Equipo</label>
-        <select data-placeholder="Seleccionar equipo"
-        class="form-control select"
-        id="solicitudEquipo"
-        required
-        ng-model="solicitud.equipo"
-        chosen="solicitanteCtrl.equipos"
-        ng-options="equipo.nombre for equipo in solicitanteCtrl.equipos">
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="solicitudProyecto">Proyecto</label>
+        <label for="productoReferencia">Referencia</label>
         <input type="text" class="form-control"
-        id="solicitudProyecto"
-        placeholder="Proyecto" maxlength="15"
-        required ng-model="solicitud.proyecto">
+        id="productoReferencia"
+        placeholder="Referencia" maxlength="15"
+        required ng-model="codificadorCtrl.producto.referencia">
     </div>
     <div class="form-group">
-        <label for="solicitudProductos">Productos</label>
-        <select data-placeholder="Seleccionar productos"
-        class="form-control select"
-        id="solicitudProductos"
-        required
-        multiple
-        ng-model="solicitud.productos"
-        chosen="solicitanteCtrl.productos"
-        ng-options="producto.nombre for producto in solicitanteCtrl.productos">
-        </select>
-        <hr>
-        <div ng-hide="solicitud.productos == null">
-            <div class="panel panel-default productosSolicitud">
-                <div class="panel-body">
-                    <h2>Tus productos</h2>
-                    <hr>
-                    <div ng-repeat="producto in solicitud.productos">
-                        <label for="{{ producto.id }}">
-                            {{ producto.nombre }}
-                        </label>
-                        <input type="number" class="form-control"
-                        id="{{ producto.id }}"
-                        placeholder="Cantidad" maxlength="5"
-                        required ng-model="producto.cantidad">
-                        <div ng-show="producto != 
-                        solicitud.productos[solicitud.productos.length-1]">
-                            <hr>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <label for="productoMarca">Marca</label>
+        <input type="text" class="form-control"
+        id="productoMarca"
+        placeholder="Marca" maxlength="15"
+        required ng-model="codificadorCtrl.producto.marca">
     </div>
-    <button ng-disabled="!solicitudForm.$valid" class="btn btn-default">
-        Crear solicitud
-    </button>
+    <div class="form-group">
+        <label for="productoServicio">Es servicio?</label>
+        <select data-placeholder="Es servicio?"
+        class="form-control select"
+        id="productoServicio"
+        required
+        ng-model="codificadorCtrl.producto.servicio"
+        chosen="codificadorCtrl.servicio"
+        ng-options="item for item in codificadorCtrl.servicio">
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="productoFamilia">Familia proveedor</label>
+        <select data-placeholder="Seleccione familia proveedor"
+        class="form-control select"
+        id="productoFamilia"
+        required
+        ng-model="codificadorCtrl.producto.familia"
+        chosen="codificadorCtrl.familias"
+        ng-options="familia.nombre for familia in codificadorCtrl.familias">
+        </select>
+    </div>
+    <input type="submit"
+    ng-disabled="productoForm.$valid"
+    class="btn btn-default"
+    value="Crear producto">
     {% endverbatim %}
 </form>
