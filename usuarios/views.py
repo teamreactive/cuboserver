@@ -52,14 +52,24 @@ def get_template(request, template_name):
     if the user is invalid, returns the user
     login template.
     """
-    template_name = 'usuaios/'
+    template_name = 'usuarios/'
     if request.usuario.is_authenticated():
-        if request.user.tipo == '3':
+#         if request.usuario.tipo == '2':
+#             return template_name + 'index-administrador-cliente'
+        if request.usuario.tipo == '3':
             return template_name + 'index-solicitante'
-#       if request.user.tipo == '6':
-#           return template_name + 'index-comprador'
-    else:
-        return template_name + 'index-login.html'
+        if request.usuario.tipo == '4':
+            return template_name + 'index-codificador'
+#         if request.usuario.tipo == '5':
+#             return template_name + 'index-aprovador-solicitudes'
+       if request.user.tipo == '6':
+           return template_name + 'index-comprador'
+#         if request.usuario.tipo == '7':
+#             return template_name + 'index-aprovador-compra'
+#         if request.usuario.tipo == '8':
+#             return template_name + 'index-almacenista'
+    return template_name + 'index-login.html'
+
 
 def fix_data(data):
     for key in data:
