@@ -16,11 +16,11 @@ app.controller('CodificadorCtrl', ['$http', function($http) {
             codificador.familias = data;
         });
 
+    codificador.mensaje = '';
     codificador.servicio = ['Si', 'No'];
     codificador.productos = [];
     codificador.producto = {};
     codificador.prod = {
-        "id": 3, 
         "codigo_onu": "NG123231", 
         "nombre": "Taladrote", 
         "descripcion": "Un taladro muy grande", 
@@ -38,10 +38,11 @@ app.controller('CodificadorCtrl', ['$http', function($http) {
         $http.post('/', codificador.prod).
             success(function(data){
                 codificador.productos.push(codificador.prod);
+                codificador.mensaje = 'La creacion fue exitosa.'
             }).
             error(function(data){
                 codificador.productos.push(codificador.prod);
-                window.alert("BAAAD =(")
+                codificador.mensaje = 'Ocurrio un error, revisa todos los campos.'
             });
     };
 }]);

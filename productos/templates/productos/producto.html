@@ -1,6 +1,9 @@
 {% verbatim %}
 <h2>Productos pendientes</h2>
 <hr>
+<div class="alert alert-success" ng-hide="codificadorCtrl.mensaje == null">
+    {{ codificadorCtrl.mensaje }}
+</div>
 <div class="col-md-6" ng-repeat="producto in codificadorCtrl.productos">
     <p>{{ producto.nombre }}</p>
     <p>{{ producto.onu }}</p>

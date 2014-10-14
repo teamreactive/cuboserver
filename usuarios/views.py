@@ -41,8 +41,8 @@ class HomeView(View):
         """
         stream = StringIO(request.body)
         data = JSONParser().parse(stream)
-        data = fix_data(data)
-        print data
+        print request.body
+        #serializer = ProductoSerializer(data=data)
         return HttpResponse(status=200)
 
 def get_template(request, template_name):
@@ -60,10 +60,3 @@ def get_template(request, template_name):
 #           return template_name + 'index-comprador'
     else:
         return template_name + 'index-login.html'
-
-def fix_data(data):
-    for key in data:
-        key = key.encode('utf-8')
-        value = data[key].encode('utf-8')
-        data[key] = value
-    return data
