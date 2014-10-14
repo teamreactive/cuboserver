@@ -1,0 +1,15 @@
+<h2>Nueva Familia proveedor</h2>
+<hr>
+<form name="familiaproveedorform"method="post"
+ng-submit="compradorCtrl.submit()"
+novalidate>
+    {% csrf_token %}
+    {% verbatim %}
+    <div class="form-group">
+        <label for="familiaproveedorNombre">Nombre</label>
+        <input type="text" class="form-control"
+        id="familiaproveedorNombre"
+        placeholder="Nombre" maxlength="25"
+        required ng-model="compradorCtrl.familiaproveedor.nombre">
+    </div>
+</form>
