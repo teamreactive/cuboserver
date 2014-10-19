@@ -37,3 +37,8 @@ class ProductoXSolicitud(models.Model):
     producto = models.ForeignKey(PrecioxProducto)
     cantidad = models.DecimalField(max_digits=7, decimal_places=2)
     solicitud = models.ForeignKey(Solicitud)
+
+    class Meta:
+        unique_together = (
+            ('linea'),('solicitud')
+        )
