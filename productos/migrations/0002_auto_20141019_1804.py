@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+    # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 from django.db import models, migrations
@@ -11,12 +11,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name='producto',
-            name='valido',
-            field=models.BooleanField(default=False),
-            preserve_default=True,
-        ),
         migrations.AlterField(
             model_name='fotosxproducto',
             name='foto',
@@ -25,11 +19,19 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='precioxproducto',
             name='talla',
-            field=models.CharField(max_length=10),
+            field=models.CharField(max_length=10, null=True, blank=True),
         ),
         migrations.AlterField(
             model_name='precioxproducto',
             name='unidad',
             field=models.CharField(max_length=10),
         ),
-    ]
+        migrations.AlterUniqueTogether(
+            name='nombresxproducto',
+            unique_together=set([('producto', 'nombre')]),
+        ),
+        migrations.AlterUniqueTogether(
+            name='producto',
+            unique_together=set([('cliente', 'codigo_onu')]),
+        ),
+    ]   

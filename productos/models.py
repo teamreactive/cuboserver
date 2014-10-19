@@ -51,8 +51,7 @@ class FotosxProducto(models.Model):
 class PrecioxProducto(models.Model):
     producto = models.ForeignKey(Producto)
     unidad = models.CharField(max_length=10)
-    talla = models.CharField(max_length=10)
-    precio_promedio = models.FloatField(null=True)
+    talla = models.CharField(max_length=10,null=True,blank=True)
 
     class Meta:
         db_table = 'precio_producto'

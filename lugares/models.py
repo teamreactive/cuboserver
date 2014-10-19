@@ -16,9 +16,9 @@ class Lugar(models.Model):
     #direccion
     ciudad = models.CharField(max_length=50,null=True,blank=True)
     seccion = models.CharField(max_length=1,null=True,blank=True)
-    numero_1 = models.IntegerField()
-    numero_2 = models.IntegerField()
-    numero_3 = models.IntegerField()
+    numero_1 = models.IntegerField(null=True)
+    numero_2 = models.IntegerField(null=True)
+    numero_3 = models.IntegerField(null=True)
     descripcion = models.CharField(max_length=200, null=True, blank=True)
     usuario = models.ForeignKey(Usuario, null=True)
     contactos = models.ManyToManyField(Contacto, db_table='lugaresxcontactos')

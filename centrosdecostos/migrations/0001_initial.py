@@ -23,4 +23,8 @@ class Migration(migrations.Migration):
             },
             bases=(models.Model,),
         ),
+        migrations.AlterUniqueTogether(
+            name='centrodecosto',
+            unique_together=set([('nombre', 'cliente')]),
+        ),
     ]
