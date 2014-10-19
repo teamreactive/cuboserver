@@ -52,7 +52,6 @@ class PrecioxProducto(models.Model):
     producto = models.ForeignKey(Producto)
     unidad = models.CharField(max_length=10)
     talla = models.CharField(max_length=10)
-    precio_promedio = models.FloatField(null=True)
 
     class Meta:
         db_table = 'precio_producto'
