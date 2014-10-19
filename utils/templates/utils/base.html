@@ -1,44 +1,17 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Compras 10.0 official website">
-    <meta name="author" content="Reactive">
-    {% load staticfiles %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="{% static "utils/css/base.css" %}">
-    {% block head %}{% endblock %}
-</head>
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="nav">
-                {% include "utils/nav.html" %}
-            </div>
-        </div>
-        <div class="row">
-            <div class="banner" id="welcome">
-                {% include "utils/banner.html" %}
-            </div>
-        </div>
-        <div class="container">
-            {% block body %}{% endblock %}
-            <div class="row">
-                <hr>
-            </div>
-            <div class="row">
-                <div class="footer">
-                    {% include "utils/footer.html" %}
-                </div>
-            </div>
+
+<div class="row">
+    <div class="banner" id="welcome">
+        {% include "utils/banner.html" %}
+    </div>
+</div>
+<div class="container">
+    {% block body %}{% endblock %}
+    <div class="row">
+        <hr>
+    </div>
+    <div class="row">
+        <div class="footer">
+            {% include "utils/footer.html" %}
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-    {% block js %}{% endblock %}
-</body>
-</html>
+</div>

@@ -36,13 +36,13 @@ app.controller('CodificadorCtrl', ['$http', function($http) {
     };
     codificador.submit = function(){
         $http.post('/', codificador.prod).
-        success(function(data){
-            codificador.productos.push(codificador.prod);
-            codificador.mensaje = 'La creacion fue exitosa.'
-        }).
-        error(function(data){
-            codificador.productos.push(codificador.prod);
-            codificador.mensaje = 'Ocurrio un error, revisa todos los campos.'
-        });
+            success(function(data){
+                codificador.productos.push(codificador.prod);
+                codificador.mensaje = 'La creacion fue exitosa.'
+            }).
+            error(function(data){
+                codificador.productos.push(codificador.prod);
+                codificador.mensaje = 'Ocurrio un error, revisa todos los campos.'
+            });
     };
 }]);

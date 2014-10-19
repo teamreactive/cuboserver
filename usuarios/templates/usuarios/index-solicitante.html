@@ -1,29 +1,218 @@
-{% extends "utils/base.html" %}
+{% verbatim %}
+<!doctype html>
+<html ng-app="app">
+<head>
 
-{% block head %}
-    {% load staticfiles %}
-    <link rel="stylesheet" href="{% static "utils/css/chosen.css" %}">
-    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css">
-    <title>Bienvenido solicitante</title>
-{% endblock %}
+    <!-- Some meta headers -->
 
-{% block body %}
-    <div class="row" ng-app="app">
-        <div ng-controller="SolicitanteCtrl as solicitanteCtrl">
-            <div class="col-md-8">
-                {% include "solicitudes/solicitud.html" %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compras 10.0 official website">
+    <meta name="author" content="Reactive">
+
+    <!-- Some CSS imports -->
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css">
+
+    <!-- The page title -->
+
+    <title>{{ language.title }}</title>
+
+</head>
+<body>
+
+    <div class="container-fluid">
+
+        <!-- Banner -->
+
+        <div class="row" id="banner">
+            <h1>
+                <span class="glyphicon glyphicon-home"></span>
+                {{ language.banner }}
+            </h1>
+        </div>
+
+        <!-- Container -->
+
+        <div class="container">
+
+            <!-- Main content -->
+
+            <div class="row">
+
+                <!-- Solicitudes -->
+
+                <div class="col-md-8" id="solicitudes" ng-controller="SolicitudController">
+                    <!-- TODO -->
+                </div>
+
+                <!-- Forms -->
+
+                <div class="col-md-4" id="forms" ng-controller="FormController">
+
+                    <!-- Solicitud form -->
+
+                    <div id="solicitudForm" ng-show="form == 'solicitud'">
+                        <!-- TODO -->
+                        <form>
+                            {% endverbatim %}{% csrf_token %}{% verbatim %}
+                            <div class="form-group">
+                                <label for="lugarSolicitud">{{ language.solicitudForm.lugar }}</label>
+                                <select class="form-control" id="lugarSolicitud" ng-options="option for option in opcionesLugares" ng-model="solicitudForm.lugar" required></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="proyectoSolicitud">{{ language.solicitudForm.proyecto }}</label>
+                                <input type="text" class="form-control" id="proyectoSolicitud" placeholer="{{ language.solicitudForm.proyecto }}" ng-model="solicitudForm.proyecto" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fechaSolicitud">{{ language.solicitudForm.fecha }}</label>
+                                <input type="text" class="form-control" id="fechaSolicitud" placeholer="{{ language.solicitudForm.fecha }}" ng-model="solicitudForm.fecha" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="productosSolicitud">{{ language.solicitudForm.productos }}</label>
+                                <select class="form-control" id="productosSolicitud" ng-options="option for option in opcionesProductos" ng-model="solicitudForm.productos" multiple required></select>
+                            </div>
+                            <button ng-click="submitSolicitud() && submit()">
+                                {{ language.solicitudForm.submit }}
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Producto form -->
+
+                    <div id="productoForm" ng-show="form == 'producto'">
+                        <form>
+                            {% endverbatim %}{% csrf_token %}{% verbatim %}
+                            <div class="form-group">
+                                <label for="onuProducto">{{ language.productoForm.onu }}</label>
+                                <input type="text" class="form-control" id="onuProducto" placeholer="{{ language.productoForm.onu }}" ng-model="productoForm.onu">
+                            </div>
+                            <div class="form-group">
+                                <label for="nombreProducto">{{ language.productoForm.nombre }}</label>
+                                <input type="text" class="form-control" id="nombreProducto" placeholer="{{ language.productoForm.nombre }}" ng-model="productoForm.nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="descripcionProducto">{{ language.productoForm.descripcion }}</label>
+                                <textarea class="form-control" id="descripcionProducto" placeholer="{{ language.productoForm.descripcion }}" ng-model="productoForm.descripcion" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="referenciaProducto">{{ language.productoForm.referencia }}</label>
+                                <input type="text" class="form-control" id="referenciaProducto" placeholer="{{ language.productoForm.referencia }}" ng-model="productoForm.referencia">
+                            </div>
+                            <div class="form-group">
+                                <label for="tallaProducto">{{ language.productoForm.talla }}</label>
+                                <input type="text" class="form-control" id="tallaProducto" placeholer="{{ language.productoForm.talla }}" ng-model="productoForm.talla">
+                            </div>
+                            <div class="form-group">
+                                <label for="marcaProducto">{{ language.productoForm.marca }}</label>
+                                <input type="text" class="form-control" id="marcaProducto" placeholer="{{ language.productoForm.marca }}" ng-model="productoForm.marca" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="unidadProducto">{{ language.productoForm.unidad }}</label>
+                                <input type="text" class="form-control" id="unidadProducto" placeholer="{{ language.productoForm.unidad }}" ng-model="productoForm.unidad" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="familiaProducto">{{ language.productoForm.familia }}</label>
+                                <select class="form-control" id="familiaProducto" ng-options="option for option in opcionesFamilia" ng-model="productoForm.familia"></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="esServicioProducto">{{ language.productoForm.esServicio }}</label>
+                                <select class="form-control" id="esServicioProducto" ng-options="option for option in opcionesEsServicio" ng-model="productoForm.esServicio" required></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="equipoProducto">{{ language.productoForm.equipo }}</label>
+                                <select class="form-control" id="equipoProducto" ng-options="option for option in opcionesEquipo" ng-model="productoForm.equipo"></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="centroCostoProducto">{{ language.productoForm.centroCosto }}</label>
+                                <select class="form-control" id="centroCostoProducto" ng-options="option for option in opcionesCentroCosto" ng-model="productoForm.centroCosto"></select>
+                            </div>
+                            <!-- TODO FOTOS -->
+                            <button ng-click="submitProducto() && submit()">
+                                {{ language.productForm.submit }}
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Lugar form -->
+
+                    <div id="lugarForm" ng-show="form == 'lugar'">
+                        <form>
+                            {% endverbatim %}{% csrf_token %}{% verbatim %}
+                            <div class="form-group">
+                                <label for="campo1Lugar">{{ language.lugarForm.campo1 }}</label>
+                                <input type="text" class="form-control" id="campo1Lugar" placeholer="{{ language.lugarForm.campo1 }}" ng-model="lugarForm.campo1">
+                            </div>
+                            <div class="form-group">
+                                <label for="campo2Lugar">{{ language.lugarForm.campo2 }}</label>
+                                <input type="text" class="form-control" id="campo2Lugar" placeholer="{{ language.lugarForm.campo2 }}" ng-model="lugarForm.campo2">
+                            </div>
+                            <div class="form-group">
+                                <label for="campo3Lugar">{{ language.lugarForm.campo3 }}</label>
+                                <input type="text" class="form-control" id="campo3Lugar" placeholer="{{ language.lugarForm.campo3 }}" ng-model="lugarForm.campo3">
+                            </div>
+                            <div class="form-group">
+                                <label for="campo4Lugar">{{ language.lugarForm.campo4 }}</label>
+                                <input type="text" class="form-control" id="campo4Lugar" placeholer="{{ language.lugarForm.campo4 }}" ng-model="lugarForm.campo4">
+                            </div>
+                            <div class="form-group">
+                                <label for="campo5Lugar">{{ language.lugarForm.campo5 }}</label>
+                                <input type="text" class="form-control" id="campo5Lugar" placeholer="{{ language.lugarForm.campo5 }}" ng-model="lugarForm.campo5">
+                            </div>
+                            <div class="form-group">
+                                <label for="campo6Lugar">{{ language.lugarForm.campo6 }}</label>
+                                <input type="text" class="form-control" id="campo6Lugar" placeholer="{{ language.lugarForm.campo6 }}" ng-model="lugarForm.campo6">
+                            </div>
+                            <div class="form-group">
+                                <label for="telefonoLugar">{{ language.lugarForm.telefono }}</label>
+                                <input type="text" class="form-control" id="telefonoLugar" placeholer="{{ language.lugarForm.telefono }}" ng-model="lugarForm.telefono">
+                            </div>
+                            <button ng-click="submitLugar() && submit()">
+                                {{ language.lugarForm.submit }}
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-4">
-                {% include "solicitudes/crear_solicitud.html" %}
+
+            <!-- Separator -->
+
+            <div class="row">
+                <hr>
+            </div>
+
+            <!-- Footer -->
+
+            <div class="row" id="footer">
+                <h4>
+                    <span class="glyphicon glyphicon-copyright-mark"></span>
+                    {{ language.footer }}
+                </h4>
             </div>
         </div>
-    </div>
-{% endblock %}
 
-{% block js %}
-    {% load staticfiles %}
-    <script src="{% static "usuarios/js/index-solicitante.js" %}"></script>
-    <script src="{% static "utils/js/chosen.jquery.min.js" %}"></script>
-    <script src="{% static "utils/js/chosen.js" %}"></script>
-    <script src="{% static "utils/js/datepicker.js" %}"></script>
-{% endblock %}
+    </div>
+
+    <!-- Some JS scripts -->
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script>
+        var app = angular.module('app', []);
+
+        app.controller('SolicitudController', ['$scope', '$http', function($scope, $http) {
+
+        }]);
+
+        app.controller('FormController', ['$scope', '$http', function($scope, $http) {
+
+        }]);
+    </script>
+
+</body>
+</html>
+{% endverbatim %}

@@ -23,7 +23,7 @@ class HomeView(View):
     """
     View endpoint that renders the home.
     """
-    template_name = 'usuarios/index-codificador.html'
+    template_name = 'usuarios/index-solicitante.html'
     # TODO -> REPLACE WITH THE GET_TEMPLATE FUNCTION #
 
     def get(self, request, *args, **kwargs):
@@ -41,8 +41,8 @@ class HomeView(View):
         """
         stream = StringIO(request.body)
         data = JSONParser().parse(stream)
-        print request.body
-        #serializer = ProductoSerializer(data=data)
+        serializer = ProductoSerializer(data=data)
+        print serializer.errors
         return HttpResponse(status=200)
 
 def get_template(request, template_name):
@@ -52,11 +52,20 @@ def get_template(request, template_name):
     if the user is invalid, returns the user
     login template.
     """
-    template_name = 'usuaios/'
+    template_name = 'usuarios/'
     if request.usuario.is_authenticated():
-        if request.user.tipo == '3':
+        if request.usuario.tipo == '2':
+            return template_name + 'index-administrador-cliente'
+        elif request.usuario.tipo == '3':
             return template_name + 'index-solicitante'
-#       if request.user.tipo == '6':
-#           return template_name + 'index-comprador'
-    else:
-        return template_name + 'index-login.html'
+        elif request.usuario.tipo == '4':
+            return template_name + 'index-codificador'
+        elif request.usuario.tipo == '5':
+            return template_name + 'index-aprovador-solicitudes'
+        elif request.user.tipo == '6':
+            return template_name + 'index-comprador'
+        elif request.usuario.tipo == '7':
+            return template_name + 'index-aprovador-compra'
+        elif request.usuario.tipo == '8':
+            return template_name + 'index-almacenista'
+    return template_name + 'index-login.html'

@@ -1,0 +1,27 @@
+{% extends "utils/base.html" %}
+
+{% block head %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static "utils/css/chosen.css" %}">
+    <title>Bienvenido comprador</title>
+{% endblock %}
+
+{% block body %}
+    <div class="row" ng-app="app">
+        <div ng-controller="CompradorCtrl as compradorCtrl">
+            <div class="col-md-4">
+                {% include "usuarios/opciones-comprador.html" %}
+            </div>
+            <div class="col-md-8">
+                
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    {% load staticfiles %}
+    <script src="{% static "usuarios/js/index-codificador.js" %}"></script>
+    <script src="{% static "utils/js/chosen.jquery.min.js" %}"></script>
+    <script src="{% static "utils/js/chosen.js" %}"></script>
+{% endblock %}

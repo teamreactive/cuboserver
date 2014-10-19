@@ -1,0 +1,48 @@
+<h2>Nuevo proveedor<h2/>
+<hr>
+<form name="proveedorForm"method="post"
+ng-submit="codificadorCtrl.submit()"
+novalidate>
+    {% csrf_token%}
+    {% verbatim %}
+    <div class="form-group">
+        <label for="proveedorRazonSocial">Nombre</label>
+        <input type="text" class="form-control"
+        id="proveedorRazonSocial"
+        placeholder="Razon Social" maxlength="25"
+        required ng-model="compradorCtrl.proveedor.razon_social">
+    </div>
+    <div class="form-group">
+        <label for="proveedorSigla">Sigla</label>
+        <input type="text" class="form-control"
+        id="proveedorSigla"
+        placeholder="Sigla" maxlength="10"
+        required ng-model="compradorCtrl.proveedor.sigla">
+    </div>
+    <div class="form-group">
+        <label for="proveedorNit">NIT</label>
+        <input type="text" class="form-control"
+        id="proveedorNit"
+        placeholder="NIT" maxlength="25"
+        required ng-model="compradorCtrl.proveedor.razon_social">
+    </div>
+    <div class="form-group">
+        <label for="proveedorNumeroVerificacion">Numero de Verificacion</label>
+        <input type="text" class="form-control"
+        id="proveedorNumeroVerificacion"
+        placeholder="Numero de Verificacion" maxlength="25"
+        required ng-model="compradorCtrl.proveedor.numero_verificacion">
+    </div>
+    <div class="form-group">
+        <label for="proveedorlugar">Lugar</label>
+        <select data-placeholder="Lugares"
+        class="form-control select"
+        id="proveedorLugar"
+        required
+        ng-model="compradorCtrl.proveedor.lugar"
+        chosen="compradorCtrl.lugares"
+        ng-options="lugar.nombre for lugar in compradorCtrl.lugares">
+        </select>
+    </div>
+
+</form>
