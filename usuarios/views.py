@@ -62,7 +62,7 @@ def get_template(request, template_name):
             return template_name + 'index-codificador'
 #         if request.usuario.tipo == '5':
 #             return template_name + 'index-aprovador-solicitudes'
-       if request.user.tipo == '6':
+        if request.user.tipo == '6':
            return template_name + 'index-comprador'
 #         if request.usuario.tipo == '7':
 #             return template_name + 'index-aprovador-compra'

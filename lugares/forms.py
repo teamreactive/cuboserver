@@ -8,7 +8,6 @@ class LugarForm(ModelForm):
         model = Lugar
         fields = [
             'nombre',
-            'direccion',
             'descripcion',
             'contactos',
         ]
