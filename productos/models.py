@@ -8,7 +8,7 @@ from familiasproveedores.models import FamiliaProveedor
 
 
 class Producto(models.Model):
-    codigo_onu = models.CharField(max_length=25)
+    codigo_onu = models.CharField(max_length=25, blank=True, null=True)
     nombre = models.CharField(max_length=25)
     descripcion = models.TextField(null=True,blank=True)
     referencia = models.CharField(max_length=25, null=True,blank=True)
