@@ -5,7 +5,7 @@ from clientes.models import Cliente
 from contactos.models import Contacto
 
 
-class Usuario(User):
+class Usuario(models.Model):
     TIPOS = (
         ('1', 'administrador_general'),
         ('2', 'administrador_cliente'),
@@ -20,6 +20,8 @@ class Usuario(User):
         ('0', 'no'),
         ('1', 'si'),
     )
+    nombre = models.CharField(max_length=20)
+    password = models.CharField(max_length=112)
     cliente = models.ForeignKey(Cliente, related_name='Usuario.cliente', null=True)
     tipo = models.CharField(max_length=1, choices=TIPOS)
     contacto = models.ForeignKey(Contacto, related_name='Usuario.contacto')
