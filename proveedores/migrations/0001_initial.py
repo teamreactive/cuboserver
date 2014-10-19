@@ -43,6 +43,10 @@ class Migration(migrations.Migration):
             },
             bases=(models.Model,),
         ),
+        migrations.AlterUniqueTogether(
+            name='proveedor',
+            unique_together=set([('cliente', 'nit')]),
+        ),
         migrations.AddField(
             model_name='contactosxproveedor',
             name='proveedor',

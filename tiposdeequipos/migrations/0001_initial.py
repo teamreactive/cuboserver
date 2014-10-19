@@ -24,4 +24,8 @@ class Migration(migrations.Migration):
             },
             bases=(models.Model,),
         ),
+        migrations.AlterUniqueTogether(
+            name='tipodeequipo',
+            unique_together=set([('cliente', 'nombre')]),
+        ),
     ]

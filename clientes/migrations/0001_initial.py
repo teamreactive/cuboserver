@@ -14,9 +14,9 @@ class Migration(migrations.Migration):
             name='Cliente',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('nit', models.CharField(max_length=25)),
-                ('codigo_verificacion', models.CharField(max_length=25, null=True, blank=True)),
-                ('razon_social', models.CharField(max_length=25)),
+                ('nit', models.CharField(unique=True, max_length=25)),
+                ('codigo_verificacion', models.CharField(max_length=25, unique=True, null=True, blank=True)),
+                ('razon_social', models.CharField(unique=True, max_length=25)),
                 ('sigla', models.CharField(max_length=10, null=True, blank=True)),
                 ('logo', models.ImageField(null=True, upload_to=b'logos', blank=True)),
             ],

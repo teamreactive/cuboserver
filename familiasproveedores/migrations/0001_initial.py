@@ -25,4 +25,8 @@ class Migration(migrations.Migration):
             },
             bases=(models.Model,),
         ),
+        migrations.AlterUniqueTogether(
+            name='familiaproveedor',
+            unique_together=set([('nombre', 'cliente')]),
+        ),
     ]
