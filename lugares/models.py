@@ -24,12 +24,11 @@ class Lugar(models.Model):
     contactos = models.ManyToManyField(Contacto, db_table='lugaresxcontactos')
 
     def __unicode__(self):
-        return '%s - %s' % (self.nombre, self.direccion)
+        return '%s - %s' % (self.nombre)
 
     class Meta:
         db_table = 'lugar'
         unique_together = (
             ('usuario', 'nombre'),
-            ('usuario', 'direccion'),
         )
 

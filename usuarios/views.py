@@ -69,3 +69,11 @@ def get_template(request, template_name):
         elif request.usuario.tipo == '8':
             return template_name + 'index-almacenista'
     return template_name + 'index-login.html'
+
+
+def fix_data(data):
+    for key in data:
+        key = key.encode('utf-8')
+        value = data[key].encode('utf-8')
+        data[key] = value
+    return data
