@@ -39,10 +39,10 @@ class HomeView(View):
         Validate and submit the corresponding form,
         and return the respective HTTP status code.
         """
-        stream = StringIO(request.body)
-        data = JSONParser().parse(stream)
-        serializer = ProductoSerializer(data=data)
-        print serializer.errors
+        # stream = StringIO(request.body)
+        # data = JSONParser().parse(stream)
+        # serializer = ProductoSerializer(data=data)
+        # print serializer.errors
         return HttpResponse(status=200)
 
 def get_template(request, template_name):
