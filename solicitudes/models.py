@@ -33,6 +33,7 @@ class Solicitud(models.Model):
     class Meta:
         db_table = 'solicitud'
 class ProductoXSolicitud(models.Model):
+    linea = models.IntegerField()
     producto = models.ForeignKey(PrecioxProducto)
     cantidad = models.DecimalField(max_digits=7, decimal_places=2)
     solicitud = models.ForeignKey(Solicitud)

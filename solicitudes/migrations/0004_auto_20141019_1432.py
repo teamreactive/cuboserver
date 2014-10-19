@@ -29,7 +29,11 @@ class Migration(migrations.Migration):
             name='fecha_creacion',
             field=models.DateTimeField(auto_now_add=True),
         ),
-        migrations.AlterField(
+        migrations.RemoveField(
+            model_name='solicitud',
+            name='productos',
+        ),
+        migrations.AddField(
             model_name='solicitud',
             name='productos',
             field=models.ManyToManyField(to=b'productos.PrecioxProducto', through='solicitudes.ProductoXSolicitud'),

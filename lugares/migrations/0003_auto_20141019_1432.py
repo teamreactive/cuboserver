@@ -11,6 +11,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.AlterUniqueTogether(
+            name='lugar',
+            unique_together=set([('usuario', 'nombre')]),
+        ),
         migrations.RemoveField(
             model_name='lugar',
             name='direccion',
@@ -24,19 +28,19 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='lugar',
             name='numero_1',
-            field=models.IntegerField(default=None),
+            field=models.IntegerField(null=True,default=None),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='lugar',
             name='numero_2',
-            field=models.IntegerField(default=None),
+            field=models.IntegerField(null=True,default=None),
             preserve_default=False,
         ),
         migrations.AddField(
             model_name='lugar',
             name='numero_3',
-            field=models.IntegerField(default=None),
+            field=models.IntegerField(null=True,default=None),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -59,9 +63,5 @@ class Migration(migrations.Migration):
             model_name='lugar',
             name='nombre',
             field=models.CharField(max_length=100, null=True, blank=True),
-        ),
-        migrations.AlterUniqueTogether(
-            name='lugar',
-            unique_together=set([('usuario', 'nombre')]),
         ),
     ]
