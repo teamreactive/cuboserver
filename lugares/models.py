@@ -1,6 +1,7 @@
 from django.db import models
 
 from contactos.models import Contacto
+from usuarios.models import Usuario
 
 
 class Lugar(models.Model):
