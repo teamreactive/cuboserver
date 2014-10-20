@@ -12,31 +12,25 @@
 
     <!-- Some CSS imports -->
 
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Lovers+Quarrel'>
-    <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
+    {% endverbatim %}
+    {% load staticfiles %}
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="{% static "usuarios/css/index-solicitante.css" %}">
 
-    <!-- Some CSS style -->
+    <!-- Some JS scripts -->
 
-    <style>
-        #banner h1 {
-            text-align: center;
-        }
-
-        #formPillows li {
-            padding: 0 2%;
-        }
-
-        #footer h4 {
-            text-align: center;
-        }
-    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="{% static "usuarios/js/index-solicitante.js" %}"></script>
+    {% verbatim %}
 
     <!-- The page title -->
 
-    <title>{{ langs.title }}</title>
+    <title>Bienvenido solicitante</title>
 </head>
 <body>
 
@@ -45,9 +39,7 @@
         <!-- Banner -->
 
         <div class="row" id="banner">
-            <h1>
-                {{ langs.banner }}
-            </h1>
+            <h1>Bienvenido solicitante</h1>
         </div>
 
         <!-- Container -->
@@ -66,23 +58,34 @@
 
             <div class="row">
 
-                <!-- Solicitudes -->
-
-                <div class="col-md-8" id="solicitudes">
-                    <!-- TODO -->
-                </div>
-
                 <!-- Forms -->
 
                 <div class="col-md-4" id="forms">
 
-                    <!-- Form pillows -->
+                    <!-- Form tabs -->
 
-                    <ul id="formPillows" class="nav nav-tabs">
-                        <li ng-class="formPillows.solicitud"><a ng-click="setFormType('solicitud')">{{ langs.formPillows.solicitud }}</a></li>
-                        <li ng-class="formPillows.producto"><a ng-click="setFormType('producto')">{{ langs.formPillows.producto }}</a></li>
-                        <li ng-class="formPillows.lugar"><a ng-click="setFormType('lugar')">{{ langs.formPillows.lugar }}</a></li>
+                    <ul id="formTabs" class="nav nav-tabs">
+                        <li ng-class="form.tab == '1' ? 'active' : ''"><a ng-click="setTab('1')">Solicitud</a></li>
+                        <li ng-class="form.tab == '2' ? 'active' : ''"><a ng-click="setTab('2')">Producto</a></li>
+                        <li ng-class="form.tab == '3' ? 'active' : ''"><a ng-click="setTab('3')">Lugar</a></li>
                     </ul>
+
+                    <!-- Blank line -->
+
+                    <div class="row">
+                        <br>
+                    </div>
+
+                    <!-- Change page buttons -->
+
+                    <div id="pageButtons">
+                        <button ng-click="decPage()" ng-disabled="form.page == '1'">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </button>
+                        <button ng-click="incPage()" ng-disabled="form.page == '3'">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </button>
+                    </div>
 
                     <!-- Blank line -->
 
@@ -92,162 +95,280 @@
 
                     <!-- Solicitud form -->
 
-                    <div id="solicitudForm" ng-show="formType == 'solicitud'">
+                    <div id="solicitudForm" ng-show="form.tab == '1'">
                         <form name="solicitudForm" novalidate>
                             {% endverbatim %}{% csrf_token %}{% verbatim %}
-                            <pre ng-class="langs.solicitudForm.warning.css" ng-show="langs.solicitudForm.warning.message != ''">{{ langs.solicitudForm.warning.message }}</pre>
-                            <div class="form-group">
-                                <label for="lugarSolicitud">{{ langs.solicitudForm.lugar }}</label>
-                                <div class="input-group">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button" ng-click="setFormType('lugar')">
-                                            <span class="glyphicon glyphicon-plus"></span>
-                                        </button>
-                                    </span>
-                                    <select class="form-control" id="lugarSolicitud" ng-options="option.id as option.telefono for option in opcionesLugares" ng-model="solicitudForm.lugar" required></select>
+
+                            <!-- Messages -->
+
+                            <pre ng-class="form.message.css" ng-show="form.message.message != ''">
+                                {{ form.message.message }}                            
+                            </pre>
+
+                            <!-- First part -->
+
+                            <div ng-show="form.page == '1'">
+                                <div class="form-group">
+                                    <label for="lugarSolicitud">* Lugar de entrega</label>
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" ng-click="setTab('3')">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </span>
+                                        <select class="form-control" id="lugarSolicitud" ng-options="(lugar.nombre + ' | ' + lugar.direccion) for lugar in opciones.lugares" ng-model="form.lugar" required></select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="proyectoSolicitud">* Proyecto</label>
+                                    <input type="text" class="form-control" id="proyectoSolicitud" placeholer="Proyecto" ng-model="form.proyecto" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fechaSolicitud">* Fecha requerida</label>
+                                    <input type="text" class="form-control" id="fechaSolicitud" placeholer="Fecha requerida" ng-model="form.fecha" required>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="proyectoSolicitud">{{ langs.solicitudForm.proyecto }}</label>
-                                <input type="text" class="form-control" id="proyectoSolicitud" placeholer="{{ langs.solicitudForm.proyecto }}" ng-model="solicitudForm.proyecto" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="fechaSolicitud">{{ langs.solicitudForm.fecha }}</label>
-                                <input type="text" class="form-control" id="fechaSolicitud" placeholer="{{ langs.solicitudForm.fecha }}" ng-model="solicitudForm.fecha" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="productosSolicitud">{{ langs.solicitudForm.productos }}</label>
-                                <div class="input-group">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button" ng-click="setFormType('producto')">
-                                            <span class="glyphicon glyphicon-plus"></span>
-                                        </button>
-                                    </span>
-                                    <select class="form-control" id="productosSolicitud" ng-options="option.id as option.nombre for option in opcionesProductos" ng-model="solicitudForm.productos" multiple required></select>
+
+                            <!-- Second part -->
+
+                            <div ng-show="form.page == '2'">
+                                <div class="form-group">
+                                    <label for="productosSolicitud">* Productos</label>
+                                    <div class="input-group">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-default" type="button" ng-click="setTab('2')">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </span>
+                                        <select class="form-control" id="productosSolicitud" ng-options="producto.nombre for producto in opciones.productos" ng-model="form.productos" multiple required></select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group panel panel-default" ng-show="solicitudForm.productos.length > 0">
-                                <div class="panel-body">
-                                    <h2>{{ langs.solicitudForm.tusProductos }}</h2>
-                                    <hr>
-                                    <div class="producto" ng-repeat="producto in solicitudForm.productos">
-                                        <p>{{ producto.nombre }}</p>
-                                        <label for="cantidadProducto">{{ langs.solicitudForm.cantidadProducto }}</label>
-                                        <input type="text" class="form-control" id="cantidadProducto" required>
-                                        <label for="unidadProducto">{{ langs.solicitudForm.unidadProducto }}</label>
-                                        <input type="text" class="form-control" id="unidadProducto" required>
-                                        <hr ng-hide="producto == productosForm">
+                                <div class="form-group panel panel-default" ng-show="form.productos.length > 0">
+                                    <div class="panel-body">
+                                        <h2>Tus productos</h2>
+                                        <hr>
+                                        <div class="producto" ng-repeat="producto in form.productos">
+                                            <h4>{{ producto.nombre }}</h4>
+                                            <div class="form-group">
+                                                <label for="cantidadProducto">* Cantidad</label>
+                                                <input type="text" class="form-control" id="cantidadProducto" placeholer="Cantidad" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="unidadProducto">* Unidad</label>
+                                                <input type="text" class="form-control" id="unidadProducto" placeholer="Unidad" required>
+                                            </div>
+                                            <hr ng-hide="producto == form.productos[form.productos.length-1]">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="comentarioSolicitante">{{ langs.solicitudForm.comentarioSolicitante }}</label>
-                                <textarea class="form-control" id="comentarioSolicitante" placeholer="{{ langs.solicitanteForm.comentarioSolicitante }}" ng-model="solicitudForm.comentarioSolicitante" required></textarea>
+
+                            <!-- Third part -->
+
+                            <div ng-show="form.page == '3'">
+                                <div class="form-group">
+                                    <label for="comentarioSolicitante">Comentarios</label>
+                                    <textarea class="form-control" id="comentarioSolicitante" placeholer="Comentarios" ng-model="form.comentario"></textarea>
+                                </div>
+                                <button class="btn btn-default" ng-click="setSubmit('1') && submit()" ng-disabled="!solicitudForm.$valid">
+                                    Crear solicitud
+                                </button>
+                                <br>
                             </div>
-                            <button class="btn btn-default" ng-click="submitSolicitud() && submit()" ng-disabled="!solicitudForm.$valid">
-                                {{ langs.solicitudForm.submit }}
-                            </button>
                         </form>
                     </div>
 
                     <!-- Producto form -->
 
-                    <div id="productoForm" ng-show="formType == 'producto'">
+                    <div id="productoForm" ng-show="form.tab == '2'">
                         <form name="productoForm">
                             {% endverbatim %}{% csrf_token %}{% verbatim %}
-                            <pre ng-class="langs.productoForm.warning.css" ng-show="langs.productoForm.warning.message != ''">{{ langs.productoForm.warning.message }}</pre>
-                            <div class="form-group">
-                                <label for="onuProducto">{{ langs.productoForm.onu }}</label>
-                                <input type="text" class="form-control" id="onuProducto" placeholer="{{ langs.productoForm.onu }}" ng-model="productoForm.onu">
+
+                            <!-- Messages -->
+
+                            <pre ng-class="form.message.css" ng-show="form.message.message != ''">
+                                {{ form.message.message }}                            
+                            </pre>
+
+                            <!-- First part -->
+
+                            <div ng-show="form.page == '1'">
+                                <div class="form-group">
+                                    <label for="nombreProducto">* Nombre</label>
+                                    <input type="text" class="form-control" id="nombreProducto" placeholer="Nombre" ng-model="form.nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="descripcionProducto">* Descripcion</label>
+                                    <textarea class="form-control" id="descripcionProducto" placeholer="Descripcion del producto..." ng-model="form.descripcion" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="marcaProducto">* Marca</label>
+                                    <input type="text" class="form-control" id="marcaProducto" placeholer="Marca" ng-model="form.marca" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="unidadProducto">* Unidad</label>
+                                    <input type="text" class="form-control" id="unidadProducto" placeholer="Unidad" ng-model="form.unidad" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tipoProducto">* Tipo</label>
+                                    <select class="form-control" id="tipoProducto" ng-options="tipo.nombre for tipo in opciones.tipos" ng-model="form.tipo" required></select>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="nombreProducto">{{ langs.productoForm.nombre }}</label>
-                                <input type="text" class="form-control" id="nombreProducto" placeholer="{{ langs.productoForm.nombre }}" ng-model="productoForm.nombre" required>
+
+                            <!-- Second part -->
+
+                            <div ng-show="form.page == '2'">
+                                <div class="form-group">
+                                    <label for="onuProducto">Codigo ONU</label>
+                                    <input type="text" class="form-control" id="onuProducto" placeholer="codigo ONU" ng-model="form.onu">
+                                </div>
+                                <div class="form-group">
+                                    <label for="referenciaProducto">Referencia</label>
+                                    <input type="text" class="form-control" id="referenciaProducto" placeholer="Referencia" ng-model="form.referencia">
+                                </div>
+                                <div class="form-group">
+                                    <label for="tallaProducto">Talla</label>
+                                    <input type="text" class="form-control" id="tallaProducto" placeholer="Talla" ng-model="form.talla">
+                                </div>
+                                <div class="form-group">
+                                    <label for="familiaProducto">Familia proveedor</label>
+                                    <select class="form-control" id="familiaProducto" ng-options="familia.nombre for familia in opciones.familias" ng-model="form.familia"></select>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="descripcionProducto">{{ langs.productoForm.descripcion }}</label>
-                                <textarea class="form-control" id="descripcionProducto" placeholer="{{ langs.productoForm.descripcion }}" ng-model="productoForm.descripcion" required></textarea>
+
+                            <!-- Third part -->
+
+                            <div ng-show="form.page == '3'">
+                                <div class="form-group">
+                                    <label for="equipoProducto">Equipo</label>
+                                    <select class="form-control" id="equipoProducto" ng-options="equipo.nombre for equipo in opciones.equipos" ng-model="form.equipo"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="centroCostoProducto">Centro de costo</label>
+                                    <select class="form-control" id="centroCostoProducto" ng-options="centro.nombre for centro in opciones.centros" ng-model="form.centro"></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="imagenProducto">Imagen</label>
+                                    <input type="file" id="imagenProducto" ng-model="form.imagen">
+                                </div>
+                                <button class="btn btn-default" ng-click="setSubmit('2') && submit()" ng-disabled="!productoForm.$valid">
+                                    Crear producto
+                                </button>
                             </div>
-                            <div class="form-group">
-                                <label for="referenciaProducto">{{ langs.productoForm.referencia }}</label>
-                                <input type="text" class="form-control" id="referenciaProducto" placeholer="{{ langs.productoForm.referencia }}" ng-model="productoForm.referencia">
-                            </div>
-                            <div class="form-group">
-                                <label for="tallaProducto">{{ langs.productoForm.talla }}</label>
-                                <input type="text" class="form-control" id="tallaProducto" placeholer="{{ langs.productoForm.talla }}" ng-model="productoForm.talla">
-                            </div>
-                            <div class="form-group">
-                                <label for="marcaProducto">{{ langs.productoForm.marca }}</label>
-                                <input type="text" class="form-control" id="marcaProducto" placeholer="{{ langs.productoForm.marca }}" ng-model="productoForm.marca" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="unidadProducto">{{ langs.productoForm.unidad }}</label>
-                                <input type="text" class="form-control" id="unidadProducto" placeholer="{{ langs.productoForm.unidad }}" ng-model="productoForm.unidad" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="familiaProducto">{{ langs.productoForm.familia }}</label>
-                                <select class="form-control" id="familiaProducto" ng-options="option for option in opcionesFamilia" ng-model="productoForm.familia"></select>
-                            </div>
-                            <div class="form-group">
-                                <label for="esServicioProducto">{{ langs.productoForm.esServicio }}</label>
-                                <select class="form-control" id="esServicioProducto" ng-options="option for option in opcionesEsServicio" ng-model="productoForm.esServicio" required></select>
-                            </div>
-                            <div class="form-group">
-                                <label for="equipoProducto">{{ langs.productoForm.equipo }}</label>
-                                <select class="form-control" id="equipoProducto" ng-options="option for option in opcionesEquipo" ng-model="productoForm.equipo"></select>
-                            </div>
-                            <div class="form-group">
-                                <label for="centroCostoProducto">{{ langs.productoForm.centroCosto }}</label>
-                                <select class="form-control" id="centroCostoProducto" ng-options="option for option in opcionesCentroCosto" ng-model="productoForm.centroCosto"></select>
-                            </div>
-                            <div class="form-group">
-                                <label for="imagenProducto">{{ langs.productoForm.imagenes }}</label>
-                                <input type="file" id="imagenProducto" ng-model="productoForm.imagen">
-                            </div>
-                            <button class="btn btn-default" ng-click="submitProducto() && submit()" ng-disabled="!productoForm.$valid">
-                                {{ langs.productoForm.submit }}
-                            </button>
                         </form>
                     </div>
 
-                    <!-- Lugar form -->
+                    <!-- Lugaisr form -->
 
-                    <div id="lugarForm" ng-show="formType == 'lugar'">
+                    <div id="lugarForm" ng-show="form.tab == '3'">
                         <form name="lugarForm">
                             {% endverbatim %}{% csrf_token %}{% verbatim %}
-                            <pre ng-class="langs.lugarForm.warning.css" ng-show="langs.lugarForm.warning.message != ''">{{ langs.lugarForm.warning.message }}</pre>
-                            <div class="form-group">
-                                <label for="nombreLugar">{{ langs.lugarForm.nombre }}</label>
-                                <input type="text" class="form-control" id="nombreLugar" placeholer="{{ langs.lugarForm.nombre }}" ng-model="lugarForm.nombre" required>
+
+                            <!-- Messages -->
+
+                            <pre ng-class="form.message.css" ng-show="form.message.message != ''">
+                                {{ form.message.message }}                            
+                            </pre>
+
+                            <!-- First part -->
+
+                            <div ng-show="form.page == '1'">
+                                <div class="form-group">
+                                    <label for="nombreLugar">* Nombre</label>
+                                    <input type="text" class="form-control" id="nombreLugar" placeholer="Nombre" ng-model="form.nombre" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="telefonoLugar">* Telefono</label>
+                                    <input type="text" class="form-control" id="telefonoLugar" placeholer="Telefono" ng-model="form.telefono" required>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="seccionLugar">{{ langs.lugarForm.seccion }}</label>
-                                <input type="text" class="form-control" id="seccionLugar" placeholer="{{ langs.lugarForm.seccion }}" ng-model="lugarForm.seccion" required>
+
+                            <!-- Second part -->
+
+                            <div ng-show="form.page == '2'">
+                                <div class="form-group">
+                                    <label for="seccionLugar">* Seccion</label>
+                                    <input type="text" class="form-control" id="seccionLugar" placeholer="Seccion" ng-model="form.seccion" required>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" ng-show="form.seccion != null">
+                                            * {{ form.seccion }}
+                                        </span>
+                                        <input type="text" class="form-control" id="numero1Lugar" placeholer="" ng-model="form.numero1" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">* #</span>
+                                        <input type="text" class="form-control" id="numero2Lugar" placeholer="" ng-model="form.numero2" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">* -</span>
+                                        <input type="text" class="form-control" id="numero3Lugar" placeholer="" ng-model="form.numero3" required>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="numero_1Lugar">{{ langs.lugarForm.numero_1 }}</label>
-                                <input type="text" class="form-control" id="numero_1Lugar" placeholer="{{ langs.lugarForm.numero_1 }}" ng-model="lugarForm.numero_1" required>
+
+                            <!-- Third part -->
+
+                            <div ng-show="form.page == '3'">
+                                <div class="form-group">
+                                    <label for="descripcionLugar">* Descripcion</label>
+                                    <textarea class="form-control" id="descripcionLugar" placeholer="Descripcion del lugar..." ng-model="form.descripcion" required></textarea>
+                                </div>
+                                <button class="btn btn-default" ng-click="setSubmit('3') && submit()" ng-disabled="!lugarForm.$valid">
+                                    Crear lugar
+                                </button>
                             </div>
-                            <div class="form-group">
-                                <label for="numero_2Lugar">{{ langs.lugarForm.numero_2 }}</label>
-                                <input type="text" class="form-control" id="numero_2Lugar" placeholer="{{ langs.lugarForm.numero_2 }}" ng-model="lugarForm.numero_2" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="numero_3Lugar">{{ langs.lugarForm.numero_3 }}</label>
-                                <input type="text" class="form-control" id="numero_3Lugar" placeholer="{{ langs.lugarForm.numero_3 }}" ng-model="lugarForm.numero_3" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="descripcionLugar">{{ langs.lugarForm.descripcion }}</label>
-                                <input type="text" class="form-control" id="descripcionLugar" placeholer="{{ langs.lugarForm.descripcion }}" ng-model="lugarForm.descripcion" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="telefonoLugar">{{ langs.lugarForm.telefono }}</label>
-                                <input type="text" class="form-control" id="telefonoLugar" placeholer="{{ langs.lugarForm.telefono }}" ng-model="lugarForm.telefono" required>
-                            </div>
-                            <button class="btn btn-default" ng-click="submitLugar() && submit()" ng-disabled="!lugarForm.$valid">
-                                {{ langs.lugarForm.submit }}
-                            </button>
                         </form>
+                    </div>
+                </div>
+
+                <!-- Solicitudes -->
+
+                <div class="col-md-8" id="solicitudes">
+                    <div class="panel panel-default row">
+                        <div class="panel-body">
+                            <h3>Nueva Solicitud (Live preview)</h3>
+                            <div class="col-md-6">
+                                <p>Lugar: {{ form.lugar.nombre + " | " + form.lugar.direccion }}</p>
+                                <p>Proyecto: {{ form.proyecto }}</p>
+                                <p>Fecha: {{ form.fecha }}</p>
+                                <p>Estado: Aprobada</p>
+                                <p>Comentarios:</p>
+                                <p ng-show="form.comentario != null">{{ form.comentario }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Productos:</strong>
+                                <p ng-repeat="producto in form.productos">
+                                    <span class="glyphicon glyphicon-record"></span>
+                                    {{ producto.nombre }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default row" ng-repeat="solicitud in opciones.solicitudes">
+                        <div class="panel-body">
+                            <h3>Solicitud</h3>
+                            <div class="col-md-6">
+                                <p>Lugar: {{ solicitud.lugar }}</p>
+                                <p>Proyecto: {{ solicitud.proyecto }}</p>
+                                <p>Fecha: {{ solicitud.fecha }}</p>
+                                <p>Estado: Aprobada</p>
+                                <p>Comentarios:</p>
+                                <p ng-show="solicitud.comentario != null">{{ solicitud.comentario }}</p>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Productos:</strong>
+                                <p ng-repeat="producto in solicitud.productos">
+                                    <span class="glyphicon glyphicon-record"></span>
+                                    {{ producto.nombre }}
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -265,253 +386,11 @@
             <div class="row" id="footer">
                 <h4>
                     <span class="glyphicon glyphicon-copyright-mark"></span>
-                    {{ langs.footer }}
+                    Copyright 2014
                 </h4>
             </div>
         </div>
-
     </div>
-
-    <!-- Some JS scripts -->
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-    <script>
-        var app = angular.module('app', []);
-
-        app.config(['$httpProvider', function($httpProvider) {
-            $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-            $httpProvider.defaults.xsrfCookieName = 'csrftoken';
-        }]);
-
-        app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
-            $scope.spanish = {
-                'title': 'Bienvenido solicitante',
-                'banner': 'Bienvenido solicitante',
-                'formPillows': {
-                    'solicitud': 'Solicitud',
-                    'producto': 'Producto',
-                    'lugar': 'Lugar'
-                },
-                'solicitudForm': {
-                    'lugar': 'Lugar de entrega',
-                    'proyecto': 'Proyecto',
-                    'fecha': 'Fecha de entrega',
-                    'productos': 'Productos',
-                    'tusProductos': 'Tus productos',
-                    'cantidadProducto': 'Cantidad',
-                    'unidadProducto': 'Unidad',
-                    'comentarioSolicitante': 'Comentarios',
-                    'submit': 'Crear solicitud',
-                    'warning': {
-                        'css': '',
-                        'message': '',
-                        'success': 'Solicitud creada con exito',
-                        'danger': 'Revisa todos lo campos'
-                    }
-                },
-                'productoForm': {
-                    'onu': 'Codigo ONU',
-                    'nombre': 'Nombre',
-                    'descripcion': 'Descripcion',
-                    'referencia': 'Referencia',
-                    'talla': 'Talla',
-                    'marca': 'Marca',
-                    'unidad': 'Unidad',
-                    'familia': 'Familia proveedor',
-                    'esServicio': 'Tipo',
-                    'equipo': 'Equipo',
-                    'centroCosto': 'Centro de costo',
-                    'imagenes': 'Imagenes',
-                    'submit': 'Crear producto',
-                    'warning': {
-                        'css': '',
-                        'message': '',
-                        'success': 'Producto creado con exito',
-                        'danger': 'Revisa todos lo campos'
-                    }
-                },
-                'lugarForm': {
-                    'seccion': 'Seccion',
-                    'numero_1': '',
-                    'numero_2': '#',
-                    'numero_3': '-',
-                    'descripcion': 'descripcion',
-                    'nombre': 'nombre',
-                    'telefono': 'Telefono',
-                    'submit': 'Crear lugar de entrega',
-                    'warning': {
-                        'css': '',
-                        'message': '',
-                        'success': 'Lugar creado con exito',
-                        'danger': 'Revisa todos lo campos'
-                    }
-                },
-                'footer': 'Copyright 2014'
-            };
-
-            $scope.langs = $scope.spanish // Keep this always above every langs!
-
-            $scope.formType = 'solicitud';
-
-            $scope.solicitudForm = {};
-
-            $scope.productoForm = {};
-
-            $scope.lugarForm = {};
-
-            $scope.formPillows = {
-                'solicitud': 'active',
-                'producto': '',
-                'lugar': ''
-            };
-
-            $scope.solicitudes = [];
-
-            $scope.opcionesLugares = [];
-
-            $scope.opcionesProductos = [];
-
-            $scope.opcionesFamilia = [];
-
-            $scope.opcionesEsServicio = ['Bien', 'Servicio'];
-
-            $scope.opcionesEquipo = [];
-
-            $scope.opcionesCentroCosto = [];
-
-            $http.get('solicitudes')
-            .success(function(data) {
-                return $scope.solicitudes = data;
-            });
-
-            $http.get('lugares')
-            .success(function(data) {
-                return $scope.opcionesLugares = data;
-            });
-
-            $http.get('productos')
-            .success(function(data) {
-                return $scope.opcionesProductos = data;
-            });
-
-            $http.get('familiasproveedores')
-            .success(function(data) {
-                return $scope.opcionesFamilia = data;
-            });
-
-            $http.get('equipos')
-            .success(function(data) {
-                return $scope.opcionesEquipo = data;
-            });
-
-            $http.get('centrosdecostos')
-            .success(function(data) {
-                return $scope.opcionesCentroCosto = data;
-            });
-
-            $scope.setFormType = function(type) {
-                if (type == 'producto') {
-                    $scope.formType = 'producto';
-                    $scope.formPillows.solicitud = '';
-                    $scope.formPillows.producto = 'active';
-                    $scope.formPillows.lugar = '';
-                } else if (type == 'lugar') {
-                    $scope.formType = 'lugar';
-                    $scope.formPillows.solicitud = '';
-                    $scope.formPillows.producto = '';
-                    $scope.formPillows.lugar = 'active';
-                } else {
-                    $scope.formType = 'solicitud';
-                    $scope.formPillows.solicitud = 'active';
-                    $scope.formPillows.producto = '';
-                    $scope.formPillows.lugar = '';
-                }
-            };
-
-            $scope.submitSolicitud = function() {
-                $scope.solicitudForm.submit = true;
-                return true;
-            };
-
-            $scope.submitProducto = function() {
-                $scope.productoForm.submit = true;
-                return true;
-            };
-
-            $scope.submitLugar = function() {
-                $scope.lugarForm.submit = true;
-                return true;
-            };
-
-            $scope.formData = function() {
-                if ($scope.solicitudForm.submit) return $scope.solicitudForm;
-                if ($scope.productoForm.submit) return $scope.productoForm;
-                if ($scope.lugarForm.submit) return $scope.lugarForm;
-                return {};
-            }
-
-            $scope.executeSuccess = function(data) {
-                console.log($scope.lugarForm);
-                if ($scope.solicitudForm.submit) {
-                    $scope.langs.solicitudForm.warning.css = "alert alert-success"
-                    $scope.langs.solicitudForm.warning.message = $scope.langs.solicitudForm.warning.success;
-                    $scope.solicitudForm.id = data.id;
-                    $scope.solicitudes.push($scope.solicitudForm);
-                    return true;
-                } else if ($scope.productoForm.submit) {
-                    $scope.langs.productoForm.warning.css = "alert alert-success"
-                    $scope.langs.productoForm.warning.message = $scope.langs.productoForm.warning.success;
-                    $scope.productoForm.id = data.id;
-                    $scope.opcionesProductos.push($scope.productoForm);
-                    $scope.productoForm.productos.push($scope.productoForm);
-                    return true;
-                } else if ($scope.lugarForm.submit) {
-                    $scope.langs.lugarForm.warning.css = "alert alert-success"
-                    $scope.langs.lugarForm.warning.message = $scope.langs.lugarForm.warning.success;
-                    $scope.productoForm.id = data.id;
-                    $scope.opcionesLugares.push($scope.lugarForm);
-                    $scope.solicitudForm.lugar = $scope.lugarForm;
-                    return true;
-                } else {
-                    return false;
-                }
-            };
-
-            $scope.executeError = function() {
-                if ($scope.solicitudForm.submit) {
-                    $scope.langs.solicitudForm.warning.css = "alert alert-danger";
-                    $scope.langs.solicitudForm.warning.message = $scope.langs.solicitudForm.warning.danger;
-                    return true;
-                } else if ($scope.productoForm.submit) {
-                    $scope.langs.productoForm.warning.css = "alert alert-danger";
-                    $scope.langs.productoForm.warning.message = $scope.langs.productoForm.warning.danger;
-                    return true;
-                } else if ($scope.lugarForm.submit) {
-                    $scope.langs.lugarForm.warning.css = "alert alert-danger";
-                    $scope.langs.lugarForm.warning.message = $scope.langs.lugarForm.warning.danger;
-                    return true;
-                } else {
-                    return false;
-                }
-            };
-
-            $scope.submit = function() {
-                var form = $scope.formData();
-
-                $http.post('', form)
-                .success(function(data) {
-                    $scope.executeSuccess(data);
-                })
-                .error(function(data) {
-                    $scope.executeError();
-                });
-            };
-        }]);
-    </script>
-
 </body>
 </html>
 {% endverbatim %}
