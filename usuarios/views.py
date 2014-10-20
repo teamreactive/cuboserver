@@ -9,6 +9,10 @@ import json
 from .models import Usuario
 from productos.serializers import ProductoSerializer
 from .serializers import UsuarioSerializer
+from lugares.models import Lugar
+from lugares.serializers import LugarSerializer
+
+from django.core.exceptions import ValidationError
 
 
 class UsuarioViewSet(viewsets.ReadOnlyModelViewSet):
@@ -39,11 +43,18 @@ class HomeView(View):
         Validate and submit the corresponding form,
         and return the respective HTTP status code.
         """
+        # print '#######path_info#######'
+        #print request.body
+        # print '######scheme########'
+        # print request.scheme
+
         # stream = StringIO(request.body)
         # data = JSONParser().parse(stream)
         # serializer = ProductoSerializer(data=data)
         # print serializer.errors
-        return HttpResponse(status=200)
+        if save_lugar(request):
+            return HttpResponse(status=200)
+        return HttpResponse(status=400)
 
 def get_template(request, template_name):
     """
@@ -77,3 +88,22 @@ def fix_data(data):
         value = data[key].encode('utf-8')
         data[key] = value
     return data
+
+def save_lugar(request):
+    stream = StringIO(request.body)
+    data = JSONParser().parse(stream)
+    print data.pop('telefono')
+    lugar_serializer = LugarSerializer(data=data)
+    # lugar = Lugar(nombre='nombre',ciudad='q',seccion='1',numero_1=12,numero_2=11,numero_3=12,descripcion='ded',usuario=1)
+    # lugar = Lugar(ciudad='qq',seccion='1',numero_1=12,numero_2=11,numero_3=12)
+    print 'succes load serializer'
+    try:
+        lugar.clean_fields()
+        print 'super success'
+        lugar.save()
+        
+        return True
+    except ValidationError:
+        print 'error'
+    return False
+    

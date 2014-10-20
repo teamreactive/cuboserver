@@ -217,28 +217,28 @@
                             {% endverbatim %}{% csrf_token %}{% verbatim %}
                             <pre ng-class="langs.lugarForm.warning.css" ng-show="langs.lugarForm.warning.message != ''">{{ langs.lugarForm.warning.message }}</pre>
                             <div class="form-group">
-                                <label for="campo1Lugar">{{ langs.lugarForm.campo1 }}</label>
-                                <input type="text" class="form-control" id="campo1Lugar" placeholer="{{ langs.lugarForm.campo1 }}" ng-model="lugarForm.campo1" required>
+                                <label for="nombreLugar">{{ langs.lugarForm.nombre }}</label>
+                                <input type="text" class="form-control" id="nombreLugar" placeholer="{{ langs.lugarForm.nombre }}" ng-model="lugarForm.nombre" required>
                             </div>
                             <div class="form-group">
-                                <label for="campo2Lugar">{{ langs.lugarForm.campo2 }}</label>
-                                <input type="text" class="form-control" id="campo2Lugar" placeholer="{{ langs.lugarForm.campo2 }}" ng-model="lugarForm.campo2" required>
+                                <label for="seccionLugar">{{ langs.lugarForm.seccion }}</label>
+                                <input type="text" class="form-control" id="seccionLugar" placeholer="{{ langs.lugarForm.seccion }}" ng-model="lugarForm.seccion" required>
                             </div>
                             <div class="form-group">
-                                <label for="campo3Lugar">{{ langs.lugarForm.campo3 }}</label>
-                                <input type="text" class="form-control" id="campo3Lugar" placeholer="{{ langs.lugarForm.campo3 }}" ng-model="lugarForm.campo3" required>
+                                <label for="numero_1Lugar">{{ langs.lugarForm.numero_1 }}</label>
+                                <input type="text" class="form-control" id="numero_1Lugar" placeholer="{{ langs.lugarForm.numero_1 }}" ng-model="lugarForm.numero_1" required>
                             </div>
                             <div class="form-group">
-                                <label for="campo4Lugar">{{ langs.lugarForm.campo4 }}</label>
-                                <input type="text" class="form-control" id="campo4Lugar" placeholer="{{ langs.lugarForm.campo4 }}" ng-model="lugarForm.campo4" required>
+                                <label for="numero_2Lugar">{{ langs.lugarForm.numero_2 }}</label>
+                                <input type="text" class="form-control" id="numero_2Lugar" placeholer="{{ langs.lugarForm.numero_2 }}" ng-model="lugarForm.numero_2" required>
                             </div>
                             <div class="form-group">
-                                <label for="campo5Lugar">{{ langs.lugarForm.campo5 }}</label>
-                                <input type="text" class="form-control" id="campo5Lugar" placeholer="{{ langs.lugarForm.campo5 }}" ng-model="lugarForm.campo5" required>
+                                <label for="numero_3Lugar">{{ langs.lugarForm.numero_3 }}</label>
+                                <input type="text" class="form-control" id="numero_3Lugar" placeholer="{{ langs.lugarForm.numero_3 }}" ng-model="lugarForm.numero_3" required>
                             </div>
                             <div class="form-group">
-                                <label for="campo6Lugar">{{ langs.lugarForm.campo6 }}</label>
-                                <input type="text" class="form-control" id="campo6Lugar" placeholer="{{ langs.lugarForm.campo6 }}" ng-model="lugarForm.campo6" required>
+                                <label for="descripcionLugar">{{ langs.lugarForm.descripcion }}</label>
+                                <input type="text" class="form-control" id="descripcionLugar" placeholer="{{ langs.lugarForm.descripcion }}" ng-model="lugarForm.descripcion" required>
                             </div>
                             <div class="form-group">
                                 <label for="telefonoLugar">{{ langs.lugarForm.telefono }}</label>
@@ -334,12 +334,12 @@
                     }
                 },
                 'lugarForm': {
-                    'campo1': 'Campo 1',
-                    'campo2': 'Campo 2',
-                    'campo3': 'Campo 3',
-                    'campo4': 'Campo 4',
-                    'campo5': 'Campo 5',
-                    'campo6': 'Campo 6',
+                    'seccion': 'Seccion',
+                    'numero_1': '',
+                    'numero_2': '#',
+                    'numero_3': '-',
+                    'descripcion': 'descripcion',
+                    'nombre': 'nombre',
                     'telefono': 'Telefono',
                     'submit': 'Crear lugar de entrega',
                     'warning': {
