@@ -98,9 +98,9 @@ def save_lugar(request):
     # lugar = Lugar(ciudad='qq',seccion='1',numero_1=12,numero_2=11,numero_3=12)
     print 'succes load serializer'
     try:
-        lugar.clean_fields()
-        print 'super success'
-        lugar.save()
+        
+        print lugar_serializer.errors
+        lugar_serializer.save()
         
         return True
     except ValidationError:
