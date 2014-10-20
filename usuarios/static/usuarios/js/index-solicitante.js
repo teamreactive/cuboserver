@@ -138,3 +138,28 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
         return true;
     };
 }]);
+
+app.directive('chosen', function() {
+    var linker = function(scope, element, attr) {
+        // update the select when data is loaded
+        scope.$watch(attr.chosen, function(oldVal, newVal) {
+        element.trigger('chosen:updated');
+        });
+        // update the select when the model changes
+        scope.$watch(attr.ngModel, function() {
+        element.trigger('chosen:updated');
+        });
+        element.chosen({ width: '100%' });
+    };
+
+    return {
+        restrict: 'A',
+        link: linker
+    };
+});
+
+$(function() {
+    $( ".datepicker" ).datepicker(
+        { dateFormat: 'dd-mm-yy' }
+    );
+});

@@ -14,6 +14,7 @@
 
     {% endverbatim %}
     {% load staticfiles %}
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css">
@@ -25,6 +26,8 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.proto.min.js"></script>
     <script src="{% static "usuarios/js/index-solicitante.js" %}"></script>
     {% verbatim %}
 
@@ -116,7 +119,7 @@
                                                 <span class="glyphicon glyphicon-plus"></span>
                                             </button>
                                         </span>
-                                        <select class="form-control" id="lugarSolicitud" ng-options="(lugar.nombre + ' | ' + lugar.direccion) for lugar in opciones.lugares" ng-model="form.lugar" required></select>
+                                        <select data-placeholder="Lugar de entrega" class="form-control" id="lugarSolicitud" ng-options="(lugar.nombre + ' | ' + lugar.direccion) for lugar in opciones.lugares" ng-model="form.lugar" chosen="opciones.lugares" required></select>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -125,7 +128,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="fechaSolicitud">* Fecha requerida</label>
-                                    <input type="text" class="form-control" id="fechaSolicitud" placeholer="Fecha requerida" ng-model="form.fecha" required>
+                                    <input type="text" class="form-control datepicker" id="fechaSolicitud" placeholer="Fecha requerida" ng-model="form.fecha" required>
                                 </div>
                             </div>
 
@@ -140,7 +143,7 @@
                                                 <span class="glyphicon glyphicon-plus"></span>
                                             </button>
                                         </span>
-                                        <select class="form-control" id="productosSolicitud" ng-options="producto.nombre for producto in opciones.productos" ng-model="form.productos" multiple required></select>
+                                        <select data-placeholder="Productos" class="form-control" id="productosSolicitud" ng-options="producto.nombre for producto in opciones.productos" ng-model="form.productos" chosen="opciones.productos" multiple required></select>
                                     </div>
                                 </div>
                                 <div class="form-group panel panel-default" ng-show="form.productos.length > 0">
@@ -211,7 +214,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="tipoProducto">* Tipo</label>
-                                    <select class="form-control" id="tipoProducto" ng-options="tipo.nombre for tipo in opciones.tipos" ng-model="form.tipo" required></select>
+                                    <select data-placeholder="Tipo" class="form-control" id="tipoProducto" ng-options="tipo.nombre for tipo in opciones.tipos" ng-model="form.tipo" chosen="opciones.tipos" required></select>
                                 </div>
                             </div>
 
@@ -232,7 +235,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="familiaProducto">Familia proveedor</label>
-                                    <select class="form-control" id="familiaProducto" ng-options="familia.nombre for familia in opciones.familias" ng-model="form.familia"></select>
+                                    <select data-placeholder="Familia proveedor" class="form-control" id="familiaProducto" ng-options="familia.nombre for familia in opciones.familias" ng-model="form.familia" chosen="opciones.familias"></select>
                                 </div>
                             </div>
 
@@ -241,11 +244,11 @@
                             <div ng-show="form.page == '3'">
                                 <div class="form-group">
                                     <label for="equipoProducto">Equipo</label>
-                                    <select class="form-control" id="equipoProducto" ng-options="equipo.nombre for equipo in opciones.equipos" ng-model="form.equipo"></select>
+                                    <select data-placeholder="Equipo" class="form-control" id="equipoProducto" ng-options="equipo.nombre for equipo in opciones.equipos" ng-model="form.equipo" chosen="opciones.equipos"></select>
                                 </div>
                                 <div class="form-group">
                                     <label for="centroCostoProducto">Centro de costo</label>
-                                    <select class="form-control" id="centroCostoProducto" ng-options="centro.nombre for centro in opciones.centros" ng-model="form.centro"></select>
+                                    <select data-placeholder="Centro de costo" class="form-control" id="centroCostoProducto" ng-options="centro.nombre for centro in opciones.centros" ng-model="form.centro" chosen="opciones.centros"></select>
                                 </div>
                                 <div class="form-group">
                                     <label for="imagenProducto">Imagen</label>
@@ -325,6 +328,12 @@
                             </div>
                         </form>
                     </div>
+                </div>
+
+                <!-- Blank line -->
+
+                <div class="row">
+                    <br>
                 </div>
 
                 <!-- Solicitudes -->
