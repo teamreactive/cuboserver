@@ -26,7 +26,7 @@ class Producto(models.Model):
 
     def save(self):
         # Define and populate historial related tavles
-        pass
+        current_product = PrecioProductoXMes
 
     class Meta:
         db_table = 'producto'
@@ -55,7 +55,7 @@ class FotosxProducto(models.Model):
 class PrecioxProducto(models.Model):
     producto = models.ForeignKey(Producto)
     unidad = models.CharField(max_length=10)
-    talla = models.CharField(max_length=10,null=True,blank=True)
+    talla = models.CharField(max_length=10,null=True,blank=True) # Ask
 
     class Meta:
         db_table = 'precio_producto'
