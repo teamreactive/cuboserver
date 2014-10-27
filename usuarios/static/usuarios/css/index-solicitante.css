@@ -3,10 +3,6 @@
     text-align: center;
 }
 
-#navigation {
-	position: fixed;
-}
-
 .chosen-container-single .chosen-search input[type=text] {
 	height: 30px;
 }
