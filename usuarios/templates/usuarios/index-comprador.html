@@ -43,7 +43,6 @@
                 </fieldset>
             </form>
             <form name="actualizarProveedorForm" ng-controller="actualizarProveedorController as aCtrl">
-                <h5 ng-repeat="proveedor in proveedorCtrl.proveedores">{%verbatim%}{{proveedor.sigla}}{%endverbatim%}</h5>
                 <fieldset>
                     <select ng-model='aCtrl.proveedor.sigla' ng-options="proveedor.razon_social for proveedor in proveedorCtrl.proveedores"></select>
                 </fieldset>
