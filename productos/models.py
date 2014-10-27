@@ -24,6 +24,10 @@ class Producto(models.Model):
     def __unicode__(self):
         return '%s - %s' % (self.codigo_onu, self.nombre)
 
+    def save(self):
+        # Define and populate historial related tavles
+        pass
+
     class Meta:
         db_table = 'producto'
         unique_together = (
@@ -55,3 +59,11 @@ class PrecioxProducto(models.Model):
 
     class Meta:
         db_table = 'precio_producto'
+
+class PrecioProductoXMes(models.Model):
+    producto = models.ForeignKey(Producto)
+    mes = models.CharField(max_length = 3)
+    precio = models.FloatField()
+
+    class Meta:
+        db_table = 'precio_mes'
