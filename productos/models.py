@@ -24,6 +24,10 @@ class Producto(models.Model):
     def __unicode__(self):
         return '%s - %s' % (self.codigo_onu, self.nombre)
 
+    def save(self):
+        # Define and populate historial related tavles
+        current_product = PrecioProductoXMes
+
     class Meta:
         db_table = 'producto'
         unique_together = (
@@ -51,7 +55,15 @@ class FotosxProducto(models.Model):
 class PrecioxProducto(models.Model):
     producto = models.ForeignKey(Producto)
     unidad = models.CharField(max_length=10)
-    talla = models.CharField(max_length=10,null=True,blank=True)
+    talla = models.CharField(max_length=10,null=True,blank=True) # Ask
 
     class Meta:
         db_table = 'precio_producto'
+
+class PrecioProductoXMes(models.Model):
+    producto = models.ForeignKey(Producto)
+    mes = models.CharField(max_length = 3)
+    precio = models.FloatField()
+
+    class Meta:
+        db_table = 'precio_mes'
