@@ -1,27 +1,84 @@
-{% extends "utils/base.html" %}
-
-{% block head %}
+<!DOCTYPE html>
+<html ng-app="Comprador">
+<head>
+    <!-- Some JS scripts -->
     {% load staticfiles %}
-    <link rel="stylesheet" href="{% static "utils/css/chosen.css" %}">
-    <title>Bienvenido comprador</title>
-{% endblock %}
-
-{% block body %}
-    <div class="row" ng-app="app">
-        <div ng-controller="CompradorCtrl as compradorCtrl">
-            <div class="col-md-4">
-                {% include "usuarios/opciones-comprador.html" %}
-            </div>
-            <div class="col-md-8">
-                
-            </div>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="{% static "usuarios/js/index-comprador.js" %}"></script>
+    <title></title>
+</head>
+<body>
+    <div id="forms" ng-controller="formtabController as tabCtrl">
+        <div ng-controller="proveedorController as proveedorCtrl">
+            <ul>
+                <li ng-class="{ active:tabCtrl.isTab(1)}">
+                    <a href ng-click="tabCtrl.setTab(1)">Nuevo Proveedor</a>
+                </li>
+                <li>
+                    <a href ng-click="tabCtrl.setTab(2)">Actualizar Proveedor</a>
+                </li ng-class="{ active:tabCtrl.isTab(2)}">
+            </ul>
+            <form name="proveedorForm" ng-controller="proveedorFormController as pfc" ng-show="tabCtrl.isTab(1)">
+                <h4>Crear un nuevo proveedor</h4>
+                <fieldset>
+                    Razon social:<input ng-model="pfc.proveedor.razon_social">
+                </fieldset>
+                <fieldset>
+                    Sigla:<input ng-model="pfc.proveedor.sigla">
+                </fieldset>
+                <fieldset>
+                    NIT:<input ng-model="pfc.proveedor.nit">
+                </fieldset>
+                <fieldset>
+                    Numero de Verificacion:<input ng-model="pfc.proveedor.numero_verificacion">
+                </fieldset>
+                <fieldset>
+                    Lugar:<input ng-model="pfc.proveedor.lugar">
+                </fieldset>
+                <fieldset>
+                    Logo:<input ng-model="pfc.proveedor.logo">
+                </fieldset>
+                <fieldset class="form-group">
+                    <input type="submit"  value="crear proveedor" />
+                </fieldset>
+            </form>
+            <form name="actualizarProveedorForm" ng-controller="actualizarProveedorController as aCtrl">
+                <fieldset>
+                    <select ng-model='aCtrl.proveedor.sigla' ng-options="proveedor.razon_social for proveedor in proveedorCtrl.proveedores"></select>
+                </fieldset>
+            </form>
         </div>
     </div>
-{% endblock %}
-
-{% block js %}
-    {% load staticfiles %}
-    <script src="{% static "usuarios/js/index-codificador.js" %}"></script>
-    <script src="{% static "utils/js/chosen.jquery.min.js" %}"></script>
-    <script src="{% static "utils/js/chosen.js" %}"></script>
-{% endblock %}
+    <div id="main" ng-controller="maintabController as tabCtrl">
+        <ul>
+            <li ng-class="{active:tabCtrl.isTab(1)}">
+                <a href ng-click="tabCtrl.setTab(1)">Solicitudes Pendientes</a>
+            </li>
+            <li ng-class="{active:tabCtrl.isTab(2)}">
+                <a href ng-click="tabCtrl.setTab(2)">Ordenes de Compra</a>
+            </li>
+        </ul>
+        <div id="solicitante" ng-controller="solicitudesController as sCtrl" ng-show="tabCtrl.isTab(1)">
+            {%verbatim%}
+            <h2>Solicitudes</h2>
+            <section id='solicitudes' ng-repeat='solicitud in sCtrl.solicitudes'>
+                <h3>Lugar</h3>
+                <p>{{solicitud.lugar}}</p>
+                <h3>Proyecto</h3>
+                <p>{{solicitud.proyecto}}</p>
+                <h3>Fecha</h3>
+                <p>{{solicitud.fech}}</p>
+                <h3>Productos</h3>
+                <div id="productos" ng-repeat='producto in solicitud.productos'>
+                    <h4>nombre</h4>
+                    <p>{{producto.nombre}}</p>
+                </div>
+            </section>
+            {%endverbatim%}
+        </div>
+        <div id="ordenesdecompra" ng-controller="ordenesdecompraController as oCtrl" ng-show="tabCtrl.isTab(2)">
+            <h1>Hello</h1>
+        </div>
+    </div>
+</body>
+</html>

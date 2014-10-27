@@ -13,16 +13,16 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
      * ##############################################################
     **/
 
-    $scope.form = {
-        'tab': '1',
-        'page': '1',
-        'message': {
-            'message': '',
-            'css': ''
-        }
-    };
+    $scope.nav = '1';
+
+    $scope.message = { 'css': '', 'message': '' };
 
     $scope.opciones = {
+        'solicitantes': [
+            {'nombre': 'Juan Camilo'},
+            {'nombre': 'Sebastian'},
+            {'nombre': 'Daniel'}
+        ],
         'solicitudes': [
             {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Edificio', 'fecha': '01-01-2015', 'productos': [{'nombre': 'Taladro'}]},
             {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Autopista', 'fecha': '02-11-2015', 'productos': [{'nombre': 'Martillo'}]},
@@ -67,6 +67,12 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
             {'nombre': 'Centro de papeleria'},
             {'nombre': 'Centro de ferreteria'},
             {'nombre': 'Centro de farmacia'}
+        ],
+        'unidades': [
+            {'nombre': 'kg'},
+            {'nombre': 'm'},
+            {'nombre': 'lb'},
+            {'nombre': 'cm'}
         ]
     };
 
@@ -84,11 +90,6 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
     $scope.incPage = function() {
         if ($scope.form.page == '1') $scope.form.page = '2';
         else if ($scope.form.page == '2') $scope.form.page = '3';
-    };
-
-    $scope.setTab = function(tab) {
-        $scope.form.tab = tab;
-        $scope.form.page = '1';
     };
 
     $scope.setSubmit = function(submit) {

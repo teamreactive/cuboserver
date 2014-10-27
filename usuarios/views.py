@@ -27,7 +27,8 @@ class HomeView(View):
     """
     View endpoint that renders the home.
     """
-    template_name = 'usuarios/index-codificador.html'
+
+    template_name = 'usuarios/index-comprador.html'
     # TODO -> REPLACE WITH THE GET_TEMPLATE FUNCTION #
 
     def get(self, request, *args, **kwargs):
@@ -55,6 +56,7 @@ class HomeView(View):
         if save_lugar(request):
             return HttpResponse(status=200)
         return HttpResponse(status=400)
+
 
 def get_template(request, template_name):
     """
@@ -88,6 +90,7 @@ def fix_data(data):
         value = data[key].encode('utf-8')
         data[key] = value
     return data
+
 
 def save_lugar(request):
     stream = StringIO(request.body)
