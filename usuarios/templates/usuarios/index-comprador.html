@@ -1,3 +1,5 @@
+
+!no sirven el submit de actualizar proveedor pues igual lo actualiza ahi mismo falta que aga un update en la base de datos
 <!DOCTYPE html>
 <html ng-app="Comprador">
 <head>
@@ -9,43 +11,85 @@
 </head>
 <body>
     <div id="forms" ng-controller="formtabController as tabCtrl">
-        <div ng-controller="proveedorController as proveedorCtrl">
+        <ul>
+            <li ng-class="{ active:tabCtrl.isMainTab(1)}">
+                <a href ng-click="tabCtrl.setMainTab(1)">Proveedores</a>
+            </li>
+            <li ng-class="{ active:tabCtrl.isMainTab(2)}">
+                <a href ng-click="tabCtrl.setMainTab(2)">Contactos</a>
+            </li>
+        </ul>
+        <div ng-controller="proveedorController as proveedorCtrl" ng-show="tabCtrl.isMainTab(1)">
             <ul>
                 <li ng-class="{ active:tabCtrl.isTab(1)}">
                     <a href ng-click="tabCtrl.setTab(1)">Nuevo Proveedor</a>
-                </li>
+                </li ng-class="{ active:tabCtrl.isTab(2) }">
                 <li>
                     <a href ng-click="tabCtrl.setTab(2)">Actualizar Proveedor</a>
-                </li ng-class="{ active:tabCtrl.isTab(2)}">
+                </li >
             </ul>
-            <form name="proveedorForm" ng-controller="proveedorFormController as pfc" ng-show="tabCtrl.isTab(1)">
+            <form name="crearProveedorForm" ng-controller="proveedorFormController as proveedorFormCtrl" ng-show="tabCtrl.isTab(1)">
                 <h4>Crear un nuevo proveedor</h4>
                 <fieldset>
-                    Razon social:<input ng-model="pfc.proveedor.razon_social">
+                    Razon social:<input ng-model="proveedorFormCtrl.proveedor.razon_social">
                 </fieldset>
                 <fieldset>
-                    Sigla:<input ng-model="pfc.proveedor.sigla">
+                    Sigla:<input ng-model="proveedorFormCtrl.proveedor.sigla">
                 </fieldset>
                 <fieldset>
-                    NIT:<input ng-model="pfc.proveedor.nit">
+                    NIT:<input ng-model="proveedorFormCtrl.proveedor.nit">
                 </fieldset>
                 <fieldset>
-                    Numero de Verificacion:<input ng-model="pfc.proveedor.numero_verificacion">
+                    Numero de Verificacion:<input ng-model="proveedorFormCtrl.proveedor.numero_verificacion">
                 </fieldset>
                 <fieldset>
-                    Lugar:<input ng-model="pfc.proveedor.lugar">
+                    Lugar:<input ng-model="proveedorFormCtrl.proveedor.lugar">
                 </fieldset>
                 <fieldset>
-                    Logo:<input ng-model="pfc.proveedor.logo">
+                    Logo:<input ng-model="proveedorFormCtrl.proveedor.logo" type="file">
                 </fieldset>
                 <fieldset class="form-group">
                     <input type="submit"  value="crear proveedor" />
                 </fieldset>
             </form>
-            <form name="actualizarProveedorForm" ng-controller="actualizarProveedorController as aCtrl">
+            {%verbatim%}
+            <form name="actualizarProveedorForm" ng-controller="actualizarProveedorController as aCtrl" ng-show="tabCtrl.isTab(2)">
+                <h4>Actualizar proveedor</h4>
                 <fieldset>
-                    <select ng-model='aCtrl.proveedor.sigla' ng-options="proveedor.razon_social for proveedor in proveedorCtrl.proveedores"></select>
+                    <select ng-model='aCtrl.proveedor' ng-options="proveedor.razon_social for proveedor in proveedorCtrl.proveedores"></select>
                 </fieldset>
+                <h3>{{aCtrl.proveedor.razon_social}}</h3>
+                <fieldset>
+                    Razon Social:<input ng-model="aCtrl.proveedor.razon_social"type="text" value="{{aCtrl.proveedor.razon_social}}">
+                </fieldset>
+                <fieldset>
+                    Sigla:<input type="text" value="{{aCtrl.proveedor.sigla}}">
+                </fieldset>
+                <fieldset>
+                    NIT:<input type="text" value="{{aCtrl.proveedor.nit}}">
+                </fieldset>
+                <fieldset>
+                    Direccion:<input type="text" value="{{aCtrl.proveedor.lugar}}">
+                </fieldset>
+                <fieldset>
+                    Logo:<input type="file">
+                </fieldset>
+                <fieldset>
+                    <input type="submit" value="Actualizar">
+                </fieldset>
+            </form>
+            {%endverbatim%}
+        </div>
+        <div ng-controller="contactosController as contactosCtrl" ng-show="tabCtrl.isMainTab(2)">
+            <ul>
+                <li>
+                    <a href ng-click="tabCtrl.setTab(3)">Crear Contacto</a>
+                </li>
+                <li>
+                    <a href ng-click="tabCtrl.setTab(4)">Actualizar Contacto</a>
+                </li>
+            </ul>
+           
             </form>
         </div>
     </div>

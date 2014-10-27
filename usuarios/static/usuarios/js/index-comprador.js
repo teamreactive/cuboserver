@@ -1,6 +1,13 @@
 var app = angular.module('Comprador',[]);
 app.controller('formtabController',function(){
     this.tab = 1;
+    this.mainTab = 1;
+    this.setMainTab = function(tab){
+        this.mainTab = tab;
+    };
+    this.isMainTab = function(tab){
+        return this.mainTab === tab;
+    };
     this.setTab = function(tab){
         this.tab = tab;
     };
@@ -16,6 +23,13 @@ app.controller('proveedorFormController', function(){
 });
 app.controller('actualizarProveedorController', function(){
     this.proveedor = {};
+    this.a =2;
+});
+app.controller('contactosController',function(){
+
+});
+app.controller('contactosFormController',function(){
+    
 });
 app.controller('maintabController',function(){
     this.tab = 1;
