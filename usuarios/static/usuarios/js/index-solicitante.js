@@ -9,13 +9,9 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
 
     /**
      * ##############################################################
-     * ######################## VARS SECTION ########################
+     * ######################### TEST DATA ##########################
      * ##############################################################
     **/
-
-    $scope.nav = '1';
-
-    $scope.message = { 'css': '', 'message': '' };
 
     $scope.opciones = {
         'solicitantes': [
@@ -36,11 +32,11 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
             {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '12-07-2015', 'productos': [{'nombre': 'Martillo'}]},
         ],
         'lugares': [
-            {'nombre': 'Casa', 'direccion': 'Avenida 15 #68 - 14', 'telefono': '4829482'},
-            {'nombre': 'Oficina', 'direccion': 'Carrera 23 #124 - 23', 'telefono': '6848294'},
-            {'nombre': 'Almacen', 'direccion': 'Avenida 11 #231 - 44', 'telefono': '21394829'},
-            {'nombre': 'Apartamento', 'direccion': 'Calle 166 #8H - 53', 'telefono': '2100600'},
-            {'nombre': 'Bodega', 'direccion': 'Carrera 9  # 28 - 65', 'telefono': '93840294'}
+            {'nombre': 'Casa', 'direccion': 'Avenida 15 68 14', 'telefono': '4829482'},
+            {'nombre': 'Oficina', 'direccion': 'Carrera 23 124 23', 'telefono': '6848294'},
+            {'nombre': 'Almacen', 'direccion': 'Avenida 11 231 44', 'telefono': '21394829'},
+            {'nombre': 'Apartamento', 'direccion': 'Calle 166 8H 53', 'telefono': '2100600'},
+            {'nombre': 'Bodega', 'direccion': 'Carrera 9 28 65', 'telefono': '93840294'}
         ],
         'productos': [
             {'nombre': 'Taladro'},
@@ -78,27 +74,32 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
 
     /**
      * ##############################################################
+     * ######################## VARS SECTION ########################
+     * ##############################################################
+    **/
+
+    $scope.nav = '1';
+
+    $scope.message = { 'css': '', 'message': '' };
+
+    /**
+     * ##############################################################
      * ######################## FUNCS SECTION #######################
      * ##############################################################
     **/
 
-    $scope.decPage = function() {
-        if ($scope.form.page == '3') $scope.form.page = '2';
-        else if ($scope.form.page == '2') $scope.form.page = '1';
-    };
-
-    $scope.incPage = function() {
-        if ($scope.form.page == '1') $scope.form.page = '2';
-        else if ($scope.form.page == '2') $scope.form.page = '3';
-    };
-
     $scope.setSubmit = function(submit) {
         $scope.form.submit = submit;
         return true;
-    }
+    };
+
+    $scope.clean = function() {
+        for (var i = 0; i < arguments.length; i++) form.arguments[i] = '';
+    };
 
     $scope.submit = function() {
         $scope.form.message = {};
+
         if ($scope.form.submit == '1') {
             var solicitud = {
                 'lugar': $scope.form.lugar.nombre,
@@ -107,57 +108,47 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
                 'comentario': $scope.form.comentario,
                 'productos': $scope.form.productos
             };
+
             $scope.opciones.solicitudes.unshift(solicitud);
-        } else if ($scope.form.submit == '2') {
-            var producto = {'nombre': $scope.form.nombre};
+            $scope.clean('lugar', 'proyecto', 'fecha', 'comentario', 'productos');
+        } 
+
+        else if ($scope.form.submit == '2') {
+            var producto = {
+                'nombre': $scope.form.nombre
+            };
+
             $scope.opciones.productos.unshift(producto);
-            $scope.form.productos.unshift(producto);
-        } else if ($scope.form.submit == '3') {
-            var direccion = $scope.form.seccion + " " +
-                            $scope.form.numero1 + " #" +
-                            $scope.form.numero2 + " - " +
+            $scope.clean('nombre');
+        } 
+
+        else if ($scope.form.submit == '3') {
+            var direccion = $scope.form.seccion + " "
+                            $scope.form.numero1 + " "
+                            $scope.form.numero2 + " "
                             $scope.form.numero3;
+
             var lugar = {
                 'nombre': $scope.form.nombre,
                 'direccion': direccion,
                 'telefono': $scope.form.telefono
             };
+
             $scope.opciones.lugares.unshift(lugar);
             $scope.form.lugar = lugar;
+            $scope.clean('nombre,', 'direccion', 'telefono');
+
         } else {
-            $scope.form.message.message = 'Tipo de formulario no valido';
-            $scope.form.message.css = 'alert alert-danger';
+            $scope.message.message = 'Tipo de formulario no valido';
+            $scope.message.css = 'alert alert-danger';
             return false;
         }
-        $scope.form = {
-            'tab': '1',
-            'page': '1',
-            'message': {}
-        };
-        $scope.form.message.message = 'Accion realizada con exito';
-        $scope.form.message.css = 'alert alert-success';
+
+        $scope.message.message = 'Accion realizada con exito';
+        $scope.message.css = 'alert alert-success';
         return true;
     };
 }]);
-
-app.directive('chosen', function() {
-    var linker = function(scope, element, attr) {
-        // update the select when data is loaded
-        scope.$watch(attr.chosen, function(oldVal, newVal) {
-        element.trigger('chosen:updated');
-        });
-        // update the select when the model changes
-        scope.$watch(attr.ngModel, function() {
-        element.trigger('chosen:updated');
-        });
-        element.chosen({ width: '100%' });
-    };
-
-    return {
-        restrict: 'A',
-        link: linker
-    };
-});
 
 $(function() {
     $( ".datepicker" ).datepicker(
