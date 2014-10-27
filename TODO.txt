@@ -12,6 +12,4 @@ TODO
 *	Tiempo de entrega fecha_entrega - (aprobación | solicitud)
 *	Gastos por mes de proyecto y centro de costos y equipo
 
-
-
 [mes for i in meses] -> Reportar
