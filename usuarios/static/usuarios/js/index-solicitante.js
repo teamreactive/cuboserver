@@ -68,7 +68,8 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
             {'nombre': 'kg'},
             {'nombre': 'm'},
             {'nombre': 'lb'},
-            {'nombre': 'cm'}
+            {'nombre': 'cm'},
+            {'nombre': 'otra'}
         ]
     };
 
@@ -82,11 +83,18 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
 
     $scope.message = { 'css': '', 'message': '' };
 
+    $scope.form = {};
+
     /**
      * ##############################################################
      * ######################## FUNCS SECTION #######################
      * ##############################################################
     **/
+
+    $scope.setNav = function(nav) {
+        $scope.nav = nav;
+        $scope.message = { 'css': '', 'message': '' };
+    }
 
     $scope.setSubmit = function(submit) {
         $scope.form.submit = submit;
@@ -94,7 +102,7 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
     };
 
     $scope.clean = function() {
-        for (var i = 0; i < arguments.length; i++) form.arguments[i] = '';
+        for (var i = 0; i < arguments.length; i++) $scope.form[arguments[i]] = '';
     };
 
     $scope.submit = function() {
@@ -119,7 +127,7 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
             };
 
             $scope.opciones.productos.unshift(producto);
-            $scope.clean('nombre');
+            $scope.clean('nombre', 'descripcion', 'marca', 'unidad', 'otraUnidad', 'tipo');
         } 
 
         else if ($scope.form.submit == '3') {
@@ -136,7 +144,7 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
 
             $scope.opciones.lugares.unshift(lugar);
             $scope.form.lugar = lugar;
-            $scope.clean('nombre,', 'direccion', 'telefono');
+            $scope.clean('nombre', 'telefono', 'ciudad', 'pais', 'seccion', 'numero1', 'numero2', 'numero3', 'descripcion');
 
         } else {
             $scope.message.message = 'Tipo de formulario no valido';
