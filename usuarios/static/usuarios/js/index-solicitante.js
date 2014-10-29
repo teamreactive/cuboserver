@@ -20,16 +20,16 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
             {'nombre': 'Daniel'}
         ],
         'solicitudes': [
-            {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Edificio', 'fecha': '01-01-2015', 'productos': [{'nombre': 'Taladro'}]},
-            {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Autopista', 'fecha': '02-11-2015', 'productos': [{'nombre': 'Martillo'}]},
-            {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Autopista', 'fecha': '02-14-2015', 'productos': [{'nombre': 'Cinta'}]},
-            {'lugar': 'Bodega | Carrera 9  # 28 - 65', 'proyecto': 'Edificio', 'fecha': '12-12-2015', 'productos': [{'nombre': 'Cinta'}]},
-            {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Edificio', 'fecha': '12-03-2015', 'productos': [{'nombre': 'Excavadora'}]},
-            {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Casa', 'fecha': '09-10-2015', 'productos': [{'nombre': 'Cinta'}]},
-            {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Casa', 'fecha': '05-01-2015', 'productos': [{'nombre': 'Taladro'}]},
-            {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '05-05-2015', 'productos': [{'nombre': 'Remolque'}]},
-            {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '11-04-2015', 'productos': [{'nombre': 'Martillo'}]},
-            {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '12-07-2015', 'productos': [{'nombre': 'Martillo'}]},
+            {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Edificio', 'fecha': '01-01-2015', 'productos': [{'nombre': 'Taladro', 'unidad': {'nombre': 'kg'}, 'cantidad': '199'}]},
+            {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Autopista', 'fecha': '02-11-2015', 'productos': [{'nombre': 'Martillo', 'unidad': {'nombre': 'oz'}, 'cantidad': '12'}]},
+            {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Autopista', 'fecha': '02-14-2015', 'productos': [{'nombre': 'Cinta', 'unidad': {'nombre': 'qs'}, 'cantidad': '1'}]},
+            {'lugar': 'Bodega | Carrera 9  # 28 - 65', 'proyecto': 'Edificio', 'fecha': '12-12-2015', 'productos': [{'nombre': 'Cinta', 'unidad': {'nombre': 'pb'}, 'cantidad': '9'}]},
+            {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Edificio', 'fecha': '12-03-2015', 'productos': [{'nombre': 'Excavadora', 'unidad': {'nombre': 'l'}, 'cantidad': '32'}]},
+            {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Casa', 'fecha': '09-10-2015', 'productos': [{'nombre': 'Cinta', 'unidad': {'nombre': 'pb'}, 'cantidad': '2'}]},
+            {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Casa', 'fecha': '05-01-2015', 'productos': [{'nombre': 'Taladro', 'unidad': {'nombre': 'm'}, 'cantidad': '4'}]},
+            {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '05-05-2015', 'productos': [{'nombre': 'Remolque', 'unidad': {'nombre': 'lb'}, 'cantidad': '100'}]},
+            {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '11-04-2015', 'productos': [{'nombre': 'Martillo', 'unidad': {'nombre': 'oz'}, 'cantidad': '30'}]},
+            {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '12-07-2015', 'productos': [{'nombre': 'Martillo', 'unidad': {'nombre': 'l'}, 'cantidad': '91'}]},
         ],
         'lugares': [
             {'nombre': 'Casa', 'direccion': 'Avenida 15 68 14', 'telefono': '4829482'},
@@ -39,11 +39,11 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
             {'nombre': 'Bodega', 'direccion': 'Carrera 9 28 65', 'telefono': '93840294'}
         ],
         'productos': [
-            {'nombre': 'Taladro'},
-            {'nombre': 'Martillo'},
-            {'nombre': 'Remolque'},
-            {'nombre': 'Excavadora'},
-            {'nombre': 'Cinta'}
+            {'nombre': 'Taladro', 'unidades': [{'nombre': 'kg'}, {'nombre':'m'}]},
+            {'nombre': 'Martillo', 'unidades': [{'nombre': 'l'}, {'nombre':'oz'}]},
+            {'nombre': 'Remolque', 'unidades': [{'nombre': 'lb'}]},
+            {'nombre': 'Excavadora', 'unidades': [{'nombre': 'l'}, {'nombre':'mb'}]},
+            {'nombre': 'Cinta', 'unidades': [{'nombre': 'qs'}, {'nombre':'pb'}]}
         ],
         'familias': [
             {'nombre': 'Ferreteria'},
@@ -79,6 +79,8 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
      * ##############################################################
     **/
 
+    $scope.aux = [];
+
     $scope.nav = '1';
 
     $scope.message = { 'css': '', 'message': '' };
@@ -94,7 +96,8 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
     $scope.setNav = function(nav) {
         $scope.nav = nav;
         $scope.message = { 'css': '', 'message': '' };
-    }
+        return true;
+    };
 
     $scope.setSubmit = function(submit) {
         $scope.form.submit = submit;
@@ -102,10 +105,13 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
     };
 
     $scope.clean = function() {
-        for (var i = 0; i < arguments.length; i++) $scope.form[arguments[i]] = '';
+        for (var i = 0; i < arguments.length; i++)
+            $scope.form[arguments[i]] = '';
+        return true;
     };
 
     $scope.submit = function() {
+
         $scope.form.message = {};
 
         if ($scope.form.submit == '1') {
@@ -118,16 +124,26 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
             };
 
             $scope.opciones.solicitudes.unshift(solicitud);
-            $scope.clean('lugar', 'proyecto', 'fecha', 'comentario', 'productos');
+            $scope.clean('solicitante', 'fecha', 'lugar', 'proyecto', 'productos', 'comentario');
         } 
 
         else if ($scope.form.submit == '2') {
             var producto = {
-                'nombre': $scope.form.nombre
+                'nombre': $scope.form.nombre,
+                'unidades': [$scope.form.unidad.nombre == 'otra' ?
+                {'nombre': $scope.form.otraUnidad} : $scope.form.unidad]
             };
 
-            $scope.opciones.productos.unshift(producto);
-            $scope.clean('nombre', 'descripcion', 'marca', 'unidad', 'otraUnidad', 'tipo');
+            if ($scope.opciones.productos.indexOf(producto) == -1) {
+                if ($scope.opciones.unidades.indexOf(producto.unidades[0]) == -1) {
+                    $scope.opciones.unidades.unshift(producto.unidades[0]);
+                    $scope.opciones.productos.unshift(producto);
+                    $scope.clean('nombre', 'descripcion', 'marca', 'unidad', 'otraUnidad', 'tipo');
+                }
+            } else {
+                $scope.message.message = 'El producto a crear ya existe';
+                $scope.message.css = 'alert alert-danger';
+            }
         } 
 
         else if ($scope.form.submit == '3') {
@@ -142,9 +158,14 @@ app.controller('MasterController', ['$scope', '$http', function($scope, $http) {
                 'telefono': $scope.form.telefono
             };
 
-            $scope.opciones.lugares.unshift(lugar);
-            $scope.form.lugar = lugar;
-            $scope.clean('nombre', 'telefono', 'ciudad', 'pais', 'seccion', 'numero1', 'numero2', 'numero3', 'descripcion');
+            if ($scope.opciones.lugares.indexOf(lugar) == -1) {
+                $scope.opciones.lugares.unshift(lugar);
+                $scope.clean('nombre', 'telefono', 'ciudad', 'pais', 'seccion', 'numero1', 'numero2', 'numero3', 'descripcion');
+            } else {
+                $scope.message.message = 'El lugar a crear ya existe';
+                $scope.message.css = 'alert alert-danger';
+                return false;
+            }
 
         } else {
             $scope.message.message = 'Tipo de formulario no valido';
