@@ -7,7 +7,7 @@ por centro de costos, equipo
 
 TODO
 
-*	Precio x producto en un tiempo (Scar comparar e insertar)
+*	Precio x producto en un tiempo (Scar comparar e insertar) [HISTORIAL x mes]
 *	Creación de solicitud y aprobación de solicitud
 *	Tiempo de entrega fecha_entrega - (aprobación | solicitud)
 *	Gastos por mes de proyecto y centro de costos y equipo
