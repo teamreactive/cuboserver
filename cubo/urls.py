@@ -15,11 +15,9 @@ from proveedores.urls import proveedorespatterns
 from solicitudes.urls import solicitudespatterns
 from tiposdeequipos.urls import tiposdeequipospatterns
 from usuarios.urls import usuariospatterns
-from usuarios.views import HomeView
 
 
 urlpatterns = patterns('',
-	url(r'^$', HomeView.as_view()),
     url(r'^admin/$', include(admin.site.urls)),
 )
 
