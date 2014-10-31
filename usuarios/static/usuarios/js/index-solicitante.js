@@ -383,6 +383,8 @@ angular.module("app", [])
             } else {
                 $scope.message.message = "El producto a crear ya existe";
                 $scope.message.css = "alert alert-danger";
+                $('html, body').animate({ scrollTop: 0 }, 'fast');
+                return false;
             }
         } 
 
@@ -404,17 +406,20 @@ angular.module("app", [])
             } else {
                 $scope.message.message = "El lugar a crear ya existe";
                 $scope.message.css = "alert alert-danger";
+                $('html, body').animate({ scrollTop: 0 }, 'fast');
                 return false;
             }
 
         } else {
             $scope.message.message = "Tipo de formulario no valido";
             $scope.message.css = "alert alert-danger";
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
             return false;
         }
 
         $scope.message.message = "Accion realizada con exito";
         $scope.message.css = "alert alert-success";
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
         return true;
     };
 }]);
