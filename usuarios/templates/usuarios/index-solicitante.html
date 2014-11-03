@@ -182,7 +182,9 @@
                                     <!-- Fields -->
 
                                     <div class='form-group'>
-                                        <p ng-hide='validNombre()'>Nombre ya existe</p>
+                                        <div class='alert alert-danger' ng-hide='validNombre()'>
+                                            <p>El nombre ya existe</p>                        
+                                        </div>
                                         <label for='nombreProducto'>Nombre *</label>
                                         <input type='text' class='form-control' id='nombreProducto' placeholder='Nombre' autocomplete='off' ng-model='form.nombre' required>
                                     </div>
@@ -211,7 +213,7 @@
                                         <select class='form-control' id='tipoProducto' ng-options='tipo.nombre for tipo in opciones.tipos' ng-model='form.tipo'required></select>
                                     </div>
 
-                                    <button class='btn btn-default' ng-click='setSubmit("2") && submit()' ng-disabled='!productoForm.$valid'>
+                                    <button class='btn btn-default' ng-click='setSubmit("2") && submit()' ng-disabled='!productoForm.$valid || !validNombre()'>
                                         Crear producto
                                     </button>
                                     <span>Asegurese de llenar todos los campos marcados con *</span>

@@ -272,9 +272,10 @@ angular.module("app", [])
         return true;
     };
     $scope.validNombre = function(){
-        for (var i = 0; i< $scope.productos.length; i++)
-            if ($scope.productos[i]["nombre"]==$scope.form.nombre)
+        for (var i = 0; i < $scope.opciones.productos.length; i++)
+            if ($scope.opciones.productos[i]["nombre"] == $scope.form.nombre) {
                 return false;
+            }
         return true;
     }
     $scope.submit = function() {
