@@ -271,7 +271,12 @@ angular.module("app", [])
             $scope.form[arguments[i]] = "";
         return true;
     };
-
+    $scope.validNombre = function(){
+        for (var i = 0; i< $scope.productos.length; i++)
+            if ($scope.productos[i]["nombre"]==$scope.form.nombre)
+                return false;
+        return true;
+    }
     $scope.submit = function() {
 
         $scope.form.message = {};
