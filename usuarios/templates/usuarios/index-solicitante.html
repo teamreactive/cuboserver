@@ -182,6 +182,7 @@
                                     <!-- Fields -->
 
                                     <div class='form-group'>
+                                        <p ng-hide='validNombre()'>Nombre ya existe</p>
                                         <label for='nombreProducto'>Nombre *</label>
                                         <input type='text' class='form-control' id='nombreProducto' placeholder='Nombre' autocomplete='off' ng-model='form.nombre' required>
                                     </div>
