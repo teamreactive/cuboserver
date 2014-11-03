@@ -141,20 +141,25 @@
                         <div class='{{ message.css }} col-md-11' ng-show='message.message != ""'>
                             <p>{{ message.message }}</p>
                         </div>
+
                         <div class='panel panel-default col-md-11'>
                             <div class='panel-body'>
                                 <h3>Crear producto</h3>
                                 <hr>
                                 <form name='productoForm' novalidate>
                                     {% endverbatim %}{% csrf_token %}{% verbatim %}
+
                                     <div class='form-group'>
-                                        <label for='nombreProducto'>Nombre *</label>
-                                        <input type='text' class='form-control' id='nombreProducto' ng-model='form.nombre' required>
+                                        <div class='alert alert-danger' ng-hide='validNombre()'>
+                                            <p>El nombre ya existe</p>                        
+                                        </div>
+                                        <label for='nombreProducto'>Nombresito *</label>
+                                        <input type='text' class='form-control' id='nombreProducto' placeholder='Nombre' autocomplete='off' ng-model='form.nombre' required>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='onuProducto'>Codigo ONU *</label>
-                                        <input type='text' class='form-control' id='onuProducto' ng-model='form.onu' required>
+                                        <input type='text' class='form-control' id='onuProducto' placeholder='Codigo ONU' ng-model='form.onu' required>
                                     </div>
 
                                     <div class='form-group'>
@@ -164,17 +169,17 @@
 
                                     <div class='form-group'>
                                         <label for='referenciaProducto'>Referencia *</label>
-                                        <input type='text' class='form-control' id='referenciaProducto' ng-model='form.referencia' required>
+                                        <input type='text' class='form-control' id='referenciaProducto' placeholder='Referencia' ng-model='form.referencia' required>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='tallaProducto'>Talla *</label>
-                                        <input type='text' class='form-control' id='tallaProducto' ng-model='form.talla' required>
+                                        <input type='text' class='form-control' id='tallaProducto' placeholder='Talla' ng-model='form.talla' required>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='marcaProducto'>Marca *</label>
-                                        <input type='text' class='form-control' id='marcaProducto' ng-model='form.marca' required>
+                                        <input type='text' class='form-control' id='marcaProducto' placeholder='Marca' ng-model='form.marca' required>
                                     </div>
 
                                     <div class='form-group'>
@@ -207,7 +212,7 @@
                                         <input type='file' ng-model='form.imagen'>
                                     </div>
 
-                                    <button class='btn btn-default' ng-click='crearProducto()' ng-disabled='!productoForm.$valid'>
+                                    <button class='btn btn-default' ng-click='crearProducto()' ng-disabled='!productoForm.$valid || !validNombre()'>
                                         Crear producto
                                     </button>
                                     <span>Asegurese de llenar todos los campos marcados con *</span>
@@ -282,7 +287,7 @@
                                     <hr>
                                     <div class='form-group'>
                                         <label for='onuProducto'>Codigo ONU *</label>
-                                        <input type='text' class='form-control' id='onuProducto' ng-model='form.producto.onu' required>
+                                        <input type='text' class='form-control' id='onuProducto' placeholder='Codigo ONU' ng-model='form.producto.onu' required>
                                     </div>
 
                                     <div class='form-group'>
@@ -292,17 +297,17 @@
 
                                     <div class='form-group'>
                                         <label for='referenciaProducto'>Referencia *</label>
-                                        <input type='text' class='form-control' id='referenciaProducto' ng-model='form.producto.referencia' required>
+                                        <input type='text' class='form-control' id='referenciaProducto' placeholder='Referencia' ng-model='form.producto.referencia' required>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='tallaProducto'>Talla *</label>
-                                        <input type='text' class='form-control' id='tallaProducto' ng-model='form.producto.talla' required>
+                                        <input type='text' class='form-control' id='tallaProducto' placeholder='Talla' ng-model='form.producto.talla' required>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='marcaProducto'>Marca *</label>
-                                        <input type='text' class='form-control' id='marcaProducto' ng-model='form.producto.marca' required>
+                                        <input type='text' class='form-control' id='marcaProducto' placeholder='Marca' ng-model='form.producto.marca' required>
                                     </div>
 
                                     <div class='form-group'>

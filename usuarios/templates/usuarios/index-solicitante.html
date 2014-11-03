@@ -129,18 +129,20 @@
                                         <div class='panel-body'>
                                             <h3>Tus productos</h3>
                                             <hr>
-                                            <div class='producto' ng-repeat='producto in form.productos'>
-                                                <h4>{{ producto.nombre }}</h4>
-                                                <div class='form-group col-md-6'>
-                                                    <label for='cantidadProducto'>Cantidad *</label>
-                                                    <input type='number' class='form-control' id='cantidadProducto' placeholder='Cantidad' autocomplete='off' ng-model='producto.cantidad' required>
-                                                </div>
-                                                <div class='form-group col-md-6'>
-                                                    <label for='unidadProducto'>Unidad *</label>
-                                                    <select class='form-control' id='unidadProducto' ng-options='unidad.nombre for unidad in producto.unidades' ng-model='producto.unidad' required></select>
-                                                </div>
-                                                <hr ng-hide='producto == form.productos[form.productos.length-1]'>
-                                            </div>
+                                            <ol class='producto'>
+                                                <li ng-repeat='producto in form.productos'>
+                                                    <h4>{{ producto.nombre }}</h4>
+                                                    <div class='form-group col-md-6'>
+                                                        <label for='cantidadProducto'>Cantidad *</label>
+                                                        <input type='number' class='form-control' id='cantidadProducto' placeholder='Cantidad' autocomplete='off' ng-model='producto.cantidad' required>
+                                                    </div>
+                                                    <div class='form-group col-md-6'>
+                                                        <label for='unidadProducto'>Unidad *</label>
+                                                        <select class='form-control' id='unidadProducto' ng-options='unidad.nombre for unidad in producto.unidades' ng-model='producto.unidad' required></select>
+                                                    </div>
+                                                    <hr ng-hide='producto == form.productos[form.productos.length-1]'>
+                                                </li>
+                                            </ol>
                                         </div>
                                     </div>
                                     
@@ -185,6 +187,7 @@
                                         <div class='alert alert-danger' ng-hide='validNombre()'>
                                             <p>El nombre ya existe</p>                        
                                         </div>
+
                                         <label for='nombreProducto'>Nombre *</label>
                                         <input type='text' class='form-control' id='nombreProducto' placeholder='Nombre' autocomplete='off' ng-model='form.nombre' required>
                                     </div>

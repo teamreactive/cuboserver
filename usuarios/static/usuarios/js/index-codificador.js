@@ -232,6 +232,15 @@ angular.module("app", [])
         return true;
     };
 
+    $scope.validNombre = function() {
+        if ($scope.form.nombre == null) return true;
+        for (var i = 0; i < $scope.opciones.productos.length; i++)
+            if ($scope.opciones.productos[i]["nombre"].toLowerCase() == $scope.form.nombre.toLowerCase()) {
+                return false;
+            }
+        return true;
+    };
+
     $scope.editar = function(producto) {
         $scope.setNav("4");
         $scope.form.temp = producto;

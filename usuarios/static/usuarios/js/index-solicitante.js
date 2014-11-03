@@ -271,13 +271,16 @@ angular.module("app", [])
             $scope.form[arguments[i]] = "";
         return true;
     };
+
     $scope.validNombre = function(){
+        if ($scope.form.nombre == null) return true;
         for (var i = 0; i < $scope.opciones.productos.length; i++)
-            if ($scope.opciones.productos[i]["nombre"] == $scope.form.nombre) {
+            if ($scope.opciones.productos[i]["nombre"].toLowerCase() == $scope.form.nombre.toLowerCase()) {
                 return false;
             }
         return true;
-    }
+    };
+
     $scope.submit = function() {
 
         $scope.form.message = {};
