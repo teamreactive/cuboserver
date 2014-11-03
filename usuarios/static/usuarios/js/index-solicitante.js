@@ -23,148 +23,6 @@ angular.module("app", [])
                 "nombre": "Daniel"
             }
         ],
-        "solicitudes": [
-            {
-                "lugar": "Casa | Avenida 15 #68 - 14",
-                "proyecto": "Edificio",
-                "fecha": "01-01-2015",
-                "productos": [
-                    {
-                        "nombre": "Taladro",
-                        "unidad": {
-                            "nombre": "kg"
-                        },
-                        "cantidad": "199"
-                    }
-                ]
-            },
-            {
-                "lugar": "Oficina | Carrera 23 #124 - 23",
-                "proyecto": "Autopista",
-                "fecha": "02-11-2015",
-                "productos": [
-                    {
-                        "nombre": "Martillo",
-                        "unidad": {
-                            "nombre": "oz"
-                        },
-                        "cantidad": "12"
-                    }
-                ]
-            },
-            {
-                "lugar": "Casa | Avenida 15 #68 - 14",
-                "proyecto": "Autopista",
-                "fecha": "02-14-2015",
-                "productos": [
-                    {
-                        "nombre": "Cinta",
-                        "unidad": {
-                            "nombre": "qs"
-                        },
-                        "cantidad": "1"
-                    }
-                ]
-            },
-            {
-                "lugar": "Bodega | Carrera 9  # 28 - 65",
-                "proyecto": "Edificio",
-                "fecha": "12-12-2015",
-                "productos": [
-                    {
-                        "nombre": "Cinta",
-                        "unidad": {
-                            "nombre": "pb"
-                        },
-                        "cantidad": "9"
-                    }
-                ]
-            },
-            {
-                "lugar": "Apartamento | Calle 166 #8H - 53",
-                "proyecto": "Edificio",
-                "fecha": "12-03-2015",
-                "productos": [
-                    {
-                        "nombre": "Excavadora",
-                        "unidad": {
-                            "nombre": "l"
-                        },
-                        "cantidad": "32"
-                    }
-                ]
-            },
-            {
-                "lugar": "Apartamento | Calle 166 #8H - 53",
-                "proyecto": "Casa",
-                "fecha": "09-10-2015",
-                "productos": [
-                    {
-                        "nombre": "Cinta",
-                        "unidad": {
-                            "nombre": "pb"
-                        },
-                        "cantidad": "2"
-                    }
-                ]
-            },
-            {
-                "lugar": "Oficina | Carrera 23 #124 - 23",
-                "proyecto": "Casa",
-                "fecha": "05-01-2015",
-                "productos": [
-                    {
-                        "nombre": "Taladro",
-                        "unidad": {
-                            "nombre": "m"
-                        },
-                        "cantidad": "4"
-                    }
-                ]
-            },
-            {
-                "lugar": "Almacen | Avenida 11 #231 - 44",
-                "proyecto": "Hangar",
-                "fecha": "05-05-2015",
-                "productos": [
-                    {
-                        "nombre": "Remolque",
-                        "unidad": {
-                            "nombre": "lb"
-                        },
-                        "cantidad": "100"
-                    }
-                ]
-            },
-            {
-                "lugar": "Almacen | Avenida 11 #231 - 44",
-                "proyecto": "Hangar",
-                "fecha": "11-04-2015",
-                "productos": [
-                    {
-                        "nombre": "Martillo",
-                        "unidad": {
-                            "nombre": "oz"
-                        },
-                        "cantidad": "30"
-                    }
-                ]
-            },
-            {
-                "lugar": "Almacen | Avenida 11 #231 - 44",
-                "proyecto": "Hangar",
-                "fecha": "12-07-2015",
-                "productos": [
-                    {
-                        "nombre": "Martillo",
-                        "unidad": {
-                            "nombre": "l"
-                        },
-                        "cantidad": "91"
-                    }
-                ]
-            }
-        ],
         "lugares": [
             {
                 "nombre": "Casa",
@@ -190,60 +48,6 @@ angular.module("app", [])
                 "nombre": "Bodega",
                 "direccion": "Carrera 9 28 65",
                 "telefono": "93840294"
-            }
-        ],
-        "productos": [
-            {
-                "nombre": "Taladro",
-                "unidades": [
-                    {
-                        "nombre": "kg"
-                    },
-                    {
-                        "nombre": "m"
-                    }
-                ]
-            },
-            {
-                "nombre": "Martillo",
-                "unidades": [
-                    {
-                        "nombre": "l"
-                    },
-                    {
-                        "nombre": "oz"
-                    }
-                ]
-            },
-            {
-                "nombre": "Remolque",
-                "unidades": [
-                    {
-                        "nombre": "lb"
-                    }
-                ]
-            },
-            {
-                "nombre": "Excavadora",
-                "unidades": [
-                    {
-                        "nombre": "l"
-                    },
-                    {
-                        "nombre": "mb"
-                    }
-                ]
-            },
-            {
-                "nombre": "Cinta",
-                "unidades": [
-                    {
-                        "nombre": "qs"
-                    },
-                    {
-                        "nombre": "pb"
-                    }
-                ]
             }
         ],
         "familias": [
@@ -305,6 +109,127 @@ angular.module("app", [])
             }
         ]
     };
+
+    $scope.opciones.productos = [
+        {
+            "nombre": "Taladro",
+            "unidades": [
+                $scope.opciones.unidades[0],
+                $scope.opciones.unidades[1]
+            ]
+        },
+        {
+            "nombre": "Martillo",
+            "unidades": [
+                $scope.opciones.unidades[0],
+                $scope.opciones.unidades[2]
+            ]
+        },
+        {
+            "nombre": "Remolque",
+            "unidades": [
+                $scope.opciones.unidades[1],
+                $scope.opciones.unidades[3]
+            ]
+        },
+        {
+            "nombre": "Excavadora",
+            "unidades": [
+                $scope.opciones.unidades[2],
+                $scope.opciones.unidades[3]
+            ]
+        },
+        {
+            "nombre": "Cinta",
+            "unidades": [
+                $scope.opciones.unidades[1],
+                $scope.opciones.unidades[3]
+            ]
+        }
+    ];
+
+    $scope.opciones.solicitudes = [
+        {
+            "lugar": "Casa | Avenida 15 #68 - 14",
+            "proyecto": "Edificio",
+            "fecha": "01-01-2015",
+            "productos": [
+                $scope.opciones.productos[0]
+            ]
+        },
+        {
+            "lugar": "Oficina | Carrera 23 #124 - 23",
+            "proyecto": "Autopista",
+            "fecha": "02-11-2015",
+            "productos": [
+                $scope.opciones.productos[1]
+            ]
+        },
+        {
+            "lugar": "Casa | Avenida 15 #68 - 14",
+            "proyecto": "Autopista",
+            "fecha": "02-14-2015",
+            "productos": [
+                $scope.opciones.productos[0]
+            ]
+        },
+        {
+            "lugar": "Bodega | Carrera 9  # 28 - 65",
+            "proyecto": "Edificio",
+            "fecha": "12-12-2015",
+            "productos": [
+                $scope.opciones.productos[2]
+            ]
+        },
+        {
+            "lugar": "Apartamento | Calle 166 #8H - 53",
+            "proyecto": "Edificio",
+            "fecha": "12-03-2015",
+            "productos": [
+                $scope.opciones.productos[1]
+            ]
+        },
+        {
+            "lugar": "Apartamento | Calle 166 #8H - 53",
+            "proyecto": "Casa",
+            "fecha": "09-10-2015",
+            "productos": [
+                $scope.opciones.productos[3]
+            ]
+        },
+        {
+            "lugar": "Oficina | Carrera 23 #124 - 23",
+            "proyecto": "Casa",
+            "fecha": "05-01-2015",
+            "productos": [
+                $scope.opciones.productos[1]
+            ]
+        },
+        {
+            "lugar": "Almacen | Avenida 11 #231 - 44",
+            "proyecto": "Hangar",
+            "fecha": "05-05-2015",
+            "productos": [
+                $scope.opciones.productos[0]
+            ]
+        },
+        {
+            "lugar": "Almacen | Avenida 11 #231 - 44",
+            "proyecto": "Hangar",
+            "fecha": "11-04-2015",
+            "productos": [
+                $scope.opciones.productos[2]
+            ]
+        },
+        {
+            "lugar": "Almacen | Avenida 11 #231 - 44",
+            "proyecto": "Hangar",
+            "fecha": "12-07-2015",
+            "productos": [
+                $scope.opciones.productos[3]
+            ]
+        }
+    ];
 
     /**
      * ##############################################################

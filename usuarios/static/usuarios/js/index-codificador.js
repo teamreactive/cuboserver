@@ -12,210 +12,6 @@ angular.module("app", [])
     **/
 
     $scope.opciones = {
-        "pendientes": [
-            {
-                "id": "1",
-                "nombre": "Taladro",
-                "descripcion": "Taladro perfora todo",
-                "marca": "Taladretor",
-                "onu": "93417lhkghk421",
-                "referencia": "25476573",
-                "talla": "1",
-                "familia": {
-                    "nombre": "Farmacia"
-                },
-                "equipo": {
-                    "nombre": "No aplica"
-                },
-                "centro": {
-                    "nombre": "Centro de Farmacia"
-                },
-                "unidad": {
-                    "nombre": "kg"
-                },
-                "tipo": {
-                    "nombre": "Bien"
-                },
-                "imagen": "taladroPerforaOrejas.jpg"
-            },
-            {
-                "id": "2",
-                "nombre": "Tornillo",
-                "descripcion": "Gran tornillo tamano familiar para cualquier ocasion",
-                "marca": "SuperTornillos",
-                "onu": "147083kjfds443",
-                "referencia": "247583",
-                "talla": "3",
-                "familia": {
-                    "nombre": "Farmacia"
-                },
-                "equipo": {
-                    "nombre": "No aplica"
-                },
-                "centro": {
-                    "nombre": "Centro de Farmacia"
-                },
-                "unidad": {
-                    "nombre": "m"
-                },
-                "tipo": {
-                    "nombre": "Bien"
-                },
-                "imagen": "tornilloSuperDuper.jpg"
-            },
-            {
-                "id": "3",
-                "nombre": "Excavadora",
-                "descripcion": "Hermosa excavadora con efecto 3D",
-                "marca": "Excavator",
-                "onu": "34789342nnhg5",
-                "referencia": "413254",
-                "talla": "34",
-                "familia": {
-                    "nombre": "Farmacia"
-                },
-                "equipo": {
-                    "nombre": "No aplica"
-                },
-                "centro": {
-                    "nombre": "Centro de Farmacia"
-                },
-                "unidad": {
-                    "nombre": "m"
-                },
-                "tipo": {
-                    "nombre": "Bien"
-                },
-                "imagen": "excavadora34.jpg"
-            },
-            {
-                "id": "4",
-                "nombre": "Tractor",
-                "descripcion": "Camion de banda ancha de gran capacidad",
-                "marca": "Tractomula",
-                "onu": "1347kjk5354",
-                "referencia": "43572034",
-                "talla": "34",
-                "familia": {
-                    "nombre": "Farmacia"
-                },
-                "equipo": {
-                    "nombre": "No aplica"
-                },
-                "centro": {
-                    "nombre": "Centro de Farmacia"
-                },
-                "unidad": {
-                    "nombre": "kg"
-                },
-                "tipo": {
-                    "nombre": "Bien"
-                },
-                "imagen": "tractorTrack.jpg"
-            },
-            {
-                "id": "5",
-                "nombre": "Agarraderos",
-                "descripcion": "Los agarraderos de la ropa",
-                "marca": "Ganchiviris",
-                "onu": "430805nkfdkh4",
-                "referencia": "04132751",
-                "talla": "38",
-                "familia": {
-                    "nombre": "Farmacia"
-                },
-                "equipo": {
-                    "nombre": "No aplica"
-                },
-                "centro": {
-                    "nombre": "Centro de Farmacia"
-                },
-                "unidad": {
-                    "nombre": "kg"
-                },
-                "tipo": {
-                    "nombre": "Bien"
-                },
-                "imagen": "ganchosGrises.jpg"
-            },
-        ],
-        "productos": [
-            {
-                "id": "6",
-                "nombre": "Ganchos",
-                "descripcion": "Ganchos de colgar la ropa de metal antiadherente",
-                "marca": "Ganchiviris",
-                "onu": "430805nkfdkh4",
-                "referencia": "04132751",
-                "talla": "38",
-                "familia": {
-                    "nombre": "Farmacia"
-                },
-                "equipo": {
-                    "nombre": "No aplica"
-                },
-                "centro": {
-                    "nombre": "Centro de Farmacia"
-                },
-                "unidad": {
-                    "nombre": "m"
-                },
-                "tipo": {
-                    "nombre": "Bien"
-                },
-                "imagen": "ganchosGrises.jpg"
-            },
-            {
-                "id": "7",
-                "nombre": "Cafe",
-                "descripcion": "Bolsa de cafe granulado de Colombia listo para preparar",
-                "marca": "Nescafe",
-                "onu": "42575hhlm65",
-                "referencia": "52707026",
-                "talla": "4",
-                "familia": {
-                    "nombre": "Farmacia"
-                },
-                "equipo": {
-                    "nombre": "No aplica"
-                },
-                "centro": {
-                    "nombre": "Centro de Farmacia"
-                },
-                "unidad": {
-                    "nombre": "kg"
-                },
-                "tipo": {
-                    "nombre": "Bien"
-                },
-                "imagen": "cafeColombiano.jpg"
-            },
-            {
-                "id": "8",
-                "nombre": "Computador",
-                "descripcion": "Portatil de alta gama con un procesador Intel de ultima generacion",
-                "marca": "Toshiba",
-                "onu": "1234nf34",
-                "referencia": "12349634",
-                "talla": "3",
-                "familia": {
-                    "nombre": "Farmacia"
-                },
-                "equipo": {
-                    "nombre": "No aplica"
-                },
-                "centro": {
-                    "nombre": "Centro de Farmacia"
-                },
-                "unidad": {
-                    "nombre": "m"
-                },
-                "tipo": {
-                    "nombre": "Bien"
-                },
-                "imagen": "computadorInteligente.jpg"
-            }
-        ],
         "familias": [
             {
                 "nombre": "Ferreteria"
@@ -276,6 +72,132 @@ angular.module("app", [])
         ]
     };
 
+    $scope.opciones.pendientes = [
+        {
+            "id": "1",
+            "nombre": "Taladro",
+            "descripcion": "Taladro perfora todo",
+            "marca": "Taladretor",
+            "onu": "93417lhkghk421",
+            "referencia": "25476573",
+            "talla": "1",
+            "familia": $scope.opciones.familias[0],
+            "equipo": $scope.opciones.equipos[0],
+            "centro": $scope.opciones.centros[1],
+            "unidad": $scope.opciones.unidades[1],
+            "tipo": $scope.opciones.tipos[0],
+            "imagen": "taladroPerforaOrejas.jpg"
+        },
+        {
+            "id": "2",
+            "nombre": "Tornillo",
+            "descripcion": "Gran tornillo tamano familiar para cualquier ocasion",
+            "marca": "SuperTornillos",
+            "onu": "147083kjfds443",
+            "referencia": "247583",
+            "talla": "3",
+            "familia": $scope.opciones.familias[1],
+            "equipo": $scope.opciones.equipos[2],
+            "centro": $scope.opciones.centros[0],
+            "unidad": $scope.opciones.unidades[1],
+            "tipo": $scope.opciones.tipos[0],
+            "imagen": "tornilloSuperDuper.jpg"
+        },
+        {
+            "id": "3",
+            "nombre": "Excavadora",
+            "descripcion": "Hermosa excavadora con efecto 3D",
+            "marca": "Excavator",
+            "onu": "34789342nnhg5",
+            "referencia": "413254",
+            "talla": "34",
+            "familia": $scope.opciones.familias[2],
+            "equipo": $scope.opciones.equipos[1],
+            "centro": $scope.opciones.centros[0],
+            "unidad": $scope.opciones.unidades[0],
+            "tipo": $scope.opciones.tipos[0],
+            "imagen": "excavadora34.jpg"
+        },
+        {
+            "id": "4",
+            "nombre": "Tractor",
+            "descripcion": "Camion de banda ancha de gran capacidad",
+            "marca": "Tractomula",
+            "onu": "1347kjk5354",
+            "referencia": "43572034",
+            "talla": "34",
+            "familia": $scope.opciones.familias[2],
+            "equipo": $scope.opciones.equipos[2],
+            "centro": $scope.opciones.centros[1],
+            "unidad": $scope.opciones.unidades[0],
+            "tipo": $scope.opciones.tipos[1],
+            "imagen": "tractorTrack.jpg"
+        },
+        {
+            "id": "5",
+            "nombre": "Agarraderos",
+            "descripcion": "Los agarraderos de la ropa",
+            "marca": "Ganchiviris",
+            "onu": "430805nkfdkh4",
+            "referencia": "04132751",
+            "talla": "38",
+            "familia": $scope.opciones.familias[1],
+            "equipo": $scope.opciones.equipos[2],
+            "centro": $scope.opciones.centros[1],
+            "unidad": $scope.opciones.unidades[0],
+            "tipo": $scope.opciones.tipos[0],
+            "imagen": "ganchosGrises.jpg"
+        },
+    ];
+
+    $scope.opciones.productos = [
+        {
+            "id": "6",
+            "nombre": "Ganchos",
+            "descripcion": "Ganchos de colgar la ropa de metal antiadherente",
+            "marca": "Ganchiviris",
+            "onu": "430805nkfdkh4",
+            "referencia": "04132751",
+            "talla": "38",
+            "familia": $scope.opciones.familias[1],
+            "equipo": $scope.opciones.equipos[2],
+            "centro": $scope.opciones.centros[1],
+            "unidad": $scope.opciones.unidades[0],
+            "tipo": $scope.opciones.tipos[0],
+            "imagen": "ganchosGrises.jpg"
+        },
+        {
+            "id": "7",
+            "nombre": "Cafe",
+            "descripcion": "Bolsa de cafe granulado de Colombia listo para preparar",
+            "marca": "Nescafe",
+            "onu": "42575hhlm65",
+            "referencia": "52707026",
+            "talla": "4",
+            "familia": $scope.opciones.familias[2],
+            "equipo": $scope.opciones.equipos[0],
+            "centro": $scope.opciones.centros[2],
+            "unidad": $scope.opciones.unidades[0],
+            "tipo": $scope.opciones.tipos[1],
+            "imagen": "cafeColombiano.jpg"
+        },
+        {
+            "id": "8",
+            "nombre": "Computador",
+            "descripcion": "Portatil de alta gama con un procesador Intel de ultima generacion",
+            "marca": "Toshiba",
+            "onu": "1234nf34",
+            "referencia": "12349634",
+            "talla": "3",
+            "familia": $scope.opciones.familias[1],
+            "equipo": $scope.opciones.equipos[0],
+            "centro": $scope.opciones.centros[2],
+            "unidad": $scope.opciones.unidades[1],
+            "tipo": $scope.opciones.tipos[0],
+            "imagen": "computadorInteligente.jpg"
+        }
+    ];
+
     /**
      * ##############################################################
      * ######################## VARS SECTION ########################
@@ -312,9 +234,25 @@ angular.module("app", [])
 
     $scope.editar = function(producto) {
         $scope.setNav("4");
-        $scope.form.producto = producto;
+        $scope.form.temp = producto;
+        $scope.editarProducto();
         return true;
-    }
+    };
+
+    $scope.editarProducto = function() {
+        var tipo = $scope.opciones.tipos.indexOf($scope.form.temp.tipo);
+        var unidad = $scope.opciones.unidades.indexOf($scope.form.temp.unidad);
+        var familia = $scope.opciones.familias.indexOf($scope.form.temp.familia);
+        var centro = $scope.opciones.centros.indexOf($scope.form.temp.centro);
+        var equipo = $scope.opciones.equipos.indexOf($scope.form.temp.equipo);
+        $scope.form.producto = $.extend(true, {}, $scope.form.temp);
+        $scope.form.producto.tipo = $scope.opciones.tipos[tipo];
+        $scope.form.producto.unidad = $scope.opciones.unidades[unidad];
+        $scope.form.producto.familia = $scope.opciones.familias[familia];
+        $scope.form.producto.centro = $scope.opciones.centros[centro];
+        $scope.form.producto.equipo = $scope.opciones.equipos[equipo];
+        return true;
+    };
 
     $scope.clean = function() {
         for (var i = 0; i < arguments.length; i++)
@@ -337,7 +275,7 @@ angular.module("app", [])
         $scope.message.message = "No se encontro el producto.";
         $('html, body').animate({ scrollTop: 0 }, 'fast');
         return false;
-    }
+    };
 
     $scope.rechazar = function(producto) {
         for (var i = 0; i < $scope.opciones.pendientes.length; i++) {
@@ -354,7 +292,7 @@ angular.module("app", [])
         $scope.message.message = "No se encontro el producto.";
         $('html, body').animate({ scrollTop: 0 }, 'fast');
         return false;
-    }
+    };
 
     $scope.crearProducto = function() {
         var producto = {
@@ -369,7 +307,7 @@ angular.module("app", [])
             "familia": $scope.form.familia,
             "equipo": $scope.form.equipo,
             "centro": $scope.form.centro,
-            "foto": $scope.form.imagen
+            "foto": $scope.form.imagen,
         };
         if ($scope.opciones.productos.indexOf(producto) == -1) {
             $scope.opciones.productos.unshift(producto);
@@ -388,7 +326,7 @@ angular.module("app", [])
             $('html, body').animate({ scrollTop: 0 }, 'fast');
             return false;
         }
-    }
+    };
 
     $scope.join = function(producto) {
         for (var i = 0; i < $scope.opciones.pendientes.length; i++) {
@@ -427,5 +365,47 @@ angular.module("app", [])
         $scope.message.css = "alert alert-danger";
         $('html, body').animate({ scrollTop: 0 }, 'fast');
         return false;
+    };
+
+    $scope.alterarProducto = function() {
+        var iProd = $scope.opciones.productos.indexOf($scope.form.temp);
+        var iPend = $scope.opciones.pendientes.indexOf($scope.form.temp);
+        var producto = {
+            "nombre": $scope.form.producto.nombre,
+            "descripcion": $scope.form.producto.descripcion,
+            "marca": $scope.form.producto.marca,
+            "unidad": $scope.form.producto.unidad,
+            "tipo": $scope.form.producto.tipo,
+            "onu": $scope.form.producto.onu,
+            "referencia": $scope.form.producto.referencia,
+            "talla": $scope.form.producto.talla,
+            "familia": $scope.form.producto.familia,
+            "equipo": $scope.form.producto.equipo,
+            "centro": $scope.form.producto.centro,
+            "foto": $scope.form.producto.imagen,
+            "nombres": $scope.form.productos.nombres,
+            "unidades": $scope.form.productos.unidades
+        };
+        if (iProd != -1) {
+            $scope.opciones.productos.splice(iProd, 1);
+            $scope.opciones.productos.unshift(producto);
+            $scope.message.message = "Producto alterado correctamente.";
+            $scope.message.css = "alert alert-success";
+            return true;
+        }
+
+        else if (iPend != -1) {
+            $scope.opciones.pendientes.splice(iPend, 1);
+            $scope.opciones.productos.unshift(producto);
+            $scope.message.message = "Producto aprobado correctamente.";
+            $scope.message.css = "alert alert-success";
+            return true;
+        }
+
+        else {
+            $scope.message.message = "No se encontro el producto.";
+            $scope.message.css = "alert alert-danger";
+            return false
+        }
     }
 }]);

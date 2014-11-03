@@ -179,27 +179,27 @@
 
                                     <div class='form-group'>
                                         <label for='tipoProducto'>Tipo *</label>
-                                        <select class='form-control' id='tipoProducto' ng-options='tipo.nombre for tipo in opciones.tipos' ng-model='form.tipo.nombre' required></select>
+                                        <select class='form-control' id='tipoProducto' ng-options='tipo.nombre for tipo in opciones.tipos' ng-model='form.tipo' required></select>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='unidadProducto'>Unidad *</label>
-                                        <select class='form-control' id='unidadProducto' ng-options='unidad.nombre for unidad in opciones.unidades' ng-model='form.unidad.nombre' required></select>
+                                        <select class='form-control' id='unidadProducto' ng-options='unidad.nombre for unidad in opciones.unidades' ng-model='form.unidad' required></select>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='familiaProducto'>Familia proveedor *</label>
-                                        <select class='form-control' id='familiaProducto' ng-options='familia.nombre for familia in opciones.familias' ng-model='form.familia.nombre' required></select>
+                                        <select class='form-control' id='familiaProducto' ng-options='familia.nombre for familia in opciones.familias' ng-model='form.familia' required></select>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='equipoProducto'>Equipo *</label>
-                                        <select class='form-control' id='equipoProducto' ng-options='equipo.nombre for equipo in opciones.equipos' ng-model='form.equipo.nombre' required></select>
+                                        <select class='form-control' id='equipoProducto' ng-options='equipo.nombre for equipo in opciones.equipos' ng-model='form.equipo' required></select>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='centroProducto'>Centro de costo *</label>
-                                        <select class='form-control' id='centroProducto' ng-options='centro.nombre for centro in opciones.centros' ng-model='form.centro.nombre' required></select>
+                                        <select class='form-control' id='centroProducto' ng-options='centro.nombre for centro in opciones.centros' ng-model='form.centro' required></select>
                                     </div>
 
                                     <div class='form-group'>
@@ -274,7 +274,10 @@
                                     {% endverbatim %}{% csrf_token %}{% verbatim %}
                                     <div class='form-group'>
                                         <label for='productoAlterar'>Producto *</label>
-                                        <select class='form-control' id='productoAlterar' ng-options='producto.nombre for producto in opciones.productos.concat(opciones.pendientes)' ng-model='form.producto' required></select>
+                                        <select class='form-control' id='productoAlterar' ng-options='producto.nombre for producto in opciones.productos.concat(opciones.pendientes)' ng-model='form.temp' required></select>
+                                        <button class='btn btn-default' ng-click='editarProducto()' ng-disabled='form.temp == null'>
+                                            Editar seleccion
+                                        </button>
                                     </div>
                                     <hr>
                                     <div class='form-group'>
@@ -331,6 +334,10 @@
                                         <label for='solicitanteSolicitud'>Imagen *</label>
                                         <input type='file' ng-model='form.producto.imagen'>
                                     </div>
+
+                                    <button class='btn btn-default' ng-click='editarProducto()' ng-disabled='form.producto == null'>
+                                        Descartar cambios
+                                    </button>
 
                                     <button class='btn btn-default' ng-click='alterarProducto()' ng-disabled='!alterarProducto.$valid'>
                                         Guardar cambios
