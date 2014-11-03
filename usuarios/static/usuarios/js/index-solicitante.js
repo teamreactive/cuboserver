@@ -277,7 +277,6 @@ angular.module("app", [])
         for (var i = 0; i < $scope.opciones.productos.length; i++)
             if ($scope.opciones.productos[i]["nombre"].toLowerCase() == $scope.form.nombre.toLowerCase()) {
                 return false;
-            }
         return true;
     };
 
