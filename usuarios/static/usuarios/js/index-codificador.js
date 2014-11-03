@@ -251,8 +251,19 @@ angular.module("app", [])
         $scope.form.producto.familia = $scope.opciones.familias[familia];
         $scope.form.producto.centro = $scope.opciones.centros[centro];
         $scope.form.producto.equipo = $scope.opciones.equipos[equipo];
+        $scope.message.message = "";
+        $scope.message.css = "";
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
         return true;
     };
+
+    $scope.descartarProducto = function() {
+        $scope.editarProducto();
+        $scope.message.css = "alert alert-danger";
+        $scope.message.message = "Se descartaron los cambios.";
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+        return true;
+    }
 
     $scope.clean = function() {
         for (var i = 0; i < arguments.length; i++)
@@ -383,28 +394,34 @@ angular.module("app", [])
             "equipo": $scope.form.producto.equipo,
             "centro": $scope.form.producto.centro,
             "foto": $scope.form.producto.imagen,
-            "nombres": $scope.form.productos.nombres,
-            "unidades": $scope.form.productos.unidades
+            "nombres": $scope.form.producto.nombres,
+            "unidades": $scope.form.producto.unidades
         };
+
         if (iProd != -1) {
             $scope.opciones.productos.splice(iProd, 1);
             $scope.opciones.productos.unshift(producto);
+            $scope.form.temp = producto;
             $scope.message.message = "Producto alterado correctamente.";
             $scope.message.css = "alert alert-success";
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
             return true;
         }
 
         else if (iPend != -1) {
             $scope.opciones.pendientes.splice(iPend, 1);
             $scope.opciones.productos.unshift(producto);
+            $scope.form.temp = producto;
             $scope.message.message = "Producto aprobado correctamente.";
             $scope.message.css = "alert alert-success";
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
             return true;
         }
 
         else {
             $scope.message.message = "No se encontro el producto.";
             $scope.message.css = "alert alert-danger";
+            $('html, body').animate({ scrollTop: 0 }, 'fast');
             return false
         }
     }

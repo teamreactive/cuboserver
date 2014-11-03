@@ -331,15 +331,15 @@
                                     </div>
 
                                     <div class='form-group'>
-                                        <label for='solicitanteSolicitud'>Imagen *</label>
+                                        <label for='solicitanteSolicitud'>Imagen</label>
                                         <input type='file' ng-model='form.producto.imagen'>
                                     </div>
 
-                                    <button class='btn btn-default' ng-click='editarProducto()' ng-disabled='form.producto == null'>
+                                    <button class='btn btn-default' ng-click='descartarProducto()' ng-disabled='form.producto == null'>
                                         Descartar cambios
                                     </button>
 
-                                    <button class='btn btn-default' ng-click='alterarProducto()' ng-disabled='!alterarProducto.$valid'>
+                                    <button class='btn btn-default' ng-click='alterarProducto()' ng-disabled='!alterarForm.$valid'>
                                         Guardar cambios
                                     </button>
                                     <span>Asegurese de llenar todos los campos marcados con *</span>
