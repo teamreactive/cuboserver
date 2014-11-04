@@ -272,13 +272,40 @@ angular.module("app", [])
         return true;
     };
 
-    $scope.validNombre = function(){
+    $scope.validNombre = function() {
         if ($scope.form.nombre == null) return true;
         for (var i = 0; i < $scope.opciones.productos.length; i++)
-            if ($scope.opciones.productos[i]["nombre"].toLowerCase() == $scope.form.nombre.toLowerCase()) {
+            if ($scope.opciones.productos[i]["nombre"].toLowerCase() == $scope.form.nombre.toLowerCase())
                 return false;
         return true;
     };
+
+    $scope.validLugar = function() {
+        if ($scope.form.nombre == null) return true;
+        for (var i = 0; i < $scope.opciones.lugares.length; i++)
+            if ($scope.opciones.lugares[i]["nombre"].toLowerCase() == $scope.form.nombre.toLowerCase())
+                return false;
+        return true;
+    };
+
+    $scope.validDireccion = function() {
+        if ($scope.form.seccion == null) return true;
+        if ($scope.form.numero1 == null) return true;
+        if ($scope.form.numero2 == null) return true;
+        if ($scope.form.numero3 == null) return true;
+        var direccion = "";
+        direccion += $scope.form.seccion.toLowerCase() + " ";
+        direccion += $scope.form.numero1.toLowerCase() + " ";
+        direccion += $scope.form.numero2.toLowerCase() + " ";
+        direccion += $scope.form.numero3.toLowerCase();
+        console.log("HERE --> " + direccion)
+        for (var i = 0; i < $scope.opciones.lugares.length; i++) {
+            console.log($scope.opciones.lugares[i]["direccion"].toLowerCase());
+            if ($scope.opciones.lugares[i]["direccion"].toLowerCase() == direccion)
+                return false;
+        }
+        return true;
+    }
 
     $scope.submit = function() {
 
