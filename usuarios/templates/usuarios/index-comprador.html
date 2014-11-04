@@ -39,6 +39,12 @@
             <li >
                 <a href ng-click="mainTabCtrl.setTab(6) ; menuTabCtrl.setTab(0)">Ordenes de Compra</a>
             </li>
+            <li >
+                <a href ng-click="mainTabCtrl.setTab(7) ; menuTabCtrl.setTab(0)">Realizar Cotizacion</a>
+            </li>
+            <li >
+                <a href ng-click="mainTabCtrl.setTab(7) ; menuTabCtrl.setTab(0)">Ingresar Cotizacion</a>
+            </li>
         </ul>
     </div>
     <div id='main' ng-controller='mainController as mainCtrl'>
@@ -172,7 +178,7 @@
                     <input id='actualizarContactoPerfil' ng-model="mainCtrl.actualizarContactoForm.perfil">
                 </fieldset>
                 <fieldset class="form-group">
-                    <input type="submit"  value="crear contacto" ng-click='mainCtrl.actualizarContacto()'/>
+                    <input type="submit"  value="actualizar contacto" ng-click='mainCtrl.actualizarContacto()'/>
                 </fieldset>
             </form>
         </div>
@@ -194,7 +200,16 @@
                 </section>
             </div>
             <div id="ordenesdecompra" ng-show="mainTabCtrl.isTab(6)">
-                <h1>Hello</h1>
+                <h1>Ordenes de Compra!</h1>
+            </div>
+            <div id="cotizar" ng-show='mainTab(7)'>
+                <h1>Realizar Cotizacion</h1>
+                <form>
+
+                </form>
+            </div>
+            <div id="ingresarcotizacion" ng-show='mainTab(8)'>
+                <h1>Ingresar Cotizacion</h1>
             </div>
         </div>
     </div>

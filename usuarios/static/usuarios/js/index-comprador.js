@@ -22,118 +22,62 @@ app.controller('mainController',function(){
     this.proveedores = proveedores;
     this.solicitudes = solicitudes;
     this.contactos = contactos;
-    this.crearProveedor = function(){
-        var proveedor = {}
-        proveedor.razon_social = this.crearProveedorForm.razon_social;
-        proveedor.sigla = this.crearProveedorForm.sigla;
-        proveedor.nit = this.crearProveedorForm.nit;
-        proveedor.numero_verificacion = this.crearProveedorForm.numero_verificacion;
-        proveedor.lugar = this.crearProveedorForm.lugar;
-        proveedor.logo = this.crearProveedorForm.logo;
-        this.proveedores.push(proveedor);
-        this.cleanProveedorForm();
+    this.makeCopy = function(from_obj, to_obj, attrs){
+        if (attrs !== undefined){
+            for (var i=0;i<attrs.length;i++)
+                to_obj[attrs[i]] = from_obj[attrs[i]];
+        } 
+        else if (to_obj !== undefined){
+            for (var key in from_obj)
+                to_obj[key] = from_obj[key];
+        } 
+        else{
+            var new_obj = {}
+            for (var key in from_obj)
+                new_obj[key] = from_obj[key];
+            return new_obj;
+        }
     };
-    this.cleanProveedorForm = function(){
-        this.crearProveedorForm.razon_social = "";
-        this.crearProveedorForm.sigla = "";
-        this.crearProveedorForm.nit = "";
-        this.crearProveedorForm.numero_verificacion = "";
-        this.crearProveedorForm.lugar = "";
-        this.crearProveedorForm.logo = "";
-
+    this.cleanObj = function(obj){
+        for (var key in obj)
+            obj[key] = "";
+    }
+    this.crearProveedor = function(){
+        var proveedor = this.makeCopy(this.crearProveedorForm);        
+        this.proveedores.push(proveedor);
+        this.cleanObj(this.crearProveedorForm);
     };
     this.getProveedor = function(){
         if(undefined !== this.actualizarProveedorForm.proveedor){
             var proveedor = this.actualizarProveedorForm.proveedor;
-            this.actualizarProveedorForm.razon_social = proveedor.razon_social;
-            this.actualizarProveedorForm.sigla = proveedor.sigla;
-            this.actualizarProveedorForm.nit = proveedor.nit;
-            this.actualizarProveedorForm.numero_verificacion = proveedor.numero_verificacion;
-            this.actualizarProveedorForm.lugar = proveedor.lugar;
-            this.actualizarProveedorForm.logo = proveedor.logo;
+            this.makeCopy(proveedor,this.actualizarProveedorForm)
         }
     };
     this.actualizarProveedor = function(){
         if(undefined !== this.actualizarProveedorForm.proveedor){
             var proveedor = this.actualizarProveedorForm.proveedor;
-            proveedor.razon_social = this.actualizarProveedorForm.razon_social;
-            proveedor.sigla = this.actualizarProveedorForm.sigla;
-            proveedor.nit = this.actualizarProveedorForm.nit;
-            proveedor.numero_verificacion = this.actualizarProveedorForm.numero_verificacion;
-            proveedor.lugar = this.actualizarProveedorForm.lugar;
-            proveedor.logo = this.actualizarProveedorForm.logo;
-            this.cleanActualizarProveedorForm();
-            this.actualizarProveedorForm.proveedor = "";
+            this.makeCopy(this.actualizarProveedorForm,proveedor,proveedor_attrs);
+            this.cleanObj(this.actualizarProveedorForm);
         }
     };
-    this.cleanActualizarProveedorForm = function(){
-        this.actualizarProveedorForm.razon_social = "";
-        this.actualizarProveedorForm.sigla = "";
-        this.actualizarProveedorForm.nit = "";
-        this.actualizarProveedorForm.numero_verificacion = "";
-        this.actualizarProveedorForm.lugar = "";
-        this.actualizarProveedorForm.logo = "";
-
-    };
     this.crearContacto = function(){
-        var contacto = {};
-        contacto.nombre = this.crearContactoForm.nombre;
-        contacto.apellido = this.crearContactoForm.apellido;
-        contacto.telefono_fijo = this.crearContactoForm.telefono_fijo;
-        contacto.celular = this.crearContactoForm.celular;
-        contacto.correo = this.crearContactoForm.correo;
-        contacto.cargo = this.crearContactoForm.cargo;
-        contacto.perfil  = this.crearContactoForm.perfil ;
+        var contacto = this.makeCopy(this.crearContactoForm);
         this.contactos.push(contacto);
-        this.cleanContactoForm();
-    };
-    this.cleanContactoForm = function(){
-        this.crearContactoForm.nombre = "";
-        this.crearContactoForm.apellido = "";
-        this.crearContactoForm.telefono_fijo = "";
-        this.crearContactoForm.extension = "";
-        this.crearContactoForm.celular = "";
-        this.crearContactoForm.correo = "";
-        this.crearContactoForm.cargo = "";
-        this.crearContactoForm.perfil = "";
+        this.cleanObj(this.crearContactoForm);
     };
     this.getContacto = function(){
         if(undefined !== this.actualizarContactoForm.contacto){
             var contacto = this.actualizarContactoForm.contacto;
-            this.actualizarContactoForm.nombre = contacto.nombre;
-            this.actualizarContactoForm.apellido = contacto.apellido;
-            this.actualizarContactoForm.telefono_fijo = contacto.telefono_fijo;
-            this.actualizarContactoForm.extension = contacto.extension;
-            this.actualizarContactoForm.celular = contacto.celular;
-            this.actualizarContactoForm.correo = contacto.correo;
-            this.actualizarContactoForm.cargo = contacto.cargo;
-            this.actualizarContactoForm.perfil = contacto.perfil;
+            this.actualizarContactoForm = this.makeCopy(contacto);
+            this.actualizarContactoForm.contacto = contacto;
         }
     };
     this.actualizarContacto = function(){
         if(undefined !== this.actualizarContactoForm.contacto){
             var contacto = this.actualizarContactoForm.contacto;
-            contacto.nombre = this.actualizarContactoForm.nombre;
-            contacto.apellido = this.actualizarContactoForm.apellido;
-            contacto.telefono_fijo = this.actualizarContactoForm.telefono_fijo;
-            contacto.extension = this.actualizarContactoForm.extension;
-            contacto.celular = this.actualizarContactoForm.celular;
-            contacto.correo = this.actualizarContactoForm.correo;
-            contacto.cargo = this.actualizarContactoForm.cargo;
-            contacto.perfil = this.actualizarContactoForm.perfil;
-            this.cleanActualizarContactoForm();
-            this.actualizarContactoForm.contacto = "";
+            this.makeCopy(this.actualizarContactoForm,contacto,contacto_attrs);
+            this.cleanObj(this.actualizarContactoForm);
         }
-    };
-    this.cleanActualizarContactoForm = function(){
-        this.actualizarContactoForm.nombre = "";
-        this.actualizarContactoForm.apellido = "";
-        this.actualizarContactoForm.telefono_fijo = "";
-        this.actualizarContactoForm.extension = "";
-        this.actualizarContactoForm.celular = "";
-        this.actualizarContactoForm.correo = "";
-        this.actualizarContactoForm.cargo = "";
-        this.actualizarContactoForm.perfil = "";
     };
 });
 var solicitudes = [
@@ -154,11 +98,29 @@ var proveedores = [
         {'razon_social':'duraplex','sigla':'dpx','nit':'SDF4495968','numero_verificacion':'32049099','lugar':'Casa | Calle 15 #68 - 14','logo':''},
         {'razon_social':'electrofin','sigla':'elf','nit':'NUKI46756','numero_verificacion':'398348493','lugar':'Casa | Calle 167 #76 - 23','logo':''},
     ];
+var proveedor_attrs = [
+        'razon_social',
+        'sigla',
+        'nit',
+        'numero_verificacion',
+        'lugar',
+        'logo'
+    ];
 var contactos = [
         {'nombre':'Laura','apellido':'Perez','extension':'1','telefono_fijo':'4556765','celular':'3143454565','correo':'LauP@gmail.com','cargo':'Gerente','perfil':'Alto'},
         {'nombre':'Maria','apellido':'Ruelas','extension':'23','telefono_fijo':'3423456','celular':'312445667','correo':'Mruelas@hotmail.com','cargo':'Empleado','perfil':'Bajo'},
         {'nombre':'Sandra','apellido':'Sanchez','extension':'32','telefono_fijo':'9896345','celular':'321559588','correo':'Sanchez321@yahoo.com','cargo':'Contador','perfil':'Medio'},
         {'nombre':'Juan','apellido':'Velazco','extension':'22','telefono_fijo':'1234345','celular':'323459566','correo':'Juanchito60@hotmail.com','cargo':'Abogado','perfil':'Alto'},
         {'nombre':'Manuel','apellido':'Vivas','extension':'11','telefono_fijo':'2332345','celular':'323049588','correo':'vivisimo@gour.edu.co','cargo':'Ingeniero','perfil':'Super Bajo'},
+    ];
+var contacto_attrs = [
+        'nombre',
+        'apellido',
+        'extension',
+        'telefono_fijo',
+        'celular',
+        'correo',
+        'cargo',
+        'perfil'
     ];
 
