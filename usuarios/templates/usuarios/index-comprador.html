@@ -1,5 +1,3 @@
-
-!no sirven el submit de actualizar proveedor pues igual lo actualiza ahi mismo falta que aga un update en la base de datos
 <!DOCTYPE html>
 <html ng-app="Comprador">
 <head>
@@ -9,120 +7,197 @@
     <script src="{% static "usuarios/js/index-comprador.js" %}"></script>
     <title></title>
 </head>
-<body>
-    <div id="forms" ng-controller="formtabController as tabCtrl">
+{% verbatim %}
+<body ng-controller='mainTabController as mainTabCtrl'>
+    <div id='menu' ng-controller='menuTabController as menuTabCtrl'>
         <ul>
-            <li ng-class="{ active:tabCtrl.isMainTab(1)}">
-                <a href ng-click="tabCtrl.setMainTab(1)">Proveedores</a>
+            <li>
+                <a href ng-click="menuTabCtrl.setTab(1)">Proveedores</a>
+                    <ul ng-show='menuTabCtrl.isTab(1)'>
+                        <li>
+                            <a href ng-click="mainTabCtrl.setTab(1)">Nuevo Proveedor</a>
+                        </li>
+                        <li>
+                            <a href ng-click="mainTabCtrl.setTab(2)">Actualizar Proveedor</a>
+                        </li >
+                    </ul>
             </li>
-            <li ng-class="{ active:tabCtrl.isMainTab(2)}">
-                <a href ng-click="tabCtrl.setMainTab(2)">Contactos</a>
+            <li>
+                <a href ng-click="menuTabCtrl.setTab(2)">Contactos</a>
+                    <ul ng-show='menuTabCtrl.isTab(2)'>
+                        <li>
+                            <a href ng-click="mainTabCtrl.setTab(3)">Nuevo Contacto</a>
+                        </li>
+                        <li>
+                            <a href ng-click="mainTabCtrl.setTab(4)">Modificar Contacto</a>
+                        </li >
+                    </ul>
+            </li>
+            <li >
+                <a href ng-click="mainTabCtrl.setTab(5) ; menuTabCtrl.setTab(0)">Solicitudes Pendientes</a>
+            </li>
+            <li >
+                <a href ng-click="mainTabCtrl.setTab(6) ; menuTabCtrl.setTab(0)">Ordenes de Compra</a>
             </li>
         </ul>
-        <div ng-controller="proveedorController as proveedorCtrl" ng-show="tabCtrl.isMainTab(1)">
-            <ul>
-                <li ng-class="{ active:tabCtrl.isTab(1)}">
-                    <a href ng-click="tabCtrl.setTab(1)">Nuevo Proveedor</a>
-                </li ng-class="{ active:tabCtrl.isTab(2) }">
-                <li>
-                    <a href ng-click="tabCtrl.setTab(2)">Actualizar Proveedor</a>
-                </li >
-            </ul>
-            <form name="crearProveedorForm" ng-controller="proveedorFormController as proveedorFormCtrl" ng-show="tabCtrl.isTab(1)">
+    </div>
+    <div id='main' ng-controller='mainController as mainCtrl'>
+        <div>
+            <form name="crearProveedorForm" ng-show="mainTabCtrl.isTab(1)">
                 <h4>Crear un nuevo proveedor</h4>
                 <fieldset>
-                    Razon social:<input ng-model="proveedorFormCtrl.proveedor.razon_social">
+                    Razon social:<input ng-model="mainCtrl.crearProveedorForm.razon_social">
                 </fieldset>
                 <fieldset>
-                    Sigla:<input ng-model="proveedorFormCtrl.proveedor.sigla">
+                    Sigla:<input ng-model="mainCtrl.crearProveedorForm.sigla">
                 </fieldset>
                 <fieldset>
-                    NIT:<input ng-model="proveedorFormCtrl.proveedor.nit">
+                    NIT:<input ng-model="mainCtrl.crearProveedorForm.nit">
                 </fieldset>
                 <fieldset>
-                    Numero de Verificacion:<input ng-model="proveedorFormCtrl.proveedor.numero_verificacion">
+                    Numero de Verificacion:<input ng-model="mainCtrl.crearProveedorForm.numero_verificacion">
                 </fieldset>
                 <fieldset>
-                    Lugar:<input ng-model="proveedorFormCtrl.proveedor.lugar">
+                    Lugar:<input ng-model="mainCtrl.crearProveedorForm.lugar">
                 </fieldset>
                 <fieldset>
-                    Logo:<input ng-model="proveedorFormCtrl.proveedor.logo" type="file">
+                    Logo:<input ng-model="mainCtrl.crearProveedorForm.logo" type="file">
                 </fieldset>
                 <fieldset class="form-group">
-                    <input type="submit"  value="crear proveedor" />
+                    <input type="submit"  value="crear proveedor" ng-click='mainCtrl.crearProveedor()'/>
                 </fieldset>
             </form>
-            {%verbatim%}
-            <form name="actualizarProveedorForm" ng-controller="actualizarProveedorController as aCtrl" ng-show="tabCtrl.isTab(2)">
+        </div>
+        <div>
+            <form name="actualizarProveedorForm" ng-show="mainTabCtrl.isTab(2)">
                 <h4>Actualizar proveedor</h4>
                 <fieldset>
-                    <select ng-model='aCtrl.proveedor' ng-options="proveedor.razon_social for proveedor in proveedorCtrl.proveedores"></select>
+                    <select ng-model='mainCtrl.actualizarProveedorForm.proveedor' ng-options="proveedor.razon_social for proveedor in mainCtrl.proveedores" ng-change='mainCtrl.getProveedor()'></select>
                 </fieldset>
-                <h3>{{aCtrl.proveedor.razon_social}}</h3>
+                <h3>{{mainCtrl.actualizarProveedorForm.razon_social}}</h3>
                 <fieldset>
-                    Razon Social:<input ng-model="aCtrl.proveedor.razon_social"type="text" value="{{aCtrl.proveedor.razon_social}}">
-                </fieldset>
-                <fieldset>
-                    Sigla:<input type="text" value="{{aCtrl.proveedor.sigla}}">
+                    Razon Social:<input ng-model="mainCtrl.actualizarProveedorForm.razon_social"type="text" value="{{mainCtrl.actualizarProveedorForm.razon_social}}">
                 </fieldset>
                 <fieldset>
-                    NIT:<input type="text" value="{{aCtrl.proveedor.nit}}">
+                    Sigla:<input type="text" value="{{mainCtrl.actualizarProveedorForm.sigla}}">
                 </fieldset>
                 <fieldset>
-                    Direccion:<input type="text" value="{{aCtrl.proveedor.lugar}}">
+                    NIT:<input type="text" value="{{mainCtrl.actualizarProveedorForm.nit}}">
+                </fieldset>
+                <fieldset>
+                    Direccion:<input type="text" value="{{mainCtrl.actualizarProveedorForm.lugar}}">
                 </fieldset>
                 <fieldset>
                     Logo:<input type="file">
                 </fieldset>
                 <fieldset>
-                    <input type="submit" value="Actualizar">
+                    <input type="submit" value="Actualizar" ng-click='mainCtrl.actualizarProveedor()'>
                 </fieldset>
             </form>
-            {%endverbatim%}
         </div>
-        <div ng-controller="contactosController as contactosCtrl" ng-show="tabCtrl.isMainTab(2)">
-            <ul>
-                <li>
-                    <a href ng-click="tabCtrl.setTab(3)">Crear Contacto</a>
-                </li>
-                <li>
-                    <a href ng-click="tabCtrl.setTab(4)">Actualizar Contacto</a>
-                </li>
-            </ul>
-           
+        <div>
+            <form name='crearContactoForm' ng-show='mainTabCtrl.isTab(3)'>
+                <h4>Crear Nuevo Contacto</h4>
+                <fieldset>
+                    <label for='nuevoContactoNombres'>Nombres</label>
+                    <input id='nuevoContactoNombres' ng-model="mainCtrl.crearContactoForm.nombre">
+                </fieldset>
+                <fieldset>
+                    <label for='nuevoContactoApellidos'>Apellidos</label>
+                    <input id='nuevoContactoApellidos' ng-model="mainCtrl.crearContactoForm.apellido">
+                </fieldset>
+                <fieldset>
+                    <h3>Telefono Fijo</h3>
+                    <label for='nuevoContactoExtension'>extension</label>
+                    <input id='nuevoContactoExtension' ng-model="mainCtrl.crearContactoForm.extension">
+                    <label for='nuevoContactoTelFijo'>numero</label>
+                    <input id='nuevoContactoTelFijo' ng-model="mainCtrl.crearContactoForm.telefono_fijo">
+                </fieldset>
+                <fieldset>
+                    <label for='nuevoContactoCelular'>Celular</label>
+                    <input id='nuevoContactoCelular' ng-model="mainCtrl.crearContactoForm.celular">
+                </fieldset>
+                <fieldset>
+                    <label for='nuevoContactoCorreo'>Correo</label>
+                    <input id='nuevoContactoCorreo' ng-model="mainCtrl.crearContactoForm.correo">
+                </fieldset>
+                <fieldset>
+                    <label for='nuevoContactoCargo'>Cargo</label>
+                    <input id='nuevoContactoCargo' ng-model="mainCtrl.crearContactoForm.cargo">
+                </fieldset>
+                <fieldset>
+                    <label for='nuevoContactoPerfil'>Perfil</label>
+                    <input id='nuevoContactoPerfil' ng-model="mainCtrl.crearContactoForm.perfil">
+                </fieldset>
+                <fieldset class="form-group">
+                    <input type="submit"  value="crear contacto" ng-click='mainCtrl.crearContacto()'/>
+                </fieldset>
             </form>
         </div>
-    </div>
-    <div id="main" ng-controller="maintabController as tabCtrl">
-        <ul>
-            <li ng-class="{active:tabCtrl.isTab(1)}">
-                <a href ng-click="tabCtrl.setTab(1)">Solicitudes Pendientes</a>
-            </li>
-            <li ng-class="{active:tabCtrl.isTab(2)}">
-                <a href ng-click="tabCtrl.setTab(2)">Ordenes de Compra</a>
-            </li>
-        </ul>
-        <div id="solicitante" ng-controller="solicitudesController as sCtrl" ng-show="tabCtrl.isTab(1)">
-            {%verbatim%}
-            <h2>Solicitudes</h2>
-            <section id='solicitudes' ng-repeat='solicitud in sCtrl.solicitudes'>
-                <h3>Lugar</h3>
-                <p>{{solicitud.lugar}}</p>
-                <h3>Proyecto</h3>
-                <p>{{solicitud.proyecto}}</p>
-                <h3>Fecha</h3>
-                <p>{{solicitud.fech}}</p>
-                <h3>Productos</h3>
-                <div id="productos" ng-repeat='producto in solicitud.productos'>
-                    <h4>nombre</h4>
-                    <p>{{producto.nombre}}</p>
-                </div>
-            </section>
-            {%endverbatim%}
+        <div >
+            <form name="actualizarContactoForm" ng-show='mainTabCtrl.isTab(4)'>
+                <h4>Actualizar Contacto</h4>
+                <fieldset>
+                    <select ng-model='mainCtrl.actualizarContactoForm.contacto' ng-options='contacto.nombre for contacto in mainCtrl.contactos' ng-change='mainCtrl.getContacto()'></select>
+                </fieldset>
+                <fieldset>
+                    <label for='actualizarContactoNombres'>Nombres</label>
+                    <input id='actualizarContactoNombres' ng-model="mainCtrl.actualizarContactoForm.nombre">
+                </fieldset>
+                <fieldset>
+                    <label for='actualizarContactoApellidos'>Apellidos</label>
+                    <input id='actualizarContactoApellidos' ng-model="mainCtrl.actualizarContactoForm.apellido">
+                </fieldset>
+                <fieldset>
+                    <h3>Telefono Fijo</h3>
+                    <label for='actualizarContactoExtension'>extension</label>
+                    <input id='actualizarContactoExtension' ng-model="mainCtrl.actualizarContactoForm.extension">
+                    <label for='actualizarContactoTelFijo'>numero</label>
+                    <input id='actualizarContactoTelFijo' ng-model="mainCtrl.actualizarContactoForm.telefono_fijo">
+                </fieldset>
+                <fieldset>
+                    <label for='actualizarContactoCelular'>Celular</label>
+                    <input id='actualizarContactoCelular' ng-model="mainCtrl.actualizarContactoForm.celular">
+                </fieldset>
+                <fieldset>
+                    <label for='actualizarContactoCorreo'>Correo</label>
+                    <input id='actualizarContactoCorreo' ng-model="mainCtrl.actualizarContactoForm.correo">
+                </fieldset>
+                <fieldset>
+                    <label for='actualizarContactoCargo'>Cargo</label>
+                    <input id='actualizarContactoCargo' ng-model="mainCtrl.actualizarContactoForm.cargo">
+                </fieldset>
+                <fieldset>
+                    <label for='actualizarContactoPerfil'>Perfil</label>
+                    <input id='actualizarContactoPerfil' ng-model="mainCtrl.actualizarContactoForm.perfil">
+                </fieldset>
+                <fieldset class="form-group">
+                    <input type="submit"  value="crear contacto" ng-click='mainCtrl.actualizarContacto()'/>
+                </fieldset>
+            </form>
         </div>
-        <div id="ordenesdecompra" ng-controller="ordenesdecompraController as oCtrl" ng-show="tabCtrl.isTab(2)">
-            <h1>Hello</h1>
+        <div>
+            <div id="solicitudes" ng-show="mainTabCtrl.isTab(5)">
+                <h2>Solicitudes Pendientes</h2>
+                <section id='solicitudes' ng-repeat='solicitud in mainCtrl.solicitudes'>
+                    <h3>Lugar</h3>
+                    <p>{{solicitud.lugar}}</p>
+                    <h3>Proyecto</h3>
+                    <p>{{solicitud.proyecto}}</p>
+                    <h3>Fecha</h3>
+                    <p>{{solicitud.fecha}}</p>
+                    <h3>Productos</h3>
+                    <div id="productos" ng-repeat='producto in solicitud.productos'>
+                        <h4>nombre</h4>
+                        <p>{{producto.nombre}}</p>
+                    </div>
+                </section>
+            </div>
+            <div id="ordenesdecompra" ng-show="mainTabCtrl.isTab(6)">
+                <h1>Hello</h1>
+            </div>
         </div>
     </div>
 </body>
+{% endverbatim %}
 </html>

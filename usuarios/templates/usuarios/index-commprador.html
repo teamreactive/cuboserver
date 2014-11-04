@@ -1,0 +1,178 @@
+
+
+
+!no sirven el submit de actualizar proveedor pues igual lo actualiza ahi mismo falta que aga un update en la base de datos
+<!DOCTYPE html>
+<html ng-app="Comprador">
+<head>
+    <!-- Some JS scripts -->
+    {% load staticfiles %}
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="{% static "usuarios/js/index-comprador.js" %}"></script>
+    <title></title>
+</head>
+<body>
+    <div id="forms" ng-controller="formtabController as tabCtrl">
+        <ul>
+            <li ng-class="{ active:tabCtrl.isMainTab(1)}">
+                <a href ng-click="tabCtrl.MainTab = 1">Proveedores</a>
+                    <ul ng-show='tabCtrl.isMainTab(1)'>
+                        <li ng-class="{ active:tabCtrl.isTab(1)}">
+                            <a href ng-click="tabCtrl.setTab(1)">Nuevo Proveedor</a>
+                        </li ng-class="{ active:tabCtrl.isTab(2) }">
+                        <li>
+                            <a href ng-click="tabCtrl.setTab(2)">Actualizar Proveedor</a>
+                        </li >
+                    </ul>
+            </li>
+            <li ng-class="{ active:tabCtrl.isMainTab(2)}">
+                <a href ng-click="tabCtrl.setMainTab(2)">Contactos</a>
+            </li>
+        </ul>
+        <div ng-controller="proveedorController as proveedorCtrl" ng-show="tabCtrl.isMainTab(1)">
+            <form name="crearProveedorForm" ng-controller="proveedorFormController as proveedorFormCtrl" ng-show="tabCtrl.isTab(1)">
+                <h4>Crear un nuevo proveedor</h4>
+                <fieldset>
+                    Razon social:<input ng-model="proveedorFormCtrl.proveedor.razon_social">
+                </fieldset>
+                <fieldset>
+                    Sigla:<input ng-model="proveedorFormCtrl.proveedor.sigla">
+                </fieldset>
+                <fieldset>
+                    NIT:<input ng-model="proveedorFormCtrl.proveedor.nit">
+                </fieldset>
+                <fieldset>
+                    Numero de Verificacion:<input ng-model="proveedorFormCtrl.proveedor.numero_verificacion">
+                </fieldset>
+                <fieldset>
+                    Lugar:<input ng-model="proveedorFormCtrl.proveedor.lugar">
+                </fieldset>
+                <fieldset>
+                    Logo:<input ng-model="proveedorFormCtrl.proveedor.logo" type="file">
+                </fieldset>
+                <fieldset class="form-group">
+                    <input type="submit"  value="crear proveedor" />
+                </fieldset>
+            </form>
+            {%verbatim%}
+            <form name="actualizarProveedorForm" ng-controller="actualizarProveedorController as aCtrl" ng-show="tabCtrl.isTab(2)">
+                <h4>Actualizar proveedor</h4>
+                <fieldset>
+                    <select ng-model='aCtrl.proveedor' ng-options="proveedor.razon_social for proveedor in proveedorCtrl.proveedores"></select>
+                </fieldset>
+                <h3>{{aCtrl.proveedor.razon_social}}</h3>
+                <fieldset>
+                    Razon Social:<input ng-model="aCtrl.proveedor.razon_social"type="text" value="{{aCtrl.proveedor.razon_social}}">
+                </fieldset>
+                <fieldset>
+                    Sigla:<input type="text" value="{{aCtrl.proveedor.sigla}}">
+                </fieldset>
+                <fieldset>
+                    NIT:<input type="text" value="{{aCtrl.proveedor.nit}}">
+                </fieldset>
+                <fieldset>
+                    Direccion:<input type="text" value="{{aCtrl.proveedor.lugar}}">
+                </fieldset>
+                <fieldset>
+                    Logo:<input type="file">
+                </fieldset>
+                <fieldset>
+                    <input type="submit" value="Actualizar">
+                </fieldset>
+            </form>
+            {%endverbatim%}
+        </div>
+        <div ng-controller="contactosController as contactosCtrl" ng-show="tabCtrl.isMainTab(2)">
+            <ul>
+                <li>
+                    <a href ng-click="tabCtrl.setTab(3)">Crear Contacto</a>
+                </li>
+                <li>
+                    <a href ng-click="tabCtrl.setTab(4)">Actualizar Contacto</a>
+                </li>
+            </ul>
+           
+            </form>
+        </div>
+    </div>
+    <div id="main" ng-controller="maintabController as tabCtrl">
+        <ul>
+            <li ng-class="{active:tabCtrl.isTab(1)}">
+                <a href ng-click="tabCtrl.setTab(1)">Solicitudes Pendientes</a>
+            </li>
+            <li ng-class="{active:tabCtrl.isTab(2)}">
+                <a href ng-click="tabCtrl.setTab(2)">Ordenes de Compra</a>
+            </li>
+        </ul>
+        <div id="solicitante" ng-controller="solicitudesController as sCtrl" ng-show="tabCtrl.isTab(1)">
+            {%verbatim%}
+            <h2>Solicitudes</h2>
+            <section id='solicitudes' ng-repeat='solicitud in sCtrl.solicitudes'>
+                <h3>Lugar</h3>
+                <p>{{solicitud.lugar}}</p>
+                <h3>Proyecto</h3>
+                <p>{{solicitud.proyecto}}</p>
+                <h3>Fecha</h3>
+                <p>{{solicitud.fech}}</p>
+                <h3>Productos</h3>
+                <div id="productos" ng-repeat='producto in solicitud.productos'>
+                    <h4>nombre</h4>
+                    <p>{{producto.nombre}}</p>
+                </div>
+            </section>
+            {%endverbatim%}
+        </div>
+        <div id="ordenesdecompra" ng-controller="ordenesdecompraController as oCtrl" ng-show="tabCtrl.isTab(2)">
+            <h1>Hello</h1>
+        </div>
+    </div>
+</body>
+</html>
+
+app.controller('formtabController',function(){
+    this.tab = 1;
+    this.mainTab = 0;
+    this.setMainTab = function(tab){
+        this.mainTab = tab;
+    };
+    this.isMainTab = function(tab){
+        return this.mainTab === tab;
+    };
+    this.setTab = function(tab){
+        this.tab = tab;
+    };
+    this.isTab = function(tab){
+        return this.tab === tab;
+    };
+});
+app.controller('proveedorController', function(){
+    this.proveedores = proveedores;
+});
+app.controller('proveedorFormController', function(){
+    this.proveedor = {};
+});
+app.controller('actualizarProveedorController', function(){
+    this.proveedor = {};
+    this.a =2;
+});
+app.controller('contactosController',function(){
+
+});
+app.controller('contactosFormController',function(){
+    
+});
+app.controller('maintabController',function(){
+    this.tab = 1;
+    this.setTab = function(tab){
+        this.tab = tab;
+    };
+    this.isTab = function(tab){
+        return this.tab === tab;
+    };
+});
+app.controller('solicitudesController', function(){
+    this.solicitudes = solicitudes;
+});
+app.controller('ordenesdecompraController', function(){
+
+});
