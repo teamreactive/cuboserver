@@ -162,7 +162,7 @@ angular.module("app", [])
             "familia": $scope.opciones.familias[1],
             "equipo": $scope.opciones.equipos[2],
             "centro": $scope.opciones.centros[1],
-            "unidad": $scope.opciones.unidades[0],
+            "unidad": $scope.opciones.unidades[1],
             "tipo": $scope.opciones.tipos[0],
             "imagen": "ganchosGrises.jpg"
         },
@@ -329,23 +329,15 @@ angular.module("app", [])
             "centro": $scope.form.centro,
             "foto": $scope.form.imagen,
         };
-        if ($scope.opciones.productos.indexOf(producto) == -1) {
-            $scope.opciones.productos.unshift(producto);
-            $scope.clean("nombre", "descripcion", "marca",
-            "unidad", "tipo", "onu", "referencia", "talla",
-            "familia", "equipo", "centro", "foto");
-            $scope.message.message = "No se encontro el producto.";
-            $scope.message.css = "alert alert-danger";
-            $('html, body').animate({ scrollTop: 0 }, 'fast');
-            return true;
-        }
 
-        else {
-            $scope.message.message = "El producto a crear ya existe.";
-            $scope.message.css = "alert alert-danger";
-            $('html, body').animate({ scrollTop: 0 }, 'fast');
-            return false;
-        }
+        $scope.opciones.productos.unshift(producto);
+        $scope.clean("nombre", "descripcion", "marca",
+        "unidad", "tipo", "onu", "referencia", "talla",
+        "familia", "equipo", "centro", "foto");
+        $scope.message.message = "Producto creado con exito.";
+        $scope.message.css = "alert alert-success";
+        $('html, body').animate({ scrollTop: 0 }, 'fast');
+        return true;
     };
 
     $scope.join = function(producto) {
@@ -366,11 +358,13 @@ angular.module("app", [])
                 }
 
                 else {
-                    if ($scope.form.otroProducto.unidades == null)
+                    if ($scope.form.otroProducto.unidades == null &&
+                    $scope.form.otroProducto.unidad != producto.unidad) {
                         $scope.form.otroProducto.unidades = [$scope.form.otroProducto.unidad];
+                        $scope.form.otroProducto.unidades.unshift(producto.unidad);
+                    }
                     if ($scope.form.otroProducto.nombres == null)
                         $scope.form.otroProducto.nombres = [];
-                    $scope.form.otroProducto.unidades.unshift(producto.unidad);
                     $scope.form.otroProducto.nombres.unshift(producto.nombre);
                     $scope.clean("otroProducto");
                     $scope.opciones.pendientes.splice(i, 1);

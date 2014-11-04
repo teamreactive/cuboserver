@@ -142,10 +142,12 @@
                                                     <div class='form-group col-md-6'>
                                                         <label for='cantidadProducto'>Cantidad *</label>
                                                         <input type='number' class='form-control' id='cantidadProducto' placeholder='Cantidad' autocomplete='off' ng-model='producto.cantidad' required>
+                                                        <span class='alerts' ng-show='!producto.cantidad'>Este campo es requerido</span>
                                                     </div>
                                                     <div class='form-group col-md-6'>
                                                         <label for='unidadProducto'>Unidad *</label>
                                                         <select class='form-control' id='unidadProducto' ng-options='unidad.nombre for unidad in producto.unidades' ng-model='producto.unidad' required></select>
+                                                        <span class='alerts' ng-show='!producto.unidad'>Este campo es requerido</span>
                                                     </div>
                                                     <hr ng-hide='producto == form.productos[form.productos.length-1]'>
                                                 </li>
@@ -198,30 +200,36 @@
 
                                         <label for='nombreProducto'>Nombre *</label>
                                         <input type='text' class='form-control' id='nombreProducto' placeholder='Nombre' autocomplete='off' ng-model='form.nombre' required>
+                                        <span class='alerts' ng-show='!form.nombre'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='descripcionProducto'>Descripcion *</label>
                                         <textarea class='form-control' id='descripcionProducto' placeholder='Descripcion del producto...' ng-model='form.descripcion' required></textarea>
+                                        <span class='alerts' ng-show='!form.descripcion'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='marcaProducto'>Marca *</label>
                                         <input type='text' class='form-control' id='marcaProducto' placeholder='Marca' autocomplete='off' ng-model='form.marca' required>
+                                        <span class='alerts' ng-show='!form.marca'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='unidadProducto'>Unidad *</label>
                                         <select class='form-control' id='unidadProducto' ng-options='unidad.nombre for unidad in opciones.unidades' ng-model='form.unidad' required></select>
+                                        <span class='alerts' ng-show='!form.unidad'>Este campo es requerido</span>
                                     </div>
 
-                                    <div class='form-group'>
-                                        <input type='text' class='form-control' id='otraUnidadProducto' placeholder='Unidad' autocomplete='off' ng-model='form.otraUnidad' ng-show='form.unidad.nombre == "otra"' ng-required='form.unidad.nombre == "otra"'>
+                                    <div class='form-group' ng-show='form.unidad.nombre == "otra"'>
+                                        <input type='text' class='form-control' id='otraUnidadProducto' placeholder='Unidad' autocomplete='off' ng-model='form.otraUnidad' ng-required='form.unidad.nombre == "otra"'>
+                                        <span class='alerts' ng-show='!form.otraUnidad'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='tipoProducto'>Tipo *</label>
                                         <select class='form-control' id='tipoProducto' ng-options='tipo.nombre for tipo in opciones.tipos' ng-model='form.tipo'required></select>
+                                        <span class='alerts' ng-show='!form.tipo'>Este campo es requerido</span>
                                     </div>
 
                                     <button class='btn btn-default' ng-click='setSubmit("2") && submit()' ng-disabled='!productoForm.$valid || !validNombre()'>
@@ -258,11 +266,13 @@
 
                                         <label for='nombreLugar'>Nombre *</label>
                                         <input type='text' class='form-control' id='nombreLugar' placeholder='Nombre' autocomplete='off' ng-model='form.nombre' required>
+                                        <span class='alerts' ng-show='!form.nombre'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='telefonoLugar'>Telefono *</label>
                                         <input type='text' class='form-control' id='telefonoLugar' placeholder='Telefono' autocomplete='off' ng-model='form.telefono' required>
+                                        <span class='alerts' ng-show='!form.telefono'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
@@ -272,14 +282,18 @@
                                     <div class='form-group col-md-6'>
                                         <label for='ciudadLugar'>Ciudad *</label>
                                         <input type='text' class='form-control' id='ciudadLugar' placeholder='Ciudad' autocomplete='off' ng-model='form.ciudad' required>
+                                        <span class='alerts' ng-show='!form.ciudad'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group col-md-6'>
                                         <label for='paisLugar'>Pais *</label>
                                         <input type='text' class='form-control' id='paisLugar' placeholder='Pais' autocomplete='off' ng-model='form.pais' required>
+                                        <span class='alerts' ng-show='!form.pais'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
+                                        <hr>
+
                                         <div class='alert alert-danger' ng-hide='validDireccion()'>
                                             <p>La direccion ya existe</p>                        
                                         </div>
@@ -290,26 +304,31 @@
                                     <div class='form-group col-md-3'>
                                         <label for='seccionLugar'>Seccion *</label>
                                         <input type='text' class='form-control' id='seccionLugar' placeholder='Seccion' autocomplete='off' ng-model='form.seccion' required>
+                                        <span class='alerts' ng-show='!form.seccion'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group col-md-3'>
                                         <label for='numero1Lugar'>Campo 1 *</label>
                                         <input type='text' class='form-control' id='numero1Lugar' placeholder='Campo 1' autocomplete='off' ng-model='form.numero1' required>
+                                        <span class='alerts' ng-show='!form.numero1'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group col-md-3'>
                                         <label for='numero2Lugar'>Campo 2 *</label>
                                         <input type='text' class='form-control' id='numero2Lugar' placeholder='Campo 2' autocomplete='off' ng-model='form.numero2' required>
+                                        <span class='alerts' ng-show='!form.numero2'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group col-md-3'>
                                         <label for='numero3Lugar'>Campo 3 *</label>
                                         <input type='text' class='form-control' id='numero3Lugar' placeholder='Campo 3' autocomplete='off' ng-model='form.numero3' required>
+                                        <span class='alerts' ng-show='!form.numero3'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='descripcionLugar'>* Descripcion</label>
                                         <textarea class='form-control' id='descripcionLugar' placeholder='Descripcion del lugar...' ng-model='form.descripcion' required></textarea>
+                                        <span class='alerts' ng-show='!form.descripcion'>Este campo es requerido</span>
                                     </div>
 
                                     <button class='btn btn-default' ng-click='setSubmit("3") && submit()' ng-disabled='!lugarForm.$valid || !validLugar() || !validDireccion()'>
