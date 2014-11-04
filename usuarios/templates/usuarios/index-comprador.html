@@ -105,6 +105,10 @@
             <form name='crearContactoForm' ng-show='mainTabCtrl.isTab(3)'>
                 <h4>Crear Nuevo Contacto</h4>
                 <fieldset>
+                    <label for='nuevoContactoProveedor'>Proveedor</label>
+                    <select ng-options='proveedor.razon_social for proveedor in mainCtrl.proveedores' id='nuevoContactoProveedor' ng-model="mainCtrl.crearContactoForm.proveedor"></select>
+                </fieldset>
+                <fieldset>
                     <label for='nuevoContactoNombres'>Nombres</label>
                     <input id='nuevoContactoNombres' ng-model="mainCtrl.crearContactoForm.nombre">
                 </fieldset>
@@ -145,6 +149,10 @@
                 <h4>Actualizar Contacto</h4>
                 <fieldset>
                     <select ng-model='mainCtrl.actualizarContactoForm.contacto' ng-options='contacto.nombre for contacto in mainCtrl.contactos' ng-change='mainCtrl.getContacto()'></select>
+                </fieldset>
+                <fieldset>
+                    <label for='actualizarContactoProveedor'>Proveedor</label>
+                    <select ng-options='proveedor.razon_social for proveedor in mainCtrl.proveedores' id='actualizarContactoProveedor' ng-model="mainCtrl.actualizarContactoForm.proveedor"></select>
                 </fieldset>
                 <fieldset>
                     <label for='actualizarContactoNombres'>Nombres</label>

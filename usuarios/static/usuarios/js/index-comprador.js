@@ -114,6 +114,7 @@ var contactos = [
         {'nombre':'Manuel','apellido':'Vivas','extension':'11','telefono_fijo':'2332345','celular':'323049588','correo':'vivisimo@gour.edu.co','cargo':'Ingeniero','perfil':'Super Bajo'},
     ];
 var contacto_attrs = [
+        'proveedor',
         'nombre',
         'apellido',
         'extension',
