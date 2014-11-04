@@ -289,9 +289,9 @@
 
                                     <div class='form-group col-md-3'>
                                         <label for='seccionLugar'>Seccion *</label>
-                                        <input type='text' class='form-control' id='seccionLugar' placeholder='Seccion' autocomplete='off' ng-model='form.seccion' required>
+                                        <select class='form-control' id='unidadProducto' ng-options='unidad for unidad in opciones.secciones' ng-model='producto.unidad' required></select>
                                     </div>
-
+                                    
                                     <div class='form-group col-md-3'>
                                         <label for='numero1Lugar'>Campo 1 *</label>
                                         <input type='text' class='form-control' id='numero1Lugar' placeholder='Campo 1' autocomplete='off' ng-model='form.numero1' required>
