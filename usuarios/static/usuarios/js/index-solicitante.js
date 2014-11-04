@@ -23,6 +23,13 @@ angular.module("app", [])
                 "nombre": "Daniel"
             }
         ],
+        "secciones": [
+            "Calle",
+            "Carrera",
+            "Transversal",
+            "Kilometro",
+            "Via"
+        ],
         "lugares": [
             {
                 "nombre": "Casa",
@@ -285,6 +292,12 @@ angular.module("app", [])
         for (var i = 0; i < $scope.opciones.lugares.length; i++)
             if ($scope.opciones.lugares[i]["nombre"].toLowerCase() == $scope.form.nombre.toLowerCase())
                 return false;
+        return true;
+    };
+
+    $scope.validTelefono = function(){
+        if ($scope.form.telefono.length > 15)
+            return false;
         return true;
     };
 
