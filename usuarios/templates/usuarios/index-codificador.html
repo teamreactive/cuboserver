@@ -64,7 +64,7 @@
                 <div class='col-md-3' id='navigation'>
                     <div class='panel panel-default col-md-11'>
                         <div class='panel-body'>
-                            <h3>Opciones {{nav}}</h3>
+                            <h3>Opciones</h3>
                             <hr>
                             <ul class='nav nav-pills nav-stacked'>
                                 <li ng-class='nav == "1" ? "active" : ""'><a ng-click='setNav("1")'>Ver pendientes</a></li>
@@ -113,6 +113,7 @@
                                         <div class='form-group'>
                                             <label for='rechazoPendiente'>Razon de rechazo *</label>
                                             <textarea class='form-control' id='rechazoPendiente' ng-model='form.rechazo' required></textarea>
+                                            <span class='alerts' ng-show='!form.rechazo'>Este campo es requerido</span>
                                         </div>
                                         <button class='btn btn-default' ng-click='rechazar(producto)' ng-disabled='!rechazoForm.$valid'>
                                                 Rechazar
@@ -125,6 +126,7 @@
                                         <div class='form-group'>
                                             <label for='otroProducto'>Productos *</label>
                                             <select class='form-control' id='otroProducto' ng-options='producto.nombre for producto in opciones.productos' ng-model='form.otroProducto' required></select>
+                                            <span class='alerts' ng-show='!form.otroProducto'>Este campo es requerido</span>
                                         </div>
                                         <button class='btn btn-default' ng-click='join(producto)' ng-disabled='!otroForm.$valid'>
                                             Agregar
@@ -153,58 +155,69 @@
                                         <div class='alert alert-danger' ng-hide='validNombre()'>
                                             <p>El nombre ya existe</p>                        
                                         </div>
-                                        <label for='nombreProducto'>Nombresito *</label>
+                                        <label for='nombreProducto'>Nombre *</label>
                                         <input type='text' class='form-control' id='nombreProducto' placeholder='Nombre' autocomplete='off' ng-model='form.nombre' required>
+                                        <span class='alerts' ng-show='!form.nombre'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='onuProducto'>Codigo ONU *</label>
                                         <input type='text' class='form-control' id='onuProducto' placeholder='Codigo ONU' ng-model='form.onu' required>
+                                        <span class='alerts' ng-show='!form.onu'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='descripcionProucto'>Descripcion *</label>
                                         <textarea class='form-control' id='descripcionProducto' ng-model='form.descripcion' required></textarea>
+                                        <span class='alerts' ng-show='!form.descripcion'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='referenciaProducto'>Referencia *</label>
                                         <input type='text' class='form-control' id='referenciaProducto' placeholder='Referencia' ng-model='form.referencia' required>
+                                        <span class='alerts' ng-show='!form.referencia'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='tallaProducto'>Talla *</label>
                                         <input type='text' class='form-control' id='tallaProducto' placeholder='Talla' ng-model='form.talla' required>
+                                        <span class='alerts' ng-show='!form.talla'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='marcaProducto'>Marca *</label>
                                         <input type='text' class='form-control' id='marcaProducto' placeholder='Marca' ng-model='form.marca' required>
+                                        <span class='alerts' ng-show='!form.marca'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='tipoProducto'>Tipo *</label>
                                         <select class='form-control' id='tipoProducto' ng-options='tipo.nombre for tipo in opciones.tipos' ng-model='form.tipo' required></select>
+                                        <span class='alerts' ng-show='!form.tipo'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='unidadProducto'>Unidad *</label>
                                         <select class='form-control' id='unidadProducto' ng-options='unidad.nombre for unidad in opciones.unidades' ng-model='form.unidad' required></select>
+                                        <span class='alerts' ng-show='!form.unidad'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='familiaProducto'>Familia proveedor *</label>
                                         <select class='form-control' id='familiaProducto' ng-options='familia.nombre for familia in opciones.familias' ng-model='form.familia' required></select>
+                                        <span class='alerts' ng-show='!form.familia'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='equipoProducto'>Equipo *</label>
                                         <select class='form-control' id='equipoProducto' ng-options='equipo.nombre for equipo in opciones.equipos' ng-model='form.equipo' required></select>
+                                        <span class='alerts' ng-show='!form.equipo'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='centroProducto'>Centro de costo *</label>
                                         <select class='form-control' id='centroProducto' ng-options='centro.nombre for centro in opciones.centros' ng-model='form.centro' required></select>
+                                        <span class='alerts' ng-show='!form.centro'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
@@ -283,56 +296,67 @@
                                         <button class='btn btn-default' ng-click='editarProducto()' ng-disabled='form.temp == null'>
                                             Editar seleccion
                                         </button>
+                                        <span class='alerts' ng-show='!form.temp'>Este campo es requerido</span>
                                     </div>
                                     <hr>
                                     <div class='form-group'>
                                         <label for='onuProducto'>Codigo ONU *</label>
                                         <input type='text' class='form-control' id='onuProducto' placeholder='Codigo ONU' ng-model='form.producto.onu' required>
+                                        <span class='alerts' ng-show='!form.producto.onu'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='descripcionProucto'>Descripcion *</label>
                                         <textarea class='form-control' id='descripcionProducto' ng-model='form.producto.descripcion' required></textarea>
+                                        <span class='alerts' ng-show='!form.producto.descripcion'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='referenciaProducto'>Referencia *</label>
                                         <input type='text' class='form-control' id='referenciaProducto' placeholder='Referencia' ng-model='form.producto.referencia' required>
+                                        <span class='alerts' ng-show='!form.producto.referencia'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='tallaProducto'>Talla *</label>
                                         <input type='text' class='form-control' id='tallaProducto' placeholder='Talla' ng-model='form.producto.talla' required>
+                                        <span class='alerts' ng-show='!form.producto.talla'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='marcaProducto'>Marca *</label>
                                         <input type='text' class='form-control' id='marcaProducto' placeholder='Marca' ng-model='form.producto.marca' required>
+                                        <span class='alerts' ng-show='!form.producto.marca'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='tipoProducto'>Tipo *</label>
                                         <select class='form-control' id='tipoProducto' ng-options='tipo.nombre for tipo in opciones.tipos' ng-model='form.producto.tipo' required></select>
+                                        <span class='alerts' ng-show='!form.producto.tipo'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='unidadProducto'>Unidad *</label>
                                         <select class='form-control' id='unidadProducto' ng-options='unidad.nombre for unidad in opciones.unidades' ng-model='form.producto.unidad' required></select>
+                                        <span class='alerts' ng-show='!form.producto.unidad'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='familiaProducto'>Familia proveedor *</label>
                                         <select class='form-control' id='familiaProducto' ng-options='familia.nombre for familia in opciones.familias' ng-model='form.producto.familia' required></select>
+                                        <span class='alerts' ng-show='!form.producto.familia'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='equipoProducto'>Equipo *</label>
                                         <select class='form-control' id='equipoProducto' ng-options='equipo.nombre for equipo in opciones.equipos' ng-model='form.producto.equipo' required></select>
+                                        <span class='alerts' ng-show='!form.producto.equipo'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>
                                         <label for='centroProducto'>Centro de costo *</label>
                                         <select class='form-control' id='centroProducto' ng-options='centro.nombre for centro in opciones.centros' ng-model='form.producto.centro' required></select>
+                                        <span class='alerts' ng-show='!form.producto.centro'>Este campo es requerido</span>
                                     </div>
 
                                     <div class='form-group'>

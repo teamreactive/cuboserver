@@ -311,9 +311,7 @@ angular.module("app", [])
         direccion += $scope.form.numero1.toLowerCase() + " ";
         direccion += $scope.form.numero2.toLowerCase() + " ";
         direccion += $scope.form.numero3.toLowerCase();
-        console.log("HERE --> " + direccion)
         for (var i = 0; i < $scope.opciones.lugares.length; i++) {
-            console.log($scope.opciones.lugares[i]["direccion"].toLowerCase());
             if ($scope.opciones.lugares[i]["direccion"].toLowerCase() == direccion)
                 return false;
         }
@@ -335,6 +333,8 @@ angular.module("app", [])
 
             $scope.opciones.solicitudes.unshift(solicitud);
             $scope.clean("solicitante", "fecha", "lugar", "proyecto", "productos", "comentario");
+            $scope.message.message = "Solicitud creada con exito.";
+            $scope.message.css = "alert alert-success";
         } 
 
         else if ($scope.form.submit == "2") {
@@ -347,18 +347,11 @@ angular.module("app", [])
                 ]
             };
 
-            if ($scope.opciones.productos.indexOf(producto) == -1) {
-                if ($scope.opciones.unidades.indexOf(producto.unidades[0]) == -1) {
-                    $scope.opciones.unidades.unshift(producto.unidades[0]);
-                    $scope.opciones.productos.unshift(producto);
-                    $scope.clean("nombre", "descripcion", "marca", "unidad", "otraUnidad", "tipo");
-                }
-            } else {
-                $scope.message.message = "El producto a crear ya existe";
-                $scope.message.css = "alert alert-danger";
-                $('html, body').animate({ scrollTop: 0 }, 'fast');
-                return false;
-            }
+            $scope.opciones.unidades.unshift(producto.unidades[0]);
+            $scope.opciones.productos.unshift(producto);
+            $scope.clean("nombre", "descripcion", "marca", "unidad", "otraUnidad", "tipo");
+            $scope.message.message = "Producto creado con exito.";
+            $scope.message.css = "alert alert-success";
         } 
 
         else if ($scope.form.submit == "3") {
@@ -373,15 +366,10 @@ angular.module("app", [])
                 "telefono": $scope.form.telefono
             };
 
-            if ($scope.opciones.lugares.indexOf(lugar) == -1) {
-                $scope.opciones.lugares.unshift(lugar);
-                $scope.clean("nombre", "telefono", "ciudad", "pais", "seccion", "numero1", "numero2", "numero3", "descripcion");
-            } else {
-                $scope.message.message = "El lugar a crear ya existe";
-                $scope.message.css = "alert alert-danger";
-                $('html, body').animate({ scrollTop: 0 }, 'fast');
-                return false;
-            }
+            $scope.opciones.lugares.unshift(lugar);
+            $scope.clean("nombre", "telefono", "ciudad", "pais", "seccion", "numero1", "numero2", "numero3", "descripcion");
+            $scope.message.message = "Lugar creado con exito.";
+            $scope.message.css = "alert alert-success";
 
         } else {
             $scope.message.message = "Tipo de formulario no valido";
@@ -390,8 +378,6 @@ angular.module("app", [])
             return false;
         }
 
-        $scope.message.message = "Accion realizada con exito";
-        $scope.message.css = "alert alert-success";
         $('html, body').animate({ scrollTop: 0 }, 'fast');
         return true;
     };
