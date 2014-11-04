@@ -261,6 +261,9 @@
                                     </div>
 
                                     <div class='form-group'>
+                                        <div class='alert alert-danger' ng-hide='validTelefono()'>
+                                            <p>El telefono es muy largo</p>                       
+                                        </div>
                                         <label for='telefonoLugar'>Telefono *</label>
                                         <input type='text' class='form-control' id='telefonoLugar' placeholder='Telefono' autocomplete='off' ng-model='form.telefono' required>
                                     </div>
@@ -289,7 +292,7 @@
 
                                     <div class='form-group col-md-3'>
                                         <label for='seccionLugar'>Seccion *</label>
-                                        <select class='form-control' id='unidadProducto' ng-options='unidad for unidad in opciones.secciones' ng-model='producto.unidad' required></select>
+                                        <select class='form-control' id='unidadProducto' ng-options='seccion for seccion in opciones.secciones' ng-model='producto.unidad' required></select>
                                     </div>
                                     
                                     <div class='form-group col-md-3'>

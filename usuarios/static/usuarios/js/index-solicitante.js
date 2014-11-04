@@ -296,7 +296,7 @@ angular.module("app", [])
     };
 
     $scope.validTelefono = function(){
-        if ($scope.form.telefono.length > 15)
+        if (undefined !== $scope.form.telefono && $scope.form.telefono.length > 15)
             return false;
         return true;
     };
