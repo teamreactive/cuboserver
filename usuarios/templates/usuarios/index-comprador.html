@@ -43,7 +43,7 @@
                 <a href ng-click="mainTabCtrl.setTab(7) ; menuTabCtrl.setTab(0)">Realizar Cotizacion</a>
             </li>
             <li >
-                <a href ng-click="mainTabCtrl.setTab(7) ; menuTabCtrl.setTab(0)">Ingresar Cotizacion</a>
+                <a href ng-click="mainTabCtrl.setTab(8) ; menuTabCtrl.setTab(0)">Ingresar Cotizacion</a>
             </li>
         </ul>
     </div>
@@ -80,7 +80,6 @@
                 <fieldset>
                     <select ng-model='mainCtrl.actualizarProveedorForm.proveedor' ng-options="proveedor.razon_social for proveedor in mainCtrl.proveedores" ng-change='mainCtrl.getProveedor()'></select>
                 </fieldset>
-                <h3>{{mainCtrl.actualizarProveedorForm.razon_social}}</h3>
                 <fieldset>
                     Razon Social:<input ng-model="mainCtrl.actualizarProveedorForm.razon_social"type="text" value="{{mainCtrl.actualizarProveedorForm.razon_social}}">
                 </fieldset>
@@ -210,13 +209,29 @@
             <div id="ordenesdecompra" ng-show="mainTabCtrl.isTab(6)">
                 <h1>Ordenes de Compra!</h1>
             </div>
-            <div id="cotizar" ng-show='mainTab(7)'>
+            <div id="cotizar" ng-show='mainTabCtrl.isTab(7)'>
                 <h1>Realizar Cotizacion</h1>
-                <form>
-
+                <form ng-controller='realizarCotizacionController as realizarCotizacionCtrl'>
+                    <fieldset class='form-group'>
+                        <select ng-model='mainCtrl.realizarCotizacion.producto' ng-options="producto.nombre for producto in mainCtrl.productos"></select>
+                    </fieldset>
+                    <fieldset class='form-group'>
+                        <select ng-model='mainCtrl.realizarCotizacion.unidad' ng-options="unidad for unidad in mainCtrl.realizarCotizacion.producto.unidades"></select>
+                    </fieldset>
+                    <fieldset class='form-group'>
+                        <label for='realizarCotizacionSelectProveedor'>Insertar Proveedor</label>
+                        <select id='realizarCotizacionSelectProveedor' ng-model='realizarCotizacionCtrl.proveedor' ng-options='proveedor.razon_social for proveedor in realizarCotizacionCtrl.proveedores' ng-change='realizarCotizacionCtrl.insertarProveedor(); mainCtrl.insertarProveedorRealizarCotizacion(realizarCotizacionCtrl.proveedor)'></select>
+                    </fieldset>
+                    <div ng-repeat='proveedor in mainCtrl.realizarCotizacion.proveedores'>
+                        <p>{{proveedor.razon_social}}</p>
+                        <button ng-click='mainCtrl.quitarProveedorRealizarCotizacion(proveedor); realizarCotizacionCtrl.quitarProveedor(proveedor)'>quitar</button>
+                    </div>
+                    <fieldset>
+                        <input type='submit' value='Realizar Cotizacion'>
+                    </fieldset>
                 </form>
             </div>
-            <div id="ingresarcotizacion" ng-show='mainTab(8)'>
+            <div id="ingresarcotizacion" ng-show='mainTabCtrl.isTab(8)'>
                 <h1>Ingresar Cotizacion</h1>
             </div>
         </div>

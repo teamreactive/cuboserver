@@ -1,5 +1,27 @@
 var app = angular.module('Comprador',[]);
 
+ //Funciones genericas//
+ var makeCopy = function(from_obj, to_obj, attrs){
+        if (attrs !== undefined){
+            for (var i=0;i<attrs.length;i++)
+                to_obj[attrs[i]] = from_obj[attrs[i]];
+        } 
+        else if (to_obj !== undefined){
+            for (var key in from_obj)
+                to_obj[key] = from_obj[key];
+        } 
+        else{
+            var new_obj = {}
+            for (var key in from_obj)
+                new_obj[key] = from_obj[key];
+            return new_obj;
+        }
+    };
+var cleanObj = function(obj){
+        for (var key in obj)
+            obj[key] = "";
+        }
+ //-------------------//
 app.controller('menuTabController',function(){
     this.tab = 0;
     this.setTab = function(tab){
@@ -22,63 +44,65 @@ app.controller('mainController',function(){
     this.proveedores = proveedores;
     this.solicitudes = solicitudes;
     this.contactos = contactos;
-    this.makeCopy = function(from_obj, to_obj, attrs){
-        if (attrs !== undefined){
-            for (var i=0;i<attrs.length;i++)
-                to_obj[attrs[i]] = from_obj[attrs[i]];
-        } 
-        else if (to_obj !== undefined){
-            for (var key in from_obj)
-                to_obj[key] = from_obj[key];
-        } 
-        else{
-            var new_obj = {}
-            for (var key in from_obj)
-                new_obj[key] = from_obj[key];
-            return new_obj;
-        }
-    };
-    this.cleanObj = function(obj){
-        for (var key in obj)
-            obj[key] = "";
-    }
+    this.productos = productos;
+    this.realizarCotizacion = {};
+    this.realizarCotizacion.proveedores = [];
     this.crearProveedor = function(){
-        var proveedor = this.makeCopy(this.crearProveedorForm);        
+        var proveedor = makeCopy(this.crearProveedorForm);        
         this.proveedores.push(proveedor);
-        this.cleanObj(this.crearProveedorForm);
+        cleanObj(this.crearProveedorForm);
     };
     this.getProveedor = function(){
         if(undefined !== this.actualizarProveedorForm.proveedor){
             var proveedor = this.actualizarProveedorForm.proveedor;
-            this.makeCopy(proveedor,this.actualizarProveedorForm)
+            makeCopy(proveedor,this.actualizarProveedorForm)
         }
     };
     this.actualizarProveedor = function(){
         if(undefined !== this.actualizarProveedorForm.proveedor){
             var proveedor = this.actualizarProveedorForm.proveedor;
-            this.makeCopy(this.actualizarProveedorForm,proveedor,proveedor_attrs);
-            this.cleanObj(this.actualizarProveedorForm);
+            makeCopy(this.actualizarProveedorForm,proveedor,proveedor_attrs);
+            cleanObj(this.actualizarProveedorForm);
         }
     };
     this.crearContacto = function(){
-        var contacto = this.makeCopy(this.crearContactoForm);
+        var contacto = makeCopy(this.crearContactoForm);
         this.contactos.push(contacto);
-        this.cleanObj(this.crearContactoForm);
+        cleanObj(this.crearContactoForm);
     };
     this.getContacto = function(){
         if(undefined !== this.actualizarContactoForm.contacto){
             var contacto = this.actualizarContactoForm.contacto;
-            this.actualizarContactoForm = this.makeCopy(contacto);
+            this.actualizarContactoForm = makeCopy(contacto);
             this.actualizarContactoForm.contacto = contacto;
         }
     };
     this.actualizarContacto = function(){
         if(undefined !== this.actualizarContactoForm.contacto){
             var contacto = this.actualizarContactoForm.contacto;
-            this.makeCopy(this.actualizarContactoForm,contacto,contacto_attrs);
-            this.cleanObj(this.actualizarContactoForm);
+            makeCopy(this.actualizarContactoForm,contacto,contacto_attrs);
+            cleanObj(this.actualizarContactoForm);
         }
     };
+    this.insertarProveedorRealizarCotizacion = function(proveedor){
+        this.realizarCotizacion.proveedores.push(proveedor);
+    };
+    this.quitarProveedorRealizarCotizacion = function(proveedor){
+        var i = this.realizarCotizacion.proveedores.indexOf(proveedor);
+        if (i != -1)
+            this.realizarCotizacion.proveedores.splice(i,1);
+    }
+});
+app.controller('realizarCotizacionController',function(){
+    this.proveedores = proveedores.slice(0);
+    this.insertarProveedor = function(){
+        var i = this.proveedores.indexOf(this.proveedor);
+        if (i != -1)
+            this.proveedores.splice(i,1);
+    };
+    this.quitarProveedor = function(proveedor){
+        this.proveedores.push(proveedor);
+    }
 });
 var solicitudes = [
         {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Edificio', 'fecha': '01-01-2015', 'productos': [{'nombre': 'Taladro'}]},
@@ -124,4 +148,51 @@ var contacto_attrs = [
         'cargo',
         'perfil'
     ];
+var unidades = [
+            "kg",
+            "m",
+            "lb",
+            "cm",
+            "otra"
+        ];
+
+var productos = [
+        {
+            "nombre": "Taladro",
+            "unidades": [
+                unidades[0],
+                unidades[1]
+            ]
+        },
+        {
+            "nombre": "Martillo",
+            "unidades": [
+                unidades[0],
+                unidades[2]
+            ]
+        },
+        {
+            "nombre": "Remolque",
+            "unidades": [
+                unidades[1],
+                unidades[3]
+            ]
+        },
+        {
+            "nombre": "Excavadora",
+            "unidades": [
+                unidades[2],
+                unidades[3]
+            ]
+        },
+        {
+            "nombre": "Cinta",
+            "unidades": [
+                unidades[1],
+                unidades[3]
+            ]
+        }
+    ];
+
+
 
