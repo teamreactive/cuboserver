@@ -17,10 +17,22 @@ var app = angular.module('Comprador',[]);
             return new_obj;
         }
     };
+var makeArrayCopy = function(array){
+    newarray = [];
+    for (var i=0; i<array.length; i++){
+        newarray[i] = array[i];
+    }
+};
 var cleanObj = function(obj){
         for (var key in obj)
             obj[key] = "";
         }
+var keyOfObject = function(obj, in_obj){
+    for (var i in in_obj)
+        if(obj[i] == obj )
+            return i;
+    return "people"
+};
  //-------------------//
 app.controller('menuTabController',function(){
     this.tab = 0;
@@ -97,6 +109,29 @@ app.controller('mainController',function(){
         cleanObj(this.realizarCotizacion);
         this.realizarCotizacion.proveedores = [];
     };
+    this.setRealizarCotizacionXSolicitud = function(solicitud){
+        this.realizarCotizacionXSolicitud = {};
+        this.realizarCotizacionXSolicitud.solicitud = solicitud;
+        var cotizaciones = makeCopy(this.realizarCotizacionXSolicitud.solicitud.productos);
+        for (var i in cotizaciones){
+            cotizaciones[i].contactos = [];
+            for (var j in this.contactos){
+                if(contactos[j].familiaProveedor == cotizaciones[i].familiaProveedor)
+                    cotizaciones[i].contactos.push(contactos[j]);
+            }
+        }
+        this.realizarCotizacionXSolicitud.cotizaciones = cotizaciones;
+    };
+    this.quitarContactoRealizarCotizacionXSolicitud = function(cotizacion, contacto){
+        var contactos = cotizacion.contactos;
+        var i = contactos.indexOf(contacto);
+        contactos.splice(i,1);
+    };
+    this.quitarCotizacionRealizarCotizacionXSolicitud = function(cotizacion){
+        var cotizaciones = this.realizarCotizacionXSolicitud.cotizaciones;
+        var i = keyOfObject(cotizacion,cotizaciones);
+        this.i = i;
+    };
 });
 app.controller('realizarCotizacionController',function(){
     this.proveedores = proveedores.slice(0);
@@ -113,17 +148,59 @@ app.controller('realizarCotizacionController',function(){
         this.proveedores = proveedores.slice(0);
     };
 });
+var familiasProveedor = [
+        'Farmacia',
+        'Papeleria',
+        'Repuestos Excavadoras',
+        'Herramientas',
+        'Maquinaria'
+    ];
+var unidades = [
+            "kg",
+            "m",
+            "lb",
+            "cm",
+            "otra"
+        ];
+
+var productos = [
+        {
+            "nombre": "Taladro",
+            "unidad": [unidades[0]],
+            "familiaProveedor": familiasProveedor[3]
+        },
+        {
+            "nombre": "Martillo",
+            "unidad": [unidades[0]],
+            "familiaProveedor": familiasProveedor[3]
+        },
+        {
+            "nombre": "Remolque",
+            "unidad": [unidades[1]],
+            "familiaProveedor": "Maquinaria"
+        },
+        {
+            "nombre": "Excavadora",
+            "unidad": [unidades[2]],
+            "familiaProveedor": familiasProveedor[4]
+        },
+        {
+            "nombre": "Cinta",
+            "unidad": [unidades[1]],
+            "familiaProveedor": familiasProveedor[1]
+        }
+    ];
 var solicitudes = [
-        {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Edificio', 'fecha': '01-01-2015', 'productos': [{'nombre': 'Taladro'}]},
-        {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Autopista', 'fecha': '02-11-2015', 'productos': [{'nombre': 'Martillo'}]},
-        {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Autopista', 'fecha': '02-14-2015', 'productos': [{'nombre': 'Cinta'}]},
-        {'lugar': 'Bodega | Carrera 9  # 28 - 65', 'proyecto': 'Edificio', 'fecha': '12-12-2015', 'productos': [{'nombre': 'Cinta'}]},
-        {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Edificio', 'fecha': '12-03-2015', 'productos': [{'nombre': 'Excavadora'}]},
-        {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Casa', 'fecha': '09-10-2015', 'productos': [{'nombre': 'Cinta'}]},
-        {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Casa', 'fecha': '05-01-2015', 'productos': [{'nombre': 'Taladro'}]},
-        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '05-05-2015', 'productos': [{'nombre': 'Remolque'}]},
-        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '11-04-2015', 'productos': [{'nombre': 'Martillo'}]},
-        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '12-07-2015', 'productos': [{'nombre': 'Martillo'}]},
+        {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Edificio', 'fecha': '01-01-2015', 'productos': [productos[0],productos[4],productos[3]]},
+        {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Autopista', 'fecha': '02-11-2015', 'productos': [productos[2],productos[1]]},
+        {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Autopista', 'fecha': '02-14-2015', 'productos': [productos[1],productos[3]]},
+        {'lugar': 'Bodega | Carrera 9  # 28 - 65', 'proyecto': 'Edificio', 'fecha': '12-12-2015', 'productos': [productos[4],productos[3]]},
+        {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Edificio', 'fecha': '12-03-2015', 'productos': [productos[0],productos[4]]},
+        {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Casa', 'fecha': '09-10-2015', 'productos': [productos[0],productos[2]]},
+        {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Casa', 'fecha': '05-01-2015', 'productos': [productos[4],productos[2]]},
+        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '05-05-2015', 'productos': [productos[2],productos[1]]},
+        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '11-04-2015', 'productos': [productos[3],productos[1]]},
+        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '12-07-2015', 'productos': [productos[2],productos[1]]},
     ];
 var proveedores = [
         {'razon_social':'cementos mx','sigla':'cmx','nit':'ADF55866','numero_verificacion':'3403055','lugar':'Casa | Avenida 15 #68 - 14','logo':''},
@@ -139,17 +216,13 @@ var proveedor_attrs = [
         'lugar',
         'logo'
     ];
-var familiasProveedor = [
-        'Farmacia',
-        'Papeleria',
-        'Repuestos Excavadoras'
-    ];
+
 var contactos = [
         {'nombre':'Laura','apellido':'Perez','proveedor':proveedores[0],'familiaProveedor':familiasProveedor[1],'extension':'1','telefono_fijo':'4556765','celular':'3143454565','correo':'LauP@gmail.com','cargo':'Gerente','perfil':'Alto'},
-        {'nombre':'Maria','apellido':'Ruelas','proveedor':proveedores[1],'familiaProveedor':familiasProveedor[0],'extension':'23','telefono_fijo':'3423456','celular':'312445667','correo':'Mruelas@hotmail.com','cargo':'Empleado','perfil':'Bajo'},
-        {'nombre':'Sandra','apellido':'Sanchez','proveedor':proveedores[2],'familiaProveedor':familiasProveedor[2],'extension':'32','telefono_fijo':'9896345','celular':'321559588','correo':'Sanchez321@yahoo.com','cargo':'Contador','perfil':'Medio'},
+        {'nombre':'Maria','apellido':'Ruelas','proveedor':proveedores[1],'familiaProveedor':familiasProveedor[3],'extension':'23','telefono_fijo':'3423456','celular':'312445667','correo':'Mruelas@hotmail.com','cargo':'Empleado','perfil':'Bajo'},
+        {'nombre':'Sandra','apellido':'Sanchez','proveedor':proveedores[2],'familiaProveedor':familiasProveedor[3],'extension':'32','telefono_fijo':'9896345','celular':'321559588','correo':'Sanchez321@yahoo.com','cargo':'Contador','perfil':'Medio'},
         {'nombre':'Juan','apellido':'Velazco','proveedor':proveedores[3],'familiaProveedor':familiasProveedor[1],'extension':'22','telefono_fijo':'1234345','celular':'323459566','correo':'Juanchito60@hotmail.com','cargo':'Abogado','perfil':'Alto'},
-        {'nombre':'Manuel','apellido':'Vivas','proveedor':proveedores[0],'familiaProveedor':familiasProveedor[2],'extension':'11','telefono_fijo':'2332345','celular':'323049588','correo':'vivisimo@gour.edu.co','cargo':'Ingeniero','perfil':'Super Bajo'},
+        {'nombre':'Manuel','apellido':'Vivas','proveedor':proveedores[0],'familiaProveedor':familiasProveedor[4],'extension':'11','telefono_fijo':'2332345','celular':'323049588','correo':'vivisimo@gour.edu.co','cargo':'Ingeniero','perfil':'Super Bajo'},
     ];
 var contacto_attrs = [
         'familiaProveedor',
@@ -163,51 +236,7 @@ var contacto_attrs = [
         'cargo',
         'perfil'
     ];
-var unidades = [
-            "kg",
-            "m",
-            "lb",
-            "cm",
-            "otra"
-        ];
 
-var productos = [
-        {
-            "nombre": "Taladro",
-            "unidades": [
-                unidades[0],
-                unidades[1]
-            ]
-        },
-        {
-            "nombre": "Martillo",
-            "unidades": [
-                unidades[0],
-                unidades[2]
-            ]
-        },
-        {
-            "nombre": "Remolque",
-            "unidades": [
-                unidades[1],
-                unidades[3]
-            ]
-        },
-        {
-            "nombre": "Excavadora",
-            "unidades": [
-                unidades[2],
-                unidades[3]
-            ]
-        },
-        {
-            "nombre": "Cinta",
-            "unidades": [
-                unidades[1],
-                unidades[3]
-            ]
-        }
-    ];
  
 
 

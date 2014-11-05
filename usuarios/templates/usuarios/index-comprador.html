@@ -9,6 +9,7 @@
 </head>
 {% verbatim %}
 <body ng-controller='mainTabController as mainTabCtrl'>
+
     <div id='menu' ng-controller='menuTabController as menuTabCtrl'>
         <ul>
             <li>
@@ -48,6 +49,7 @@
         </ul>
     </div>
     <div id='main' ng-controller='mainController as mainCtrl'>
+        <h1>{{mainCtrl.i}}</h1>
         <div>
             <form name="crearProveedorForm" ng-show="mainTabCtrl.isTab(1)">
                 <h4>Crear un nuevo proveedor</h4>
@@ -211,6 +213,7 @@
                     <h4>nombre</h4>
                     <p>{{producto.nombre}}</p>
                 </div>
+                <button ng-click='mainTabCtrl.setTab(9); mainCtrl.setRealizarCotizacionXSolicitud(solicitud)'>realizar cotizacion</button>
             </section>
         </div>
         <div id="ordenesdecompra" ng-show="mainTabCtrl.isTab(6)">
@@ -245,6 +248,18 @@
             <h1>Ingresar Cotizacion</h1>
         </div>
         <div id="realizarCotizacionXSolicitud" ng-show='mainTabCtrl.isTab(9)'>
+            <section ng-repeat='cotizacion in mainCtrl.realizarCotizacionXSolicitud.cotizaciones'>
+                <h2>{{cotizacion.nombre}}</h2>
+                <h3>{{cotizacion.familiaProveedor}}</h3>
+                <form>
+                    <fieldset ng-repeat='contacto in cotizacion.contactos'>
+                        <h4>{{contacto.proveedor.razon_social}}</h4>
+                        <p>{{contacto.nombre}} {{contacto.apellido}}</p>
+                        <button ng-click='mainCtrl.quitarContactoRealizarCotizacionXSolicitud(cotizacion,contacto)'>quitar contacto</button>
+                    </fieldset>
+                    <button ng-click='mainCtrl.quitarCotizacionRealizarCotizacionXSolicitud(cotizacion)'>realizar cotizacion</button>
+                </form>
+            </section>
         </div>
     </div>
 </body>
