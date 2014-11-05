@@ -45,6 +45,7 @@ app.controller('mainController',function(){
     this.solicitudes = solicitudes;
     this.contactos = contactos;
     this.productos = productos;
+    this.familiasProveedor = familiasProveedor;
     this.realizarCotizacion = {};
     this.realizarCotizacion.proveedores = [];
     this.crearProveedor = function(){
@@ -92,6 +93,10 @@ app.controller('mainController',function(){
         if (i != -1)
             this.realizarCotizacion.proveedores.splice(i,1);
     }
+    this.cleanRealizarCotizacion = function(){
+        cleanObj(this.realizarCotizacion);
+        this.realizarCotizacion.proveedores = [];
+    };
 });
 app.controller('realizarCotizacionController',function(){
     this.proveedores = proveedores.slice(0);
@@ -102,7 +107,11 @@ app.controller('realizarCotizacionController',function(){
     };
     this.quitarProveedor = function(proveedor){
         this.proveedores.push(proveedor);
-    }
+    };
+    this.clean = function(){
+        cleanObj(this);
+        this.proveedores = proveedores.slice(0);
+    };
 });
 var solicitudes = [
         {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Edificio', 'fecha': '01-01-2015', 'productos': [{'nombre': 'Taladro'}]},
@@ -130,14 +139,20 @@ var proveedor_attrs = [
         'lugar',
         'logo'
     ];
+var familiasProveedor = [
+        'Farmacia',
+        'Papeleria',
+        'Repuestos Excavadoras'
+    ];
 var contactos = [
-        {'nombre':'Laura','apellido':'Perez','extension':'1','telefono_fijo':'4556765','celular':'3143454565','correo':'LauP@gmail.com','cargo':'Gerente','perfil':'Alto'},
-        {'nombre':'Maria','apellido':'Ruelas','extension':'23','telefono_fijo':'3423456','celular':'312445667','correo':'Mruelas@hotmail.com','cargo':'Empleado','perfil':'Bajo'},
-        {'nombre':'Sandra','apellido':'Sanchez','extension':'32','telefono_fijo':'9896345','celular':'321559588','correo':'Sanchez321@yahoo.com','cargo':'Contador','perfil':'Medio'},
-        {'nombre':'Juan','apellido':'Velazco','extension':'22','telefono_fijo':'1234345','celular':'323459566','correo':'Juanchito60@hotmail.com','cargo':'Abogado','perfil':'Alto'},
-        {'nombre':'Manuel','apellido':'Vivas','extension':'11','telefono_fijo':'2332345','celular':'323049588','correo':'vivisimo@gour.edu.co','cargo':'Ingeniero','perfil':'Super Bajo'},
+        {'nombre':'Laura','apellido':'Perez','proveedor':proveedores[0],'familiaProveedor':familiasProveedor[1],'extension':'1','telefono_fijo':'4556765','celular':'3143454565','correo':'LauP@gmail.com','cargo':'Gerente','perfil':'Alto'},
+        {'nombre':'Maria','apellido':'Ruelas','proveedor':proveedores[1],'familiaProveedor':familiasProveedor[0],'extension':'23','telefono_fijo':'3423456','celular':'312445667','correo':'Mruelas@hotmail.com','cargo':'Empleado','perfil':'Bajo'},
+        {'nombre':'Sandra','apellido':'Sanchez','proveedor':proveedores[2],'familiaProveedor':familiasProveedor[2],'extension':'32','telefono_fijo':'9896345','celular':'321559588','correo':'Sanchez321@yahoo.com','cargo':'Contador','perfil':'Medio'},
+        {'nombre':'Juan','apellido':'Velazco','proveedor':proveedores[3],'familiaProveedor':familiasProveedor[1],'extension':'22','telefono_fijo':'1234345','celular':'323459566','correo':'Juanchito60@hotmail.com','cargo':'Abogado','perfil':'Alto'},
+        {'nombre':'Manuel','apellido':'Vivas','proveedor':proveedores[0],'familiaProveedor':familiasProveedor[2],'extension':'11','telefono_fijo':'2332345','celular':'323049588','correo':'vivisimo@gour.edu.co','cargo':'Ingeniero','perfil':'Super Bajo'},
     ];
 var contacto_attrs = [
+        'familiaProveedor',
         'proveedor',
         'nombre',
         'apellido',
@@ -193,6 +208,6 @@ var productos = [
             ]
         }
     ];
-
+ 
 
 
