@@ -142,7 +142,7 @@ app.controller('mainController',function(sharedVars){
         var cotizaciones = this.realizarCotizacionXSolicitud.cotizaciones;
         var i = keyOfObject(cotizacion,cotizaciones);
         cotizaciones.splice(i,1);
-        if(cotizaciones.length == 1)
+        if(cotizaciones.length == 0)
             sharedVars.getMainTab()['value'] = 5;
     };
 });
