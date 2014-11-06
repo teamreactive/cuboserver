@@ -49,7 +49,6 @@
         </ul>
     </div>
     <div id='main' ng-controller='mainController as mainCtrl'>
-        <h1>{{mainCtrl.i}}</h1>
         <div>
             <form name="crearProveedorForm" ng-show="mainTabCtrl.isTab(1)">
                 <h4>Crear un nuevo proveedor</h4>
@@ -248,6 +247,8 @@
             <h1>Ingresar Cotizacion</h1>
         </div>
         <div id="realizarCotizacionXSolicitud" ng-show='mainTabCtrl.isTab(9)'>
+            <h1>Realizar Cotizacion</h1>
+            <h1>{{mainCtrl.i}}</h1>
             <section ng-repeat='cotizacion in mainCtrl.realizarCotizacionXSolicitud.cotizaciones'>
                 <h2>{{cotizacion.nombre}}</h2>
                 <h3>{{cotizacion.familiaProveedor}}</h3>
@@ -260,6 +261,7 @@
                     <button ng-click='mainCtrl.quitarCotizacionRealizarCotizacionXSolicitud(cotizacion)'>realizar cotizacion</button>
                 </form>
             </section>
+            <button ng-click='mainCtrl.quitarCotizacionRealizarCotizacionXSolicitud(cotizacion)'>Realizar Todas Las Cotizaciones</button>
         </div>
     </div>
 </body>

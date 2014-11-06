@@ -29,13 +29,24 @@ var cleanObj = function(obj){
         }
 var keyOfObject = function(obj, in_obj){
     for (var i in in_obj)
-        if(obj[i] == obj )
+        if(obj === in_obj[i] )
             return i;
-    return "people"
 };
+//----------services------//
+ app.service('sharedVars',function(){
+    this.menuTab = 0;
+    this.getMenuTab = function(){
+        return this.menuTab;
+    };
+    this.mainTab = 6;
+    this.getMainTab = function(){
+        return this.mainTab;
+    };
+ });
+//-----------------------//
  //-------------------//
-app.controller('menuTabController',function(){
-    this.tab = 0;
+app.controller('menuTabController',function(sharedVars){
+    this.tab = sharedVars.getMenuTab();
     this.setTab = function(tab){
         this.tab = tab;
     };
@@ -43,8 +54,8 @@ app.controller('menuTabController',function(){
         return this.tab == tab;
     };
 });
-app.controller('mainTabController',function(){
-    this.tab = 6;
+app.controller('mainTabController',function(sharedVars){
+    this.tab = sharedVars.getMainTab();
     this.setTab = function(tab){
         this.tab = tab;
     };
@@ -52,7 +63,7 @@ app.controller('mainTabController',function(){
         return this.tab == tab;
     };
 });
-app.controller('mainController',function(){
+app.controller('mainController',function(sharedVars){
     this.proveedores = proveedores;
     this.solicitudes = solicitudes;
     this.contactos = contactos;
@@ -112,7 +123,7 @@ app.controller('mainController',function(){
     this.setRealizarCotizacionXSolicitud = function(solicitud){
         this.realizarCotizacionXSolicitud = {};
         this.realizarCotizacionXSolicitud.solicitud = solicitud;
-        var cotizaciones = makeCopy(this.realizarCotizacionXSolicitud.solicitud.productos);
+        var cotizaciones = this.realizarCotizacionXSolicitud.solicitud.productos;
         for (var i in cotizaciones){
             cotizaciones[i].contactos = [];
             for (var j in this.contactos){
@@ -130,7 +141,10 @@ app.controller('mainController',function(){
     this.quitarCotizacionRealizarCotizacionXSolicitud = function(cotizacion){
         var cotizaciones = this.realizarCotizacionXSolicitud.cotizaciones;
         var i = keyOfObject(cotizacion,cotizaciones);
-        this.i = i;
+        this.i = cotizaciones.splice(i,1);
+        if(cotizaciones.length == 1)
+            var tab = sharedVars.getMainTab();
+            tab = 5;
     };
 });
 app.controller('realizarCotizacionController',function(){
@@ -191,16 +205,16 @@ var productos = [
         }
     ];
 var solicitudes = [
-        {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Edificio', 'fecha': '01-01-2015', 'productos': [productos[0],productos[4],productos[3]]},
-        {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Autopista', 'fecha': '02-11-2015', 'productos': [productos[2],productos[1]]},
-        {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Autopista', 'fecha': '02-14-2015', 'productos': [productos[1],productos[3]]},
-        {'lugar': 'Bodega | Carrera 9  # 28 - 65', 'proyecto': 'Edificio', 'fecha': '12-12-2015', 'productos': [productos[4],productos[3]]},
-        {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Edificio', 'fecha': '12-03-2015', 'productos': [productos[0],productos[4]]},
-        {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Casa', 'fecha': '09-10-2015', 'productos': [productos[0],productos[2]]},
-        {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Casa', 'fecha': '05-01-2015', 'productos': [productos[4],productos[2]]},
-        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '05-05-2015', 'productos': [productos[2],productos[1]]},
-        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '11-04-2015', 'productos': [productos[3],productos[1]]},
-        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '12-07-2015', 'productos': [productos[2],productos[1]]},
+        {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Edificio', 'fecha': '01-01-2015', 'productos': [productos[0],productos[4],productos[3]],'estado':'pendiente'},
+        {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Autopista', 'fecha': '02-11-2015', 'productos': [productos[2],productos[1]],'estado':'pendiente'},
+        {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Autopista', 'fecha': '02-14-2015', 'productos': [productos[1],productos[3]],'estado':'pendiente'},
+        {'lugar': 'Bodega | Carrera 9  # 28 - 65', 'proyecto': 'Edificio', 'fecha': '12-12-2015', 'productos': [productos[4],productos[3]],'estado':'pendiente'},
+        {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Edificio', 'fecha': '12-03-2015', 'productos': [productos[0],productos[4]],'estado':'pendiente'},
+        {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Casa', 'fecha': '09-10-2015', 'productos': [productos[0],productos[2]],'estado':'pendiente'},
+        {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Casa', 'fecha': '05-01-2015', 'productos': [productos[4],productos[2]],'estado':'pendiente'},
+        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '05-05-2015', 'productos': [productos[2],productos[1]],'estado':'pendiente'},
+        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '11-04-2015', 'productos': [productos[3],productos[1]],'estado':'pendiente'},
+        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '12-07-2015', 'productos': [productos[2],productos[1]],'estado':'pendiente'},
     ];
 var proveedores = [
         {'razon_social':'cementos mx','sigla':'cmx','nit':'ADF55866','numero_verificacion':'3403055','lugar':'Casa | Avenida 15 #68 - 14','logo':''},
