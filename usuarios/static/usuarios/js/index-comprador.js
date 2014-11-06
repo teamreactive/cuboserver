@@ -34,11 +34,11 @@ var keyOfObject = function(obj, in_obj){
 };
 //----------services------//
  app.service('sharedVars',function(){
-    this.menuTab = 0;
+    this.menuTab = {'value':0};
     this.getMenuTab = function(){
         return this.menuTab;
     };
-    this.mainTab = 6;
+    this.mainTab = {'value':6};
     this.getMainTab = function(){
         return this.mainTab;
     };
@@ -48,19 +48,19 @@ var keyOfObject = function(obj, in_obj){
 app.controller('menuTabController',function(sharedVars){
     this.tab = sharedVars.getMenuTab();
     this.setTab = function(tab){
-        this.tab = tab;
+        this.tab['value'] = tab;
     };
     this.isTab = function(tab){
-        return this.tab == tab;
+        return this.tab['value'] == tab;
     };
 });
 app.controller('mainTabController',function(sharedVars){
     this.tab = sharedVars.getMainTab();
     this.setTab = function(tab){
-        this.tab = tab;
+        this.tab['value'] = tab;
     };
     this.isTab = function(tab){
-        return this.tab == tab;
+        return sharedVars.getMainTab()['value'] == tab;
     };
 });
 app.controller('mainController',function(sharedVars){
@@ -141,10 +141,9 @@ app.controller('mainController',function(sharedVars){
     this.quitarCotizacionRealizarCotizacionXSolicitud = function(cotizacion){
         var cotizaciones = this.realizarCotizacionXSolicitud.cotizaciones;
         var i = keyOfObject(cotizacion,cotizaciones);
-        this.i = cotizaciones.splice(i,1);
+        cotizaciones.splice(i,1);
         if(cotizaciones.length == 1)
-            var tab = sharedVars.getMainTab();
-            tab = 5;
+            sharedVars.getMainTab()['value'] = 5;
     };
 });
 app.controller('realizarCotizacionController',function(){
