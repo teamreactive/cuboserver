@@ -8,3 +8,8 @@ app.controller('MainTabController', function(){
 		return this.tab === tab;
 	};
 });
+app.controller('mainController',['$http',function($http){
+	$http.get('products.').success(function(data){
+		
+	});
+}]);

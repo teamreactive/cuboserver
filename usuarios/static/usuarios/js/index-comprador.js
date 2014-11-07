@@ -25,10 +25,11 @@ var makeCopy = function(from_obj, to_obj, attrs) {
     }
 };
 
-var makeArrayCopy = function(array) {
+var makeArrayCopy = function(from_array) {
     newarray = [];
-    for (var i=0; i<array.length; i++)
-        newarray[i] = array[i];
+    for (var i=0; i<from_array.length; i++)
+        newarray[i] = from_array[i];
+    return newarray;
 };
 
 var cleanObj = function(obj) {
@@ -40,6 +41,16 @@ var keyOfObject = function(obj, in_obj) {
     for (var i in in_obj)
         if(obj === in_obj[i] )
             return i;
+};
+var removeObj = function(obj, in_obj){
+    var i = keyOfObject(obj,in_obj);
+    in_obj.splice(i,1);
+};
+var getObjId = function(obj, in_array){
+    for (var i = 0; i<in_array.length; i++)
+        if (obj === in_array[i])
+            return i;
+    return -1;
 };
 
 /** 
@@ -59,9 +70,27 @@ var keyOfObject = function(obj, in_obj) {
         return this.mainTab;
     };
  });
+ app.service('cotizarSolicitudService',function(){
+    this.solicitud = {};
+    this.cotizarSolicitud= function(solicitud){
+        this.solicitud = solicitud;
+        var products = makeArrayCopy(solicitud.productos);
+        for(var i=0; i<products.length; i++)
+            if(products[i].estado == 'cotizado')
+                this.products.splice(i,1);
+        this.cotizaciones = [];
+        for (var i=0;i<products.length; i++){
+            var id = getObjId(products[i],productos);
+            var cotizacion = {}
+            cotizacion.productoId = id;
+            cotizacion
+        }
+        
+    };
+ });
 //-----------------------//
  //-------------------//
-app.controller('menuTabController',function(sharedVars){
+app.controller('menuTabController',function(sharedVars,cotizarSolicitudService){
     this.tab = sharedVars.getMenuTab();
     this.setTab = function(tab){
         this.tab['value'] = tab;
@@ -82,8 +111,18 @@ app.controller('mainTabController',function(sharedVars){
 });
 
 app.controller('mainController',function(sharedVars){
+    this.getSolicitudesPendientes = function(){
+        var solicitudesPendientes = [];
+        for (var i=0; i<solicitudes.length; i++){
+            var estado = solicitudes[i].estado;
+            if(estado == 'pendiente' || estado == 'parcialmente cotizada')
+                solicitudesPendientes.push(solicitudes[i]);
+
+        }
+        return solicitudesPendientes;
+    };
+    this.solicitudes = this.getSolicitudesPendientes();
     this.proveedores = proveedores;
-    this.solicitudes = solicitudes;
     this.contactos = contactos;
     this.productos = productos;
     this.familiasProveedor = familiasProveedor;
@@ -150,7 +189,13 @@ app.controller('mainController',function(sharedVars){
     this.setRealizarCotizacionXSolicitud = function(solicitud) {
         this.realizarCotizacionXSolicitud = {};
         this.realizarCotizacionXSolicitud.solicitud = solicitud;
-        var cotizaciones = this.realizarCotizacionXSolicitud.solicitud.productos;
+
+        var cotizaciones = makeArrayCopy(this.realizarCotizacionXSolicitud.solicitud.productos);
+        //---- quitar productos cotizados --//
+        for (var i = 0; i<cotizaciones.length; i++)
+            if (cotizaciones[i].estado == 'cotizado')
+                cotizaciones.splice(i,1);
+        //----------------------------------//
         for (var i in cotizaciones){
             cotizaciones[i].contactos = [];
             for (var j in this.contactos){
@@ -167,13 +212,29 @@ app.controller('mainController',function(sharedVars){
         contactos.splice(i,1);
     };
 
-    this.quitarCotizacionRealizarCotizacionXSolicitud = function(cotizacion) {
+    this.realizarCotizacionRealizarCotizacionXSolicitud = function(cotizacion) {
         var cotizaciones = this.realizarCotizacionXSolicitud.cotizaciones;
         var i = keyOfObject(cotizacion,cotizaciones);
         cotizaciones.splice(i,1);
+        var j = keyOfObject(cotizacion,this.realizarCotizacionXSolicitud.solicitud.productos)
+        var producto = this.realizarCotizacionXSolicitud.solicitud.productos[j];
+        producto.estado = 'cotizado';
         if(cotizaciones.length == 0)
             sharedVars.getMainTab()['value'] = 5;
+            var solicitud = this.realizarCotizacionXSolicitud.solicitud;
+            removeObj(solicitud,this.solicitudes);
+            solicitud.estado = 'cotizada';
     };
+    this.insertarContactoRealizarCotizacionXSolicitud = function(cotizacion){
+        cotizacion.contactos.push(cotizacion.nuevoContacto);
+        cotizacion.nuevoContacto = "";
+    };
+    
+});
+app.controller("realizarCotizacionXSolicitudController",function(sharedVars){
+    this.solicitud = sharedVars.solicitudACotizar;
+    this.productos = makeArrayCopy(this.solicitud.productos);
+
 });
 
 app.controller("realizarCotizacionController",function() {
@@ -251,7 +312,8 @@ var solicitudes = [
             productos[0],
             productos[4],
             productos[3]
-        ]
+        ],
+        "estado" : "pendiente"
     },
     {
         "lugar": "Oficina | Carrera 23 #124 - 23",
@@ -260,7 +322,8 @@ var solicitudes = [
         "productos": [
             productos[2],
             productos[1]
-        ]
+        ],
+        "estado" : "pendiente"
     },
     {
         "lugar": "Casa | Avenida 15 #68 - 14",
@@ -269,7 +332,8 @@ var solicitudes = [
         "productos": [
             productos[1],
             productos[3]
-        ]
+        ],
+        "estado" : "pendiente"
     },
     {
         "lugar": "Bodega | Carrera 9  # 28 - 65",
@@ -278,7 +342,8 @@ var solicitudes = [
         "productos": [
             productos[4],
             productos[3]
-        ]
+        ],
+        "estado" : "pendiente"
     },
     {
         "lugar": "Apartamento | Calle 166 #8H - 53",
@@ -287,7 +352,8 @@ var solicitudes = [
         "productos": [
             productos[0],
             productos[4]
-        ]
+        ],
+        "estado" : "pendiente"
     },
     {
         "lugar": "Apartamento | Calle 166 #8H - 53",
@@ -296,7 +362,8 @@ var solicitudes = [
         "productos": [
             productos[0],
             productos[2]
-        ]
+        ],
+        "estado" : "pendiente"
     },
     {
         "lugar": "Oficina | Carrera 23 #124 - 23",
@@ -305,7 +372,8 @@ var solicitudes = [
         "productos": [
             productos[4],
             productos[2]
-        ]
+        ],
+        "estado" : "pendiente"
     },
     {
         "lugar": "Almacen | Avenida 11 #231 - 44",
@@ -314,7 +382,8 @@ var solicitudes = [
         "productos": [
             productos[2],
             productos[1]
-        ]
+        ],
+        "estado" : "pendiente"
     },
     {
         "lugar": "Almacen | Avenida 11 #231 - 44",
@@ -323,7 +392,8 @@ var solicitudes = [
         "productos": [
             productos[3],
             productos[1]
-        ]
+        ],
+        "estado" : "pendiente"
     },
     {
         "lugar": "Almacen | Avenida 11 #231 - 44",
@@ -332,7 +402,8 @@ var solicitudes = [
         "productos": [
             productos[2],
             productos[1]
-        ]
+        ],
+        "estado" : "pendiente"
     }
 ];
 

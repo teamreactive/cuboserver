@@ -136,7 +136,6 @@
                 <!-- Main view -->
 
                 <div id='main' class='col-md-9' ng-controller='mainController as mainCtrl'>
-
                     <!-- Crear proveedor -->
 
                     <div ng-show='mainTabCtrl.isTab(1)'>
@@ -428,7 +427,7 @@
                                     <p><strong>Lugar:</strong> {{ solicitud.lugar }}</p>
                                     <p><strong>Proyecto:</strong> {{ solicitud.proyecto }}</p>
                                     <p><strong>Fecha:</strong> {{ solicitud.fecha }}</p>
-                                    <p><strong>Estado:</strong> Aprobada</p>
+                                    <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
                                     <strong>Comentarios:</strong>
                                     <p ng-show='solicitud.comentario != null'>{{ solicitud.comentario }}</p>
                                 </div>
@@ -437,7 +436,7 @@
                                     <strong>Productos</strong>
                                     <p ng-repeat='producto in solicitud.productos'>
                                         <span class='glyphicon glyphicon-record'></span>
-                                        {{ producto.nombre }} ({{ producto.cantidad }} {{ producto.unidad.nombre }})
+                                        {{ producto.nombre }} ({{ producto.cantidad }} {{ producto.unidad.nombre }} {{producto.estado}})
                                     </p>
                                 </div>
 
@@ -523,12 +522,15 @@
                     <!-- CotizarXSolicitud -->
 
                     <div id='realizarCotizacionXSolicitud' ng-show='mainTabCtrl.isTab(9)'>
-                        <div class='panel panel-default col-md-11' ng-repeat='cotizacion in mainCtrl.realizarCotizacionXSolicitud.cotizaciones'>
+                        <h2>Ya no sirve</h2>
+                        <div class='panel panel-default col-md-11' ng-repeat='cotizacion in mainCtrl.cotizaciones'>
                             <div class='panel-body'>
                                 <h3>{{cotizacion.nombre}}</h3>
                                 <h4>{{cotizacion.familiaProveedor}}</h4>
                                 <hr>
                                 <form name='cotizarXSolicitudForm' novalidate>
+                                    <label for='realizarCotizacionXSolicitudNuevoContacto'ng-model='cotizacion.nuevoContacto'>Insertar Contacto</label>
+                                    <select id = 'realizarCotizacionXSolicitudNuevoContacto'ng-model='cotizacion.nuevoContacto' ng-options='contacto.nombre+" ("+contacto.familiaProveedor+")" group by contacto.proveedor.razon_social for contacto in mainCtrl.contactos' ng-change='mainCtrl.insertarContactoRealizarCotizacionXSolicitud(cotizacion)'></select>
                                     <div ng-repeat='contacto in cotizacion.contactos'>
                                         <p><strong>Razon social:</strong> {{ contacto.proveedor.razon_social }}</p>
                                         <p><strong>Contacto:</strong> {{ contacto.nombre }} {{ contacto.apellido }}</p>
@@ -538,7 +540,7 @@
                                         <hr ng-hide='contacto == cotizacion.contactos[cotizacion.contactos.length-1]'>
                                     </div>
                                     <hr>
-                                    <button class='btn btn-default' ng-click='mainCtrl.quitarCotizacionRealizarCotizacionXSolicitud(cotizacion)'>
+                                    <button class='btn btn-default' ng-click='mainCtrl.realizarCotizacionRealizarCotizacionXSolicitud(cotizacion)'>
                                         Realizar Cotizacion
                                     </button>
                                 </form>
