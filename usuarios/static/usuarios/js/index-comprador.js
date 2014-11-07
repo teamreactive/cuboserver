@@ -38,19 +38,9 @@ var cleanObj = function(obj) {
 
 var keyOfObject = function(obj, in_obj) {
     for (var i in in_obj)
-<<<<<<< HEAD
-        if(obj[i] == obj) return i;
-    return "people"
-||||||| merged common ancestors
-        if(obj[i] == obj )
-            return i;
-    return "people"
-=======
         if(obj === in_obj[i] )
             return i;
->>>>>>> 5d886c0df40218efc7c1c4cdf4274633c2967d57
 };
-<<<<<<< HEAD
 
 /** 
  * ################################################ 
@@ -58,21 +48,6 @@ var keyOfObject = function(obj, in_obj) {
  * ################################################
 **/
 
-app.controller("menuTabController", function(){
-    this.tab = 0;
-    this.setTab = function(tab) { this.tab = tab; };
-    this.isTab = function(tab){ return this.tab == tab; };
-||||||| merged common ancestors
- //-------------------//
-app.controller('menuTabController',function(){
-    this.tab = 0;
-    this.setTab = function(tab){
-        this.tab = tab;
-    };
-    this.isTab = function(tab){
-        return this.tab == tab;
-    };
-=======
 //----------services------//
  app.service('sharedVars',function(){
     this.menuTab = {'value':0};
@@ -94,24 +69,8 @@ app.controller('menuTabController',function(sharedVars){
     this.isTab = function(tab){
         return this.tab['value'] == tab;
     };
->>>>>>> 5d886c0df40218efc7c1c4cdf4274633c2967d57
 });
-<<<<<<< HEAD
 
-app.controller("mainTabController", function() {
-    this.tab = 6;
-    this.setTab = function(tab){ this.tab = tab; };
-    this.isTab = function(tab){ return this.tab == tab; };
-||||||| merged common ancestors
-app.controller('mainTabController',function(){
-    this.tab = 6;
-    this.setTab = function(tab){
-        this.tab = tab;
-    };
-    this.isTab = function(tab){
-        return this.tab == tab;
-    };
-=======
 app.controller('mainTabController',function(sharedVars){
     this.tab = sharedVars.getMainTab();
     this.setTab = function(tab){
@@ -120,16 +79,9 @@ app.controller('mainTabController',function(sharedVars){
     this.isTab = function(tab){
         return sharedVars.getMainTab()['value'] == tab;
     };
->>>>>>> 5d886c0df40218efc7c1c4cdf4274633c2967d57
 });
-<<<<<<< HEAD
 
-app.controller("mainController",function() {
-||||||| merged common ancestors
-app.controller('mainController',function(){
-=======
 app.controller('mainController',function(sharedVars){
->>>>>>> 5d886c0df40218efc7c1c4cdf4274633c2967d57
     this.proveedores = proveedores;
     this.solicitudes = solicitudes;
     this.contactos = contactos;
@@ -291,7 +243,6 @@ var productos = [
 ];
 
 var solicitudes = [
-<<<<<<< HEAD
     {
         "lugar": "Casa | Avenida 15 #68 - 14",
         "proyecto": "Edificio",
@@ -385,31 +336,6 @@ var solicitudes = [
     }
 ];
 
-||||||| merged common ancestors
-        {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Edificio', 'fecha': '01-01-2015', 'productos': [productos[0],productos[4],productos[3]]},
-        {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Autopista', 'fecha': '02-11-2015', 'productos': [productos[2],productos[1]]},
-        {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Autopista', 'fecha': '02-14-2015', 'productos': [productos[1],productos[3]]},
-        {'lugar': 'Bodega | Carrera 9  # 28 - 65', 'proyecto': 'Edificio', 'fecha': '12-12-2015', 'productos': [productos[4],productos[3]]},
-        {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Edificio', 'fecha': '12-03-2015', 'productos': [productos[0],productos[4]]},
-        {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Casa', 'fecha': '09-10-2015', 'productos': [productos[0],productos[2]]},
-        {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Casa', 'fecha': '05-01-2015', 'productos': [productos[4],productos[2]]},
-        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '05-05-2015', 'productos': [productos[2],productos[1]]},
-        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '11-04-2015', 'productos': [productos[3],productos[1]]},
-        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '12-07-2015', 'productos': [productos[2],productos[1]]},
-    ];
-=======
-        {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Edificio', 'fecha': '01-01-2015', 'productos': [productos[0],productos[4],productos[3]],'estado':'pendiente'},
-        {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Autopista', 'fecha': '02-11-2015', 'productos': [productos[2],productos[1]],'estado':'pendiente'},
-        {'lugar': 'Casa | Avenida 15 #68 - 14', 'proyecto': 'Autopista', 'fecha': '02-14-2015', 'productos': [productos[1],productos[3]],'estado':'pendiente'},
-        {'lugar': 'Bodega | Carrera 9  # 28 - 65', 'proyecto': 'Edificio', 'fecha': '12-12-2015', 'productos': [productos[4],productos[3]],'estado':'pendiente'},
-        {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Edificio', 'fecha': '12-03-2015', 'productos': [productos[0],productos[4]],'estado':'pendiente'},
-        {'lugar': 'Apartamento | Calle 166 #8H - 53', 'proyecto': 'Casa', 'fecha': '09-10-2015', 'productos': [productos[0],productos[2]],'estado':'pendiente'},
-        {'lugar': 'Oficina | Carrera 23 #124 - 23', 'proyecto': 'Casa', 'fecha': '05-01-2015', 'productos': [productos[4],productos[2]],'estado':'pendiente'},
-        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '05-05-2015', 'productos': [productos[2],productos[1]],'estado':'pendiente'},
-        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '11-04-2015', 'productos': [productos[3],productos[1]],'estado':'pendiente'},
-        {'lugar': 'Almacen | Avenida 11 #231 - 44', 'proyecto': 'Hangar', 'fecha': '12-07-2015', 'productos': [productos[2],productos[1]],'estado':'pendiente'},
-    ];
->>>>>>> 5d886c0df40218efc7c1c4cdf4274633c2967d57
 var proveedores = [
     {
         "razon_social": "cementos mx",
