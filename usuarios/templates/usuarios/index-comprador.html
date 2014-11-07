@@ -69,17 +69,17 @@
                             <h3>Opciones</h3>
                             <hr>
                             <ul class='nav nav-pills nav-stacked'>
-                                <li class='menuTabCtrl.isTab(1) ? "active" : ""'>
+                                <li ng-class='menuTabCtrl.isTab(1) ? "active" : ""'>
                                     <a href ng-click='menuTabCtrl.setTab(1)'>
                                         Proveedores
                                     </a>
                                     <ul class='nav nav-pills nav-stacked' ng-show='menuTabCtrl.isTab(1)'>
-                                        <li class='mainTabCtrl.isTab(1) ? "active" : ""'>
+                                        <li ng-class='mainTabCtrl.isTab(1) ? "active" : ""'>
                                             <a href ng-click='mainTabCtrl.setTab(1)'>
                                                 Nuevo Proveedor
                                             </a>
                                         </li>
-                                        <li class='mainTabCtrl.isTab(2) ? "active" : ""'>
+                                        <li ng-class='mainTabCtrl.isTab(2) ? "active" : ""'>
                                             <a href ng-click='mainTabCtrl.setTab(2)'>
                                                 Actualizar Proveedor
                                             </a>
@@ -87,17 +87,17 @@
                                     </ul>
                                 </li>
 
-                                <li class='menuTabCtrl.isTab(2) ? "active" : ""'>
+                                <li ng-class='menuTabCtrl.isTab(2) ? "active" : ""'>
                                     <a href ng-click='menuTabCtrl.setTab(2)'>
                                         Contactos
                                     </a>
                                     <ul class='nav nav-pills nav-stacked' ng-show='menuTabCtrl.isTab(2)'>
-                                        <li class='mainTabCtrl.isTab(3) ? "active" : ""'>
+                                        <li ng-class='mainTabCtrl.isTab(3) ? "active" : ""'>
                                             <a href ng-click='mainTabCtrl.setTab(3)'>
                                                 Nuevo Contacto
                                             </a>
                                         </li>
-                                        <li class='mainTabCtrl.isTab(4) ? "active" : ""'>
+                                        <li ng-class='mainTabCtrl.isTab(4) ? "active" : ""'>
                                             <a href ng-click='mainTabCtrl.setTab(4)'>
                                                 Modificar Contacto
                                             </a>
@@ -105,25 +105,25 @@
                                     </ul>
                                 </li>
 
-                                <li class='mainTabCtrl.isTab(5) ? "active" : ""'>
+                                <li ng-class='mainTabCtrl.isTab(5) ? "active" : ""'>
                                     <a href ng-click='mainTabCtrl.setTab(5) ; menuTabCtrl.setTab(0)'>
                                         Solicitudes Pendientes
                                     </a>
                                 </li>
 
-                                <li class='mainTabCtrl.isTab(6) ? "active" : ""'>
+                                <li ng-class='mainTabCtrl.isTab(6) ? "active" : ""'>
                                     <a href ng-click='mainTabCtrl.setTab(6) ; menuTabCtrl.setTab(0)'>
                                         Ordenes de Compra
                                     </a>
                                 </li>
 
-                                <li class='mainTabCtrl.isTab(7) ? "active" : ""'>
+                                <li ng-class='mainTabCtrl.isTab(7) ? "active" : ""'>
                                     <a href ng-click='mainTabCtrl.setTab(7) ; menuTabCtrl.setTab(0)'>
                                         Realizar Cotizacion
                                     </a>
                                 </li>
 
-                                <li class='mainTabCtrl.isTab(8) ? "active" : ""'>
+                                <li ng-class='mainTabCtrl.isTab(8) ? "active" : ""'>
                                     <a href ng-click='mainTabCtrl.setTab(8) ; menuTabCtrl.setTab(0)'>
                                         Ingresar Cotizacion
                                     </a>
@@ -182,7 +182,7 @@
 
                                     <div class='form-group'>
                                         <label for='logoProveedor'>Logo *</label>
-                                        <input type='file' id='logoProveedor' ng-model='mainCtrl.crearProveedorForm.logo' required>
+                                        <input type='file' id='logoProveedor' ng-model='mainCtrl.crearProveedorForm.logo'>
                                     </div>
 
                                     <button class='btn btn-default' ng-click='mainCtrl.crearProveedor()' ng-disabled='!crearProveedorForm.$valid'>
@@ -239,7 +239,7 @@
 
                                     <div class='form-group'>
                                         <label for='logoAP'>Logo *</label>
-                                        <input type='file' id='logoAP' ng-model='mainCtrl.actualizarProveedorForm.lugar' required>
+                                        <input type='file' id='logoAP' ng-model='mainCtrl.actualizarProveedorForm.logo'>
                                     </div>
 
                                     <button class='btn btn-default' ng-click='mainCtrl.actualizarProveedor()' ng-disabled='!actualizarProveedorForm.$valid'>
@@ -495,7 +495,9 @@
                                     <div ng-repeat='proveedor in mainCtrl.realizarCotizacion.proveedores'>
                                         <div class='form-group'>
                                             <p>{{ proveedor.razon_social }}</p>
-                                            <button ng-click='mainCtrl.quitarProveedorRealizarCotizacion(proveedor); realizarCotizacionCtrl.quitarProveedor(proveedor)'>Eliminar</button>
+                                            <button class='btn btn-default' ng-click='mainCtrl.quitarProveedorRealizarCotizacion(proveedor); realizarCotizacionCtrl.quitarProveedor(proveedor)'>
+                                                Eliminar
+                                            </button>
                                         </div>
                                     </div>
 
@@ -525,15 +527,18 @@
                             <div class='panel-body'>
                                 <h3>{{cotizacion.nombre}}</h3>
                                 <h4>{{cotizacion.familiaProveedor}}</h4>
+                                <hr>
                                 <form name='cotizarXSolicitudForm' novalidate>
                                     <div ng-repeat='contacto in cotizacion.contactos'>
-                                        <h5>{{ contacto.proveedor.razon_social }}</h5>
-                                        <p>{{ contacto.nombre }} {{ contacto.apellido }}</p>
-                                        <button ng-click='mainCtrl.quitarContactoRealizarCotizacionXSolicitud(cotizacion,contacto)'>
+                                        <p><strong>Razon social:</strong> {{ contacto.proveedor.razon_social }}</p>
+                                        <p><strong>Contacto:</strong> {{ contacto.nombre }} {{ contacto.apellido }}</p>
+                                        <button class='btn btn-default' ng-click='mainCtrl.quitarContactoRealizarCotizacionXSolicitud(cotizacion,contacto)'>
                                             Eliminar contacto
                                         </button>
+                                        <hr ng-hide='contacto == cotizacion.contactos[cotizacion.contactos.length-1]'>
                                     </div>
-                                    <button ng-click='mainCtrl.quitarCotizacionRealizarCotizacionXSolicitud(cotizacion)'>
+                                    <hr>
+                                    <button class='btn btn-default' ng-click='mainCtrl.quitarCotizacionRealizarCotizacionXSolicitud(cotizacion)'>
                                         Realizar Cotizacion
                                     </button>
                                 </form>
