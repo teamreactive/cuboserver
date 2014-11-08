@@ -1,0 +1,85 @@
+{% verbatim %}
+<!doctype html>
+<html ng-app='AprobadorDeSolicitudes'>
+<head>
+	<meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name='description' content='Compras 10.0 official website'>
+    <meta name='author' content='Reactive'>
+	{% endverbatim %}
+	{% load staticfiles %}
+	<script src='//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+    <script src='//ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js'></script>
+    <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.jquery.min.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/chosen/1.0/chosen.proto.min.js'></script>
+    <script src='//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+    <script src='{% static 'usuarios/js/index-aprobador-de-solicitudes.js' %}'></script>
+	<title></title>
+</head>
+{% verbatim %}
+<body>
+	<div ng-controller='tabController as tabCtrl'>
+		<h1>{{tabCtrl.tab}}</h1>
+		<div id='menu'>
+			<ul id='menu_options'>
+				<li>
+					<a href ng-click='tabCtrl.setTab(1)'>solicitudes pendientes</a>
+				</li>
+				<li>
+					<a href ng-click='tabCtrl.setTab(2)'>Historial de Compras</a>
+				</li>
+			</ul>
+		</div>
+		<div ng-controller='mainController as mainCtrl'>
+			<div id='solicitudes_pendientes' ng-show='tabCtrl.isTab(1)'>
+				<h2>Solicitudes Pendientes</h2>
+				<div id='solicitud_pendiente' ng-repeat='solicitud in mainCtrl.solicitudes'>
+					<div class='col-md-6'>
+                            <p><strong>Lugar:</strong> {{ solicitud.lugar }}</p>
+                            <p><strong>Proyecto:</strong> {{ solicitud.proyecto }}</p>
+                            <p><strong>Fecha:</strong> {{ solicitud.fecha }}</p>
+                            <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
+                            <strong>Comentarios:</strong>
+                            <p ng-show='solicitud.comentario != null'>{{ solicitud.comentario }}</p>
+                        </div>
+
+                        <div class='col-md-6'>
+                            <strong>Productos</strong>
+                            <p ng-repeat='producto in solicitud.productos'>
+                                <span class='glyphicon glyphicon-record'></span>
+                                {{ producto.nombre }} ({{ producto.cantidad }} {{ producto.unidad.nombre }} {{producto.estado}})
+                            </p>
+                        </div>
+                        <button>Aprobar</button>
+                        <div ng-show='solicitud.estado == "en rechazo"'>
+                        	<label for='rechazo'>Ingrese el motivo de rechazo:</label>
+                        	<input id = 'rechazo' ng-model='solicitud.mensaje'>
+                        </div>
+                        <button ng-click='mainCtrl.rechazarSolicitud(solicitud)'>Rechazar</button>
+                        <div ng-show='solicitud.estado == "en pregunta"'>
+                        	<label for='pregunta'>Ingrese su pregunta:</label>
+                        	<input id = 'pregunta' ng-model='solicitud.mensaje'>
+                        </div>
+                        <button ng-click='mainCtrl.preguntarSolicitud(solicitud)'>Preguntar</button>
+                    </div>
+				</div>
+			</div>
+			<div id='historial_de_compras' ng-show='tabCtrl.isTab(2)'>
+				<h2>Historial de compras</h2>
+				<div id='menu_historial_de_compras'>
+					<ul>
+						<li>
+							<a href >Proyectos</a>
+						</li>
+						<li>
+							<a href >Familias Proveedor</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+{% endverbatim %}
+</html>
