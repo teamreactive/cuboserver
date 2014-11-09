@@ -32,6 +32,8 @@ class Solicitud(models.Model):
 
     class Meta:
         db_table = 'solicitud'
+
+        
 class ProductoXSolicitud(models.Model):
     linea = models.IntegerField()
     producto = models.ForeignKey(PrecioxProducto)

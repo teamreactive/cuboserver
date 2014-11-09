@@ -1,12 +1,10 @@
-from django.conf.urls import url, include
-from rest_framework import routers
-from cotizaciones import views
+from django.conf.urls.defaults import *
+from tastypie.api import Api
+from .api import CotizacionResource
 
+v1_api = Api(api_name='v1')
+v1_api.register(CotizacionResource())
 
-routers = routers.DefaultRouter()
-routers.register(r'cotizaciones', views.CotizacionViewSet)
-
-
-cotizacionespatterns = [
-	url(r'^', include(routers.urls)),
-]
+urlpatterns = patterns('',
+    (r'^api/', include(v1_api.urls)),
+)

@@ -1,12 +1,14 @@
-from django.conf.urls import url, include
-from rest_framework import routers
-from productos import views
+from django.conf.urls.defaults import *
+from tastypie.api import Api
+from .api import *
 
+v1_api = Api(api_name='v1')
+v1_api.register(ProductoResource())
+v1_api.register(NombreProductoResource())
+v1_api.register(FotoProductoResource())
+v1_api.register(PrecioProductoResource())
+v1_api.register(PrecioMesProductoResource())
 
-routers = routers.DefaultRouter()
-routers.register(r'productos', views.ProductoViewSet)
-
-
-productospatterns = [
-	url(r'^', include(routers.urls)),
-]
+urlpatterns = patterns('',
+    (r'^api/', include(v1_api.urls)),
+)

@@ -1,12 +1,10 @@
-from django.conf.urls import url, include
-from rest_framework import routers
-from contactos import views
+from django.conf.urls.defaults import *
+from tastypie.api import Api
+from .api import ContactoResource
 
+v1_api = Api(api_name='v1')
+v1_api.register(ContactoResource())
 
-routers = routers.DefaultRouter()
-routers.register(r'contactos', views.ContactoViewSet)
-
-
-contactospatterns = [
-	url(r'^', include(routers.urls)),
-]
+urlpatterns = patterns('',
+    (r'^api/', include(v1_api.urls)),
+)
