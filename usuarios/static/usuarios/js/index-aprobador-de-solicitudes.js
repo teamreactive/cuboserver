@@ -49,6 +49,15 @@ app.controller('mainController', function(){
 			soicitud.estado = 'aprobada';
 	};
 });
+app.controller('historialTabController',function(){
+	this.tab = 0;
+	this.setTab = function(tab){
+		this.tab = tab;
+	};
+	this.isTab = function(tab){
+		return this.tab == tab;
+	};
+});
 var familiasProveedor = [
     "Farmacia",
     "Papeleria",
@@ -196,3 +205,145 @@ var solicitudes = [
         "estado" : "pendiente"
     }
 ];
+var proyectos = [
+			{
+                "nombre": "Edificio"
+            },
+            {
+                "nombre": "Autopista"
+            },
+            {
+                "nombre": "Carretera"
+            },
+            {
+            	"nombre": "Bodega"
+            }
+];
+var centroDeCostos = [
+			{
+                "nombre": "Centro de papeleria"
+            },
+            {
+                "nombre": "Centro de ferreteria"
+            },
+            {
+                "nombre": "Centro de farmacia"
+            }
+];
+var equipos = [
+			{
+                "nombre": "Centro de papeleria"
+            },
+            {
+                "nombre": "Centro de ferreteria"
+            },
+            {
+                "nombre": "Centro de farmacia"
+            }
+];
+var compras = [
+	{
+		"producto": productos[0],
+		"precio": 300000,
+		"fecha": {
+			"mes": 01,
+			"ano": 2014,
+			"dia": 01
+		}
+		"proyecto": proyectos[0]
+	},
+	{
+		"producto": productos[1],
+		"precio": 450000,
+		"fecha": {
+			"mes": 11,
+			"ano": 2014,
+			"dia": 03
+		}
+		"proyecto": proyectos[0]
+	},
+	{
+		"producto": productos[0],
+		"precio": 3670000,
+		"fecha": {
+			"mes": 12,
+			"ano": 2013,
+			"dia": 03
+		}
+		"proyecto": proyectos[0]
+	},
+	{
+		"producto": productos[1],
+		"precio": 3000,
+		"fecha": {
+			"mes": 05,
+			"ano": 2014,
+			"dia": 12
+		}
+		"proyecto": proyectos[1]
+	},
+	{
+		"producto": productos[0],
+		"precio": 890000,
+		"fecha": {
+			"mes": 06,
+			"ano": 2011,
+			"dia": 02
+		}
+		"proyecto": proyectos[1]
+	},
+	{
+		"producto": productos[0],
+		"precio": 340000,
+		"fecha": {
+			"mes": 05,
+			"ano": 2014,
+			"dia": 31
+		}
+		"proyecto": proyectos[3]
+	},
+	{
+		"producto": productos[0],
+		"precio": 340000,
+		"fecha": {
+			"mes": 08,
+			"ano": 2013,
+			"dia": 31
+		}
+		"centroDeCosto": centroDeCostos[2]
+	},
+	{
+		"producto": productos[0],
+		"precio": 340000,
+		"fecha": {
+			"mes": 02,
+			"ano": 2014,
+			"dia": 14
+		}
+		"centroDeCosto": centroDeCostos[1]
+	},
+	{
+		"producto": productos[0],
+		"precio": 340000,
+		"fecha": {
+			"mes": 06,
+			"ano": 2014,
+			"dia": 12
+		}
+		"centroDeCosto": centroDeCostos[0]
+	},
+	{
+		"producto": productos[0],
+		"precio": 340000,
+		"fecha": {
+			"mes": 05,
+			"ano": 2014,
+			"dia": 31
+		}
+		"centroDeCosto": centroDeCostos[1]
+	}
+];
+
+
+
+

@@ -34,7 +34,6 @@
 {% verbatim %}
 <body>
 	<div ng-controller='tabController as tabCtrl'>
-
 		<div id='menu'>
 			<ul id='menu_options'>
 				<li>
@@ -81,15 +80,49 @@
 			</div>
 			<div id='historial_de_compras' ng-show='tabCtrl.isTab(2)'>
 				<h2>Historial de compras</h2>
-				<div id='menu_historial_de_compras'>
-					<ul>
-						<li>
-							<a href >Proyectos</a>
-						</li>
-						<li>
-							<a href >Familias Proveedor</a>
-						</li>
-					</ul>
+				<div ng-controller='historialTabController as historialTabCtrl'>
+					<div id='menu_historial_de_compras'>
+						<ul>
+							<li>
+								<a href ng-click='historialTabCtrl.setTab(0)'>General</a>
+							</li>
+							<li>
+								<a href ng-click='historialTabCtrl.setTab(1)'>Proyectos</a>
+							</li>
+							<li>
+								<a href ng-click='historialTabCtrl.setTab(2)'>Familias Proveedor</a>
+							</li>
+							<li>
+								<a href ng-click='historialTabCtrl.setTab(3)'>Centros de Costo</a>
+							</li>
+							<li>
+								<a href ng-click='historialTabCtrl.setTab(4)'>Equipos</a>
+							</li>
+							<li>
+								<a href ng-click='historialTabCtrl.setTab(5)'>Productos</a>
+							</li>
+						</ul>
+					</div>
+					<div id='main_historial_de_compras'>
+						<div ng-show='historialTabCtrl.isTab(0)'>
+							<h3>Historial General</h3>
+						</div>
+						<div ng-show='historialTabCtrl.isTab(1)'>
+							<h3>Proyectos</h3>
+						</div>
+						<div ng-show='historialTabCtrl.isTab(2)'>
+							<h3>Familias Proveedor</h3>
+						</div>
+						<div ng-show='historialTabCtrl.isTab(3)'>
+							<h3>Centros de Costo</h3>
+						</div>
+						<div ng-show='historialTabCtrl.isTab(4)'>
+							<h3>Equipo</h3>
+						</div>
+						<div ng-show='historialTabCtrl.isTab(5)'>
+							<h3>Productos</h3>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
