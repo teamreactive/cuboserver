@@ -17,7 +17,7 @@ app.controller('tabController', function(){
 	};
 });
 
-app.controller('mainController', funtion(){
+app.controller('mainController', function(){
 	this.solicitudes = makeArrayCopy(solicitudes);
 	this.aprobarSolicitud = function(solicitud){
 		var i =this.solicitudes.indexOf(solicitud);
