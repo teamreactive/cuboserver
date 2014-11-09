@@ -34,7 +34,7 @@
 {% verbatim %}
 <body>
 	<div ng-controller='tabController as tabCtrl'>
-		<h1>{{tabCtrl.tab}}</h1>
+
 		<div id='menu'>
 			<ul id='menu_options'>
 				<li>
@@ -65,17 +65,17 @@
                                 {{ producto.nombre }} ({{ producto.cantidad }} {{ producto.unidad.nombre }} {{producto.estado}})
                             </p>
                         </div>
-                        <button>Aprobar</button>
+                        <button ng-click='mainCtrl.aprobarSolicitud(solicitud)' ng-show='solicitud.estado == "pendiente"'>Aprobar</button>
                         <div ng-show='solicitud.estado == "en rechazo"'>
                         	<label for='rechazo'>Ingrese el motivo de rechazo:</label>
                         	<input id = 'rechazo' ng-model='solicitud.mensaje'>
                         </div>
-                        <button ng-click='mainCtrl.rechazarSolicitud(solicitud)'>Rechazar</button>
+                        <button ng-click='mainCtrl.rechazarSolicitud(solicitud)' ng-show='solicitud.estado == "pendiente" || solicitud.estado == "en rechazo" '>Rechazar</button>
                         <div ng-show='solicitud.estado == "en pregunta"'>
                         	<label for='pregunta'>Ingrese su pregunta:</label>
                         	<input id = 'pregunta' ng-model='solicitud.mensaje'>
                         </div>
-                        <button ng-click='mainCtrl.preguntarSolicitud(solicitud)'>Preguntar</button>
+                        <button ng-show='solicitud.estado == "pendiente" || solicitud.estado == "en pregunta" ' ng-click='mainCtrl.preguntarSolicitud(solicitud)'>Preguntar</button>
                     </div>
 				</div>
 			</div>

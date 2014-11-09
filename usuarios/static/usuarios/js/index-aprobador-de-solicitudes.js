@@ -43,6 +43,11 @@ app.controller('mainController', function(){
 			solicitud.estado = 'en pregunta';
 		}
 	};
+	this.aprobarSolicitud = function(solicitud){
+		var i =this.solicitudes.indexOf(solicitud);
+			this.solicitudes.splice(i,1);
+			soicitud.estado = 'aprobada';
+	};
 });
 var familiasProveedor = [
     "Farmacia",
