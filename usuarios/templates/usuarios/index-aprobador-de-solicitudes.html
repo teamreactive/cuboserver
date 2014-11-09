@@ -50,7 +50,7 @@
 				<div id='solicitud_pendiente' ng-repeat='solicitud in mainCtrl.solicitudes'>
 					<div class='col-md-6'>
                             <p><strong>Lugar:</strong> {{ solicitud.lugar }}</p>
-                            <p><strong>Proyecto:</strong> {{ solicitud.proyecto }}</p>
+                            <p><strong>producto:</strong> {{ solicitud.producto }}</p>
                             <p><strong>Fecha:</strong> {{ solicitud.fecha }}</p>
                             <p><strong>Estado:</strong> {{ solicitud.estado }}</p>
                             <strong>Comentarios:</strong>
@@ -78,49 +78,107 @@
                     </div>
 				</div>
 			</div>
-			<div id='historial_de_compras' ng-show='tabCtrl.isTab(2)'>
+			<div id='historial_de_compras' ng-show='tabCtrl.isTab(2)' ng-controller='historialController as historialCtrl'>
 				<h2>Historial de compras</h2>
 				<div ng-controller='historialTabController as historialTabCtrl'>
 					<div id='menu_historial_de_compras'>
 						<ul>
 							<li>
-								<a href ng-click='historialTabCtrl.setTab(0)'>General</a>
+								<a href ng-click='historialTabCtrl.setTab(0); historialCtrl.setGraphics("general")'>General</a>
 							</li>
 							<li>
-								<a href ng-click='historialTabCtrl.setTab(1)'>Proyectos</a>
+								<a href ng-click='historialTabCtrl.setTab(1); historialCtrl.setGraphics("proyecto")'>Proyectos</a>
 							</li>
 							<li>
-								<a href ng-click='historialTabCtrl.setTab(2)'>Familias Proveedor</a>
+								<a href ng-click='historialTabCtrl.setTab(2); historialCtrl.setGraphics("familiaProveedor")'>Familias Proveedor</a>
 							</li>
 							<li>
-								<a href ng-click='historialTabCtrl.setTab(3)'>Centros de Costo</a>
+								<a href ng-click='historialTabCtrl.setTab(3); historialCtrl.setGraphics("centroDeCostos")'>Centros de Costo</a>
 							</li>
 							<li>
-								<a href ng-click='historialTabCtrl.setTab(4)'>Equipos</a>
+								<a href ng-click='historialTabCtrl.setTab(4); historialCtrl.setGraphics("equipo")'>Equipos</a>
 							</li>
 							<li>
-								<a href ng-click='historialTabCtrl.setTab(5)'>Productos</a>
+								<a href ng-click='historialTabCtrl.setTab(5); historialCtrl.setGraphics("producto")'>Productos</a>
 							</li>
 						</ul>
 					</div>
 					<div id='main_historial_de_compras'>
 						<div ng-show='historialTabCtrl.isTab(0)'>
-							<h3>Historial General</h3>
+							<h3>General</h3>
+								<h4>Año Transcurrido</h4>
+								<p>{{historialCtrl.sumYear}}</p>
+								<h4>Ultimo mes</h4>
+								<p>{{historialCtrl.sumMonth}}</p>
+								<h4>Pendientes de Aprobar</h4>
+								<p>{{historialCtrl.sumPendientes}}</p>
+							<div class='graficos'>
+							</div>
 						</div>
 						<div ng-show='historialTabCtrl.isTab(1)'>
 							<h3>Proyectos</h3>
+							<h2>{{historialCtrl.proyecto.nombre}}</h2>
+							<select ng-options='proyecto.nombre for proyecto in historialCtrl.proyectos' ng-model='historialCtrl.proyecto' ng-change='historialCtrl.setGraphics("proyecto")'></select>
+							<div class='graficos'>
+								<h4>Año Transcurrido</h4>
+								<p>{{historialCtrl.sumYear}}</p>
+								<h4>Ultimo mes</h4>
+								<p>{{historialCtrl.sumMonth}}</p>
+								<h4>Pendientes de Aprobar</h4>
+								<p>{{historialCtrl.sumPendientes}}</p>
+							</div>
 						</div>
 						<div ng-show='historialTabCtrl.isTab(2)'>
 							<h3>Familias Proveedor</h3>
+							<h2>{{historialCtrl.familiaProveedor.nombre}}</h2>
+							<select ng-options='familia.nombre for familia in historialCtrl.familiasProveedor' ng-model='historialCtrl.familiaProveedor' ng-change='historialCtrl.setGraphics("familiaProveedor")'></select>
+							<div class='graficos'>
+								<h4>Año Transcurrido</h4>
+								<p>{{historialCtrl.sumYear}}</p>
+								<h4>Ultimo mes</h4>
+								<p>{{historialCtrl.sumMonth}}</p>
+								<h4>Pendientes de Aprobar</h4>
+								<p>{{historialCtrl.sumPendientes}}</p>
+							</div>
 						</div>
 						<div ng-show='historialTabCtrl.isTab(3)'>
 							<h3>Centros de Costo</h3>
+							<h2>{{historialCtrl.centroDeCosto.nombre}}</h2>
+							<select ng-options='centro.nombre for centro in historialCtrl.centroDeCostos' ng-model='historialCtrl.centroDeCosto' ng-change='historialCtrl.setGraphics("centroDeCostos")'></select>
+							<div class='graficos'>
+								<h4>Año Transcurrido</h4>
+								<p>{{historialCtrl.sumYear}}</p>
+								<h4>Ultimo mes</h4>
+								<p>{{historialCtrl.sumMonth}}</p>
+								<h4>Pendientes de Aprobar</h4>
+								<p>{{historialCtrl.sumPendientes}}</p>
+							</div>
 						</div>
 						<div ng-show='historialTabCtrl.isTab(4)'>
 							<h3>Equipo</h3>
+							<h2>{{historialCtrl.equipo.nombre}}</h2>
+							<select ng-options='equipo.nombre for equipo in historialCtrl.equipos' ng-model='historialCtrl.equipo' ng-change='historialCtrl.setGraphics("equipo")'></select>
+							<div class='graficos'>
+								<h4>Año Transcurrido</h4>
+								<p>{{historialCtrl.sumYear}}</p>
+								<h4>Ultimo mes</h4>
+								<p>{{historialCtrl.sumMonth}}</p>
+								<h4>Pendientes de Aprobar</h4>
+								<p>{{historialCtrl.sumPendientes}}</p>
+							</div>
 						</div>
 						<div ng-show='historialTabCtrl.isTab(5)'>
 							<h3>Productos</h3>
+							<h2>{{historialCtrl.producto.nombre}}</h2>
+							<select ng-options='producto.nombre for producto in historialCtrl.productos' ng-model='historialCtrl.producto' ng-change='historialCtrl.setGraphics("producto")'></select>
+							<div class='graficos'>
+								<h4>Año Transcurrido</h4>
+								<p>{{historialCtrl.sumYear}}</p>
+								<h4>Ultimo mes</h4>
+								<p>{{historialCtrl.sumMonth}}</p>
+								<h4>Pendientes de Aprobar</h4>
+								<p>{{historialCtrl.sumPendientes}}</p>
+							</div>
 						</div>
 					</div>
 				</div>
