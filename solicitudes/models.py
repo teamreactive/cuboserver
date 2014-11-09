@@ -5,7 +5,7 @@ from lugares.models import Lugar
 from usuarios.models import Usuario
 from centrosdecostos.models import CentroDeCosto
 from equipos.models import Equipo
-from productos.models import Producto, PrecioxProducto
+from productos.models import Producto, UnidadxProducto
 
 
 class Solicitud(models.Model):
@@ -34,7 +34,7 @@ class Solicitud(models.Model):
         db_table = 'solicitud'
 class ProductoXSolicitud(models.Model):
     linea = models.IntegerField()
-    producto = models.ForeignKey(PrecioxProducto)
+    producto = models.ForeignKey(UnidadXProducto)
     cantidad = models.DecimalField(max_digits=7, decimal_places=2)
     solicitud = models.ForeignKey(Solicitud)
 

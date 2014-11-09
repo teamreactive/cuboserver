@@ -1,8 +1,8 @@
 from django.db import models
 
 from datetime import datetime
-from productos.models import Producto
 from proveedores.models import Proveedor
+from solicitudes.models import ProductoXSolicitud
 
 
 class Cotizacion(models.Model):
@@ -17,7 +17,7 @@ class Cotizacion(models.Model):
         ('2', 'contado'),
         ('3', 'dias'),
     )
-    producto = models.ForeignKey(Producto, on_delete=models.PROTECT)
+    producto = models.ForeignKey(ProductoXSolicitud, on_delete=models.PROTECT)
     precio_unitario = models.DecimalField(max_digits=12,decimal_places=2)
     iva = models.CharField(max_length=1, choices=IVAS)
     referencia = models.CharField(max_length=25)

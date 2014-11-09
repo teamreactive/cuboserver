@@ -48,7 +48,7 @@ class FotosxProducto(models.Model):
         db_table = 'fotos_por_producto'
 
 
-class PrecioxProducto(models.Model):
+class  UnidadXProducto(models.Model):
     producto = models.ForeignKey(Producto)
     unidad = models.CharField(max_length=10)
     talla = models.CharField(max_length=10,null=True,blank=True) # Ask
