@@ -5,7 +5,7 @@ from lugares.models import Lugar
 from usuarios.models import Usuario
 from centrosdecostos.models import CentroDeCosto
 from equipos.models import Equipo
-from productos.models import Producto, UnidadxProducto
+from productos.models import Producto, UnidadXProducto
 
 
 class Solicitud(models.Model):
@@ -25,7 +25,7 @@ class Solicitud(models.Model):
     centro_de_costo = models.ForeignKey(CentroDeCosto, related_name='Solicitud.centro_de_costo', null=True)
     equipo = models.ForeignKey(Equipo, related_name='Solicitud.equipo', null=True)
     proyecto = models.CharField(max_length=25)
-    productos = models.ManyToManyField(PrecioxProducto, through='ProductoXSolicitud')
+    productos = models.ManyToManyField(UnidadXProducto, through='ProductoXSolicitud')
 
     def __unicode__(self):
         return '%s - %s - %s' % (self.estado, self.solicitante, self.fecha_creacion)
