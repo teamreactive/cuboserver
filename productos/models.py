@@ -48,7 +48,7 @@ class FotosxProducto(models.Model):
         db_table = 'fotos_por_producto'
 
 
-class PrecioxProducto(models.Model):
+class  UnidadXProducto(models.Model):
     producto = models.ForeignKey(Producto)
     unidad = models.CharField(max_length=10)
     talla = models.CharField(max_length=10,null=True,blank=True) # Ask
@@ -57,7 +57,7 @@ class PrecioxProducto(models.Model):
         db_table = 'precio_producto'
 
 class PrecioProductoXMes(models.Model):
-    producto = models.ForeignKey(PrecioxProducto)
+    producto = models.ForeignKey(UnidadXProducto)
     mes = models.CharField(max_length = 2) # 1,2,3,4,5,6,7,8,9,10,11,12
     precio = models.FloatField()
 

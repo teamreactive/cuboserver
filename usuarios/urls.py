@@ -12,5 +12,7 @@ usuariospatterns = [
 	url(r'^solicitante/$', views.HomeView.as_view()),
 	url(r'^codificador/$', views.HomeView2.as_view()),
 	url(r'^comprador/$', views.HomeView3.as_view()),
+	url(r'^aprobador-de-solicitudes$', views.HomeView4.as_view()),
+	url(r'^aprobador-de-compra$', views.HomeView5.as_view()),
 	url(r'^', include(routers.urls)),
 ]

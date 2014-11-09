@@ -25,10 +25,11 @@ var makeCopy = function(from_obj, to_obj, attrs) {
     }
 };
 
-var makeArrayCopy = function(array) {
+var makeArrayCopy = function(from_array) {
     newarray = [];
-    for (var i=0; i<array.length; i++)
-        newarray[i] = array[i];
+    for (var i=0; i<from_array.length; i++)
+        newarray[i] = from_array[i];
+    return newarray;
 };
 
 var cleanObj = function(obj) {
@@ -40,6 +41,16 @@ var keyOfObject = function(obj, in_obj) {
     for (var i in in_obj)
         if(obj === in_obj[i] )
             return i;
+};
+var removeObj = function(obj, in_obj){
+    var i = keyOfObject(obj,in_obj);
+    in_obj.splice(i,1);
+};
+var getObjId = function(obj, in_array){
+    for (var i = 0; i<in_array.length; i++)
+        if (obj === in_array[i])
+            return i;
+    return -1;
 };
 
 /** 
@@ -59,9 +70,17 @@ var keyOfObject = function(obj, in_obj) {
         return this.mainTab;
     };
  });
+ app.service('cotizarSolicitudService',function(){
+    this.vars = {}; 
+    this.setSolicitud = function(solicitud){
+        this.vars.solicitud = solicitud;
+
+    };
+        
+ });
 //-----------------------//
  //-------------------//
-app.controller('menuTabController',function(sharedVars){
+app.controller('menuTabController',function(sharedVars,cotizarSolicitudService){
     this.tab = sharedVars.getMenuTab();
     this.setTab = function(tab){
         this.tab['value'] = tab;
@@ -81,9 +100,29 @@ app.controller('mainTabController',function(sharedVars){
     };
 });
 
-app.controller('mainController',function(sharedVars){
+app.controller('mainController',function(sharedVars,cotizarSolicitudService){
+    this.getSolicitudesPendientes = function(){
+        var solicitudesPendientes = [];
+        for (var i=0; i<solicitudes.length; i++){
+            var solicitud = {};
+            var estado = solicitudes[i].estado;
+            if(estado == 'pendiente' || estado == 'parcialmente cotizada'){
+                this.getProductosXSolicitud(solicitudes[i]);
+                solicitudesPendientes.push(solicitudes[i]);
+            }
+        }
+        return solicitudesPendientes;
+    };
+    this.getProductosXSolicitud = function(solicitud){
+        solicitud.productoXSolicitud = [];
+        for (var i=0; i<productoXSolicitud.length; i++){
+            if(solicitud == productoXSolicitud[i].solicitud){
+                solicitud.productoXSolicitud.push(productoXSolicitud[i]);
+            }
+        }
+    };
+    this.solicitudes = this.getSolicitudesPendientes();
     this.proveedores = proveedores;
-    this.solicitudes = solicitudes;
     this.contactos = contactos;
     this.productos = productos;
     this.familiasProveedor = familiasProveedor;
@@ -147,18 +186,8 @@ app.controller('mainController',function(sharedVars){
         this.realizarCotizacion.proveedores = [];
     };
 
-    this.setRealizarCotizacionXSolicitud = function(solicitud) {
-        this.realizarCotizacionXSolicitud = {};
-        this.realizarCotizacionXSolicitud.solicitud = solicitud;
-        var cotizaciones = this.realizarCotizacionXSolicitud.solicitud.productos;
-        for (var i in cotizaciones){
-            cotizaciones[i].contactos = [];
-            for (var j in this.contactos){
-                if(contactos[j].familiaProveedor == cotizaciones[i].familiaProveedor)
-                    cotizaciones[i].contactos.push(contactos[j]);
-            }
-        }
-        this.realizarCotizacionXSolicitud.cotizaciones = cotizaciones;
+    this.cotizarSolicitud = function(solicitud) {
+        cotizarSolicitudService.setSolicitud(solicitud);
     };
 
     this.quitarContactoRealizarCotizacionXSolicitud = function(cotizacion, contacto) {
@@ -167,13 +196,48 @@ app.controller('mainController',function(sharedVars){
         contactos.splice(i,1);
     };
 
-    this.quitarCotizacionRealizarCotizacionXSolicitud = function(cotizacion) {
+    this.realizarCotizacionRealizarCotizacionXSolicitud = function(cotizacion) {
         var cotizaciones = this.realizarCotizacionXSolicitud.cotizaciones;
         var i = keyOfObject(cotizacion,cotizaciones);
         cotizaciones.splice(i,1);
+        var j = keyOfObject(cotizacion,this.realizarCotizacionXSolicitud.solicitud.productos)
+        var producto = this.realizarCotizacionXSolicitud.solicitud.productos[j];
+        producto.estado = 'cotizado';
         if(cotizaciones.length == 0)
             sharedVars.getMainTab()['value'] = 5;
+            var solicitud = this.realizarCotizacionXSolicitud.solicitud;
+            removeObj(solicitud,this.solicitudes);
+            solicitud.estado = 'cotizada';
     };
+    this.insertarContactoRealizarCotizacionXSolicitud = function(cotizacion){
+        cotizacion.contactos.push(cotizacion.nuevoContacto);
+        cotizacion.nuevoContacto = "";
+    };
+    
+});
+app.controller("cotizarSolicitudController",function(cotizarSolicitudService){
+    this.vars = cotizarSolicitudService.vars;
+
+    this.quitarContacto = function(cotizacion, contacto) {
+        var contactos = cotizacion.contactos;
+        var i = contactos.indexOf(contacto);
+        contactos.splice(i,1);
+    };
+
+    this.realizarCotizacion = function(cotizacion) {
+        var cotizaciones = this.cotizaciones;
+        var i = keyOfObject(cotizacion,cotizaciones);
+        cotizaciones.splice(i,1);
+        var j = keyOfObject(cotizacion,this.realizarCotizacionXSolicitud.solicitud.productos)
+        var producto = this.realizarCotizacionXSolicitud.solicitud.productos[j];
+        producto.estado = 'cotizado';
+        if(cotizaciones.length == 0)
+            sharedVars.getMainTab()['value'] = 5;
+            var solicitud = this.realizarCotizacionXSolicitud.solicitud;
+            removeObj(solicitud,this.solicitudes);
+            solicitud.estado = 'cotizada';
+    };
+
 });
 
 app.controller("realizarCotizacionController",function() {
@@ -207,37 +271,37 @@ var familiasProveedor = [
 ];
 
 var unidades = [
-    "kg",
-    "m",
-    "lb",
-    "cm",
-    "otra"
+    {"nombre":"kg"},
+    {"nombre":"m"},
+    {"nombre":"lb"},
+    {"nombre":"cm"},
+    {"nombre":"otra"}
 ];
 
 var productos = [
     {
         "nombre": "Taladro",
-        "unidad": [unidades[0]],
+        "unidad": unidades[0],
         "familiaProveedor": familiasProveedor[3]
     },
     {
         "nombre": "Martillo",
-        "unidad": [unidades[0]],
+        "unidad": unidades[0],
         "familiaProveedor": familiasProveedor[3]
     },
     {
         "nombre": "Remolque",
-        "unidad": [unidades[1]],
+        "unidad": unidades[1],
         "familiaProveedor": "Maquinaria"
     },
     {
         "nombre": "Excavadora",
-        "unidad": [unidades[2]],
+        "unidad": unidades[2],
         "familiaProveedor": familiasProveedor[4]
     },
     {
         "nombre": "Cinta",
-        "unidad": [unidades[1]],
+        "unidad": unidades[1],
         "familiaProveedor": familiasProveedor[1]
     }
 ];
@@ -247,92 +311,153 @@ var solicitudes = [
         "lugar": "Casa | Avenida 15 #68 - 14",
         "proyecto": "Edificio",
         "fecha": "01-01-2015",
-        "productos": [
-            productos[0],
-            productos[4],
-            productos[3]
-        ]
+        "estado" : "pendiente"
     },
     {
         "lugar": "Oficina | Carrera 23 #124 - 23",
         "proyecto": "Autopista",
         "fecha": "02-11-2015",
-        "productos": [
-            productos[2],
-            productos[1]
-        ]
+        "estado" : "pendiente"
     },
     {
         "lugar": "Casa | Avenida 15 #68 - 14",
         "proyecto": "Autopista",
         "fecha": "02-14-2015",
-        "productos": [
-            productos[1],
-            productos[3]
-        ]
+        "estado" : "pendiente"
     },
     {
         "lugar": "Bodega | Carrera 9  # 28 - 65",
         "proyecto": "Edificio",
         "fecha": "12-12-2015",
-        "productos": [
-            productos[4],
-            productos[3]
-        ]
+        "estado" : "pendiente"
     },
     {
         "lugar": "Apartamento | Calle 166 #8H - 53",
         "proyecto": "Edificio",
         "fecha": "12-03-2015",
-        "productos": [
-            productos[0],
-            productos[4]
-        ]
+        "estado" : "pendiente"
     },
     {
         "lugar": "Apartamento | Calle 166 #8H - 53",
         "proyecto": "Casa",
         "fecha": "09-10-2015",
-        "productos": [
-            productos[0],
-            productos[2]
-        ]
+        "estado" : "pendiente"
     },
     {
         "lugar": "Oficina | Carrera 23 #124 - 23",
         "proyecto": "Casa",
         "fecha": "05-01-2015",
-        "productos": [
-            productos[4],
-            productos[2]
-        ]
+        "estado" : "pendiente"
     },
     {
         "lugar": "Almacen | Avenida 11 #231 - 44",
         "proyecto": "Hangar",
         "fecha": "05-05-2015",
-        "productos": [
-            productos[2],
-            productos[1]
-        ]
+        "estado" : "pendiente"
     },
     {
         "lugar": "Almacen | Avenida 11 #231 - 44",
         "proyecto": "Hangar",
         "fecha": "11-04-2015",
-        "productos": [
-            productos[3],
-            productos[1]
-        ]
+        "estado" : "pendiente"
     },
     {
         "lugar": "Almacen | Avenida 11 #231 - 44",
         "proyecto": "Hangar",
         "fecha": "12-07-2015",
-        "productos": [
-            productos[2],
-            productos[1]
-        ]
+        "estado" : "pendiente"
+    }
+];
+var productoXSolicitud = [
+    {
+        "solicitud":solicitudes[0],
+        "producto":productos[0],
+        "cantidad":12,
+        "estado":"pediente"
+    },
+    {
+        "solicitud":solicitudes[0],
+        "producto":productos[1],
+        "cantidad":1,
+        "estado":"pediente"
+    },
+    {
+        "solicitud":solicitudes[1],
+        "producto":productos[2],
+        "cantidad":2,
+        "estado":"pediente"
+    },
+    {
+        "solicitud":solicitudes[1],
+        "producto":productos[3],
+        "cantidad":4,
+        "estado":"pediente"
+    },
+    {
+        "solicitud":solicitudes[2],
+        "producto":productos[4],
+        "cantidad":6,
+        "estado":"pediente"
+    },
+    {
+        "solicitud":solicitudes[3],
+        "producto":productos[0],
+        "cantidad":45,
+        "estado":"pediente"
+    },
+    {
+        "solicitud":solicitudes[4],
+        "producto":productos[1],
+        "cantidad":9,
+        "estado":"pediente"
+    },
+    {
+        "solicitud":solicitudes[5],
+        "producto":productos[2],
+        "cantidad":12,
+        "estado":"pediente"
+    },
+    {
+        "solicitud":solicitudes[6],
+        "producto":productos[3],
+        "cantidad":11,
+        "estado":"pediente"
+    },
+    {
+        "solicitud":solicitudes[6],
+        "producto":productos[4],
+        "cantidad":43,
+        "estado":"pediente"
+    },
+    {
+        "solicitud":solicitudes[7],
+        "producto":productos[1],
+        "cantidad":67,
+        "estado":"pediente"
+    },
+    {
+        "solicitud":solicitudes[7],
+        "producto":productos[0],
+        "cantidad":91,
+        "estado":"pediente"
+    },
+    {
+        "solicitud":solicitudes[8],
+        "producto":productos[2],
+        "cantidad":10,
+        "estado":"pediente"
+    },
+    {
+        "solicitud":solicitudes[9],
+        "producto":productos[3],
+        "cantidad":39,
+        "estado":"pediente"
+    },
+    {
+        "solicitud":solicitudes[9],
+        "producto":productos[4],
+        "cantidad":34,
+        "estado":"pediente"
     }
 ];
 

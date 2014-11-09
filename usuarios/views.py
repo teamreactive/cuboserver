@@ -127,6 +127,72 @@ class HomeView3(View):
             return HttpResponse(status=200)
         return HttpResponse(status=400)
 
+class HomeView4(View):
+    """
+    View endpoint that renders the home.
+    """
+
+    template_name = 'usuarios/index-aprobador-de-solicitudes.html'
+    # TODO -> REPLACE WITH THE GET_TEMPLATE FUNCTION #
+
+    def get(self, request, *args, **kwargs):
+        """
+        Define the response of a HTTP GET request.
+        Renders the home page with the given template name.
+        """
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        """
+        Define the response of a HTTP POST request.
+        Validate and submit the corresponding form,
+        and return the respective HTTP status code.
+        """
+        # print '#######path_info#######'
+        #print request.body
+        # print '######scheme########'
+        # print request.scheme
+
+        # stream = StringIO(request.body)
+        # data = JSONParser().parse(stream)
+        # serializer = ProductoSerializer(data=data)
+        # print serializer.errors
+        if save_lugar(request):
+            return HttpResponse(status=200)
+        return HttpResponse(status=400)
+class HomeView5(View):
+    """
+    View endpoint that renders the home.
+    """
+
+    template_name = 'usuarios/index-aprobador-de-compra.html'
+    # TODO -> REPLACE WITH THE GET_TEMPLATE FUNCTION #
+
+    def get(self, request, *args, **kwargs):
+        """
+        Define the response of a HTTP GET request.
+        Renders the home page with the given template name.
+        """
+        return render(request, self.template_name)
+
+    def post(self, request, *args, **kwargs):
+        """
+        Define the response of a HTTP POST request.
+        Validate and submit the corresponding form,
+        and return the respective HTTP status code.
+        """
+        # print '#######path_info#######'
+        #print request.body
+        # print '######scheme########'
+        # print request.scheme
+
+        # stream = StringIO(request.body)
+        # data = JSONParser().parse(stream)
+        # serializer = ProductoSerializer(data=data)
+        # print serializer.errors
+        if save_lugar(request):
+            return HttpResponse(status=200)
+        return HttpResponse(status=400)
 
 def get_template(request, template_name):
     """
@@ -144,11 +210,11 @@ def get_template(request, template_name):
         elif request.usuario.tipo == '4':
             return template_name + 'index-codificador'
         elif request.usuario.tipo == '5':
-            return template_name + 'index-aprovador-solicitudes'
+            return template_name + 'index-aprobador-solicitudes'
         elif request.user.tipo == '6':
             return template_name + 'index-comprador'
         elif request.usuario.tipo == '7':
-            return template_name + 'index-aprovador-compra'
+            return template_name + 'index-aprobador-compra'
         elif request.usuario.tipo == '8':
             return template_name + 'index-almacenista'
     return template_name + 'index-login.html'
