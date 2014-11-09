@@ -1,13 +1,6 @@
-var app = angular.module('AprobadorDeSolicitudes',[]);
+var app = angular.module('AprobadorDeCompra',[]);
 
-var makeArrayCopy = function(from_array) {
-    newarray = [];
-    for (var i=0; i<from_array.length; i++)
-        newarray[i] = from_array[i];
-    return newarray;
-};
-
-app.controller('tabController', function(){
+app.controller('tabController',function(){
 	this.tab = 1;
 	this.setTab = function(tab){
 		this.tab = tab;
@@ -17,38 +10,6 @@ app.controller('tabController', function(){
 	};
 });
 
-app.controller('mainController', function(){
-	this.solicitudes = makeArrayCopy(solicitudes);
-	this.aprobarSolicitud = function(solicitud){
-		var i =this.solicitudes.indexOf(solicitud);
-		this.solicitudes.splice(i,1);
-	};
-	this.rechazarSolicitud = function(solicitud){
-		if(solicitud.estado == 'en rechazo'){
-			var i =this.solicitudes.indexOf(solicitud);
-			this.solicitudes.splice(i,1);
-			solicitud.estado = 'rechazado';
-		}
-		else{
-			solicitud.estado = 'en rechazo';
-		}
-	};
-	this.preguntarSolicitud = function(solicitud){
-		if(solicitud.estado == 'en pregunta'){
-			var i =this.solicitudes.indexOf(solicitud);
-			this.solicitudes.splice(i,1);
-			solicitud.estado = 'preguntada';
-		}
-		else{
-			solicitud.estado = 'en pregunta';
-		}
-	};
-	this.aprobarSolicitud = function(solicitud){
-		var i =this.solicitudes.indexOf(solicitud);
-			this.solicitudes.splice(i,1);
-			solicitud.estado = 'aprobada';
-	};
-});
 app.controller('historialTabController',function(){
 	this.tab = 0;
 	this.setTab = function(tab){
@@ -58,6 +19,7 @@ app.controller('historialTabController',function(){
 		return this.tab == tab;
 	};
 });
+
 app.controller('historialController',function(){
 	this.proyectos = proyectos;
 	this.familiasProveedor = familiasProveedor;
@@ -511,7 +473,3 @@ var compras = [
 		"equipo": equipos[0]
 	}
 ];
-
-
-
-
