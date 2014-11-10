@@ -11,7 +11,7 @@ from .models import *
 class ProveedorResource(ModelResource):
 	cliente = fields.ForeignKey(ClienteResource, "cliente")
 	lugar = fields.ForeignKey(LugarResource, "lugar")
-	contactos = fields.ToManyFields(ContactoResource, "contactos")
+	contactos = fields.ToManyField(ContactoResource, "contactos")
 
 	class Meta:
 		queryset = Proveedor.objects.all()

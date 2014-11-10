@@ -91,7 +91,7 @@ class CompradorAprobadorCompras(models.Model):
 		db_table = "compradoraprobadorcompras"
 
 
-class AprobadorCompraAlmacenista(models.Model):
+class AprobadorComprasAlmacenista(models.Model):
 	aprobador = models.ForeignKey(Usuario, related_name="AprobadorCompraAlmacenista.aprobador")
 	almacenista = models.ForeignKey(Usuario, related_name="AprobadorCompraAlmacenista.almacenista")
 

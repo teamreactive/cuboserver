@@ -14,12 +14,12 @@ class Producto(models.Model):
 	referencia = models.CharField(max_length=25, null=True,blank=True)
 	marca = models.CharField(max_length=25)
 	servicio = models.BooleanField(default=False)
-	familia = models.ForeignKey(FamiliaProveedor, null=True, related_name="Producto.familia")
+	familia = models.ForeignKey(Familia, null=True, related_name="Producto.familia")
 	tiempopromedio = models.CharField(max_length=15, null=True, blank=True)
 	cliente = models.ForeignKey(Cliente, related_name="Producto.cliente")
 	valido = models.BooleanField(default=False)
-	contactonovende = models.ManyToManyField(Contacto, db_table="productocontactonovende")
-	contactovende = models.ManyToManyField(Contacto, db_table="productocontactovende")
+	contactonovende = models.ManyToManyField(Contacto, db_table="productocontactonovende", related_name="Producto.contactonovende")
+	contactovende = models.ManyToManyField(Contacto, db_table="productocontactovende", related_name="Producto.contactovende")
 	
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.onu)
@@ -27,7 +27,7 @@ class Producto(models.Model):
 	class Meta:
 		db_table = "producto"
 		unique_together = (
-			("cliente", "codigo_onu"),
+			("cliente", "onu"),
 		)
 
 
@@ -41,7 +41,7 @@ class NombreProducto(models.Model):
 	class Meta:
 		db_table = "nombreproducto"
 		unique_together = (
-			("producto","nombre")
+			("producto", "nombre")
 		)
 
 

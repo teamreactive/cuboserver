@@ -51,8 +51,7 @@ INSTALLED_APPS = (
 	"solicitudes",
 	"tastypie",
 	"tiposequipos",
-	"usuarios",
-	"utils"
+	"usuarios"
 )
 
 MIDDLEWARE_CLASSES = (

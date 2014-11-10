@@ -5,7 +5,7 @@ from usuarios.models import *
 
 
 class Historial(models.Model):
-	usuario = models.ForeignKey(Usuario, related_name="Historial.usuario", related_name="Historial.usuario")
+	usuario = models.ForeignKey(Usuario, related_name="Historial.usuario")
 	fecha = models.DateTimeField(default=datetime.now)
 	descripcion = models.TextField()
 

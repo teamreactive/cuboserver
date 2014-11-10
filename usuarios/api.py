@@ -72,6 +72,6 @@ class AprobadorComprasAlmacenistaResource(ModelResource):
 	almacenista = fields.ForeignKey(UsuarioResource, "almacenista")
 
 	class Meta:
-		queryset = AprobadorCompraAlmacenista.objects.all()
+		queryset = AprobadorComprasAlmacenista.objects.all()
 		resource_name = "aprobadorcomprasalmacenista"
 		authorization = Authorization()

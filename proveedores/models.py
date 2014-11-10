@@ -15,7 +15,7 @@ class Proveedor(models.Model):
 	cliente = models.ForeignKey(Cliente, related_name="Proveedor.cliente")
 	calificacion = models.IntegerField()
 	cotizacion = models.BooleanField(default=False)
-	contactos = models.ManyToManyField(Contacto, db_table="contactoproveedor")
+	contactos = models.ManyToManyField(Contacto, db_table="contactoproveedor", related_name="Proveedor.contactos")
 
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.razon)
