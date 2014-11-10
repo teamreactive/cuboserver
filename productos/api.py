@@ -1,4 +1,5 @@
 from clientes.api import ClienteResource
+from contactos.api import ContactoResource
 from familiasproveedores.api import FamiliaResource
 from tastypie.authorization import Authorization
 from tastypie.resources import ModelResource
@@ -8,6 +9,8 @@ from .models import *
 class ProductoResource(ModelResource):
 	cliente = fields.ToManyField(ClienteResource, 'cliente')
 	familia_proveedor = fields.ForeignKey(FamiliaResource, 'familia_proveedor')
+	contacto_novende = fields.ToManyField(ContactoResource, 'contacto_novende')
+	contacto_vende = fields.ToManyField(ContactoResource, 'contacto_vende')
 
     class Meta:
         queryset = Producto.objects.all()
@@ -33,12 +36,12 @@ class FotoProductoResource(ModelResource):
 		authorization = Authorization()
 
 
-class PrecioProductoResource(ModelResource):
+class UnidadProductoResource(ModelResource):
 	producto = fields.ForeignKey(ProductoResource, 'producto')
 
 	class Meta:
-		queryset = PrecioxProducto.objects.all()
-		resource_name = 'precioproducto'
+		queryset = UnidadXProducto.objects.all()
+		resource_name = 'unidadproducto'
 		authorization = Authorization()
 
 

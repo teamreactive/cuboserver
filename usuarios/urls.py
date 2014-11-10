@@ -1,18 +1,24 @@
-from django.conf.urls import url, include
-from rest_framework import routers
-
-from usuarios import views
-
-
-routers = routers.DefaultRouter()
-routers.register(r'usuarios', views.UsuarioViewSet)
+from django.conf.urls.defaults import *
+from tastypie.api import Api
+from .api import *
+from .views import *
 
 
-usuariospatterns = [
-	url(r'^solicitante/$', views.HomeView.as_view()),
-	url(r'^codificador/$', views.HomeView2.as_view()),
-	url(r'^comprador/$', views.HomeView3.as_view()),
-	url(r'^aprobador-de-solicitudes$', views.HomeView4.as_view()),
-	url(r'^aprobador-de-compra$', views.HomeView5.as_view()),
-	url(r'^', include(routers.urls)),
-]
+v1_api = Api(api_name='v1')
+v1_api.register(UsuarioResource())
+v1_api.register(ConsolidadorSolicitanteResource())
+v1_api.register(SolicitanteCodificadorResource())
+v1_api.register(AprobadorSolicitudesSolicitanteResource())
+v1_api.register(AprobadorSolicitudesCompradorResource())
+v1_api.register(CompradorAprobadorComprasResource())
+v1_api.register(AprobadorComprasAlmacenistaResource())
+
+
+urlpatterns = patterns('',
+    (r'^api/', include(v1_api.urls)),
+    (r'^solicitante/$', views.HomeView.as_view()),
+    (r'^codificador/$', views.HomeView2.as_view()),
+    (r'^comprador/$', views.HomeView3.as_view()),
+    (r'^aprobador-de-solicitudes$', views.HomeView4.as_view()),
+    (r'^aprobador-de-compra$', views.HomeView5.as_view())
+)
