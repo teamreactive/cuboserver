@@ -1,27 +1,19 @@
-from clientes.api import ClienteResource
-from contactos.api import ContactoResource
-from lugares.api import LugarResource
 from tastypie.authorization import Authorization
 from tastypie import fields
 from tastypie.resources import ModelResource
+
+from clientes.api import *
+from contactos.api import *
+from lugares.api import *
 from .models import *
 
 
 class ProveedorResource(ModelResource):
-    cliente = fields.ForeignKey(ClienteResource, 'cliente')
-    lugar = fields.ForeignKey(LugarResource, 'lugar')
+	cliente = fields.ForeignKey(ClienteResource, "cliente")
+	lugar = fields.ForeignKey(LugarResource, "lugar")
+	contactos = fields.ToManyFields(ContactoResource, "contactos")
 
-    class Meta:
-        queryset = Proveedor.objects.all()
-        resource_name = 'proveedor'
-        authorization = Authorization()
-
-
-class ContactoProveedorResource(ModelResource):
-    contacto = fields.ForeignKey(ContactoResource, 'contacto')
-    proveedor = fields.ForeignKey(ProveedorResource, 'proveedor')
-
-    class Meta:
-        queryset = ContactosxProveedor.objects.all()
-        resource_name = 'contactoproveedor'
-        authorization = Authorization()
+	class Meta:
+		queryset = Proveedor.objects.all()
+		resource_name = "proveedor"
+		authorization = Authorization()

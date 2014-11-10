@@ -1,30 +1,27 @@
 from django.db import models
 
-from lugares.models import Lugar
-from clientes.models import Cliente
-from contactos.models import Contacto
+from lugares.models import *
+from clientes.models import *
+from contactos.models import *
 
 
 class Proveedor(models.Model):
-    razon_social = models.CharField(max_length=25)
-    sigla = models.CharField(max_length=10)
-    nit = models.CharField(max_length=25)
-    numero_verificacion = models.CharField(max_length=25)
-    lugar = models.ForeignKey(Lugar, related_name='Proveedor.lugar')
-    logo = models.FileField(upload_to='logos/proovedores')
-    cliente = models.ForeignKey(Cliente, related_name='Proveedor.cliente')
-    calificacion = models.IntegerField()
-    cotizacion_defecto = models.BooleanField(default=False)
+	razon = models.CharField(max_length=25)
+	sigla = models.CharField(max_length=10)
+	nit = models.CharField(max_length=25)
+	verificacion = models.CharField(max_length=25)
+	lugar = models.ForeignKey(Lugar, related_name="Proveedor.lugar")
+	logo = models.FileField(upload_to="logos/proovedores")
+	cliente = models.ForeignKey(Cliente, related_name="Proveedor.cliente")
+	calificacion = models.IntegerField()
+	cotizacion = models.BooleanField(default=False)
+	contactos = models.ManyToManyField(Contacto, db_table="contactoproveedor")
 
-    class Meta:
-        db_table = 'proveedor'
-        unique_together = (
-            ('cliente', 'nit'),
-        )
+	def __unicode__(self):
+		return "%s %s" % (self.id, self.razon)
 
-class ContactosxProveedor(models.Model):
-    contacto = models.ForeignKey(Contacto, related_name='CxP.contacto')
-    proveedor = models.ForeignKey(Proveedor, related_name='CxP.proveedor')
-
-    class Meta:
-        db_table = 'contacto_por_proveedor'
+	class Meta:
+		db_table = "proveedor"
+		unique_together = (
+			("cliente", "nit")
+		)

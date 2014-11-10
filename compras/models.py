@@ -1,14 +1,17 @@
 from django.db import models
 
+from cotizaciones.models import *
 from datetime import datetime
-from cotizaciones.models import Cotizacion
 
 
 class Compra(models.Model):
-    cotizacion = models.ForeignKey(Cotizacion)
-    fecha_entregado = models.DateTimeField(default=datetime.now)
-    entrega_parcial = models.DateTimeField(default=datetime.now)
-    porcentaje_de_devolucion = models.DecimalField(max_digits=5, decimal_places=2)
+	cotizacion = models.ForeignKey(Cotizacion, related_name="Compra.cotizacion")
+	fechaentregado = models.DateTimeField(default=datetime.now)
+	entregaparcial = models.DateTimeField(default=datetime.now)
+	porcentajedevolucion = models.DecimalField(max_digits=5, decimal_places=2)
 
-    class Meta:
-        db_table = 'compra'
+	def __unicode__(self):
+		return "%s %s" % (self.id, self.cotizacion)
+
+	class Meta:
+		db_table = "compra"

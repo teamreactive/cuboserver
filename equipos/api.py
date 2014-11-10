@@ -1,16 +1,17 @@
-from clientes.api import ClienteResource
-from tiposdeequipos.api import TipoEquipoResource
 from tastypie.authorization import Authorization
 from tastypie import fields
 from tastypie.resources import ModelResource
-from .models import Equipo
+
+from clientes.api import *
+from .models import *
+from tiposequipos.api import *
 
 
 class EquipoResource(ModelResource):
-    cliente = fields.ForeignKey(ClienteResource, 'cliente')
-    tipo_de_equipo = fields.ForeignKey(TipoEquipoResource, 'tipo_de_equipo')
+	cliente = fields.ForeignKey(ClienteResource, "cliente")
+	tipo_de_equipo = fields.ForeignKey(TipoEquipoResource, "tipo_de_equipo")
 
-    class Meta:
-        queryset = Equipo.objects.all()
-        resource_name = 'equipo'
-        authorization = Authorization()
+	class Meta:
+		queryset = Equipo.objects.all()
+		resource_name = "equipo"
+		authorization = Authorization()

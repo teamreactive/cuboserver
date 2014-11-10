@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import Proveedor
-from .models import ContactosxProveedor
+from .models import *
+
 
 admin.site.register(Proveedor)
-admin.site.register(ContactosxProveedor)

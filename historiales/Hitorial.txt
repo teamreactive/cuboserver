@@ -1,8 +1,0 @@
-Hitorial
-table 1 "mensajes":
-solicitud|from_usuario|to_usuario|date
-table 2 "solicitudes":
-solicitud|usuario|type
-type in (creacion,aprobadoXaprobadorSolicitudes,)
-table 3 (table_1Xtable_2) "mensajes por accion":
-table_1|table_2|

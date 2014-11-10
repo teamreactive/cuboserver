@@ -2,17 +2,17 @@ from django.db import models
 
 
 class Contacto(models.Model):
-    nombre = models.CharField(max_length=25)
-    apellido = models.CharField(max_length=25)
-    telefono_fijo = models.CharField(max_length=15, null=True, blank=True)
-    extension = models.CharField(max_length=5, null=True, blank=True)
-    celular = models.CharField(max_length=15, null=True, blank=True)
-    correo_electronico = models.EmailField(max_length=25, null=True, blank=True)
-    cargo = models.CharField(max_length=25, null=True, blank=True)
-    perfil = models.TextField(null=True, blank=True)
+	nombre = models.CharField(max_length=25)
+	apellido = models.CharField(max_length=25)
+	telefono = models.CharField(max_length=15, null=True, blank=True)
+	extension = models.CharField(max_length=5, null=True, blank=True)
+	celular = models.CharField(max_length=15, null=True, blank=True)
+	email = models.EmailField(max_length=25, null=True, blank=True)
+	cargo = models.CharField(max_length=25, null=True, blank=True)
+	perfil = models.TextField(null=True, blank=True)
 
-    def __unicode__(self):
-        return '%s - %s' % (self.nombre, self.telefono_fijo)
+	def __unicode__(self):
+		return "%s %s" % (self.id, self.nombre)
 
-    class Meta:
-        db_table = 'contacto'
+	class Meta:
+		db_table = "contacto"

@@ -1,17 +1,13 @@
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.generic import View
-from StringIO import StringIO
 
 import json
-from .models import Usuario
-from lugares.models import Lugar
-
-from django.core.exceptions import ValidationError
+from lugares.models import *
+from .models import *
 
 
 class HomeView(View):
-    template_name = ""
+	template_name = ""
 
-    def get(self, request, *args, **kwargs):
-        return render(request, self.template_name)
+	def get(self, request, *args, **kwargs):
+		return render(request, self.template_name)

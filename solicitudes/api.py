@@ -1,33 +1,34 @@
-from centrosdecostos.api import CentroResource
-from equipos.api import EquipoResource
-from lugares.api import LugarResource
-from productos.api import UnidadProductoResource
-from usuarios.api import UsuarioResource
 from tastypie.authorization import Authorization
 from tastypie import fields
 from tastypie.resources import ModelResource
+
+from centros.api import *
+from equipos.api import *
+from lugares.api import *
 from .models import *
+from productos.api import *
+from usuarios.api import *
 
 
 class SolicitudResource(ModelResource):
-    lugar_entrega = fields.ForeignKey(LugarResource, 'lugar_entrega')
-    solicitante = fields.ForeignKey(UsuarioResource, 'solicitante')
-    consolidador = fields.ForeignKey(UsuarioResource, 'consolidador')
-    aprobador = fields.ForeignKey(UsuarioResource, 'aprobador')
-    centro_de_costo = fields.ForeignKey(CentroResource, 'centro_de_costo')
-    equipo =  fields.ForeignKey(EquipoResource, 'equipo')
+	lugar = fields.ForeignKey(LugarResource, "lugar")
+	solicitante = fields.ForeignKey(UsuarioResource, "solicitante")
+	consolidador = fields.ForeignKey(UsuarioResource, "consolidador")
+	aprobador = fields.ForeignKey(UsuarioResource, "aprobador")
+	centro = fields.ForeignKey(CentroResource, "centro")
+	equipo =  fields.ForeignKey(EquipoResource, "equipo")
 
-    class Meta:
-        queryset = Solicitud.objects.all()
-        resource_name = 'solicitud'
-        authorization = Authorization()
+	class Meta:
+		queryset = Solicitud.objects.all()
+		resource_name = "solicitud"
+		authorization = Authorization()
 
 
 class ProductoSolicitudResource(ModelResource):
-    producto = fields.ForeignKey(UnidadProductoResource, 'producto')
-    solicitud = fields.ForeignKey(SolicitudResource, 'solicitud')
+	producto = fields.ForeignKey(UnidadProductoResource, "producto")
+	solicitud = fields.ForeignKey(SolicitudResource, "solicitud")
 
-    class Meta:
-        queryset = ProductoXSolicitud.objects.all()
-        resource_name = 'productosolicitud'
-        authorization = Authorization()
+	class Meta:
+		queryset = ProductoSolicitud.objects.all()
+		resource_name = "productosolicitud"
+		authorization = Authorization()

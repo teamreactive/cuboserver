@@ -17,7 +17,7 @@ from tiposdeequipos.api import *
 from usuarios.api import *
 from usuarios.views import *
 
-v1_api = Api(api_name='v1')
+v1_api = Api(api_name="v1")
 v1_api.register(CentroResource())
 v1_api.register(ClienteResource())
 v1_api.register(CompraResource())
@@ -33,7 +33,6 @@ v1_api.register(FotoProductoResource())
 v1_api.register(UnidadProductoResource())
 v1_api.register(PrecioMesProductoResource())
 v1_api.register(ProveedorResource())
-v1_api.register(ContactoProveedorResource())
 v1_api.register(SolicitudResource())
 v1_api.register(ProductoSolicitudResource())
 v1_api.register(TipoEquipoResource())
@@ -45,13 +44,13 @@ v1_api.register(AprobadorSolicitudesCompradorResource())
 v1_api.register(CompradorAprobadorComprasResource())
 v1_api.register(AprobadorComprasAlmacenistaResource())
 
-urlpatterns = patterns('',
-	(r'^api/', include(v1_api.urls)),
-    (r'^admin/$', include(admin.site.urls)),
-    (r'^almacenista/$', HomeView.as_view(template_name='usuarios/index-almacenista.html')),
-    (r'^aprobadorcompras/$', HomeView.as_view(template_name='usuarios/index-aprobador-de-compra.html')),
-    (r'^aprobadorsolicitudes/$', HomeView.as_view(template_name='usuarios/index-aprobador-de-solicitudes.html')),
-    (r'^codificador/$', HomeView.as_view(template_name='usuarios/index-codificador.html')),
-    (r'^comprador/$', HomeView.as_view(template_name='usuarios/index-comprador.html')),
-    (r'^solicitante/$', HomeView.as_view(template_name='usuarios/index-solicitante.html'))
+urlpatterns = patterns("",
+	(r"^api/", include(v1_api.urls)),
+	(r"^admin/$", include(admin.site.urls)),
+	(r"^almacenista/$", HomeView.as_view(template_name="usuarios/index-almacenista.html")),
+	(r"^aprobadorcompras/$", HomeView.as_view(template_name="usuarios/index-aprobador-de-compra.html")),
+	(r"^aprobadorsolicitudes/$", HomeView.as_view(template_name="usuarios/index-aprobador-de-solicitudes.html")),
+	(r"^codificador/$", HomeView.as_view(template_name="usuarios/index-codificador.html")),
+	(r"^comprador/$", HomeView.as_view(template_name="usuarios/index-comprador.html")),
+	(r"^solicitante/$", HomeView.as_view(template_name="usuarios/index-solicitante.html"))
 )

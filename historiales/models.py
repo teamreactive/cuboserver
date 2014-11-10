@@ -1,14 +1,16 @@
 from django.db import models
 
-from usuarios.models import Usuario
-
 from datetime import datetime
+from usuarios.models import *
 
 
 class Historial(models.Model):
-    usuario = models.ForeignKey(Usuario, related_name='Historial.usuario')
-    fecha = models.DateTimeField(default=datetime.now)
-    descripcion = models.TextField()
+	usuario = models.ForeignKey(Usuario, related_name="Historial.usuario", related_name="Historial.usuario")
+	fecha = models.DateTimeField(default=datetime.now)
+	descripcion = models.TextField()
 
-    class Meta:
-        db_table = 'historial'
+	def __unicode__(self):
+		return "%s %s" % (self.id, self.usuario)
+
+	class Meta:
+		db_table = "historial"

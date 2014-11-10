@@ -1,30 +1,35 @@
 from django.db import models
 
 from datetime import datetime
-from proveedores.models import Proveedor
-from solicitudes.models import ProductoXSolicitud
+from proveedores.models import *
+from solicitudes.models import *
 
 
 class Cotizacion(models.Model):
-    IVAS = (
-        ('1', '16'),
-        ('2', '1.6'), 
-        ('3', '20'),
-        ('4', '0'),
-    )
-    PAGOS = (
-        ('1', 'anticipado'),
-        ('2', 'contado'),
-        ('3', 'dias'),
-    )
-    producto = models.ForeignKey(ProductoXSolicitud, on_delete=models.PROTECT)
-    precio_unitario = models.DecimalField(max_digits=12,decimal_places=2)
-    iva = models.CharField(max_length=1, choices=IVAS)
-    referencia = models.CharField(max_length=25)
-    validez = models.CharField(max_length=25)
-    forma_de_pago = models.CharField(max_length=1, choices=PAGOS)
-    proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null = True)
-    fecha_entrega = models.DateTimeField()
+	IVAS = (
+		("1", "16"),
+		("2", "1.6"), 
+		("3", "20"),
+		("4", "0")
+	)
 
-    class Meta:
-        db_table = 'cotizacion'
+	PAGOS = (
+		("1", "anticipado"),
+		("2", "contado"),
+		("3", "dias")
+	)
+
+	producto = models.ForeignKey(ProductoSolicitud, on_delete=models.PROTECT, related_name="Cotizacion.producto")
+	preciounitario = models.DecimalField(max_digits=12,decimal_places=2)
+	iva = models.CharField(max_length=1, choices=IVAS)
+	referencia = models.CharField(max_length=25)
+	validez = models.CharField(max_length=25)
+	formapago = models.CharField(max_length=1, choices=PAGOS)
+	proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null = True, related_name="Cotizacion.proveedor")
+	fechaentrega = models.DateTimeField()
+
+	def __unicode__(self):
+		return "%s %s" % (self.id, self.producto)
+
+	class Meta:
+		db_table = "cotizacion"
