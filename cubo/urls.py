@@ -1,37 +1,57 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from tastypie.api import Api
+from centrosdecostos.api import *
+from clientes.api import *
+from compras.api import *
+from contactos.api import *
+from cotizaciones.api import *
+from equipos.api import *
+from familiasproveedores.api import *
+from historiales.api import *
+from lugares.api import *
+from productos.api import *
+from proveedores.api import *
+from solicitudes.api import *
+from tiposdeequipos.api import *
+from usuarios.api import *
+from usuarios.views import *
 
-from centrosdecostos.urls import centrosdecostospatterns
-from clientes.urls import clientespatterns
-from compras.urls import compraspatterns
-from contactos.urls import contactospatterns
-from cotizaciones.urls import cotizacionespatterns
-from equipos.urls import equipospatterns
-from familiasproveedores.urls import familiasproveedorespatterns
-from historiales.urls import historialespatterns
-from lugares.urls import lugarespatterns
-from productos.urls import productospatterns
-from proveedores.urls import proveedorespatterns
-from solicitudes.urls import solicitudespatterns
-from tiposdeequipos.urls import tiposdeequipospatterns
-from usuarios.urls import usuariospatterns
-
+v1_api = Api(api_name='v1')
+v1_api.register(CentroResource())
+v1_api.register(ClienteResource())
+v1_api.register(CompraResource())
+v1_api.register(ContactoResource())
+v1_api.register(CotizacionResource())
+v1_api.register(EquipoResource())
+v1_api.register(FamiliaResource())
+v1_api.register(HistorialResource())
+v1_api.register(LugarResource())
+v1_api.register(ProductoResource())
+v1_api.register(NombreProductoResource())
+v1_api.register(FotoProductoResource())
+v1_api.register(UnidadProductoResource())
+v1_api.register(PrecioMesProductoResource())
+v1_api.register(ProveedorResource())
+v1_api.register(ContactoProveedorResource())
+v1_api.register(SolicitudResource())
+v1_api.register(ProductoSolicitudResource())
+v1_api.register(TipoEquipoResource())
+v1_api.register(UsuarioResource())
+v1_api.register(ConsolidadorSolicitanteResource())
+v1_api.register(SolicitanteCodificadorResource())
+v1_api.register(AprobadorSolicitudesSolicitanteResource())
+v1_api.register(AprobadorSolicitudesCompradorResource())
+v1_api.register(CompradorAprobadorComprasResource())
+v1_api.register(AprobadorComprasAlmacenistaResource())
 
 urlpatterns = patterns('',
-    url(r'^admin/$', include(admin.site.urls)),
+	(r'^api/', include(v1_api.urls)),
+    (r'^admin/$', include(admin.site.urls)),
+    (r'^almacenista/$', HomeView.as_view(template_name='usuarios/index-almacenista.html')),
+    (r'^aprobadorcompras/$', HomeView.as_view(template_name='usuarios/index-aprobador-de-compra.html')),
+    (r'^aprobadorsolicitudes/$', HomeView.as_view(template_name='usuarios/index-aprobador-de-solicitudes.html')),
+    (r'^codificador/$', HomeView.as_view(template_name='usuarios/index-codificador.html')),
+    (r'^comprador/$', HomeView.as_view(template_name='usuarios/index-comprador.html')),
+    (r'^solicitante/$', HomeView.as_view(template_name='usuarios/index-solicitante.html'))
 )
-
-urlpatterns += centrosdecostospatterns
-urlpatterns += clientespatterns
-urlpatterns += compraspatterns
-urlpatterns += contactospatterns
-urlpatterns += cotizacionespatterns
-urlpatterns += equipospatterns
-urlpatterns += familiasproveedorespatterns
-urlpatterns += historialespatterns
-urlpatterns += lugarespatterns
-urlpatterns += productospatterns
-urlpatterns += proveedorespatterns
-urlpatterns += solicitudespatterns
-urlpatterns += tiposdeequipospatterns
-urlpatterns += usuariospatterns

@@ -4,6 +4,7 @@ from lugares.api import LugarResource
 from productos.api import UnidadProductoResource
 from usuarios.api import UsuarioResource
 from tastypie.authorization import Authorization
+from tastypie import fields
 from tastypie.resources import ModelResource
 from .models import *
 
@@ -17,7 +18,7 @@ class SolicitudResource(ModelResource):
     equipo =  fields.ForeignKey(EquipoResource, 'equipo')
 
     class Meta:
-        queryset = solicitud.objects.all()
+        queryset = Solicitud.objects.all()
         resource_name = 'solicitud'
         authorization = Authorization()
 
