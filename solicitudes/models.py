@@ -27,6 +27,10 @@ class Solicitud(models.Model):
 	proyecto = models.CharField(max_length=25)
 	productos = models.ManyToManyField(UnidadProducto, through="ProductoSolicitud", related_name="Solicitud.productos")
 
+	def save(self, *args, **kwargs):
+		self.id = Solicitud.objects.all().order_by("-id")[0].id + 1
+		super(Solicitud, self).save(*args, **kwargs)
+
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.solicitante)
 
@@ -40,6 +44,10 @@ class ProductoSolicitud(models.Model):
 	cantidad = models.DecimalField(max_digits=7, decimal_places=2)
 	solicitud = models.ForeignKey(Solicitud, related_name="ProductoSolicitud.solicitud")
 	estado = models.CharField(max_length=20, default="")
+
+	def save(self, *args, **kwargs):
+		self.id = ProductoSolicitud.objects.all().order_by("-id")[0].id + 1
+		super(ProductoSolicitud, self).save(*args, **kwargs)
 
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.producto)

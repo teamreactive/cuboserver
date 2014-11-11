@@ -29,6 +29,10 @@ class Usuario(models.Model):
 	contacto = models.ForeignKey(Contacto, related_name="Usuario.contacto")
 	activo = models.CharField(max_length=1, choices=ACTIVOS)
 
+	def save(self, *args, **kwargs):
+		self.id = Usuario.objects.all().order_by("-id")[0].id + 1
+		super(Usuario, self).save(*args, **kwargs)
+
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.nombre)
 
@@ -39,6 +43,10 @@ class Usuario(models.Model):
 class ConsolidadorSolicitante(models.Model):
 	consolidador = models.ForeignKey(Usuario, related_name="ConsolidadorSolicitante.consolidador")
 	solicitante = models.ForeignKey(Usuario, related_name="ConsolidadorSolicitante.solicitante")
+
+	def save(self, *args, **kwargs):
+		self.id = ConsolidadorSolicitante.objects.all().order_by("-id")[0].id + 1
+		super(ConsolidadorSolicitante, self).save(*args, **kwargs)
 
 	def __unicode__(self):
 		return "%s %s" % (self.consolidador, self.solicitante)
@@ -51,6 +59,10 @@ class SolicitanteCodificador(models.Model):
 	solicitante = models.ForeignKey(Usuario, related_name="SolicitanteCodificador.solicitante")
 	codificador = models.ForeignKey(Usuario, related_name="SolicitanteCodificador.codificador")
 
+	def save(self, *args, **kwargs):
+		self.id = SolicitanteCodificador.objects.all().order_by("-id")[0].id + 1
+		super(SolicitanteCodificador, self).save(*args, **kwargs)
+
 	def __unicode__(self):
 		return "%s %s" % (self.solicitante, self.codificador)
 
@@ -61,6 +73,10 @@ class SolicitanteCodificador(models.Model):
 class AprobadorSolicitudesSolicitante(models.Model):
 	aprobador = models.ForeignKey(Usuario, related_name="AprobadorSolicitudesSolicitante.aprobador")
 	solicitante = models.ForeignKey(Usuario, related_name="AprobadorSolicitudesSolicitante.solicitante")
+
+	def save(self, *args, **kwargs):
+		self.id = AprobadorSolicitudesSolicitante.objects.all().order_by("-id")[0].id + 1
+		super(AprobadorSolicitudesSolicitante, self).save(*args, **kwargs)
 
 	def __unicode__(self):
 		return "%s %s" % (self.aprobador, self.solicitante)
@@ -73,6 +89,10 @@ class AprobadorSolicitudesComprador(models.Model):
 	aprobador = models.ForeignKey(Usuario, related_name="AprobadorSolicitudesComprador.aprobador")
 	comprador = models.ForeignKey(Usuario, related_name="AprobadorSolicitudesComprador.comprador")
 
+	def save(self, *args, **kwargs):
+		self.id = AprobadorSolicitudesComprador.objects.all().order_by("-id")[0].id + 1
+		super(AprobadorSolicitudesComprador, self).save(*args, **kwargs)
+
 	def __unicode__(self):
 		return "%s %s" % (self.aprobador, self.comprador)
 
@@ -84,6 +104,10 @@ class CompradorAprobadorCompras(models.Model):
 	aprobador = models.ForeignKey(Usuario, related_name="CompradorAprobadorCompras.aprobador")
 	comprador = models.ForeignKey(Usuario, related_name="CompradorAprobadorCompras.comprador")
 
+	def save(self, *args, **kwargs):
+		self.id = CompradorAprobadorCompras.objects.all().order_by("-id")[0].id + 1
+		super(CompradorAprobadorCompras, self).save(*args, **kwargs)
+
 	def __unicode__(self):
 		return "%s %s" % (self.aprobador, self.comprador)
 
@@ -92,8 +116,12 @@ class CompradorAprobadorCompras(models.Model):
 
 
 class AprobadorComprasAlmacenista(models.Model):
-	aprobador = models.ForeignKey(Usuario, related_name="AprobadorCompraAlmacenista.aprobador")
-	almacenista = models.ForeignKey(Usuario, related_name="AprobadorCompraAlmacenista.almacenista")
+	aprobador = models.ForeignKey(Usuario, related_name="AprobadorComprasAlmacenista.aprobador")
+	almacenista = models.ForeignKey(Usuario, related_name="AprobadorComprasAlmacenista.almacenista")
+
+	def save(self, *args, **kwargs):
+		self.id = AprobadorComprasAlmacenista.objects.all().order_by("-id")[0].id + 1
+		super(AprobadorComprasAlmacenista, self).save(*args, **kwargs)
 
 	def __unicode__(self):
 		return "%s %s" % (self.aprobador, self.almacenista)

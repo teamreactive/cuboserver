@@ -9,6 +9,10 @@ class Familia(models.Model):
 	cliente = models.ForeignKey(Cliente, related_name="Familia.cliente")
 	contactos = models.ManyToManyField(Contacto, db_table="familiacontacto", related_name="Familia.contactos")
 
+	def save(self, *args, **kwargs):
+		self.id = Familia.objects.all().order_by("-id")[0].id + 1
+		super(Familia, self).save(*args, **kwargs)
+
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.nombre)
 

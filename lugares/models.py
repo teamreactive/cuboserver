@@ -23,6 +23,10 @@ class Lugar(models.Model):
 	usuario = models.ForeignKey(Usuario, null=True, related_name="Lugar.usuario")
 	contactos = models.ManyToManyField(Contacto, db_table="lugarcontacto")
 
+	def save(self, *args, **kwargs):
+		self.id = Lugar.objects.all().order_by("-id")[0].id + 1
+		super(Lugar, self).save(*args, **kwargs)
+
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.nombre)
 

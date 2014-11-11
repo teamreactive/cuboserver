@@ -8,6 +8,10 @@ class TipoEquipo(models.Model):
 	descripcion = models.TextField(null=True, blank=True)
 	cliente = models.ForeignKey(Cliente, related_name="TipoEquipo.cliente")
 
+	def save(self, *args, **kwargs):
+		self.id = TipoEquipo.objects.all().order_by("-id")[0].id + 1
+		super(TipoEquipo, self).save(*args, **kwargs)
+
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.nombre)
 

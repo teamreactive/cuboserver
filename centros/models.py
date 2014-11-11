@@ -7,6 +7,10 @@ class Centro(models.Model):
 	nombre = models.CharField(max_length=25)
 	cliente = models.ForeignKey(Cliente, related_name="Centro.cliente")
 
+	def save(self, *args, **kwargs):
+		self.id = Centro.objects.all().order_by("-id")[0].id + 1
+		super(Centro, self).save(*args, **kwargs)
+
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.nombre)
 

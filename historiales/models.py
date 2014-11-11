@@ -9,6 +9,10 @@ class Historial(models.Model):
 	fecha = models.DateTimeField(default=datetime.now)
 	descripcion = models.TextField()
 
+	def save(self, *args, **kwargs):
+		self.id = Historial.objects.all().order_by("-id")[0].id + 1
+		super(Historial, self).save(*args, **kwargs)
+
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.usuario)
 

@@ -17,6 +17,10 @@ class Proveedor(models.Model):
 	cotizacion = models.BooleanField(default=False)
 	contactos = models.ManyToManyField(Contacto, db_table="contactoproveedor", related_name="Proveedor.contactos")
 
+	def save(self, *args, **kwargs):
+		self.id = Proveedor.objects.all().order_by("-id")[0].id + 1
+		super(Proveedor, self).save(*args, **kwargs)
+
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.razon)
 

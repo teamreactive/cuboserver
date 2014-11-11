@@ -28,6 +28,10 @@ class Cotizacion(models.Model):
 	proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null = True, related_name="Cotizacion.proveedor")
 	fechaentrega = models.DateTimeField()
 
+	def save(self, *args, **kwargs):
+		self.id = Cotizacion.objects.all().order_by("-id")[0].id + 1
+		super(Cotizacion, self).save(*args, **kwargs)
+
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.producto)
 

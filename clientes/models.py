@@ -8,6 +8,10 @@ class Cliente(models.Model):
 	sigla = models.CharField(max_length=10, null=True, blank=True)
 	logo = models.ImageField(upload_to="logos", null=True, blank=True)
 
+	def save(self, *args, **kwargs):
+		self.id = Cliente.objects.all().order_by("-id")[0].id + 1
+		super(Cliente, self).save(*args, **kwargs)
+
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.nit)
 
