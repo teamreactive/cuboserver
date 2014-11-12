@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 from centros.models import *
 from datetime import datetime
@@ -17,7 +18,7 @@ class Solicitud(models.Model):
 	)
 	estado = models.CharField(max_length=1, default="1", choices=ESTADOS)
 	lugar = models.ForeignKey(Lugar, related_name="Solicitud.lugar")
-	fechacreacion = models.DateTimeField(auto_now_add=True)
+	fechacreacion = models.DateTimeField(default=timezone.now)
 	fecharequerida = models.DateField()
 	solicitante = models.ForeignKey(Usuario, related_name="Solicitud.solicitante")
 	consolidador = models.ForeignKey(Usuario, related_name="Solicitud.consolidador", null=True)

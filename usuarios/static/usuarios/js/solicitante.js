@@ -10,7 +10,15 @@ angular.module("app", [])
 	 * ######################### TEST DATA ##########################
 	 * ##############################################################
 	**/
-
+	$http({
+		method: "GET",
+		url: "api/v1/solicitud/",
+		content_type: "application/json"
+	}).success(function(data){
+		$scope.solicitudes = data.objects;
+	}).error(function(data){
+		// EMPTY
+	});
 	$scope.opciones = {
 		"solicitantes": [
 			{
