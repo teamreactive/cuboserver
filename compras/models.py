@@ -11,7 +11,9 @@ class Compra(models.Model):
 	porcentajedevolucion = models.DecimalField(max_digits=5, decimal_places=2)
 
 	def save(self, *args, **kwargs):
-		self.id = Compra.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = Compra.objects.all().order_by("-id")[0].id + 1
+		except: pass
 		super(Compra, self).save(*args, **kwargs)
 
 	def __unicode__(self):

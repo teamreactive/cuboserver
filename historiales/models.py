@@ -10,7 +10,9 @@ class Historial(models.Model):
 	descripcion = models.TextField()
 
 	def save(self, *args, **kwargs):
-		self.id = Historial.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = Historial.objects.all().order_by("-id")[0].id + 1
+		except: pass
 		super(Historial, self).save(*args, **kwargs)
 
 	def __unicode__(self):

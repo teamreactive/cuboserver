@@ -28,7 +28,9 @@ class Solicitud(models.Model):
 	productos = models.ManyToManyField(UnidadProducto, through="ProductoSolicitud", related_name="Solicitud.productos")
 
 	def save(self, *args, **kwargs):
-		self.id = Solicitud.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = Solicitud.objects.all().order_by("-id")[0].id + 1
+		except: pass
 		super(Solicitud, self).save(*args, **kwargs)
 
 	def __unicode__(self):
@@ -46,7 +48,9 @@ class ProductoSolicitud(models.Model):
 	estado = models.CharField(max_length=20, default="")
 
 	def save(self, *args, **kwargs):
-		self.id = ProductoSolicitud.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = ProductoSolicitud.objects.all().order_by("-id")[0].id + 1
+		except: pass
 		super(ProductoSolicitud, self).save(*args, **kwargs)
 
 	def __unicode__(self):

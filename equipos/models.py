@@ -12,7 +12,9 @@ class Equipo(models.Model):
 	cliente = models.ForeignKey(Cliente, related_name="Equipo.cliente")
 
 	def save(self, *args, **kwargs):
-		self.id = Equipo.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = Equipo.objects.all().order_by("-id")[0].id + 1
+		except: pass
 		super(Equipo, self).save(*args, **kwargs)
 
 	def __unicode__(self):

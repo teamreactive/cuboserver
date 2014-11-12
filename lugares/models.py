@@ -24,7 +24,9 @@ class Lugar(models.Model):
 	contactos = models.ManyToManyField(Contacto, db_table="lugarcontacto")
 
 	def save(self, *args, **kwargs):
-		self.id = Lugar.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = Lugar.objects.all().order_by("-id")[0].id + 1
+		except: pass
 		super(Lugar, self).save(*args, **kwargs)
 
 	def __unicode__(self):

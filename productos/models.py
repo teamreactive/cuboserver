@@ -22,7 +22,9 @@ class Producto(models.Model):
 	contactovende = models.ManyToManyField(Contacto, db_table="productocontactovende", related_name="Producto.contactovende")
 
 	def save(self, *args, **kwargs):
-		self.id = Producto.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = Producto.objects.all().order_by("-id")[0].id + 1
+		except: pass
 		super(Producto, self).save(*args, **kwargs)
 	
 	def __unicode__(self):
@@ -40,7 +42,9 @@ class NombreProducto(models.Model):
 	nombre = models.CharField(max_length=25)
 
 	def save(self, *args, **kwargs):
-		self.id = NombreProducto.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = NombreProducto.objects.all().order_by("-id")[0].id + 1
+		except: pass
 		super(NombreProducto, self).save(*args, **kwargs)
 
 	def __unicode__(self):
@@ -58,7 +62,9 @@ class FotoProducto(models.Model):
 	foto = models.ImageField(upload_to="fotoproducto")
 
 	def save(self, *args, **kwargs):
-		self.id = FotoProducto.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = FotoProducto.objects.all().order_by("-id")[0].id + 1
+		except: pass
 		super(FotoProducto, self).save(*args, **kwargs)
 
 	def __unicode__(self):
@@ -74,7 +80,9 @@ class UnidadProducto(models.Model):
 	talla = models.CharField(max_length=10,null=True,blank=True) # Ask
 
 	def save(self, *args, **kwargs):
-		self.id = UnidadProducto.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = UnidadProducto.objects.all().order_by("-id")[0].id + 1
+		except: pass
 		super(UnidadProducto, self).save(*args, **kwargs)
 
 	def __unicode__(self):
@@ -90,7 +98,9 @@ class PrecioMesProducto(models.Model):
 	precio = models.FloatField()
 
 	def save(self, *args, **kwargs):
-		self.id = PrecioMesProducto.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = PrecioMesProducto.objects.all().order_by("-id")[0].id + 1
+		except: pass
 		super(PrecioMesProducto, self).save(*args, **kwargs)
 
 	def __unicode__(self):

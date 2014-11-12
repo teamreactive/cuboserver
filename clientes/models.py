@@ -9,7 +9,9 @@ class Cliente(models.Model):
 	logo = models.ImageField(upload_to="logos", null=True, blank=True)
 
 	def save(self, *args, **kwargs):
-		self.id = Cliente.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = Cliente.objects.all().order_by("-id")[0].id + 1
+		except: pass 
 		super(Cliente, self).save(*args, **kwargs)
 
 	def __unicode__(self):

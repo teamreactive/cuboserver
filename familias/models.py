@@ -10,7 +10,9 @@ class Familia(models.Model):
 	contactos = models.ManyToManyField(Contacto, db_table="familiacontacto", related_name="Familia.contactos")
 
 	def save(self, *args, **kwargs):
-		self.id = Familia.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = Familia.objects.all().order_by("-id")[0].id + 1
+		except: pass
 		super(Familia, self).save(*args, **kwargs)
 
 	def __unicode__(self):

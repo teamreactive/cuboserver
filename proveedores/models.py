@@ -18,7 +18,9 @@ class Proveedor(models.Model):
 	contactos = models.ManyToManyField(Contacto, db_table="contactoproveedor", related_name="Proveedor.contactos")
 
 	def save(self, *args, **kwargs):
-		self.id = Proveedor.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = Proveedor.objects.all().order_by("-id")[0].id + 1
+		except: pass
 		super(Proveedor, self).save(*args, **kwargs)
 
 	def __unicode__(self):

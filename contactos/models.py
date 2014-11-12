@@ -12,7 +12,9 @@ class Contacto(models.Model):
 	perfil = models.TextField(null=True, blank=True)
 
 	def save(self, *args, **kwargs):
-		self.id = Contacto.objects.all().order_by("-id")[0].id + 1
+		self.id = 1
+		try: self.id = Contacto.objects.all().order_by("-id")[0].id + 1
+		except: pass
 		super(Contacto, self).save(*args, **kwargs)
 
 	def __unicode__(self):
