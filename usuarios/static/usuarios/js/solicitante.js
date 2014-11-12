@@ -10,15 +10,6 @@ angular.module("app", [])
 	 * ######################### TEST DATA ##########################
 	 * ##############################################################
 	**/
-	$http({
-		method: "GET",
-		url: "api/v1/solicitud/",
-		content_type: "application/json"
-	}).success(function(data){
-		$scope.solicitudes = data.objects;
-	}).error(function(data){
-		// EMPTY
-	});
 	$scope.opciones = {
 		"solicitantes": [
 			{
@@ -245,7 +236,38 @@ angular.module("app", [])
 			]
 		}
 	];
-
+	/**
+	 * ##############################################################
+	 * ############### OVERWRITE SAMPLE DATA ########################
+	 * ##############################################################
+	**/
+	$http({
+		method: "GET",
+		url: "api/v1/solicitud/",
+		content_type: "application/json"
+	}).success(function(data){
+		$scope.opciones.solicitudes = data.objects;
+	}).error(function(data){
+		// EMPTY
+	});
+	$http({
+		method: "GET",
+		url: "api/v1/producto/",
+		content_type: "application/json"
+	}).success(function(data){
+		$scope.opciones.productos = data.objects;
+	}).error(function(data){
+		// EMPTY
+	});
+	$http({
+		method: "GET",
+		url: "api/v1/lugar/",
+		content_type: "application/json"
+	}).success(function(data){
+		$scope.opciones.lugares = data.objects;
+	}).error(function(data){
+		// EMPTY
+	});
 	/**
 	 * ##############################################################
 	 * ######################## VARS SECTION ########################
