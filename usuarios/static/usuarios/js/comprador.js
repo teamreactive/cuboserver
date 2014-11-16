@@ -82,8 +82,7 @@ var nameCheck = function(obj, obj_array, attrs){
 	this.setSolicitud = function(solicitud){
 		this.vars.solicitud = solicitud;
 
-	};
-		
+	};	
  });
 //-----------------------//
  //-------------------//

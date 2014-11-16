@@ -33,9 +33,9 @@ class UserLoginView(View):
 		if usuario:
 			usuario = usuario[0]
 			password = md5(password).hexdigest()
-			if usuario.password == password:
+			if usuario.password == password:				
 				if usuario.tipo == '1':
-					return HttpResponse('Not Created')
+					return render(request,'usuarios/admin-general.html',{})
 				if usuario.tipo == '2':
 					return HttpResponse('Not Created')
 				if usuario.tipo == '3':
