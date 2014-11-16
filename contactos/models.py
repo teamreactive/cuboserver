@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class Contacto(models.Model):
 	nombre = models.CharField(max_length=25)
 	apellido = models.CharField(max_length=25)
@@ -12,9 +11,10 @@ class Contacto(models.Model):
 	perfil = models.TextField(null=True, blank=True)
 
 	def save(self, *args, **kwargs):
-		self.id = 1
-		try: self.id = Contacto.objects.all().order_by("-id")[0].id + 1
-		except: pass
+		if self.id is None:
+			self.id = 1
+			try: self.id = Contacto.objects.all().order_by("-id")[0].id + 1
+			except: pass
 		super(Contacto, self).save(*args, **kwargs)
 
 	def __unicode__(self):

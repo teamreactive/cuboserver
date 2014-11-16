@@ -58,48 +58,47 @@
 					<p ng-show='crearUsuarioCtrl.password != crearUsuarioCtrl.usuario.password'>las contraseñas no coiciden</p>
 
 					<label for='crear-usuario-cliente'>cliente</label>
-					<select id='crear-usuario-cliente' ng-model='crearUsuarioCtrl.usuario.cliente' ng-options='cliente.razon for cliente in crearUsuarioCtrl.clientes'></select>
+					<select id='crear-usuario-cliente' ng-model='crearUsuarioCtrl.cliente' ng-options='cliente.razon for cliente in crearUsuarioCtrl.clientes'></select>
 
 					<label for='crear-usuario-tipo'>tipo</label>
 					<select id='crear-usuario-tipo' ng-model='crearUsuarioCtrl.tipo' ng-options='tipo.nombre for tipo in crearUsuarioCtrl.tipos'></select>
 
 					<div>
 						<h3>informacion adicional</h3>
-						<form>
-							<label for='crear-usuario-nombre'>nombre
-							</label>
-							<input type='text' id='crear-usuario-nombre' ng-model='crearUsuarioCtrl.contacto.nombre'>
+						<label for='crear-usuario-nombre'>nombre
+						</label>
+						<input type='text' id='crear-usuario-nombre' ng-model='crearUsuarioCtrl.usuario.contacto.nombre'>
 
-							<label for='crear-usuario-apellido'>apellido
-							</label>
-							<input type='text' id='crear-usuario-apellido' ng-model='crearUsuarioCtrl.contacto.apellido'>
+						<label for='crear-usuario-apellido'>apellido
+						</label>
+						<input type='text' id='crear-usuario-apellido' ng-model='crearUsuarioCtrl.usuario.contacto.apellido'>
 
-							<label for='crear-usuario-telefono'>telefono
-							</label>
-							<input type='text' id='crear-usuario-telefono' ng-model='crearUsuarioCtrl.contacto.telefono'>
+						<label for='crear-usuario-telefono'>telefono
+						</label>
+						<input type='text' id='crear-usuario-telefono' ng-model='crearUsuarioCtrl.usuario.contacto.telefono'>
 
-							<label for='crear-usuario-extension'>extension
-							</label>
-							<input type='text' id='crear-usuario-extension' ng-model='crearUsuarioCtrl.contacto.extension'>
+						<label for='crear-usuario-extension'>extension
+						</label>
+						<input type='text' id='crear-usuario-extension' ng-model='crearUsuarioCtrl.usuario.contacto.extension'>
 
-							<label for='crear-usuario-celular'>celular
-							</label>
-							<input type='text' id='crear-usuario-celular' ng-model='crearUsuarioCtrl.contacto.celular'>
+						<label for='crear-usuario-celular'>celular
+						</label>
+						<input type='text' id='crear-usuario-celular' ng-model='crearUsuarioCtrl.usuario.contacto.celular'>
 
-							<label for='crear-usuario-email'>email
-							</label>
-							<input type='email' id='crear-usuario-email' ng-model='crearUsuarioCtrl.contacto.email'>
+						<label for='crear-usuario-email'>email
+						</label>
+						<input type='email' id='crear-usuario-email' ng-model='crearUsuarioCtrl.usuario.contacto.email'>
 
-							<label for='crear-usuario-cargo'>cargo
-							</label>
-							<input type='text' id='crear-usuario-cargo' ng-model='crearUsuarioCtrl.contacto.cargo'>
+						<label for='crear-usuario-cargo'>cargo
+						</label>
+						<input type='text' id='crear-usuario-cargo' ng-model='crearUsuarioCtrl.usuario.contacto.cargo'>
 
-							<label for='crear-usuario-perfil'>perfil
-							</label>
-							<input type='text' id='crear-usuario-perfil' ng-model='crearUsuarioCtrl.contacto.perfil'>
-						</form>
+						<label for='crear-usuario-perfil'>perfil
+						</label>
+						<input type='text' id='crear-usuario-perfil' ng-model='crearUsuarioCtrl.usuario.contacto.perfil' >
 					</div>
-					<input type='submit' value='crear usuario' disabled='crearUsuarioCtrl.password != crearUsuarioCtlr.usuario.password'>
+					<p>{{crearUsuarioCtrl.i}}</p>
+					<button ng-click='crearUsuarioCtrl.crearUsuario()'>crear usuario</button>
 				</form>
 			</div>
 		</div>
