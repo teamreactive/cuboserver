@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from hashlib import *
 
 from clientes.models import *
 from contactos.models import *
@@ -23,7 +24,7 @@ class Usuario(models.Model):
 	)
 
 	nombre = models.CharField(max_length=20)
-	password = models.CharField(max_length=112)
+	password = models.CharField(max_length=130)
 	cliente = models.ForeignKey(Cliente, related_name="Usuario.cliente", null=True)
 	tipo = models.CharField(max_length=1, choices=TIPOS)
 	contacto = models.ForeignKey(Contacto, related_name="Usuario.contacto", null=True)
@@ -31,6 +32,7 @@ class Usuario(models.Model):
 
 	def save(self, *args, **kwargs):
 		self.id = 1
+		self.password = sha512(self.password).hexdigest()
 		try: self.id = Usuario.objects.all().order_by("-id")[0].id + 1
 		except: pass
 		super(Usuario, self).save(*args, **kwargs)

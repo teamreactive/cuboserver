@@ -32,7 +32,7 @@ class UserLoginView(View):
 		usuario = Usuario.objects.filter(nombre=username)
 		if usuario:
 			usuario = usuario[0]
-			password = md5(password).hexdigest()
+			password = sha512(password).hexdigest()
 			if usuario.password == password:				
 				if usuario.tipo == '1':
 					return render(request,'usuarios/admin-general.html',{})
