@@ -1,0 +1,81 @@
+Este archivo esta hecho pensando unicamente en un modelo entidad relacion.
+no incluye el manejo de mensajes, como lo son el mensaje cuando se rechaza una solicitud, ni notificaciones.
+
+-USUARIO:
+nombre, contrasena, cliente(CLIENTE FK) null, tipo {adminGeneral, adminCliente, solicitante, codificador, aprovadorSolicitudes, comprador, aprovadorCompra, almacenista}, contacto(CONTACTO FK), activo boolean
+-CONSOLIDADORXSOLICITANTE:
+consolidador(USUARIO FK),solicitante(USUARIO FK)
+-SOLCITANTEXCODIFICADOR:
+solicitante(USUARIO FK),codificador(USUARIO FK)
+-APROVADORSOLICITUDESXSOLICITANTE:
+aprovador(USUARIO FK),solicitante(USUARIO FK)
+-APROVADORSOLICITUDESXCOMPRADOR:
+aprovador(USUARIO FK), comprador(USUARIO FK)
+-COMPRADORXAPROVADORCOMPRAS:
+aprovadorCompra(USUARIO FK), comprador(USUARIO FK)
+-APROVADORCOMPRAXALMACENISTA:
+aprovadorCompra(USUARIO FK), almacenista(USUARIO FK)
+
+-LUGAR:
+nombre null,seccion {calle,carrera,transversal,avenida,diagonal},numeroSeccion, numero1,numero2, cliente (CLIENTE FK)
+-LUGARXCONTACTO:
+lugar(LUGAR FK), contacto(CONTACTO FK)
+
+-CLIENTE:
+nit,codVerificacion null,razonSocial,sigla null,lugar(LUGAR FK) null,logo null
+
+-HISTORIAL:
+USUARIO FK,fecha,descripcion
+
+-SOLICITUD:
+estado,lugarEntrega(LUGAR FK), fechaCreacion, fechaRequerida,...., solicitante(USUARIO FK), consolidador(USUARIO FK) null, aprovador(USUARIO FK) null, centroDeCosto(CENTRODECOSTO FK) null, equipo(EQUIPO FK) null, emergencia[1], proyecto,
+-PRODUCTOSXSOLICITUD:
+solicitud(SOLICITUD FK),producto(PRODUCTO FK),numeroLinea, cantidadProducto, unidadProducto
+
+-PROVEEDOR:
+razonSocial, sigla, nit, numeroVerificacioNit, lugar(LUGAR FK), logo, cliente (CLIENTE FK), calificacion, cotizacionXDefecto boolean
+-CONTACTOSXPROVEEDOR:
+contacto(CONTACTO FK), proveedor(PROVEEDOR FK)
+
+-PRODUCTO:
+codigoOnu,nombre, descripcion null, referencia null, marca, servicio boolean, familiaProveedor(FAMILIA PROVEEDOR FK) null,tiempoPromedio[1] null, cliente(CLIENTE FK), equipo(EQUIPO FK) null, centroDeCostos(CENTRODECOSTOS FK) null
+-NOMBRESXPRODUCTO:
+producto(PRODUCTO FK), nombre
+-FOTOSXPRODUCTO:
+producto(PRODUCTO FK), foto
+-PRECIOXPRODUCTO:
+producto(PRODUCTO FK), unidad, talla, precioPromedio null[1]
+-PRODUCTOXCONTACTOQUENOVENDE:
+producto(PRODUCTO FK), contacto(CONTACTO FK)
+-PRODUCTOXCONTACTOQUEVENDE:[4]
+producto(PRODUCTO FK), contacto(CONTACTO FK)
+
+-FAMILIASPROVEEDOR:
+nombre, cliente(CLIENTE FK)
+-CONTACTOSXFAMILIAPROVEEDOR:
+familiasProveedor(FAMILIASPROVEEDOR FK), contactos(CONTACTOS FK)
+[3]
+
+-CONTACTO:
+nombre, apellido, telefonofijo null, extension null, celular null, correoElectronico null, cargo null,  perfil null
+
+-CENTRODECOSTO:
+nombre, cliente(CLIENTE FK)
+
+-EQUIPO:
+nombre, descripcion null, cantidad, tipoDeEquipo(TIPODEEQUIPO FK)[2], cliente
+
+-TIPODEEQUIPO:
+nombre, descripcion null, cliente(CLIENTE FK)
+
+-COTIZACION:
+producto(PRODUCTOXSOLICITUD FK), precioUnitario, iva{16,1.6,20,0}, tiempoentrega, referencia, validez, formadepago{anticipado,contado,dias}, proveedor(PROVEEDOR FK), fechaEntrega
+
+-COMPRA:
+cotizacion(COTIZACION FK), fechaEntregado, entregaParcial, porcentajeDeDevoluciones[5]
+
+[1]tener cuidado este es un atributo dependiente.
+[2]se pondra en otros en caso de no tener asignado uno
+[3]aqui esta implicito los compradores asociados (117)
+[4]en caso que el producto este en otros, hagame caso no vaya a modificar esta putisima seccion de tablas aunq paresca redundante
+[5]se puede combinar con la tabla cotizacion, las separe para evitar confuciones y evitar un monton de espacios en null

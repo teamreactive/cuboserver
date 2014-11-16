@@ -1,0 +1,1 @@
+web: gunicorn cubo.wsgi --log-file -
