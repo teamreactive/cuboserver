@@ -26,7 +26,7 @@ class Usuario(models.Model):
 	password = models.CharField(max_length=112)
 	cliente = models.ForeignKey(Cliente, related_name="Usuario.cliente", null=True)
 	tipo = models.CharField(max_length=1, choices=TIPOS)
-	contacto = models.ForeignKey(Contacto, related_name="Usuario.contacto")
+	contacto = models.ForeignKey(Contacto, related_name="Usuario.contacto", null=True)
 	activo = models.CharField(max_length=1, choices=ACTIVOS)
 
 	def save(self, *args, **kwargs):

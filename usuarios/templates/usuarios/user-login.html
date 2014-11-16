@@ -1,15 +1,16 @@
 <!Doctype html>
 <html>
 <head>
-	<title>login</title>
+	<title>iniciar sesion</title>
 </head>
 <body>
-	<h1>Iniciar Sesion</h1>
-	<form>
-		<label for='usuario' name='username'>Usuario</label>
-		<input type='text' id='usuario'>
-		<label for='password' name='password'>contraseña</label>
-		<input type='password' id='password'>
+	<h1>compras 10.0</h1>
+	<h2>iniciar sesion</h2>
+	<form method='post'>{% csrf_token %}
+		<label for='usuario' >Usuario</label>
+		<input type='text' id='usuario' name='username'>
+		<label for='password' >contraseña</label>
+		<input type='password' id='password' name ='password'>
 		<input type='submit' value='iniciar sesión'>
 	</form>
 </body>

@@ -53,5 +53,6 @@ urlpatterns = patterns("",
 	(r"^codificador/$", HomeView.as_view(template_name="usuarios/codificador.html")),
 	(r"^comprador/$", HomeView.as_view(template_name="usuarios/comprador.html")),
 	(r"^solicitante/$", HomeView.as_view(template_name="usuarios/solicitante.html")),
-	(r"^test/$", TestView.as_view())
+	(r"^test/$", TestView.as_view()),
+	(r"^userlogin/$", UserLoginView.as_view())
 )
