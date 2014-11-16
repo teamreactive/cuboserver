@@ -23,7 +23,7 @@ class Usuario(models.Model):
 		("1", "si")
 	)
 
-	nombre = models.CharField(max_length=20)
+	nombre = models.CharField(max_length=20, unique=True)
 	password = models.CharField(max_length=130)
 	cliente = models.ForeignKey(Cliente, related_name="Usuario.cliente", null=True)
 	tipo = models.CharField(max_length=1, choices=TIPOS)
