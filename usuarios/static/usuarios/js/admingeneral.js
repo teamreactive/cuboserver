@@ -34,7 +34,8 @@ app.controller("crearUsuarioController", ["$http",function($http){
 	this.crearUsuario = function(){
 		this.usuario.tipo = this.tipo.id;
 		this.usuario.activo = 0;
-		this.usuario.cliente = "/api/v1/cliente/"+this.cliente.id+"/";
+		if (this.usuario.cliente)
+			this.usuario.cliente = "/api/v1/cliente/"+this.cliente.id+"/";
 		//validate contacto
 		if (this.usuario){
 			$http({
