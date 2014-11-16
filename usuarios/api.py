@@ -8,8 +8,8 @@ from .models import *
 
 
 class UsuarioResource(ModelResource):
-	cliente = fields.ForeignKey(ClienteResource, "cliente")
-	contacto = fields.ForeignKey(ContactoResource, "contacto")
+	cliente = fields.ForeignKey(ClienteResource, "cliente", null=True)
+	contacto = fields.ForeignKey(ContactoResource, "contacto", null=True, full=True)
 
 	class Meta:
 		queryset = Usuario.objects.all()

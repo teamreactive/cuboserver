@@ -40,6 +40,9 @@
 				<li>
 					<a href ng-click='tabCtrl.setTab(1)'>crear usuario</a>
 				</li>
+				<li>
+					<a href ng-click='tabCtrl.setTab(2)'>actualizar usuario</a>
+				</li>
 			</ul>
 		</div>
 		<div>
@@ -98,7 +101,65 @@
 						<input type='text' id='crear-usuario-perfil' ng-model='crearUsuarioCtrl.usuario.contacto.perfil' >
 					</div>
 					<p>{{crearUsuarioCtrl.i}}</p>
-					<button ng-click='crearUsuarioCtrl.crearUsuario()'>crear usuario</button>
+					<button ng-click='crearUsuarioCtrl.crearUsuario()'>actualizar usuario</button>
+				</form>
+			</div>
+			<div id='actualizar-usuario' ng-show='tabCtrl.isTab(2)'>
+				<h2>Actualizar Usuario</h2>
+				<form ng-controller='actualizarUsuarioController as actualizarCtrl'>
+					<select ng-options='usuario.nombre for usuario in actualizarCtrl.usuarios' ng-model='actualizarCtrl.usuario'></select>
+					<label for='actualizar-usuario-usuario'>usuario</label>
+					<input type='text' id='crear.usuario.usuario' ng-model='actualizarCtrl.usuario.nombre'>
+					
+
+					<label for='actualizar-usuario-password'>contraseña</label>
+					<input type='password' id='actualizar-usuario-password' ng-model='actualizarCtrl.usuario.password'>
+
+					<label for='actualizar-usuario-repeat'>repetir contraseña</label>
+					<input type='password' id='actualizar-usuario-repeat' ng-model='actualizarCtrl.password'>
+					<p ng-show='actualizarCtrl.password != actualizarCtrl.usuario.password'>las contraseñas no coiciden</p>
+
+					<label for='actualizar-usuario-cliente'>cliente</label>
+					<select id='actualizar-usuario-cliente' ng-model='actualizarCtrl.cliente' ng-options='cliente.razon for cliente in actualizarCtrl.clientes'></select>
+
+					<label for='actualizar-usuario-tipo'>tipo</label>
+					<select id='actualizar-usuario-tipo' ng-model='actualizarCtrl.tipo' ng-options='tipo.nombre for tipo in actualizarCtrl.tipos'></select>
+					{{actualizarCtrl.usuario}}
+					<div>
+						<h3>informacion adicional</h3>
+						<label for='actualizar-usuario-nombre'>nombre
+						</label>
+						<input type='text' id='actualizar-usuario-nombre' ng-model='actualizarCtrl.usuario.contacto.nombre'>
+
+						<label for='actualizar-usuario-apellido'>apellido
+						</label>
+						<input type='text' id='actualizar-usuario-apellido' ng-model='actualizarCtrl.usuario.contacto.apellido'>
+
+						<label for='actualizar-usuario-telefono'>telefono
+						</label>
+						<input type='text' id='actualizar-usuario-telefono' ng-model='actualizarCtrl.usuario.contacto.telefono'>
+
+						<label for='actualizar-usuario-extension'>extension
+						</label>
+						<input type='text' id='actualizar-usuario-extension' ng-model='actualizarCtrl.usuario.contacto.extension'>
+
+						<label for='actualizar-usuario-celular'>celular
+						</label>
+						<input type='text' id='actualizar-usuario-celular' ng-model='actualizarCtrl.usuario.contacto.celular'>
+
+						<label for='actualizar-usuario-email'>email
+						</label>
+						<input type='email' id='actualizar-usuario-email' ng-model='actualizarCtrl.usuario.contacto.email'>
+
+						<label for='actualizar-usuario-cargo'>cargo
+						</label>
+						<input type='text' id='actualizar-usuario-cargo' ng-model='actualizarCtrl.usuario.contacto.cargo'>
+
+						<label for='actualizar-usuario-perfil'>perfil
+						</label>
+						<input type='text' id='actualizar-usuario-perfil' ng-model='actualizarCtrl.usuario.contacto.perfil' >
+					</div>
+					<button ng-click='actualizarCtrl.actualizarUsuario()'>actualizar usuario</button>
 				</form>
 			</div>
 		</div>

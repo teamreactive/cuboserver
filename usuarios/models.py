@@ -25,7 +25,7 @@ class Usuario(models.Model):
 
 	nombre = models.CharField(max_length=20, unique=True)
 	password = models.CharField(max_length=130)
-	cliente = models.ForeignKey(Cliente, related_name="Usuario.cliente", null=True)
+	cliente = models.OneToOneField(Cliente, null=True, blank=True)
 	tipo = models.CharField(max_length=1, choices=TIPOS)
 	contacto = models.ForeignKey(Contacto, related_name="Usuario.contacto", null=True)
 	activo = models.CharField(max_length=1, choices=ACTIVOS)
