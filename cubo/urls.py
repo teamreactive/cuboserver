@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from tastypie.api import Api
+
 from centros.api import *
 from clientes.api import *
 from compras.api import *
@@ -16,6 +17,7 @@ from solicitudes.api import *
 from tiposequipos.api import *
 from usuarios.api import *
 from usuarios.views import *
+
 
 v1_api = Api(api_name="v1")
 v1_api.register(CentroResource())
@@ -46,13 +48,5 @@ v1_api.register(AprobadorComprasAlmacenistaResource())
 
 urlpatterns = patterns("",
 	(r"^api/", include(v1_api.urls)),
-	(r"^admin/$", include(admin.site.urls)),
-	(r"^almacenista/$", HomeView.as_view(template_name="usuarios/almacenista.html")),
-	(r"^aprobadorcompras/$", HomeView.as_view(template_name="usuarios/aprobadorcompras.html")),
-	(r"^aprobadorsolicitudes/$", HomeView.as_view(template_name="usuarios/aprobadorsolicitudes.html")),
-	(r"^codificador/$", HomeView.as_view(template_name="usuarios/codificador.html")),
-	(r"^comprador/$", HomeView.as_view(template_name="usuarios/comprador.html")),
-	(r"^solicitante/$", HomeView.as_view(template_name="usuarios/solicitante.html")),
-	(r"^test/$", TestView.as_view()),
-	(r"^userlogin/$", UserLoginView.as_view())
+	(r"^admin/", include(admin.site.urls))
 )
