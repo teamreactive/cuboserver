@@ -11,7 +11,7 @@ class Cliente(models.Model):
 	def save(self, *args, **kwargs):
 		self.id = 1
 		try: self.id = Cliente.objects.all().order_by("-id")[0].id + 1
-		except Exception, e: print str(e)  
+		except: pass 
 		super(Cliente, self).save(*args, **kwargs)
 
 	def __unicode__(self):

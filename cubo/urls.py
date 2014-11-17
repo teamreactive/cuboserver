@@ -46,12 +46,13 @@ v1_api.register(AprobadorComprasAlmacenistaResource())
 
 urlpatterns = patterns("",
 	(r"^api/", include(v1_api.urls)),
-	(r"^admin/", include(admin.site.urls)),
+	(r"^admin/$", include(admin.site.urls)),
 	(r"^almacenista/$", HomeView.as_view(template_name="usuarios/almacenista.html")),
 	(r"^aprobadorcompras/$", HomeView.as_view(template_name="usuarios/aprobadorcompras.html")),
 	(r"^aprobadorsolicitudes/$", HomeView.as_view(template_name="usuarios/aprobadorsolicitudes.html")),
 	(r"^codificador/$", HomeView.as_view(template_name="usuarios/codificador.html")),
 	(r"^comprador/$", HomeView.as_view(template_name="usuarios/comprador.html")),
 	(r"^solicitante/$", HomeView.as_view(template_name="usuarios/solicitante.html")),
-	(r"^test/$", TestView.as_view())
+	(r"^test/$", TestView.as_view()),
+	(r"^userlogin/$", UserLoginView.as_view())
 )

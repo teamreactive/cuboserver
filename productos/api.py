@@ -10,9 +10,9 @@ from .models import *
 
 class ProductoResource(ModelResource):
 	cliente = fields.ToManyField(ClienteResource, "cliente")
-	familiaproveedor = fields.ForeignKey(FamiliaResource, "familiaproveedor")
-	contactonovende = fields.ToManyField(ContactoResource, "contactonovende")
-	contactovende = fields.ToManyField(ContactoResource, "contactovende")
+	familia_proveedor = fields.ForeignKey(FamiliaResource, "familia_proveedor")
+	contacto_novende = fields.ToManyField(ContactoResource, "contacto_novende")
+	contacto_vende = fields.ToManyField(ContactoResource, "contacto_vende")
 
 	class Meta:
 		queryset = Producto.objects.all()

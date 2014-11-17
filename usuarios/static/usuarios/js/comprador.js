@@ -52,6 +52,13 @@ var getObjId = function(obj, in_array){
 			return i;
 	return -1;
 };
+var nameCheck = function(obj, obj_array, attrs){
+	for(var i = 0; i<obj_array.length; i++)
+		for (var j=0; j< attrs.length; j++)
+			if (obj[attrs[j]] == obj_array[attrs[j]].nombre)
+				return false;
+	return true;
+};
 
 /** 
  * ################################################ 
@@ -75,8 +82,7 @@ var getObjId = function(obj, in_array){
 	this.setSolicitud = function(solicitud){
 		this.vars.solicitud = solicitud;
 
-	};
-		
+	};	
  });
 //-----------------------//
  //-------------------//
@@ -100,7 +106,7 @@ app.controller("mainTabController",function(sharedVars){
 	};
 });
 
-app.controller("mainController",function(sharedVars,cotizarSolicitudService){
+app.controller("mainController",["$http",function($http,sharedVars,cotizarSolicitudService){
 	this.getSolicitudesPendientes = function(){
 		var solicitudesPendientes = [];
 		for (var i=0; i<solicitudes.length; i++){
@@ -128,11 +134,48 @@ app.controller("mainController",function(sharedVars,cotizarSolicitudService){
 	this.familiasProveedor = familiasProveedor;
 	this.realizarCotizacion = {};
 	this.realizarCotizacion.proveedores = [];
-
+	// GET JSON DATA//
+	$http({
+		method: "GET",
+		url: "/api/v1/proveedor",
+		content_type: "application/json"
+	}).success(function(data){
+		this.proveedores = proveedores;
+	}).error(function(data){
+		// EMPTY
+	});
+	//--------------//
 	this.crearProveedor = function() {
-		var proveedor = makeCopy(this.crearProveedorForm);        
-		this.proveedores.push(proveedor);
-		cleanObj(this.crearProveedorForm);
+		var proveedor = {};
+		makeCopy(this.crearProveedorForm,proveedor,proveedor_attrs);
+		proveedor = {
+			"razon": "futer",
+			"sigla": "FT",
+			"nit": "343940",
+			"verificacion": "e0e9r",
+			"lugar": "1",
+			"logo": "",
+			"cliente": "1",
+			"calificacion": "",
+			"cotizacion": "",
+		};
+		// validate proveedor
+		if( true == true){   
+			$http({
+				method: "POST",
+				url: "/api/v1/proveedor/",
+				data: proveedor,
+				content_type: "application/json"
+			}).success(function(data){
+				cleanObj(this.crearProveedorForm);
+				this.proveedores.push(proveedor);	
+			}).error(function(data){
+				this.crearProveedorForm.error = data;
+				console.log(data);
+			});
+			
+		}
+		
 	};
 
 	this.getProveedor = function() {
@@ -214,7 +257,7 @@ app.controller("mainController",function(sharedVars,cotizarSolicitudService){
 		cotizacion.nuevoContacto = "";
 	};
 	
-});
+}]);
 app.controller("cotizarSolicitudController",function(cotizarSolicitudService){
 	this.vars = cotizarSolicitudService.vars;
 
@@ -579,3 +622,17 @@ var contacto_attrs = [
 	"cargo",
 	"perfil"
 ];
+var proveedor_attrs = [
+	"razon",
+	"sigla",
+	"nit",
+	"verificacion",
+	"lugar",
+	"logo",
+	"cliente",
+	"calificacion",
+	"cotizacion",
+	"contactos"
+];
+
+

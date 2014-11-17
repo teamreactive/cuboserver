@@ -151,7 +151,9 @@
 									<div ng-class='message.css' ng-show='message.message != ""'>
 										<p>{{ message.message }}</p>                        
 									</div>
-
+									<div ng-show='!mainCtrl.crearProveedorForm.error'>
+										<p>{{mainCtrl.crearProveedorForm.error}}</p>
+									</div>
 									<!-- Fields -->
 
 									<div class='form-group'>
