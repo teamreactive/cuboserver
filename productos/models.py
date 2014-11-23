@@ -14,7 +14,7 @@ class Producto(models.Model):
 	referencia = models.CharField(max_length=25, null=True,blank=True)
 	marca = models.CharField(max_length=25)
 	servicio = models.BooleanField(default=False)
-	familia = models.ForeignKey(Familia, null=True, related_name="Producto.familia")
+	familia = models.ForeignKey(Familia, related_name="Producto.familia")
 	tiempopromedio = models.CharField(max_length=15, null=True, blank=True)
 	cliente = models.ForeignKey(Cliente, related_name="Producto.cliente")
 	valido = models.BooleanField(default=False)
