@@ -11,6 +11,7 @@ from .models import *
 class ProductoResource(ModelResource):
 	cliente = fields.ForeignKey(ClienteResource, "cliente")
 	familia = fields.ForeignKey(FamiliaResource, "familia")
+	nombres = fields.ToManyField("productos.api.NombreProductoResource", "nombres", related_name="producto", null=True)
 
 	class Meta:
 		queryset = Producto.objects.all()
@@ -19,7 +20,7 @@ class ProductoResource(ModelResource):
 
 
 class NombreProductoResource(ModelResource):
-	producto = fields.ForeignKey(ProductoResource, "producto")
+	producto = fields.ForeignKey(ProductoResource,"producto")
 
 	class Meta:
 		queryset = NombreProducto.objects.all()
