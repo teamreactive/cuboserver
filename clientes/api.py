@@ -11,4 +11,3 @@ class ClienteResource(ModelResource):
 		queryset = Cliente.objects.all()
 		resource_name = "cliente"
 		authorization = Authorization()
-		authentication = Authentication()

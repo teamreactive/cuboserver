@@ -3,6 +3,7 @@ from tastypie import fields
 from tastypie.resources import ModelResource
 
 from clientes.api import *
+from clientes.models import *
 from contactos.api import *
 from .models import *
 
