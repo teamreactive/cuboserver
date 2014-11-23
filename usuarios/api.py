@@ -2,13 +2,12 @@ from tastypie.authorization import Authorization
 from tastypie import fields
 from tastypie.resources import ModelResource
 
-from common.api import *
 from clientes.api import *
 from contactos.api import *
 from .models import *
 
 
-class UsuarioResource(CORSResource, ModelResource):
+class UsuarioResource(ModelResource):
 	cliente = fields.ForeignKey(ClienteResource, "cliente", null=True)
 	contacto = fields.ForeignKey(ContactoResource, "contacto", null=True, full=True)
 

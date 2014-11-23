@@ -61,7 +61,8 @@ MIDDLEWARE_CLASSES = (
 	"django.contrib.auth.middleware.AuthenticationMiddleware",
 	"django.contrib.auth.middleware.SessionAuthenticationMiddleware",
 	"django.contrib.messages.middleware.MessageMiddleware",
-	"django.middleware.clickjacking.XFrameOptionsMiddleware"
+	"django.middleware.clickjacking.XFrameOptionsMiddleware",
+	"middleware.crossdomainxhr.XsSharing"
 )
 
 ROOT_URLCONF = "cubo.urls"
@@ -115,3 +116,8 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # Allow all host headers
 
 ALLOWED_HOSTS = ["*"]
+
+# XS
+
+XS_SHARING_ALLOWED_ORIGINS = "*"
+XS_SHARING_ALLOWED_METHODS = ["POST", "GET", "OPTIONS", "PUT", "DELETE"]
