@@ -11,5 +11,5 @@ class CompraResource(ModelResource):
 
 	class Meta:
 		queryset = Compra.objects.all()
-		resource_name = "cotizacion"
+		resource_name = "compra"
 		authorization = Authorization()
