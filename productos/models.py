@@ -14,9 +14,9 @@ class Producto(models.Model):
 	referencia = models.CharField(max_length=25, null=True,blank=True)
 	marca = models.CharField(max_length=25)
 	servicio = models.BooleanField(default=False)
-	familia = models.ForeignKey(Familia, null=True, related_name="Producto.familia")
+	familia = models.ForeignKey(Familia, related_name="Producto.familia")
 	tiempopromedio = models.CharField(max_length=15, null=True, blank=True)
-	cliente = models.ForeignKey(Cliente, related_name="Producto.cliente")
+	cliente = models.ForeignKey(Cliente, related_name="productos", null=True)
 	valido = models.BooleanField(default=False)
 	contactonovende = models.ManyToManyField(Contacto, db_table="productocontactonovende", related_name="Producto.contactonovende")
 	contactovende = models.ManyToManyField(Contacto, db_table="productocontactovende", related_name="Producto.contactovende")
@@ -38,7 +38,7 @@ class Producto(models.Model):
 
 
 class NombreProducto(models.Model):
-	producto = models.ForeignKey(Producto, related_name="NombreProducto.producto")
+	producto = models.ForeignKey(Producto, related_name="nombres")
 	nombre = models.CharField(max_length=25)
 
 	def save(self, *args, **kwargs):
@@ -58,7 +58,7 @@ class NombreProducto(models.Model):
 
 
 class FotoProducto(models.Model):
-	producto = models.ForeignKey(Producto, related_name="FotoProducto.producto")
+	producto = models.ForeignKey(Producto, related_name="fotos")
 	foto = models.ImageField(upload_to="fotoproducto")
 
 	def save(self, *args, **kwargs):
@@ -75,7 +75,7 @@ class FotoProducto(models.Model):
 
 
 class UnidadProducto(models.Model):
-	producto = models.ForeignKey(Producto, related_name="UnidadProducto.producto")
+	producto = models.ForeignKey(Producto, related_name="unidades")
 	unidad = models.CharField(max_length=10)
 	talla = models.CharField(max_length=10,null=True,blank=True) # Ask
 
@@ -93,7 +93,7 @@ class UnidadProducto(models.Model):
 
 
 class PrecioMesProducto(models.Model):
-	producto = models.ForeignKey(UnidadProducto, related_name="PrecioMesProducto.producto")
+	producto = models.ForeignKey(UnidadProducto, related_name="preciomes")
 	mes = models.CharField(max_length = 2) # 1,2,3,4,5,6,7,8,9,10,11,12
 	precio = models.FloatField()
 
