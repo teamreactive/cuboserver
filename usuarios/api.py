@@ -16,6 +16,7 @@ class UsuarioResource(ModelResource):
 		queryset = Usuario.objects.all()
 		resource_name = "usuario"
 		authorization = Authorization()
+		always_return_data = True
 		filtering = {
 			"nombre": ("exact")
 		}
