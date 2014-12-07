@@ -37,7 +37,7 @@ class MailView(View):
 		message += "Nombre de usuario: " + user
 
 		fmail = mail
-		tmail = "jcbages@outlook.com"
+		tmail = ["jcbages@outlook.com", "jorge0305@gmail.com"]
 		send_mail(subject, message,	fmail, [tmail], fail_silently=False)
 		return HttpResponse(status=200)
 
