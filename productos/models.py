@@ -2,30 +2,25 @@ from django.db import models
 
 from centros.models import *
 from clientes.models import *
+from common.upper import UpperCharField
 from contactos.models import *
 from equipos.models import *
 from familias.models import *
 
 
 class Producto(models.Model):
-	onu = models.CharField(max_length=25, blank=True, null=True)
-	nombre = models.CharField(max_length=25)
-	descripcion = models.TextField(null=True,blank=True)
-	referencia = models.CharField(max_length=25, null=True,blank=True)
-	marca = models.CharField(max_length=25)
+	onu = UpperCharField(max_length=25, blank=True, null=True)
+	nombre = UpperCharField(max_length=25)
+	descripcion = models.TextField()
+	referencia = UpperCharField(max_length=25, null=True, blank=True)
+	marca = UpperCharField(max_length=25)
 	servicio = models.BooleanField(default=False)
-	familia = models.ForeignKey(Familia, related_name="Producto.familia")
+	familia = models.ForeignKey(Familia, related_name="Producto.familia", null=True)
 	tiempopromedio = models.CharField(max_length=15, null=True, blank=True)
 	cliente = models.ForeignKey(Cliente, related_name="productos", null=True)
 	valido = models.BooleanField(default=False)
 	contactonovende = models.ManyToManyField(Contacto, db_table="productocontactonovende", related_name="Producto.contactonovende")
 	contactovende = models.ManyToManyField(Contacto, db_table="productocontactovende", related_name="Producto.contactovende")
-
-	def save(self, *args, **kwargs):
-		self.id = 1
-		try: self.id = Producto.objects.all().order_by("-id")[0].id + 1
-		except: pass
-		super(Producto, self).save(*args, **kwargs)
 	
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.onu)
@@ -39,13 +34,7 @@ class Producto(models.Model):
 
 class NombreProducto(models.Model):
 	producto = models.ForeignKey(Producto, related_name="nombres")
-	nombre = models.CharField(max_length=25)
-
-	def save(self, *args, **kwargs):
-		self.id = 1
-		try: self.id = NombreProducto.objects.all().order_by("-id")[0].id + 1
-		except: pass
-		super(NombreProducto, self).save(*args, **kwargs)
+	nombre = UpperCharField(max_length=25)
 
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.producto)
@@ -61,12 +50,6 @@ class FotoProducto(models.Model):
 	producto = models.ForeignKey(Producto, related_name="fotos")
 	foto = models.ImageField(upload_to="fotoproducto")
 
-	def save(self, *args, **kwargs):
-		self.id = 1
-		try: self.id = FotoProducto.objects.all().order_by("-id")[0].id + 1
-		except: pass
-		super(FotoProducto, self).save(*args, **kwargs)
-
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.producto)
 
@@ -76,14 +59,8 @@ class FotoProducto(models.Model):
 
 class UnidadProducto(models.Model):
 	producto = models.ForeignKey(Producto, related_name="unidades")
-	unidad = models.CharField(max_length=10)
-	talla = models.CharField(max_length=10,null=True,blank=True) # Ask
-
-	def save(self, *args, **kwargs):
-		self.id = 1
-		try: self.id = UnidadProducto.objects.all().order_by("-id")[0].id + 1
-		except: pass
-		super(UnidadProducto, self).save(*args, **kwargs)
+	unidad = UpperCharField(max_length=10)
+	talla = UpperCharField(max_length=10,null=True,blank=True) # Ask
 
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.producto)
@@ -94,14 +71,8 @@ class UnidadProducto(models.Model):
 
 class PrecioMesProducto(models.Model):
 	producto = models.ForeignKey(UnidadProducto, related_name="preciomes")
-	mes = models.CharField(max_length = 2) # 1,2,3,4,5,6,7,8,9,10,11,12
+	mes = UpperCharField(max_length = 2) # 1,2,3,4,5,6,7,8,9,10,11,12
 	precio = models.FloatField()
-
-	def save(self, *args, **kwargs):
-		self.id = 1
-		try: self.id = PrecioMesProducto.objects.all().order_by("-id")[0].id + 1
-		except: pass
-		super(PrecioMesProducto, self).save(*args, **kwargs)
 
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.producto)

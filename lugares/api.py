@@ -15,3 +15,6 @@ class LugarResource(ModelResource):
 		queryset = Lugar.objects.all()
 		resource_name = "lugar"
 		authorization = Authorization()
+		filtering = {
+			"nombre": ("exact")
+		}

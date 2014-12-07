@@ -22,6 +22,9 @@ class SolicitudResource(ModelResource):
 		queryset = Solicitud.objects.all()
 		resource_name = "solicitud"
 		authorization = Authorization()
+		filtering = {
+			"solicitante": ("exact")
+		}
 
 
 class ProductoSolicitudResource(ModelResource):

@@ -30,6 +30,10 @@ class ConsolidadorSolicitanteResource(ModelResource):
 		queryset = ConsolidadorSolicitante.objects.all()
 		resource_name = "consolidadorsolicitante"
 		authorization = Authorization()
+		filtering = {
+			"consolidador": ("exact"),
+			"solicitante": ("exact")
+		}
 
 
 class SolicitanteCodificadorResource(ModelResource):
@@ -50,6 +54,10 @@ class AprobadorSolicitudesSolicitanteResource(ModelResource):
 		queryset = AprobadorSolicitudesSolicitante.objects.all()
 		resource_name = "aprobadorsolicitudessolicitante"
 		authorization = Authorization()
+		filtering = {
+			"aprobador": ("exact"),
+			"solicitante": ("exact")
+		}
 
 
 class AprobadorSolicitudesCompradorResource(ModelResource):

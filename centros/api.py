@@ -13,3 +13,7 @@ class CentroResource(ModelResource):
 		queryset = Centro.objects.all()
 		resource_name = "centro"
 		authorization = Authorization()
+		filtering = {
+			"cliente": ("exact"),
+			"nombre": ("exact")
+		}

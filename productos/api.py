@@ -10,7 +10,7 @@ from .models import *
 
 class ProductoResource(ModelResource):
 	cliente = fields.ForeignKey(ClienteResource, "cliente", null=True)
-	familia = fields.ForeignKey(FamiliaResource, "familia")
+	familia = fields.ForeignKey(FamiliaResource, "familia", null=True)
 	#nombres = fields.ToManyField("productos.api.NombreProductoResource", "nombres", related_name="producto", null=True)
 	#fotos = fields.ToManyField("productos.api.FotoProductoResource", "fotos", related_name="producto")
 	
@@ -19,6 +19,9 @@ class ProductoResource(ModelResource):
 		resource_name = "producto"
 		authorization = Authorization()
 		always_return_data = True
+		filtering = {
+			"cliente": ("exact")
+		}
 
 	def obj_create(self, bundle, request=None, **kwargs):
 		producto = Producto.objects

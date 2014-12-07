@@ -1,19 +1,14 @@
 from django.db import models
 
+from common.upper import UpperCharField
 
 class Cliente(models.Model):
-	nit = models.CharField(max_length=25, unique=True)
-	verificacion = models.CharField(max_length=25, null=True, blank=True, unique=True)
-	razon = models.CharField(max_length=25, unique=True)
-	sigla = models.CharField(max_length=10, null=True, blank=True)
+	nit = UpperCharField(max_length=25, unique=True)
+	verificacion = UpperCharField(max_length=25, null=True, blank=True, unique=True)
+	razon = UpperCharField(max_length=25, unique=True)
+	sigla = UpperCharField(max_length=10, null=True, blank=True)
 	logo = models.ImageField(upload_to="logos", null=True, blank=True)
-
-	def save(self, *args, **kwargs):
-		self.id = 1
-		try: self.id = Cliente.objects.all().order_by("-id")[0].id + 1
-		except: pass 
-		super(Cliente, self).save(*args, **kwargs)
-
+	
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.nit)
 

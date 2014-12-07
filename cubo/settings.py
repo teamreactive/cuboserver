@@ -62,7 +62,8 @@ MIDDLEWARE_CLASSES = (
 	"django.contrib.auth.middleware.SessionAuthenticationMiddleware",
 	"django.contrib.messages.middleware.MessageMiddleware",
 	"django.middleware.clickjacking.XFrameOptionsMiddleware",
-	"middleware.crossdomainxhr.XsSharing"
+	"middleware.crossdomainxhr.XsSharing",
+	"middleware.crossdomainxhr.DisableCSRF"
 )
 
 ROOT_URLCONF = "cubo.urls"
@@ -121,3 +122,13 @@ ALLOWED_HOSTS = ["*"]
 
 XS_SHARING_ALLOWED_ORIGINS = "*"
 XS_SHARING_ALLOWED_METHODS = ["POST", "GET", "OPTIONS", "PUT", "DELETE"]
+
+# EMAIL
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'jcbages95@gmail.com'
+EMAIL_HOST_PASSWORD = '95092406246'
+DEFAULT_FROM_EMAIL = 'jcbages95@gmail.com'
+DEFAULT_TO_EMAIL = 'jcbages@outlook.com'

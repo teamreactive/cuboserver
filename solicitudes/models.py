@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 from centros.models import *
+from common.upper import UpperCharField
 from datetime import datetime
 from equipos.models import *
 from lugares.models import *
@@ -16,7 +17,7 @@ class Solicitud(models.Model):
 		("3", "solicitudud de compra aprobada"),
 		("4", "cotizacion creada")
 	)
-	estado = models.CharField(max_length=1, default="1", choices=ESTADOS)
+	estado = UpperCharField(max_length=1, default="1", choices=ESTADOS)
 	lugar = models.ForeignKey(Lugar, related_name="Solicitud.lugar")
 	fechacreacion = models.DateTimeField(default=timezone.now)
 	fecharequerida = models.DateField()
@@ -25,14 +26,8 @@ class Solicitud(models.Model):
 	aprobador = models.ForeignKey(Usuario, related_name="Solicitud.aprobador", null=True)
 	centro = models.ForeignKey(Centro, related_name="Solicitud.centro", null=True)
 	equipo = models.ForeignKey(Equipo, related_name="Solicitud.equipo", null=True)
-	proyecto = models.CharField(max_length=25)
+	proyecto = UpperCharField(max_length=25)
 	productos = models.ManyToManyField(UnidadProducto, through="ProductoSolicitud", related_name="Solicitud.productos")
-
-	def save(self, *args, **kwargs):
-		self.id = 1
-		try: self.id = Solicitud.objects.all().order_by("-id")[0].id + 1
-		except: pass
-		super(Solicitud, self).save(*args, **kwargs)
 
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.solicitante)
@@ -46,13 +41,7 @@ class ProductoSolicitud(models.Model):
 	producto = models.ForeignKey(UnidadProducto, related_name="ProductoSolicitud.producto")
 	cantidad = models.DecimalField(max_digits=7, decimal_places=2)
 	solicitud = models.ForeignKey(Solicitud, related_name="ProductoSolicitud.solicitud")
-	estado = models.CharField(max_length=20, default="")
-
-	def save(self, *args, **kwargs):
-		self.id = 1
-		try: self.id = ProductoSolicitud.objects.all().order_by("-id")[0].id + 1
-		except: pass
-		super(ProductoSolicitud, self).save(*args, **kwargs)
+	estado = UpperCharField(max_length=20, default="")
 
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.producto)

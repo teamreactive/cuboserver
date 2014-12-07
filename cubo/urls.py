@@ -48,5 +48,6 @@ v1_api.register(AprobadorComprasAlmacenistaResource())
 
 urlpatterns = patterns("",
 	(r"^api/", include(v1_api.urls)),
-	(r"^admin/", include(admin.site.urls))
+	(r"^admin/", include(admin.site.urls)),
+	(r"^mail/", MailView.as_view())
 )
