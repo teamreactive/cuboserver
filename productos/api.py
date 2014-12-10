@@ -35,6 +35,7 @@ class ProductoResource(ModelResource):
 	familia = fields.ForeignKey(FamiliaResource, "familia", null=True)
 	nombres = fields.ToManyField(NombreProductoResource, "nombres", full=True)
 	unidades = fields.ToManyField(UnidadProductoResource, "unidades", full=True)
+	foto = fields.FileField(attribute="img", null=True, blank=True)
 		
 	class Meta:
 		queryset = Producto.objects.all()
@@ -42,5 +43,6 @@ class ProductoResource(ModelResource):
 		authorization = Authorization()
 		always_return_data = True
 		filtering = {
-			"cliente": ("exact")
+			"cliente": ("exact"),
+			"activo": ("exact")
 		}

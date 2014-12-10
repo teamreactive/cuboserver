@@ -2,14 +2,13 @@ from tastypie.authorization import Authorization
 from tastypie import fields
 from tastypie.resources import ModelResource
 
+from clientes.api import *
 from contactos.api import *
 from .models import *
-from usuarios.api import *
 
 
 class LugarResource(ModelResource):
-	usuario = fields.ForeignKey(UsuarioResource, "usuario", null=True)
-	contactos = fields.ToManyField(ContactoResource, "contactos",)
+	cliente = fields.ForeignKey(ClienteResource, "cliente")
 
 	class Meta:
 		queryset = Lugar.objects.all()

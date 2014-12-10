@@ -8,7 +8,6 @@ import datetime
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cotizaciones', '0001_initial'),
     ]
 
     operations = [
@@ -19,7 +18,6 @@ class Migration(migrations.Migration):
                 ('fechaentregado', models.DateTimeField(default=datetime.datetime.now)),
                 ('entregaparcial', models.DateTimeField(default=datetime.datetime.now)),
                 ('porcentajedevolucion', models.DecimalField(max_digits=5, decimal_places=2)),
-                ('cotizacion', models.ForeignKey(related_name=b'Compra.cotizacion', to='cotizaciones.Cotizacion')),
             ],
             options={
                 'db_table': 'compra',

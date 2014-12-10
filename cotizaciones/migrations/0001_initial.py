@@ -3,13 +3,14 @@ from __future__ import unicode_literals
 
 from django.db import models, migrations
 import django.db.models.deletion
+import common.upper
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('solicitudes', '0001_initial'),
-        ('proveedores', '0001_initial'),
+        ('proveedores', '0004_remove_proveedor_cliente'),
+        ('solicitudes', '0008_auto_20141210_0454'),
     ]
 
     operations = [
@@ -18,11 +19,11 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('preciounitario', models.DecimalField(max_digits=12, decimal_places=2)),
-                ('iva', models.CharField(max_length=1, choices=[(b'1', b'16'), (b'2', b'1.6'), (b'3', b'20'), (b'4', b'0')])),
-                ('referencia', models.CharField(max_length=25)),
-                ('validez', models.CharField(max_length=25)),
-                ('formapago', models.CharField(max_length=1, choices=[(b'1', b'anticipado'), (b'2', b'contado'), (b'3', b'dias')])),
-                ('fechaentrega', models.DateTimeField()),
+                ('ivaa', models.DecimalField(max_digits=6, decimal_places=3)),
+                ('tiempo', models.IntegerField()),
+                ('referencia', common.upper.UpperCharField(max_length=25)),
+                ('validez', common.upper.UpperCharField(max_length=25)),
+                ('formapago', common.upper.UpperCharField(max_length=10)),
                 ('producto', models.ForeignKey(related_name=b'Cotizacion.producto', on_delete=django.db.models.deletion.PROTECT, to='solicitudes.ProductoSolicitud')),
                 ('proveedor', models.ForeignKey(related_name=b'Cotizacion.proveedor', on_delete=django.db.models.deletion.SET_NULL, to='proveedores.Proveedor', null=True)),
             ],

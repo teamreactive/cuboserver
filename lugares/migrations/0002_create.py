@@ -10,7 +10,8 @@ import datetime
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('clientes', '0001_initial'),
+    	('lugares', '0001_initial'),
+        ('clientes', '0006_auto_20141206_0113'),
     ]
 
     operations = [

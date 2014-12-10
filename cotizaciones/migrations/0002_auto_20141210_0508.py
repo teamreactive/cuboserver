@@ -15,21 +15,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='cotizacion',
             name='formapago',
-            field=common.upper.UpperCharField(max_length=1, choices=[(b'1', b'anticipado'), (b'2', b'contado'), (b'3', b'dias')]),
-        ),
-        migrations.AlterField(
-            model_name='cotizacion',
-            name='iva',
-            field=common.upper.UpperCharField(max_length=1, choices=[(b'1', b'16'), (b'2', b'1.6'), (b'3', b'20'), (b'4', b'0')]),
+            field=common.upper.UpperCharField(max_length=50),
         ),
         migrations.AlterField(
             model_name='cotizacion',
             name='referencia',
-            field=common.upper.UpperCharField(max_length=25),
+            field=common.upper.UpperCharField(max_length=50),
         ),
         migrations.AlterField(
             model_name='cotizacion',
             name='validez',
-            field=common.upper.UpperCharField(max_length=25),
+            field=common.upper.UpperCharField(max_length=50),
         ),
     ]
