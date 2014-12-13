@@ -4,11 +4,11 @@ from tastypie.resources import ModelResource
 
 from .models import *
 from proveedores.api import *
-from solicitudes.api import *
+from productos.api import *
 
 
 class CotizacionResource(ModelResource):
-	producto = fields.ForeignKey(ProductoSolicitudResource, "producto")
+	producto = fields.ForeignKey(ProductoResource, "producto")
 	proveedor = fields.ForeignKey(ProveedorResource, "proveedor")
 
 	class Meta:

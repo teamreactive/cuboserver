@@ -4,17 +4,18 @@ from datetime import datetime
 from common.upper import UpperCharField
 from proveedores.models import *
 from solicitudes.models import *
+from productos.models import *
 
 
 class Cotizacion(models.Model):
-	producto = models.ForeignKey(ProductoSolicitud, on_delete=models.PROTECT, related_name="Cotizacion.producto")
+	producto = models.ForeignKey(Producto, related_name="Cotizacion.producto")
 	preciounitario = models.DecimalField(max_digits=12, decimal_places=2)
-	ivaa = models.DecimalField(max_digits=6, decimal_places=3)
+	iva = models.DecimalField(max_digits=6, decimal_places=3)
 	tiempo = models.IntegerField()
 	referencia = UpperCharField(max_length=25)
-	validez = UpperCharField(max_length=25)
-	formapago = UpperCharField(max_length=10)
-	proveedor = models.ForeignKey(Proveedor, on_delete=models.SET_NULL, null = True, related_name="Cotizacion.proveedor")
+	validez = models.IntegerField()
+	formapago = UpperCharField(max_length=20)
+	proveedor = models.ForeignKey(Proveedor, related_name="Cotizacion.proveedor", null=True)
 
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.producto)

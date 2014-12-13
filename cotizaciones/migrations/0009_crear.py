@@ -11,7 +11,8 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('productos', '0016_auto_20141207_2015'),
-        ('proveedores', '0004_remove_proveedor_cliente')
+        ('proveedores', '0004_remove_proveedor_cliente'),
+        ('cotizaciones', '0001_initial'),
     ]
 
     operations = [
@@ -25,8 +26,8 @@ class Migration(migrations.Migration):
                 ('tiempo', models.IntegerField()),
                 ('referencia', common.upper.UpperCharField(max_length=25)),
                 ('validez', models.IntegerField()),
-                ('formapago', common.upper.UpperCharField(max_length=10)),
-                ('proveedor', models.ForeignKey(related_name=b'Cotizacion.proveedor', to='proveedores.Proveedor')),
+                ('formapago', common.upper.UpperCharField(max_length=20)),
+                ('proveedor', models.ForeignKey(related_name=b'Cotizacion.proveedor', to='proveedores.Proveedor', null=True)),
             ],
             options={
                 'db_table': 'cotizacion',
