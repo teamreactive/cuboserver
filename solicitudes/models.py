@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 from centros.models import *
+from clientes.models import *
 from common.upper import UpperCharField
 from datetime import datetime
 from equipos.models import *
@@ -21,6 +22,7 @@ class ProductoSolicitud(models.Model):
 
 
 class Solicitud(models.Model):
+	cliente = models.ForeignKey(Cliente, related_name="Solicitud.cliente")
 	estado = UpperCharField(max_length=10, default="0100")
 	lugar = models.ForeignKey(Lugar, related_name="Solicitud.lugar")
 	fechacreacion = models.DateTimeField(default=datetime.now)

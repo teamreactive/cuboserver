@@ -1,6 +1,7 @@
 from django.db import models
 
 from datetime import datetime
+from clientes.models import *
 from common.upper import UpperCharField
 from proveedores.models import *
 from solicitudes.models import *
@@ -8,6 +9,7 @@ from productos.models import *
 
 
 class Cotizacion(models.Model):
+	cliente = models.ForeignKey(Cliente, related_name="Cotizacion.cliente")
 	producto = models.ForeignKey(Producto, related_name="Cotizacion.producto")
 	preciounitario = models.DecimalField(max_digits=12, decimal_places=2)
 	iva = models.DecimalField(max_digits=6, decimal_places=3)

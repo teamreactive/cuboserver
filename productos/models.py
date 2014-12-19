@@ -9,6 +9,7 @@ from familias.models import *
 
 
 class NombreProducto(models.Model):
+	cliente = models.ForeignKey(Cliente, related_name="NombreProducto.cliente")
 	nombre = UpperCharField(max_length=100)
 
 	class Meta:

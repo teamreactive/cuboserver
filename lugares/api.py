@@ -15,5 +15,6 @@ class LugarResource(ModelResource):
 		resource_name = "lugar"
 		authorization = Authorization()
 		filtering = {
+			"cliente": ("exact"),
 			"nombre": ("exact")
 		}

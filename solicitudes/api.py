@@ -3,6 +3,7 @@ from tastypie import fields
 from tastypie.resources import ModelResource
 
 from centros.api import *
+from clientes.api import *
 from equipos.api import *
 from lugares.api import *
 from .models import *
@@ -20,6 +21,7 @@ class ProductoSolicitudResource(ModelResource):
 
 
 class SolicitudResource(ModelResource):
+	cliente = fields.ForeignKey(ClienteResource, "cliente")
 	lugar = fields.ForeignKey(LugarResource, "lugar", full=True)
 	solicitante = fields.ForeignKey(UsuarioResource, "solicitante")
 	consolidador = fields.ForeignKey(UsuarioResource, "consolidador", null=True)
@@ -33,6 +35,7 @@ class SolicitudResource(ModelResource):
 		resource_name = "solicitud"
 		authorization = Authorization()
 		filtering = {
+			"cliente": ("exact"),
 			"estado": ("exact"),
 			"solicitante": ("exact")
 		}

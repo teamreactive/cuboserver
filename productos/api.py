@@ -9,12 +9,14 @@ from .models import *
 
 
 class NombreProductoResource(ModelResource):
+	cliente = fields.ForeignKey(ClienteResource, "cliente")
 	
 	class Meta:
 		queryset = NombreProducto.objects.all()
 		resource_name = "nombreproducto"
 		authorization = Authorization()
 		filtering = {
+			"cliente": ("exact"),
 			"nombre": ("exact")
 		}
 

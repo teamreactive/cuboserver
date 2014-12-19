@@ -4,13 +4,11 @@ from tastypie.resources import ModelResource
 
 from clientes.api import *
 from clientes.models import *
-from contactos.api import *
 from .models import *
 
 
 class UsuarioResource(ModelResource):
 	cliente = fields.ForeignKey(ClienteResource, "cliente", null=True)
-	contacto = fields.ForeignKey(ContactoResource, "contacto", null=True, full=True)
 
 	class Meta:
 		queryset = Usuario.objects.all()
@@ -18,6 +16,7 @@ class UsuarioResource(ModelResource):
 		authorization = Authorization()
 		always_return_data = True
 		filtering = {
+			"cliente": ("exact"),
 			"nombre": ("exact")
 		}
 

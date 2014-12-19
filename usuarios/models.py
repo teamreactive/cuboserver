@@ -8,28 +8,17 @@ from datetime import datetime
 
 
 class Usuario(models.Model):
-	TIPOS = (
-		("1", "administrador_general"),
-		("2", "administrador_cliente"),
-		("3", "solicitante"),
-		("4", "codificador"),
-		("5", "aprobador_solicitudes"),
-		("6", "comprador"),
-		("7", "aprobador_compra"),
-		("8", "almacenista")
-	)
-
-	ACTIVOS = (
-		("0", "no"),
-		("1", "si")
-	)
-
-	nombre = UpperCharField(max_length=20, unique=True)
+	cliente = models.ForeignKey(Cliente)
+	nombre = UpperCharField(max_length=50, unique=True)
+	email = UpperCharField(max_length=50, unique=True)
+	tipo = UpperCharField(max_length=25)
 	password = UpperCharField(max_length=130, uppercase=False)
-	cliente = models.ForeignKey(Cliente, null=True, blank=True)
-	tipo = UpperCharField(max_length=1, choices=TIPOS)
-	contacto = models.ForeignKey(Contacto, related_name="Usuario.contacto", null=True)
-	activo = UpperCharField(max_length=1, choices=ACTIVOS)
+	nombre = UpperCharField(max_length=50)
+	apellido = UpperCharField(max_length=50)
+	celular = UpperCharField(max_length=20, null=True, blank=True)
+	telefono = UpperCharField(max_length=20)
+	extension = UpperCharField(max_length=5, null=True, blank=True)
+	activo = UpperCharField(max_length=2, default="SI")
 
 	def __unicode__(self):
 		return "%s %s" % (self.id, self.nombre)

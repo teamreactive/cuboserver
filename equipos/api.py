@@ -15,3 +15,7 @@ class EquipoResource(ModelResource):
 		queryset = Equipo.objects.all()
 		resource_name = "equipo"
 		authorization = Authorization()
+		filtering = {
+			"cliente": ("exact"),
+			"nombre": ("exact")
+		}
