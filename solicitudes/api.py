@@ -23,11 +23,11 @@ class ProductoSolicitudResource(ModelResource):
 class SolicitudResource(ModelResource):
 	cliente = fields.ForeignKey(ClienteResource, "cliente")
 	lugar = fields.ForeignKey(LugarResource, "lugar", full=True)
-	solicitante = fields.ForeignKey(UsuarioResource, "solicitante")
-	consolidador = fields.ForeignKey(UsuarioResource, "consolidador", null=True)
+	solicitante = fields.ForeignKey(UsuarioResource, "solicitante", full=True)
+	consolidador = fields.ForeignKey(UsuarioResource, "consolidador", null=True, full=True)
 	aprobador = fields.ForeignKey(UsuarioResource, "aprobador", null=True)
-	centro = fields.ForeignKey(CentroResource, "centro", null=True)
-	equipo =  fields.ForeignKey(EquipoResource, "equipo", null=True)
+	centro = fields.ForeignKey(CentroResource, "centro", null=True, full=True)
+	equipo =  fields.ForeignKey(EquipoResource, "equipo", null=True, full=True)
 	productos = fields.ToManyField(ProductoSolicitudResource, "productos", full=True)
 
 	class Meta:

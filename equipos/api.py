@@ -9,7 +9,7 @@ from tiposequipos.api import *
 
 class EquipoResource(ModelResource):
 	cliente = fields.ForeignKey(ClienteResource, "cliente")
-	tipo_de_equipo = fields.ForeignKey(TipoEquipoResource, "tipo_de_equipo")
+	tipoequipo = fields.ForeignKey(TipoEquipoResource, "tipoequipo")
 
 	class Meta:
 		queryset = Equipo.objects.all()

@@ -13,3 +13,7 @@ class TipoEquipoResource(ModelResource):
 		queryset = TipoEquipo.objects.all()
 		resource_name = "tipoequipo"
 		authorization = Authorization()
+		filtering = {
+			"nombre": ("exact"),
+			"cliente": ("exact")
+		}

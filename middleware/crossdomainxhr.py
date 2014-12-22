@@ -14,7 +14,7 @@ class XsSharing(object):
 			response = http.HttpResponse()
 			response['Access-Control-Allow-Origin']  = "*"
 			response['Access-Control-Allow-Methods'] = "POST, GET, HEAD, OPTIONS, PUT, UPDATE, DELETE" 
-			response['Access-Control-Allow-Headers'] = "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+			response['Access-Control-Allow-Headers'] = "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Accept-Encoding"
 			response['Access-Control-Allow-Credentials'] = "true"
 			return response
  
@@ -23,7 +23,7 @@ class XsSharing(object):
 	def process_response(self, request, response):
 		response['Access-Control-Allow-Origin']  = "*"
 		response['Access-Control-Allow-Methods'] = "POST, GET, HEAD, OPTIONS, PUT, UPDATE, DELETE"
-		response['Access-Control-Allow-Headers'] = "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+		response['Access-Control-Allow-Headers'] = "Origin, Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Accept-Encoding"
 		response['Access-Control-Allow-Credentials'] = "true"
  
 		return response

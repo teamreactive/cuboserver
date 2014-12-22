@@ -29,7 +29,6 @@ class MailView(View):
 		newpass = ""
 		for i in range(10): newpass += random.choice(string.ascii_uppercase + string.digits)
 		target.password = hashlib.sha512(newpass).hexdigest()
-		target.password = hashlib.sha512(target.password).hexdigest()
 		target.save()
 		message += ("Se te ha asignado una contrasena nueva,\n"+
 				"el valor de la misma es:\n")

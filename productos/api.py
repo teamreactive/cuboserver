@@ -33,8 +33,8 @@ class UnidadProductoResource(ModelResource):
 
 
 class ProductoResource(ModelResource):
-	cliente = fields.ForeignKey(ClienteResource, "cliente")
-	familia = fields.ForeignKey(FamiliaResource, "familia", null=True)
+	cliente = fields.ForeignKey(ClienteResource, "cliente", full=True)
+	familia = fields.ForeignKey(FamiliaResource, "familia", null=True, full=True)
 	nombres = fields.ToManyField(NombreProductoResource, "nombres", full=True)
 	unidades = fields.ToManyField(UnidadProductoResource, "unidades", full=True)
 	foto = fields.FileField(attribute="img", null=True, blank=True)

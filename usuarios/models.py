@@ -1,15 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from clientes.models import *
 from contactos.models import *
 from common.upper import UpperCharField
 from datetime import datetime
 
 
 class Usuario(models.Model):
-	cliente = models.ForeignKey(Cliente)
-	nombre = UpperCharField(max_length=50, unique=True)
+	cliente = models.ForeignKey("clientes.Cliente", related_name="Usuario.cliente")
+	usuario = UpperCharField(max_length=50, unique=True)
 	email = UpperCharField(max_length=50, unique=True)
 	tipo = UpperCharField(max_length=25)
 	password = UpperCharField(max_length=130, uppercase=False)
@@ -21,7 +20,7 @@ class Usuario(models.Model):
 	activo = UpperCharField(max_length=2, default="SI")
 
 	def __unicode__(self):
-		return "%s %s" % (self.id, self.nombre)
+		return "%s %s" % (self.id, self.usuario)
 
 	class Meta:
 		db_table = "usuario"
